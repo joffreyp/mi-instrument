@@ -240,7 +240,7 @@ class Sbe16plusBaseParticle(DataParticle):
         @return: dictionary of compiled regexs
         """
         result = {}
-        for (key, regex) in self.regex_multiline().iteritems():
+        for (key, regex) in self.regex_multiline().items():
             result[key] = re.compile(regex, re.DOTALL)
 
         return result
@@ -270,7 +270,7 @@ class Sbe16plusBaseParticle(DataParticle):
 
         for line in split_fun(self.raw_data):
             log.trace("Line: %s" % line)
-            for key in matchers.keys():
+            for key in list(matchers.keys()):
                 log.trace("match: %s" % regexs.get(key))
                 match = matchers[key].search(line)
                 if match:
@@ -370,7 +370,7 @@ class Sbe16plusBaseParticle(DataParticle):
         @param value: string to convert
         @return: bool
         """
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             raise InstrumentParameterException("value not a string")
 
         if value.lower() == 'no':
@@ -957,12 +957,11 @@ class SBE16InstrumentDriver(SingleConnectionInstrumentDriver):
 ###############################################################################
 # Seabird Electronics 37-SMP MicroCAT protocol.
 ###############################################################################
-class SBE16Protocol(CommandResponseInstrumentProtocol):
+class SBE16Protocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class for SBE16 driver.
     Subclasses SeaBirdProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
     _sampling = False
 
     def __init__(self, prompts, newline, driver_event):
@@ -1228,11 +1227,11 @@ class SBE16Protocol(CommandResponseInstrumentProtocol):
         # Pump Mode is the only parameter that is set by the driver
         # that where the input isn't validated by the instrument.  So
         # We will do a quick range check before we start all sets
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             if key == Parameter.PUMP_MODE and val not in [0, 1, 2]:
                 raise InstrumentParameterException("pump mode out of range")
 
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
 
             old_val = self._param_dict.format(key)
             new_val = self._param_dict.format(key, val)

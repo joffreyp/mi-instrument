@@ -86,10 +86,10 @@ class FlordLWfpSioParserUnitTestCase(ParserUnitTestCase):
             # Attempt to retrieve 1000 particles
             particles = parser.get_records(1000)
 
-            self.assertEquals(len(self.exception_callback_value), 3)
+            self.assertEqual(len(self.exception_callback_value), 3)
 
             for i in range(0,len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], UnexpectedDataException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], UnexpectedDataException))
 
             # We should end up with 0 particles
             self.assertTrue(len(particles) == 0)

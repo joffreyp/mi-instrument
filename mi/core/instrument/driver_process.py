@@ -6,7 +6,7 @@
 @author Edward Hunter
 @brief Messaging enabled driver processes.
 """
-import Queue
+import queue
 import importlib
 import signal
 import subprocess
@@ -54,7 +54,7 @@ class DriverProcess(object):
         self.driver_class = driver_class
         self.ppid = ppid
         self.driver = None
-        self.events = Queue.Queue()
+        self.events = queue.Queue()
         self.messaging_started = False
         self.int_time = 0
 

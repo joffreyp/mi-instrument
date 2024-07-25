@@ -16,8 +16,8 @@ from mi.core.persistent_store import PersistentStoreDict
 class RasflPersistentStoreDict(PersistentStoreDict):
     def __init__(self, reference_designator, host = "127.0.0.1", port = "5432"):
         PersistentStoreDict.__init__(self, "rasfl", reference_designator, host, port)
-        self.CURRENT_COLLECTION_BAG_KEY = u"CURRENT_COLLECTION_BAG"
-        self.TOTAL_COLLECTION_BAGS_KEY = u"TOTAL_COLLECTION_BAGS"
+        self.CURRENT_COLLECTION_BAG_KEY = "CURRENT_COLLECTION_BAG"
+        self.TOTAL_COLLECTION_BAGS_KEY = "TOTAL_COLLECTION_BAGS"
 
     def isInitialized(self):
         with self.rLock:

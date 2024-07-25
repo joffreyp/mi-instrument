@@ -237,31 +237,31 @@ class ADCPTMixin(DriverTestMixin):
     }
 
     _system_configuration_data_parameters = {
-        AdcpSystemConfigurationKey.SERIAL_NUMBER: {'type': unicode, 'value': "18444"},
+        AdcpSystemConfigurationKey.SERIAL_NUMBER: {'type': str, 'value': "18444"},
         AdcpSystemConfigurationKey.TRANSDUCER_FREQUENCY: {'type': int, 'value': 76800},
-        AdcpSystemConfigurationKey.CONFIGURATION: {'type': unicode, 'value': "4 BEAM, JANUS"},
-        AdcpSystemConfigurationKey.MATCH_LAYER: {'type': unicode, 'value': "10"},
+        AdcpSystemConfigurationKey.CONFIGURATION: {'type': str, 'value': "4 BEAM, JANUS"},
+        AdcpSystemConfigurationKey.MATCH_LAYER: {'type': str, 'value': "10"},
         AdcpSystemConfigurationKey.BEAM_ANGLE: {'type': int, 'value': 20},
-        AdcpSystemConfigurationKey.BEAM_PATTERN: {'type': unicode, 'value': "CONVEX"},
-        AdcpSystemConfigurationKey.ORIENTATION: {'type': unicode, 'value': "UP"},
-        AdcpSystemConfigurationKey.SENSORS: {'type': unicode,
+        AdcpSystemConfigurationKey.BEAM_PATTERN: {'type': str, 'value': "CONVEX"},
+        AdcpSystemConfigurationKey.ORIENTATION: {'type': str, 'value': "UP"},
+        AdcpSystemConfigurationKey.SENSORS: {'type': str,
                                              'value': "HEADING  TILT 1  TILT 2  DEPTH  TEMPERATURE  PRESSURE"},
         AdcpSystemConfigurationKey.PRESSURE_COEFF_c3: {'type': float, 'value': -1.927850E-11},
         AdcpSystemConfigurationKey.PRESSURE_COEFF_c2: {'type': float, 'value': +1.281892E-06},
         AdcpSystemConfigurationKey.PRESSURE_COEFF_c1: {'type': float, 'value': +1.375793E+00},
         AdcpSystemConfigurationKey.PRESSURE_COEFF_OFFSET: {'type': float, 'value': 13.38634},
         AdcpSystemConfigurationKey.TEMPERATURE_SENSOR_OFFSET: {'type': float, 'value': -0.01},
-        AdcpSystemConfigurationKey.CPU_FIRMWARE: {'type': unicode, 'value': "50.40 [0]"},
-        AdcpSystemConfigurationKey.BOOT_CODE_REQUIRED: {'type': unicode, 'value': "1.16"},
-        AdcpSystemConfigurationKey.BOOT_CODE_ACTUAL: {'type': unicode, 'value': "1.16"},
-        AdcpSystemConfigurationKey.DEMOD_1_VERSION: {'type': unicode, 'value': "ad48"},
-        AdcpSystemConfigurationKey.DEMOD_1_TYPE: {'type': unicode, 'value': "1f"},
-        AdcpSystemConfigurationKey.DEMOD_2_VERSION: {'type': unicode, 'value': "ad48"},
-        AdcpSystemConfigurationKey.DEMOD_2_TYPE: {'type': unicode, 'value': "1f"},
-        AdcpSystemConfigurationKey.POWER_TIMING_VERSION: {'type': unicode, 'value': "85d3"},
-        AdcpSystemConfigurationKey.POWER_TIMING_TYPE: {'type': unicode, 'value': "7"},
-        AdcpSystemConfigurationKey.BOARD_SERIAL_NUMBERS: {'type': unicode,
-                                                          'value': u"72  00 00 06 FE BC D8  09 HPA727-3009-00B," +
+        AdcpSystemConfigurationKey.CPU_FIRMWARE: {'type': str, 'value': "50.40 [0]"},
+        AdcpSystemConfigurationKey.BOOT_CODE_REQUIRED: {'type': str, 'value': "1.16"},
+        AdcpSystemConfigurationKey.BOOT_CODE_ACTUAL: {'type': str, 'value': "1.16"},
+        AdcpSystemConfigurationKey.DEMOD_1_VERSION: {'type': str, 'value': "ad48"},
+        AdcpSystemConfigurationKey.DEMOD_1_TYPE: {'type': str, 'value': "1f"},
+        AdcpSystemConfigurationKey.DEMOD_2_VERSION: {'type': str, 'value': "ad48"},
+        AdcpSystemConfigurationKey.DEMOD_2_TYPE: {'type': str, 'value': "1f"},
+        AdcpSystemConfigurationKey.POWER_TIMING_VERSION: {'type': str, 'value': "85d3"},
+        AdcpSystemConfigurationKey.POWER_TIMING_TYPE: {'type': str, 'value': "7"},
+        AdcpSystemConfigurationKey.BOARD_SERIAL_NUMBERS: {'type': str,
+                                                          'value': "72  00 00 06 FE BC D8  09 HPA727-3009-00B," +
                                                                    "81  00 00 06 F5 CD 9E  09 REC727-1004-06A," +
                                                                    "A5  00 00 06 FF 1C 79  09 HPI727-3007-00A," +
                                                                    "82  00 00 06 FF 23 E5  09 CPU727-2011-00E," +
@@ -523,8 +523,8 @@ class ADCPTMixin(DriverTestMixin):
         AdcpPd0ParsedKey.PERCENT_GOOD_4BEAM: beam_parameters[AdcpPd0ParsedKey.PERCENT_GOOD_BEAM4]
     }
 
-    _pd0_parameters = dict(_pd0_parameters_base.items() + beam_parameters.items())
-    _pd0_parameters_earth = dict(_pd0_parameters_base.items() + earth_parameters.items())
+    _pd0_parameters = dict(list(_pd0_parameters_base.items()) + list(beam_parameters.items()))
+    _pd0_parameters_earth = dict(list(_pd0_parameters_base.items()) + list(earth_parameters.items()))
     _pd0_config_parameters_earth = copy.deepcopy(_pd0_config_parameters)
     _pd0_config_parameters_earth[AdcpPd0ParsedKey.COORD_TRANSFORM_TYPE] = {'type': int, 'value': 3}
 
@@ -538,7 +538,7 @@ class ADCPTMixin(DriverTestMixin):
         AdcpTransmitPathKey.ADCP_TRANSIT_CURRENT: {'type': float, 'value': 2.0},
         AdcpTransmitPathKey.ADCP_TRANSIT_VOLTAGE: {'type': float, 'value': 60.1},
         AdcpTransmitPathKey.ADCP_TRANSIT_IMPEDANCE: {'type': float, 'value': 29.8},
-        AdcpTransmitPathKey.ADCP_TRANSIT_TEST_RESULT: {'type': unicode, 'value': "$0 ... PASS"},
+        AdcpTransmitPathKey.ADCP_TRANSIT_TEST_RESULT: {'type': str, 'value': "$0 ... PASS"},
     }
 
     # Driver Parameter Methods
@@ -864,7 +864,7 @@ class WorkhorseDriverUnitTest(InstrumentDriverUnitTestCase, ADCPTMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
 
 ###############################################################################
@@ -1482,7 +1482,7 @@ class WorkhorseDriverQualificationTest(InstrumentDriverQualificationTestCase):
                 WorkhorseProtocolEvent.ACQUIRE_STATUS,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)
@@ -1534,7 +1534,7 @@ class WorkhorseDriverQualificationTest(InstrumentDriverQualificationTestCase):
         """
         self.assert_enter_command_mode()
 
-        for k in self._driver_parameters.keys():
+        for k in list(self._driver_parameters.keys()):
             if self.VALUE in self._driver_parameters[k]:
                 if not self._driver_parameters[k][self.READONLY]:
                     self.assert_get_parameter(k, self._driver_parameters[k][self.VALUE])
@@ -1579,7 +1579,7 @@ class WorkhorseDriverQualificationTest(InstrumentDriverQualificationTestCase):
         since nose orders the tests by ascii value this should run second.
         """
         self.assert_enter_command_mode()
-        for k in self._driver_parameters.keys():
+        for k in list(self._driver_parameters.keys()):
             if self.VALUE in self._driver_parameters[k]:
                 if not self._driver_parameters[k][self.READONLY]:
                     self.assert_get_parameter(k, self._driver_parameters[k][self.VALUE])

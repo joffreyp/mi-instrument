@@ -228,13 +228,13 @@ ZPLSC_C_PARTICLE_RULES = [
     (ZplscCParticleKey.TEMPERATURE,      1,  float),
     (ZplscCParticleKey.PRESSURE,         1,  float),
     (ZplscCParticleKey.FREQ_CHAN_1,      1,  int),
-    (ZplscCParticleKey.VALS_CHAN_1,      ZplscCDataKey.NUM_BINS_FREQ_1, lambda x: map(int, x)),
+    (ZplscCParticleKey.VALS_CHAN_1,      ZplscCDataKey.NUM_BINS_FREQ_1, lambda x: list(map(int, x))),
     (ZplscCParticleKey.FREQ_CHAN_2,      1,  int),
-    (ZplscCParticleKey.VALS_CHAN_2,      ZplscCDataKey.NUM_BINS_FREQ_2, lambda x: map(int, x)),
+    (ZplscCParticleKey.VALS_CHAN_2,      ZplscCDataKey.NUM_BINS_FREQ_2, lambda x: list(map(int, x))),
     (ZplscCParticleKey.FREQ_CHAN_3,      1,  int),
-    (ZplscCParticleKey.VALS_CHAN_3,      ZplscCDataKey.NUM_BINS_FREQ_3, lambda x: map(int, x)),
+    (ZplscCParticleKey.VALS_CHAN_3,      ZplscCDataKey.NUM_BINS_FREQ_3, lambda x: list(map(int, x))),
     (ZplscCParticleKey.FREQ_CHAN_4,      1,  int),
-    (ZplscCParticleKey.VALS_CHAN_4,      ZplscCDataKey.NUM_BINS_FREQ_4, lambda x: map(int, x))
+    (ZplscCParticleKey.VALS_CHAN_4,      ZplscCDataKey.NUM_BINS_FREQ_4, lambda x: list(map(int, x)))
 ]
 
 
@@ -242,13 +242,12 @@ class DataParticleType(BaseEnum):
     ZPLSC_C_DCL_SAMPLE = 'zplsc_c_instrument'
 
 
-class ZplscCInstrumentDataParticle(DataParticle):
+class ZplscCInstrumentDataParticle(DataParticle, metaclass=get_logging_metaclass(log_level='trace')):
     """
     Class for generating the zplsc_c instrument particle.
     """
 
     _data_particle_type = DataParticleType.ZPLSC_C_DCL_SAMPLE
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     def _build_parsed_values(self):
         """
@@ -266,12 +265,10 @@ class ZplscCInstrumentDataParticle(DataParticle):
                 for name, counter, function in ZPLSC_C_PARTICLE_RULES]
 
 
-class ZplscCDclParser(SimpleParser):
+class ZplscCDclParser(SimpleParser, metaclass=get_logging_metaclass(log_level='trace')):
     """
     ZPLSC C DCL Parser.
     """
-
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     def parse_file(self):
         """
@@ -390,7 +387,7 @@ class ZplscCDclParser(SimpleParser):
                     data_dict[key] = data[index]
                 else:
                     data_dict[key] = None
-            except IndexError, e:
+            except IndexError as e:
                 log.error("IndexError %s: %s: %s >= data length %s, index: %s",
                           e, key, count, (len(data)-index), index)
                 return None

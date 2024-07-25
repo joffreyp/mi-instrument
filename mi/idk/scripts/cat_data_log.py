@@ -73,7 +73,7 @@ def _get_header(buffer):
 
     if(packet.get_data_length() < 0): return None
 
-    print "time: %f" % packet.get_timestamp()
+    print("time: %f" % packet.get_timestamp())
 
     return packet
 

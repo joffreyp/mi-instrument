@@ -33,7 +33,7 @@ class ConsulServiceRegistry(object):
                 cmd_port = cmd_port[0]['Service']['Port']
                 port_agent_config = {'port': port, 'cmd_port': cmd_port, 'addr': addr}
                 return port_agent_config
-        except StandardError:
+        except Exception:
             log.exception('Exception attempting to locate port agent via Consul')
             return None
 
@@ -60,13 +60,13 @@ class ConsulServiceRegistry(object):
                     try:
                         ConsulServiceRegistry.register_driver(self.reference_designator, self.port)
                         self.registered = True
-                    except StandardError:
+                    except Exception:
                         log.exception('Unable to register with Consul, '
                                       'will attempt again in %d secs', DRIVER_SERVICE_TTL / 2)
                 if self.registered:
                     try:
                         CONSUL.agent.check.ttl_pass(self.check_id)
-                    except StandardError:
+                    except Exception:
                         # Force re-register
                         self.registered = False
                         log.exception('Unable to update TTL health check with Consul, '
@@ -99,13 +99,13 @@ class ConsulPersistentStore(MutableMapping):
         return len(list(self._get_iter()))
 
     def __repr__(self):
-        return str(dict(self.iteritems()))
+        return str(dict(iter(self.items())))
 
     def _make_key(self, key=None):
         if key is None:
             return '/'.join((self.refdes, self.prefix))
 
-        if not isinstance(key, basestring):
+        if not isinstance(key, str):
             raise InstrumentParameterException('Persistent store keys MUST be strings')
         return '/'.join((self.refdes, self.prefix, key))
 

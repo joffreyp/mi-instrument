@@ -8,7 +8,7 @@
 """
 
 import os
-from StringIO import StringIO
+from io import StringIO
 
 import ntplib
 from nose.plugins.attrib import attr
@@ -268,9 +268,9 @@ class Vel3dKWfpStcParserUnitTestCase(ParserUnitTestCase):
         self.parser = self.create_parser(input_file)
         particles = self.parser.get_records(1)
 
-        self.assertEquals(len(particles), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(particles), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.info("END BAD FLAG")
 
@@ -287,9 +287,9 @@ class Vel3dKWfpStcParserUnitTestCase(ParserUnitTestCase):
         self.parser = self.create_parser(input_file)
         particles = self.parser.get_records(1)
 
-        self.assertEquals(len(particles), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(particles), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
         log.info("END SHORT FLAG")
 
     def test_real_file_1(self):
@@ -380,8 +380,8 @@ class Vel3dKWfpStcParserUnitTestCase(ParserUnitTestCase):
 
             # unless told otherwise, should return nothing
             # when there is no valid end record found
-            self.assertEquals(len(particles), 0)
-            self.assertEquals(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertEqual(len(particles), 0)
+            self.assertEqual(len(self.exception_callback_value), 1)
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.info("END Bug 8637")

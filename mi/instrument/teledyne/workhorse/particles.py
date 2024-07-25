@@ -647,7 +647,7 @@ class AdcpCompassCalibrationDataParticle(DataParticle):
         matches[AdcpCompassCalibrationKey.TILT_NULL] = float(match.group(1))
 
         result = []
-        for key, value in matches.iteritems():
+        for key, value in matches.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -688,7 +688,7 @@ class AdcpAncillarySystemDataParticle(DataParticle):
             matches[key] = formatter(match.group(1))
 
         result = []
-        for key, value in matches.iteritems():
+        for key, value in matches.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -725,7 +725,7 @@ class AdcpTransmitPathParticle(DataParticle):
             matches[key] = formatter(match.group(1))
 
         result = []
-        for key, value in matches.iteritems():
+        for key, value in matches.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 

@@ -555,7 +555,7 @@ class Mavs4StatusDataParticle(DataParticle):
         log.debug('Mavs4StatusDataParticle: raw_data=%s', self.raw_data)
 
         result = []
-        for (k, v) in self.raw_data.iteritems():
+        for (k, v) in self.raw_data.items():
             result.append({DataParticleKey.VALUE_ID: k,
                            DataParticleKey.VALUE: v})
 
@@ -563,9 +563,8 @@ class Mavs4StatusDataParticle(DataParticle):
         return result
 
 
-class mavs4InstrumentProtocol(MenuInstrumentProtocol):
+class mavs4InstrumentProtocol(MenuInstrumentProtocol, metaclass=get_logging_metaclass(log_level='trace')):
 
-    __metaclass__ = get_logging_metaclass(log_level='trace')
     """
     This protocol implements a simple command-response interaction for the
     menu based MAVs-4 instrument. It utilizes a dictionary that holds info on
@@ -833,7 +832,7 @@ class mavs4InstrumentProtocol(MenuInstrumentProtocol):
         particle_status_dict = Mavs4StatusDataParticleKey.dict()
         params_mapping_dict = InstrumentParameters.dict()
         self.status_particle_mapping = {}
-        for key in particle_status_dict.keys():
+        for key in list(particle_status_dict.keys()):
             self.status_particle_mapping[particle_status_dict[key]] = params_mapping_dict[key]
 
     @staticmethod
@@ -882,7 +881,7 @@ class mavs4InstrumentProtocol(MenuInstrumentProtocol):
         if expected_prompt is None:
             prompt_list = self._prompts.list()
         else:
-            if isinstance(expected_prompt, basestring):
+            if isinstance(expected_prompt, str):
                 prompt_list = [expected_prompt]
             else:
                 prompt_list = expected_prompt
@@ -1144,7 +1143,7 @@ class mavs4InstrumentProtocol(MenuInstrumentProtocol):
         log.debug('old_config:           %r', old_config)
         log.debug('params_to_set before: %r', params_to_set)
         new_params = {}
-        for key, value in params_to_set.iteritems():
+        for key, value in params_to_set.items():
             if old_config.get(key) != value:
                 new_params[key] = value
         params_to_set = new_params

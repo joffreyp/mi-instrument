@@ -51,7 +51,7 @@ class NutnrMGliderParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(12)
             # requested more than are available in file, should only be 10
-            self.assertEquals(len(particles), 10)
+            self.assertEqual(len(particles), 10)
 
             self.assert_particles(particles, "many.yml", RESOURCE_PATH)
 
@@ -66,7 +66,7 @@ class NutnrMGliderParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(40)
             # requested more than are available in file, should only be 10
-            self.assertEquals(len(particles), 31)
+            self.assertEqual(len(particles), 31)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -81,7 +81,7 @@ class NutnrMGliderParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(1)
             # requested more than are available in file, should only be 10
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
 
     def test_bad_config(self):
         """

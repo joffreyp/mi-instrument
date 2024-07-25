@@ -256,7 +256,7 @@ class NutnrBParser(Parser):
             instrument_line_match.group(InstrumentDataMatchGroups.INST_GROUP_TIME_OF_DAY)
         )
 
-        metadata_values = self._metadata.values()
+        metadata_values = list(self._metadata.values())
 
         if None in metadata_values \
                 and self._metadata_particle_generated is False:
@@ -360,8 +360,8 @@ class NutnrBParser(Parser):
              instrument_line_match.group(InstrumentDataMatchGroups.INST_GROUP_SPEC_CHANNEL_AVERAGE),
              float),
             (spectral_key,
-             map(int, instrument_line_match.group(
-                 InstrumentDataMatchGroups.INST_GROUP_SPECTRAL_CHANNELS).split(',')),
+             list(map(int, instrument_line_match.group(
+                 InstrumentDataMatchGroups.INST_GROUP_SPECTRAL_CHANNELS).split(','))),
              list)
         )
         # Generate the instrument data particle

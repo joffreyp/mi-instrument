@@ -54,7 +54,7 @@ class IDKGit():
         try:
             branch = self.repo.createBranch(branch_name)
             log.info("create git branch %s" % branch_name)
-        except GitCommandFailedException, e:
+        except GitCommandFailedException as e:
             log.error("failed to create branch %s: %s" % (branch_name, e))
             raise GitCommandException("failed to create branch")
 
@@ -78,7 +78,7 @@ class IDKGit():
         log.info("Checkout branch %s" % branch_name)
         try:
             self.repo.checkout(branch_name)
-        except GitCommandFailedException, e:
+        except GitCommandFailedException as e:
             log.error("failed to switch branch %s: %s" % (branch_name, e))
             raise GitCommandException("failed to switch branch")
 

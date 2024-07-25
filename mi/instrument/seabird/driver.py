@@ -86,7 +86,7 @@ class SeaBirdParticle(DataParticle):
         @return: dictionary of compiled regexs
         """
         result = {}
-        for (key, regex) in self.regex_multiline().iteritems():
+        for (key, regex) in self.regex_multiline().items():
             result[key] = re.compile(regex, re.DOTALL)
 
         return result
@@ -116,7 +116,7 @@ class SeaBirdParticle(DataParticle):
 
         for line in split_fun(self.raw_data):
             log.trace("Line: %s" % line)
-            for key in matchers.keys():
+            for key in list(matchers.keys()):
                 log.trace("match: %s" % regexs.get(key))
                 match = matchers[key].search(line)
                 if match:
@@ -207,7 +207,7 @@ class SeaBirdParticle(DataParticle):
         @param divisor: conversion value
         @return: int or float of the converted value
         """
-        if not isinstance(hex_value, basestring):
+        if not isinstance(hex_value, str):
             raise InstrumentParameterException("hex value not a string")
 
         if divisor is not None and divisor == 0:
@@ -226,7 +226,7 @@ class SeaBirdParticle(DataParticle):
         @param value: string to convert
         @return: bool
         """
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             raise InstrumentParameterException("value (%r) not a string" % value)
 
         if value.lower() == 'no':
@@ -280,12 +280,11 @@ class SeaBirdInstrumentDriver(SingleConnectionInstrumentDriver):
 # Protocol
 ###############################################################################
 
-class SeaBirdProtocol(CommandResponseInstrumentProtocol):
+class SeaBirdProtocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='trace')):
     """
     Instrument protocol class for seabird driver.
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -551,7 +550,7 @@ class SeaBirdProtocol(CommandResponseInstrumentProtocol):
             log.debug("set param, but check visibility first")
             log.debug("Read only keys: %s", readonly)
 
-            for (key, val) in params.iteritems():
+            for (key, val) in params.items():
                 if key in readonly:
                     raise InstrumentParameterException("Attempt to set read only parameter (%s)" % key)
 

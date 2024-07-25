@@ -110,8 +110,8 @@ class SioEngSioMuleParserUnitTestCase(ParserUnitTestCase):
             result = parser.get_records(4)
             self.assert_particles(result, 'node59p1_1.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertEqual(len(self.exception_callback_value), 1)
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def test_get_with_extra_data(self):
         """
@@ -124,8 +124,8 @@ class SioEngSioMuleParserUnitTestCase(ParserUnitTestCase):
             result = parser.get_records(4)
             self.assert_particles(result, 'node59p1_1.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertEqual(len(self.exception_callback_value), 1)
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def test_long_stream(self):
         """
@@ -163,7 +163,7 @@ class SioEngSioMuleParserUnitTestCase(ParserUnitTestCase):
             self.assertEqual(len(result), 3)
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_bad_recov(self):
         """
@@ -177,4 +177,4 @@ class SioEngSioMuleParserUnitTestCase(ParserUnitTestCase):
             self.assertEqual(len(result), 23)
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))

@@ -542,7 +542,7 @@ class DriverUnitTest(SamiUnitTest, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -700,14 +700,14 @@ class DriverIntegrationTest(SamiIntegrationTest, DriverTestMixinSub):
 
         self.assert_initialize_driver()
 
-        for (key, val) in startup_values.iteritems():
+        for (key, val) in startup_values.items():
             self.assert_get(key, val)
 
         self.assert_set_bulk(new_values)
 
         self.driver_client.cmd_dvr('apply_startup_params')
 
-        for (key, val) in startup_values.iteritems():
+        for (key, val) in startup_values.items():
             self.assert_get(key, val)
 
     def test_set(self):
@@ -1055,7 +1055,7 @@ class DriverQualificationTest(SamiQualificationTest, DriverTestMixinSub):
                 ProtocolEvent.REAGENT_FLUSH
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

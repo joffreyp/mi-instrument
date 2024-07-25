@@ -135,7 +135,7 @@ class Parameter(DriverParameter):
 
     @classmethod
     def reverse_dict(cls):
-        return dict((v, k) for k, v in cls.dict().iteritems())
+        return dict((v, k) for k, v in cls.dict().items())
 
 
 class ParameterConstraint(BaseEnum):
@@ -239,12 +239,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyUnusedLocal,PyMethodMayBeStatic
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=META_LOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -383,7 +382,7 @@ class Protocol(CommandResponseInstrumentProtocol):
                     func(sample)
                 return sample
 
-        raise InstrumentProtocolException(u'unhandled chunk received by _got_chunk: [{0!r:s}]'.format(chunk))
+        raise InstrumentProtocolException('unhandled chunk received by _got_chunk: [{0!r:s}]'.format(chunk))
 
     def _extract_sample(self, particle_class, regex, line, timestamp, publish=True):
         """
@@ -537,7 +536,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         parameters = Parameter.reverse_dict()
 
         # step through the list of parameters
-        for key, val in params.iteritems():
+        for key, val in params.items():
             # verify this parameter exists
             if not Parameter.has(key):
                 raise InstrumentParameterException('Received invalid parameter in SET: %s' % key)
@@ -580,7 +579,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         old_config = self._param_dict.get_config()
 
         # all constraints met or no constraints exist, set the values
-        for key, value in params.iteritems():
+        for key, value in params.items():
             self._param_dict.set_value(key, value)
 
         new_config = self._param_dict.get_config()

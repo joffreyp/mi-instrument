@@ -408,7 +408,7 @@ class Pco2wAbcImodemDataParticle(DataParticle):
         """
         result = []
 
-        for key in self.raw_data.keys():
+        for key in list(self.raw_data.keys()):
 
             if key == Pco2wAbcDataParticleKey.RECORD_TIME:
                 unix_time = mac_timestamp_to_utc_timestamp(self.raw_data[key])

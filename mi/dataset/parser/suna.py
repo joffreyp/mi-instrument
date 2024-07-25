@@ -3,7 +3,7 @@ import datetime
 import ntplib
 
 from mi.core.log import get_logger
-from utilities import dcl_time_to_ntp, julian_time_to_ntp
+from .utilities import dcl_time_to_ntp, julian_time_to_ntp
 from mi.instrument.satlantic.suna_deep.ooicore.driver import SUNASampleDataParticleKey
 from mi.dataset.dataset_parser import Parser
 from mi.core.instrument.dataset_data_particle import \

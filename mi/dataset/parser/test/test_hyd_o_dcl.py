@@ -56,7 +56,7 @@ class HydODclParserUnitTestCase(ParserUnitTestCase):
             # there are 813 lines in the file, but 70 are ignored so we should get 743 particles
             particles = parser.get_records(813)
 
-            self.assertEquals(len(particles), 743)
+            self.assertEqual(len(particles), 743)
             self.assertEqual(self.exception_callback_value, [])
 
     def test_bad_format_telem(self):
@@ -68,7 +68,7 @@ class HydODclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(10)
 
-            self.assertEquals(len(particles), 8)
+            self.assertEqual(len(particles), 8)
             # particles in the file should still match the good data in first.hyd1.log, just skipping the bad lines
             self.assert_particles(particles, "first_telem.yml", RESOURCE_PATH)
             # confirm we get two exceptions, one for each bad line
@@ -85,5 +85,5 @@ class HydODclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(10)
 
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
             self.assertEqual(self.exception_callback_value, [])

@@ -263,7 +263,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 # Protocol
 ###########################################################################
-class THSPHProtocol(CommandResponseInstrumentProtocol):
+class THSPHProtocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
@@ -281,8 +281,6 @@ class THSPHProtocol(CommandResponseInstrumentProtocol):
         SERIES_B: {Command.GET_SAMPLE: GET_SAMPLE_SERIES_B},
         SERIES_C: {Command.GET_SAMPLE: GET_SAMPLE_SERIES_C},
     }
-
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -560,7 +558,7 @@ class THSPHProtocol(CommandResponseInstrumentProtocol):
             return
 
         # Do a range check before we start all sets
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
 
             if key == Parameter.INTERVAL and not (0 < val < 601):
                 log.debug("Auto Sample Interval not in 1 to 600 range ")

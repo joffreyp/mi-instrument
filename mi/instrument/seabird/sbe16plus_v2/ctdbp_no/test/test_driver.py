@@ -355,13 +355,13 @@ class SBE16NOMixin(SeaBird16plusMixin):
     }
 
     _configuration_parameters = {
-        SBE19ConfigurationParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
+        SBE19ConfigurationParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
         SBE19ConfigurationParticleKey.SCANS_TO_AVERAGE: {TYPE: int, VALUE: 4, REQUIRED: True},
         SBE19ConfigurationParticleKey.MIN_COND_FREQ: {TYPE: int, VALUE: 500, REQUIRED: True},
         SBE19ConfigurationParticleKey.PUMP_DELAY: {TYPE: int, VALUE: 60, REQUIRED: True},
         SBE19ConfigurationParticleKey.AUTO_RUN: {TYPE: int, VALUE: 0, REQUIRED: True},
         SBE19ConfigurationParticleKey.IGNORE_SWITCH: {TYPE: int, VALUE: 1, REQUIRED: True},
-        SBE19ConfigurationParticleKey.BATTERY_TYPE: {TYPE: unicode, VALUE: "alkaline", REQUIRED: True},
+        SBE19ConfigurationParticleKey.BATTERY_TYPE: {TYPE: str, VALUE: "alkaline", REQUIRED: True},
         SBE19ConfigurationParticleKey.BATTERY_CUTOFF: {TYPE: float, VALUE: 7.5, REQUIRED: True},
         SBE19ConfigurationParticleKey.EXT_VOLT_0: {TYPE: int, VALUE: 1, REQUIRED: True},
         SBE19ConfigurationParticleKey.EXT_VOLT_1: {TYPE: int, VALUE: 1, REQUIRED: True},
@@ -376,13 +376,13 @@ class SBE16NOMixin(SeaBird16plusMixin):
         SBE19ConfigurationParticleKey.GAS_TENSION_DEVICE: {TYPE: int, VALUE: 0, REQUIRED: True},
         SBE19ConfigurationParticleKey.ECHO_CHARACTERS: {TYPE: int, VALUE: 1, REQUIRED: True},
         SBE19ConfigurationParticleKey.OUTPUT_EXECUTED_TAG: {TYPE: int, VALUE: 0, REQUIRED: True},
-        SBE19ConfigurationParticleKey.OUTPUT_FORMAT: {TYPE: unicode, VALUE: "raw HEX", REQUIRED: True},
+        SBE19ConfigurationParticleKey.OUTPUT_FORMAT: {TYPE: str, VALUE: "raw HEX", REQUIRED: True},
     }
 
     _status_parameters = {
-        SBE19StatusParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE19StatusParticleKey.DATE_TIME: {TYPE: unicode, VALUE: "2014-05-08T21:58:38", REQUIRED: True},
-        SBE19StatusParticleKey.LOGGING_STATE: {TYPE: unicode, VALUE: "not logging", REQUIRED: True},
+        SBE19StatusParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE19StatusParticleKey.DATE_TIME: {TYPE: str, VALUE: "2014-05-08T21:58:38", REQUIRED: True},
+        SBE19StatusParticleKey.LOGGING_STATE: {TYPE: str, VALUE: "not logging", REQUIRED: True},
         SBE19StatusParticleKey.NUMBER_OF_EVENTS: {TYPE: int, VALUE: 3, REQUIRED: True},
         SBE19StatusParticleKey.BATTERY_VOLTAGE_MAIN: {TYPE: float, VALUE: 12.9, REQUIRED: True},
         SBE19StatusParticleKey.BATTERY_VOLTAGE_LITHIUM: {TYPE: float, VALUE: 8.5, REQUIRED: True},
@@ -398,37 +398,37 @@ class SBE16NOMixin(SeaBird16plusMixin):
     }
 
     _hardware_parameters = {
-        SBE16NOHardwareParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE16NOHardwareParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: '2.5.2', REQUIRED: True},
-        SBE16NOHardwareParticleKey.FIRMWARE_DATE: {TYPE: unicode, VALUE: '12 Mar 2013 11:50', REQUIRED: True},
-        SBE16NOHardwareParticleKey.COMMAND_SET_VERSION: {TYPE: unicode, VALUE: '1.3', REQUIRED: True},
+        SBE16NOHardwareParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE16NOHardwareParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: '2.5.2', REQUIRED: True},
+        SBE16NOHardwareParticleKey.FIRMWARE_DATE: {TYPE: str, VALUE: '12 Mar 2013 11:50', REQUIRED: True},
+        SBE16NOHardwareParticleKey.COMMAND_SET_VERSION: {TYPE: str, VALUE: '1.3', REQUIRED: True},
         SBE16NOHardwareParticleKey.PCB_SERIAL_NUMBER: {TYPE: list, VALUE: ['49565', '43360', '49357', '38072'],
                                                        REQUIRED: True},
         SBE16NOHardwareParticleKey.ASSEMBLY_NUMBER: {TYPE: list, VALUE: ['41054H', '41580B', '41606', '41057A'],
                                                      REQUIRED: True},
-        SBE16NOHardwareParticleKey.MANUFACTURE_DATE: {TYPE: unicode, VALUE: '29-Oct-2012', REQUIRED: True},
-        SBE16NOHardwareParticleKey.TEMPERATURE_SENSOR_SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE16NOHardwareParticleKey.CONDUCTIVITY_SENSOR_SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230',
+        SBE16NOHardwareParticleKey.MANUFACTURE_DATE: {TYPE: str, VALUE: '29-Oct-2012', REQUIRED: True},
+        SBE16NOHardwareParticleKey.TEMPERATURE_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE16NOHardwareParticleKey.CONDUCTIVITY_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '01907230',
                                                                        REQUIRED: True},
-        SBE16NOHardwareParticleKey.PRESSURE_SENSOR_SERIAL_NUMBER: {TYPE: unicode, VALUE: '124969', REQUIRED: True},
-        SBE16NOHardwareParticleKey.PRESSURE_SENSOR_TYPE: {TYPE: unicode, VALUE: 'quartzTC-0', REQUIRED: True},
-        SBE16NOHardwareParticleKey.VOLT0_TYPE: {TYPE: unicode, VALUE: 'not assigned', REQUIRED: True},
-        SBE16NOHardwareParticleKey.VOLT0_SERIAL_NUMBER: {TYPE: unicode, VALUE: 'not assigned', REQUIRED: True},
-        SBE16NOHardwareParticleKey.VOLT1_TYPE: {TYPE: unicode, VALUE: 'not assigned', REQUIRED: True},
-        SBE16NOHardwareParticleKey.VOLT1_SERIAL_NUMBER: {TYPE: unicode, VALUE: 'not assigned', REQUIRED: True},
+        SBE16NOHardwareParticleKey.PRESSURE_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '124969', REQUIRED: True},
+        SBE16NOHardwareParticleKey.PRESSURE_SENSOR_TYPE: {TYPE: str, VALUE: 'quartzTC-0', REQUIRED: True},
+        SBE16NOHardwareParticleKey.VOLT0_TYPE: {TYPE: str, VALUE: 'not assigned', REQUIRED: True},
+        SBE16NOHardwareParticleKey.VOLT0_SERIAL_NUMBER: {TYPE: str, VALUE: 'not assigned', REQUIRED: True},
+        SBE16NOHardwareParticleKey.VOLT1_TYPE: {TYPE: str, VALUE: 'not assigned', REQUIRED: True},
+        SBE16NOHardwareParticleKey.VOLT1_SERIAL_NUMBER: {TYPE: str, VALUE: 'not assigned', REQUIRED: True},
     }
 
     _calibration_parameters = {
-        SBE16NOCalibrationParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE16NOCalibrationParticleKey.TEMP_SENSOR_SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE16NOCalibrationParticleKey.TEMP_CAL_DATE: {TYPE: unicode, VALUE: "07-Dec-13", REQUIRED: True},
+        SBE16NOCalibrationParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.TEMP_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.TEMP_CAL_DATE: {TYPE: str, VALUE: "07-Dec-13", REQUIRED: True},
         SBE16NOCalibrationParticleKey.TA0: {TYPE: float, VALUE: 1.272723e-03, REQUIRED: True},
         SBE16NOCalibrationParticleKey.TA1: {TYPE: float, VALUE: 2.687218e-04, REQUIRED: True},
         SBE16NOCalibrationParticleKey.TA2: {TYPE: float, VALUE: -4.735777e-07, REQUIRED: True},
         SBE16NOCalibrationParticleKey.TA3: {TYPE: float, VALUE: 1.522571e-07, REQUIRED: True},
         SBE16NOCalibrationParticleKey.TOFFSET: {TYPE: float, VALUE: 0.0, REQUIRED: True},
-        SBE16NOCalibrationParticleKey.COND_SENSOR_SERIAL_NUMBER: {TYPE: unicode, VALUE: '01907230', REQUIRED: True},
-        SBE16NOCalibrationParticleKey.COND_CAL_DATE: {TYPE: unicode, VALUE: '07-Dec-13', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.COND_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '01907230', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.COND_CAL_DATE: {TYPE: str, VALUE: '07-Dec-13', REQUIRED: True},
         SBE16NOCalibrationParticleKey.CONDG: {TYPE: float, VALUE: -9.931677e-01, REQUIRED: True},
         SBE16NOCalibrationParticleKey.CONDH: {TYPE: float, VALUE: 1.391189e-01, REQUIRED: True},
         SBE16NOCalibrationParticleKey.CONDI: {TYPE: float, VALUE: -4.457962e-04, REQUIRED: True},
@@ -436,8 +436,8 @@ class SBE16NOMixin(SeaBird16plusMixin):
         SBE16NOCalibrationParticleKey.CPCOR: {TYPE: float, VALUE: -9.570000e-08, REQUIRED: True},
         SBE16NOCalibrationParticleKey.CTCOR: {TYPE: float, VALUE: 3.250000e-06, REQUIRED: True},
         SBE16NOCalibrationParticleKey.CSLOPE: {TYPE: float, VALUE: 1.0, REQUIRED: True},
-        SBE16NOCalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: unicode, VALUE: '124969', REQUIRED: True},
-        SBE16NOCalibrationParticleKey.PRES_CAL_DATE: {TYPE: unicode, VALUE: '05-Dec-13', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: str, VALUE: '124969', REQUIRED: True},
+        SBE16NOCalibrationParticleKey.PRES_CAL_DATE: {TYPE: str, VALUE: '05-Dec-13', REQUIRED: True},
         SBE16NOCalibrationParticleKey.PC1: {TYPE: float, VALUE: 9.913353e+02, REQUIRED: True},
         SBE16NOCalibrationParticleKey.PC2: {TYPE: float, VALUE: 1.013600e-05, REQUIRED: True},
         SBE16NOCalibrationParticleKey.PC3: {TYPE: float, VALUE: -1.182100e-04, REQUIRED: True},
@@ -466,7 +466,7 @@ class SBE16NOMixin(SeaBird16plusMixin):
     }
 
     _send_optode_parameters = {
-        OptodeSettingsParticleKey.ANALOG_OUTPUT: {TYPE: unicode, VALUE: 'CalPhase', REQUIRED: True},
+        OptodeSettingsParticleKey.ANALOG_OUTPUT: {TYPE: str, VALUE: 'CalPhase', REQUIRED: True},
         OptodeSettingsParticleKey.CALPHASE: {TYPE: float, VALUE: 30.050, REQUIRED: True},
         OptodeSettingsParticleKey.ENABLE_AIR_SAT: {TYPE: int, VALUE: 0, REQUIRED: True},
         OptodeSettingsParticleKey.ENABLE_RAW_DATA: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -474,7 +474,7 @@ class SBE16NOMixin(SeaBird16plusMixin):
         OptodeSettingsParticleKey.ENABLE_TEMP: {TYPE: int, VALUE: 0, REQUIRED: True},
         OptodeSettingsParticleKey.ENABLE_TEXT: {TYPE: int, VALUE: 0, REQUIRED: True},
         OptodeSettingsParticleKey.INTERVAL: {TYPE: float, VALUE: 5.000, REQUIRED: True},
-        OptodeSettingsParticleKey.MODE: {TYPE: unicode, VALUE: 'Smart Sensor Terminal', REQUIRED: True},
+        OptodeSettingsParticleKey.MODE: {TYPE: str, VALUE: 'Smart Sensor Terminal', REQUIRED: True},
 
     }
 
@@ -1216,7 +1216,7 @@ class SBE16NOQualTestCase(Sbe16plusQualTestCase, SBE16NOMixin):
                 ProtocolEvent.START_AUTOSAMPLE,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

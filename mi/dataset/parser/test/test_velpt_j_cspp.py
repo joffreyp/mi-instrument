@@ -63,11 +63,11 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
 
             # check that there are no more particles in file
             particles2 = parser.get_records(3)
-            self.assertEquals(len(particles2), 0)
+            self.assertEqual(len(particles2), 0)
 
             self.assert_particles(particles, 'short_PPB_ADCP.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_get_many(self):
         """
@@ -82,12 +82,12 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
             particles.extend(particles2)
             # request past the end of the file, should only be 4 remaining records
             particles3 = parser.get_records(10)
-            self.assertEquals(len(particles3), 4)
+            self.assertEqual(len(particles3), 4)
             particles.extend(particles3)
 
             self.assert_particles(particles, '11079364_PPD_ADCP.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_long_stream(self):
         """
@@ -105,7 +105,7 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, '11079364_PPB_ADCP.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_bad_recov(self):
         """
@@ -139,7 +139,7 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
             #     extra spaces
             #     4 okay lines
 
-            self.assertEquals(len(self.exception_callback_value), n_exceptions)
+            self.assertEqual(len(self.exception_callback_value), n_exceptions)
             for exception in self.exception_callback_value:
                 self.assertIsInstance(exception, RecoverableSampleException)
 
@@ -156,11 +156,11 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
 
             # check that there are no more particles in file
             particles2 = parser.get_records(3)
-            self.assertEquals(len(particles2), 0)
+            self.assertEqual(len(particles2), 0)
 
             self.assert_particles(particles, 'missing_header_PPB_ADCP.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], RecoverableSampleException)
 
     def test_partial_header(self):
@@ -175,8 +175,8 @@ class VelptJCsppParserUnitTestCase(ParserUnitTestCase):
 
             # check that there are no more particles in file
             particles2 = parser.get_records(3)
-            self.assertEquals(len(particles2), 0)
+            self.assertEqual(len(particles2), 0)
 
             self.assert_particles(particles, 'partial_header_PPB_ADCP.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])

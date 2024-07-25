@@ -166,7 +166,7 @@ class PresfAbcParserUnitTestCase(ParserUnitTestCase):
 
             # Check the expected exceptions
             self.assertTrue(len(self.exception_callback_value) == 1)
-            self.assert_(isinstance(self.exception_callback_value[0],
+            self.assertTrue(isinstance(self.exception_callback_value[0],
                                     RecoverableSampleException))
 
     def test_invalid_wave_record(self):
@@ -213,7 +213,7 @@ class PresfAbcParserUnitTestCase(ParserUnitTestCase):
             # Check the expected exceptions
             self.assertTrue(len(self.exception_callback_value) == 3)
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i],
+                self.assertTrue(isinstance(self.exception_callback_value[i],
                                         RecoverableSampleException))
 
     def test_no_particles(self):
@@ -262,5 +262,5 @@ class PresfAbcParserUnitTestCase(ParserUnitTestCase):
 
             # Check the expected exceptions
             self.assertTrue(len(self.exception_callback_value) == 1)
-            self.assert_(isinstance(self.exception_callback_value[0],
+            self.assertTrue(isinstance(self.exception_callback_value[0],
                                     RecoverableSampleException))

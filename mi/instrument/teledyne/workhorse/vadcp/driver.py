@@ -141,7 +141,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
         next_state = DriverConnectionState.UNCONFIGURED
         result = None
 
-        for connection in self._connection.values():
+        for connection in list(self._connection.values()):
             connection.stop_comms()
 
         self._destroy_protocol()
@@ -153,7 +153,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
         The device connection was lost. Stop comms, destroy protocol FSM and revert to unconfigured state.
         @return (next_state, result) tuple, (DriverConnectionState.UNCONFIGURED, None).
         """
-        for connection in self._connection.values():
+        for connection in list(self._connection.values()):
             connection.stop_comms()
 
         self._destroy_protocol()
@@ -186,7 +186,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
                 raise InstrumentParameterException('No %s port agent config supplied and failed to auto-discover' % key)
 
         connections = {}
-        for name, config in all_configs.items():
+        for name, config in list(all_configs.items()):
             if not isinstance(config, dict):
                 continue
             if 'mock_port_agent' in config:
@@ -200,7 +200,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
                     port = config['port']
                     cmd_port = config.get('cmd_port')
 
-                    if isinstance(addr, basestring) and isinstance(port, int) and len(addr) > 0:
+                    if isinstance(addr, str) and isinstance(port, int) and len(addr) > 0:
                         callback = functools.partial(self._got_data, connection=name)
                         connections[name] = PortAgentClient(addr, port, cmd_port, callback,
                                                             self._lost_connection_callback)
@@ -301,7 +301,7 @@ class Protocol(WorkhorseProtocol):
         if expected_prompt is None:
             prompt_list = self._get_prompts()
         else:
-            if isinstance(expected_prompt, basestring):
+            if isinstance(expected_prompt, str):
                 prompt_list = [expected_prompt]
             else:
                 prompt_list = expected_prompt
@@ -741,7 +741,7 @@ class Protocol(WorkhorseProtocol):
             if slave_params:
                 resp = self._get_params(slave_params, SlaveProtocol.FIFTHBEAM)
                 self._param_dict2.update_many(resp)
-                for key, value in self._param_dict2.get_all().iteritems():
+                for key, value in self._param_dict2.get_all().items():
                     self._param_dict.set_value(key, value)
 
         new_config = self._param_dict.get_config()
@@ -776,7 +776,7 @@ class Protocol(WorkhorseProtocol):
 
         master_commands = []
         slave_commands = []
-        for key, val in params.iteritems():
+        for key, val in params.items():
             if WorkhorseEngineeringParameter.has(key):
                 continue
             if val != old_config.get(key):

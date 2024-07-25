@@ -516,7 +516,7 @@ class AdcptMWVSInstrumentDataParticle(DataParticle):
         """
         # Unpack the unpacking rules
         (num_freq_name, num_dir_name, good_name, dat_name),\
-        (num_freq_fmt, num_dir_fmt, good_fmt, dat_fmt) = zip(*rules)
+        (num_freq_fmt, num_dir_fmt, good_fmt, dat_fmt) = list(zip(*rules))
 
         # First unpack the array lengths and single length values
         (num_freq_data, num_dir_data, dspec_good_data) = struct.unpack_from(
@@ -545,7 +545,7 @@ class AdcptMWVSInstrumentDataParticle(DataParticle):
         """
         # Unpack the unpacking rules
         (hpr_num_name, beam_angle_name, spare_name, hpr_time_names),\
-        (hpr_num_fmt, beam_angle_fmt, spare_fmt, hpr_time_fmt) = zip(*rules)
+        (hpr_num_fmt, beam_angle_fmt, spare_fmt, hpr_time_fmt) = list(zip(*rules))
 
         # First unpack the array length and single length value, no need to unpack spare
         (hpr_num_data, beam_angle_data) = struct.unpack_from(
@@ -606,7 +606,7 @@ class AdcptMWVSInstrumentDataParticle(DataParticle):
         Assumes first value to unpack contains the size of the array for the second value to unpack
         """
         # Unpack the unpacking rules
-        (param_size_name, param_list_name), (param_size_fmt, param_list_fmt) = zip(*rules)
+        (param_size_name, param_list_name), (param_size_fmt, param_list_fmt) = list(zip(*rules))
 
         # First unpack the array length value
         num_data, = struct.unpack_from('<%s' % param_size_fmt, self.raw_data, offset)

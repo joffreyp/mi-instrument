@@ -144,7 +144,7 @@ class Parameter(DriverParameter):
 
     @classmethod
     def reverse_dict(cls):
-        return dict((v, k) for k, v in cls.dict().iteritems())
+        return dict((v, k) for k, v in cls.dict().items())
 
 
 class Responses(BaseEnum):
@@ -226,11 +226,10 @@ class RGASampleParticleKey(BaseEnum):
 
 
 # noinspection PyMethodMayBeStatic,PyProtectedMember
-class RGASampleParticle(DataParticle):
+class RGASampleParticle(DataParticle, metaclass=META_LOGGER):
     """
     RGA Sample particle.  Takes a binary blob, decodes to a list of Integers
     """
-    __metaclass__ = META_LOGGER
     _data_particle_type = DataParticleType.RGA_SAMPLE
 
     def _build_parsed_values(self):
@@ -262,16 +261,15 @@ class RGAStatusParticleKey(BaseEnum):
     FL_ACTUAL = 'massp_rga_filament_emission_actual'
 
 
-class RGAStatusParticle(DataParticle):
+class RGAStatusParticle(DataParticle, metaclass=META_LOGGER):
     """
     The contents of the parameter dictionary, published at the start of a scan
     """
-    __metaclass__ = META_LOGGER
     _data_particle_type = DataParticleType.RGA_STATUS
 
     def _build_parsed_values(self):
         result = []
-        for key, value in self.raw_data.items():
+        for key, value in list(self.raw_data.items()):
             if key == Parameter.ERROR_REASON:
                 continue
             key = 'massp_%s' % key
@@ -285,12 +283,11 @@ class RGAStatusParticle(DataParticle):
 # Driver
 ###############################################################################
 
-class InstrumentDriver(SingleConnectionInstrumentDriver):
+class InstrumentDriver(SingleConnectionInstrumentDriver, metaclass=META_LOGGER):
     """
     InstrumentDriver subclass
     Subclasses SingleConnectionInstrumentDriver with connection state machine.
     """
-    __metaclass__ = META_LOGGER
 
     ########################################################################
     # Protocol builder.
@@ -308,12 +305,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=META_LOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -688,7 +684,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         parameters = Parameter.reverse_dict()
 
         # step through the list of parameters
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             # if constraint exists, verify we have not violated it
             constraint_key = parameters.get(key)
             if constraint_key in constraints:
@@ -704,7 +700,7 @@ class Protocol(CommandResponseInstrumentProtocol):
                         (key, val, minimum, maximum))
 
         # all constraints met or no constraints exist, set the values
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             if key in old_config:
                 self._param_dict.set_value(key, val)
             else:
@@ -753,7 +749,7 @@ class Protocol(CommandResponseInstrumentProtocol):
 
         log.debug('response_type: %s parameter: %s command: %s', response_type, getattr(Parameter, command), command)
         # attempt to set the value up to MAX_SET_RETRIES times
-        for x in xrange(MAX_RETRIES):
+        for x in range(MAX_RETRIES):
             if response_type == STATUS:
                 resp = self._do_cmd_resp(command, old_value)
                 self._check_error_byte(resp)

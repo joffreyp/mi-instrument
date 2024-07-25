@@ -71,7 +71,7 @@ class _Recv(Thread):
             return False
 
     def run(self):
-        print "### _Recv running."
+        print("### _Recv running.")
         while True:
             recv = self._conn.recv(1)
             newline = self._update_lines(recv)
@@ -88,10 +88,10 @@ class _Direct(object):
         """
         Establishes the connection and starts the receiving thread.
         """
-        print "### connecting to %s:%s" % (host, port)
-        print "For automatic temperature polling (port 4002) enter autoTemp"
-        print "For automatic RAS burn-in (port 4001) enter autoRAS"
-        print "For automatic PPS burn-in (port 4003) enter autoPPS"
+        print("### connecting to %s:%s" % (host, port))
+        print("For automatic temperature polling (port 4002) enter autoTemp")
+        print("For automatic RAS burn-in (port 4001) enter autoRAS")
+        print("For automatic PPS burn-in (port 4003) enter autoPPS")
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._sock.connect((host, port))
         self._bt = _Recv(self._sock)
@@ -111,11 +111,11 @@ class _Direct(object):
                 self.wake()
 
             elif cmd == "^C":
-                print "### sending '%s'" % cmd
+                print("### sending '%s'" % cmd)
                 self.send_control('c')
 
             elif cmd == "q":
-                print "### exiting"
+                print("### exiting")
                 break
 
             elif cmd == "autoTemp":
@@ -134,14 +134,14 @@ class _Direct(object):
                 self.reset_all()
 
             else:
-                print "### sending '%s'" % cmd
+                print("### sending '%s'" % cmd)
                 self.send(cmd)
                 self.send('\r\n')
 
         self.stop()
 
     def wake(self):
-        print "### attempting to wake"
+        print("### attempting to wake")
         self.send_control('c')
         time.sleep(1)
         self.send_control('c')
@@ -151,15 +151,15 @@ class _Direct(object):
         self.send_control('c')
         time.sleep(1)
         self.send_control('c')
-        print "### five ^C sent"
+        print("### five ^C sent")
         return True
 
     def automatic_control_temp(self):
         """
         Sends temp probe queries repeatedly until any keyed sequence is entered
         """
-        print "### Automatic temperature polling mode"
-        print "### To exit: input any key followed by enter"
+        print("### Automatic temperature polling mode")
+        print("### To exit: input any key followed by enter")
         # The following two while loops do the same thing, however the exit strategy of the the second one,
         # utilizing a timer, is cleaner than the first, which utilizes a  hard break (thanks to Eric McRae)
 
@@ -167,10 +167,10 @@ class _Direct(object):
         while True:
             if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                 stopcmd = sys.stdin.readline()
-                print "### exiting polling mode"
+                print("### exiting polling mode")
                 break
             if second == 1:
-                print "Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
+                print("Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()))
                 self.send('$1RD')
             if second == 1.25:
                 self.send('$2RD')
@@ -186,8 +186,8 @@ class _Direct(object):
         Simulates a 200-hr burn in of the RAS, by cycling through all 48 ports and using the pump
         as it is used during sampling
         """
-        print "### 200 hr burn-in simulation of RAS started"
-        print "### To exit: input any key followed by enter"
+        print("### 200 hr burn-in simulation of RAS started")
+        print("### To exit: input any key followed by enter")
 
         # The following two while loops do the same thing, however the exit strategy of the the second one,
         # utilizing a timer, is cleaner than the first, which utilizes a  hard break (thanks to Eric McRae)
@@ -196,13 +196,13 @@ class _Direct(object):
         while True:
             if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                 stopcmd = sys.stdin.readline()
-                print "### exiting 200 hr burn-in"
+                print("### exiting 200 hr burn-in")
                 break
             if port == 25:
-                print "### exiting 200 hr burn-in, 24 ports tested, half yearly duty cycle"
+                print("### exiting 200 hr burn-in, 24 ports tested, half yearly duty cycle")
                 break
             if second == 1:
-                print "Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
+                print("Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()))
                 self.wake()
             if second == 20:  # actual is ~7s
                 self.send('HOME')
@@ -230,8 +230,8 @@ class _Direct(object):
         Simulates a 200-hr burn in of the PPS, by cycling through all 24 ports and using the pump
         as it is used during sampling
         """
-        print "### 200 hr burn-in simulation of PPS started"
-        print "### To exit: input any key followed by enter"
+        print("### 200 hr burn-in simulation of PPS started")
+        print("### To exit: input any key followed by enter")
 
         # The following two while loops do the same thing, however the exit strategy of the the second one,
         # utilizing a timer, is cleaner than the first, which utilizes a  hard break (thanks to Eric McRae)
@@ -240,13 +240,13 @@ class _Direct(object):
         while True:
             if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                 stopcmd = sys.stdin.readline()
-                print "### exiting 200 hr burn-in"
+                print("### exiting 200 hr burn-in")
                 break
             if port == 13:
-                print "### exiting 200 hr burn-in, 12 ports tested, half yearly duty cycle"
+                print("### exiting 200 hr burn-in, 12 ports tested, half yearly duty cycle")
                 break
             if second == 1:
-                print "Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
+                print("Timestamp:", time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()))
                 self.wake()
             if second == 20:  # actual is ~7s
                 self.send('HOME')
@@ -275,11 +275,11 @@ class _Direct(object):
             if i in exclude:
                 continue
             address = chr(i)
-            print '0x%02x' % i
+            print('0x%02x' % i)
             command = str('$%sRS\r' % address)
             # command = str('$%sSUXXX\r' % address)
             self.send(command)
-            print
+            print()
 
     def reset_all(self):
         exclude = (0, 0x0D, 0x24, 0x23, 0x7B, 0x7D)
@@ -288,7 +288,7 @@ class _Direct(object):
             if i in exclude:
                 continue
             address = chr(i)
-            print '0x%02x' % i
+            print('0x%02x' % i)
             # command = str('$%sRS\r' % address)
             unit = str('#%s' % address)
             old_send = self.send
@@ -325,7 +325,7 @@ class _Direct(object):
         time.sleep(0.1)
         cmd += '\r\n'
         if echo:
-            print "### sending '%r'" % cmd
+            print("### sending '%r'" % cmd)
         c = os.write(self._sock.fileno(), cmd)
         time.sleep(0.2)
         return c
@@ -344,7 +344,7 @@ class _Direct(object):
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print USAGE
+        print(USAGE)
         exit()
 
     if len(sys.argv) == 2:

@@ -329,21 +329,20 @@ class ResultSet(object):
             if not ResultSet._are_streams_equal(particle_received, particle_expected.get(TYPE_KEY, None)):
                 return False
 
-        expected_keys = particle_expected.keys()
+        expected_keys = list(particle_expected.keys())
         ignore_list = [INDEX, DataParticleKey.NEW_SEQUENCE,
                        DataParticleKey.INTERNAL_TIMESTAMP,
                        DataParticleKey.PORT_TIMESTAMP,
                        OBJECT_KEY, TYPE_KEY]
         # remove keys in ignore list from expected_keys, these are specifically ignored or were already handled
-        expected_keys = filter(lambda x: x not in ignore_list, expected_keys)
+        expected_keys = [x for x in expected_keys if x not in ignore_list]
 
         # the received dictionary contains an array of dictionaries {value_id: KEY, value: VALUE}
         # reformat into a list of value keys
-        received_keys = map(lambda x: x[DataParticleKey.VALUE_ID], received_dict[DataParticleKey.VALUES])
+        received_keys = [x[DataParticleKey.VALUE_ID] for x in received_dict[DataParticleKey.VALUES]]
         # transform dictionary into a list of tuples, with each tuple containing the key and value pair,
         # i.e. [(key, value), (key, value)]
-        received_value_map = map(lambda x: (x[DataParticleKey.VALUE_ID], x[DataParticleKey.VALUE]),
-                                 received_dict[DataParticleKey.VALUES])
+        received_value_map = [(x[DataParticleKey.VALUE_ID], x[DataParticleKey.VALUE]) for x in received_dict[DataParticleKey.VALUES]]
 
         # confirm the two particles have the same set of value keys
         if sorted(expected_keys) != sorted(received_keys):

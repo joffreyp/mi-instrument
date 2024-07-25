@@ -26,7 +26,7 @@ import sys
 import traceback
 from logging import NOTSET
 
-import logger
+from . import logger
 import yaml
 from pkg_resources import resource_string
 import mi.logging
@@ -60,7 +60,7 @@ class _LoggingConfiguration(object):
 
     def _log(self, message):
         """ print a message to STDOUT """
-        print >> sys.stderr, message
+        print(message, file=sys.stderr)
 
     def add_configuration(self, configuration, initial=False):
         self._debug('DEBUG LOGGING: add_configuration: %r' % configuration)
@@ -69,7 +69,7 @@ class _LoggingConfiguration(object):
             return # no config = no-op
         if isinstance(configuration, dict):
             self._add_dictionary_configuration(configuration, initial)
-        elif isinstance(configuration, basestring):
+        elif isinstance(configuration, str):
             # is a configuration file or resource -- try both
             contents = self._read_file(configuration) or self._read_resource(configuration)
             if not contents:
@@ -125,7 +125,7 @@ class _LoggingConfiguration(object):
             if recursive:
                 first_part = scope + '.'
                 if 'loggers' in self.current_config:
-                    for name in self.current_config['loggers'].keys():
+                    for name in list(self.current_config['loggers'].keys()):
                         if name.startswith(first_part):
                             changes[name] = NOTSET
             config = { 'loggers': changes }
@@ -136,7 +136,7 @@ class _LoggingConfiguration(object):
             if recursive:
                 config['loggers'] = {}
                 if 'loggers' in self.current_config:
-                    for name in self.current_config['loggers'].keys():
+                    for name in list(self.current_config['loggers'].keys()):
                         config['loggers'][name] = NOTSET
             self.add_configuration(config)
 
@@ -144,7 +144,7 @@ class _LoggingConfiguration(object):
         self._debug('DEBUG LOGGING: set_all_levels: %s' % level)
         changes = {'root':{'level':level}}
         if 'loggers' in self.current_config:
-            for scope in self.current_config['loggers'].keys():
+            for scope in list(self.current_config['loggers'].keys()):
                 changes[scope] = {'level':'NOTSET'}
         self.add_configuration(changes)
 
@@ -155,7 +155,7 @@ class _LoggingConfiguration(object):
         try:
             with open(filename, 'r') as infile:
                 return infile.read()
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.ENOENT:
                 self._log('ERROR: error reading logging configuration file %r: %s' % (filename, e))
         return None
@@ -163,7 +163,7 @@ class _LoggingConfiguration(object):
     def _read_resource(self, resource_name):
         try:
             return resource_string('', resource_name)
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.ENOENT:
                 self._log('ERROR: error reading logging configuration file %r: %s' % (resource_name, e))
         return None

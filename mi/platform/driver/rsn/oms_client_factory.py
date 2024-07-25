@@ -10,7 +10,7 @@
 __author__ = 'Carlos Rueda'
 __license__ = 'Apache 2.0'
 
-import xmlrpclib
+import xmlrpc.client
 
 import os
 from gevent import Greenlet, sleep
@@ -55,7 +55,7 @@ class CIOMSClientFactory(object):
             instance = CIOMSSimulator()
         else:
             log.debug("Creating xmlrpclib.ServerProxy: uri=%s", uri)
-            instance = xmlrpclib.ServerProxy(uri, allow_none=True)
+            instance = xmlrpc.client.ServerProxy(uri, allow_none=True)
             log.debug("Created xmlrpclib.ServerProxy: uri=%s", uri)
 
         cls._inst_count += 1

@@ -68,7 +68,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcpt_20130929_091817.telem.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, 'adcpt_20130929_091817.DAT'), 'rb') as file_handle:
             parser = AdcpsJlnStcParser(self._recov_config,
@@ -79,7 +79,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcpt_20130929_091817.recov.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
     def test_bad_data_telem(self):
         """
@@ -97,9 +97,9 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_checksum.telem.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
             self.exception_callback_value.pop()
 
@@ -113,9 +113,9 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_num_bytes.telem.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_bad_data_recov(self):
         """
@@ -133,9 +133,9 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_checksum.recov.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
             self.exception_callback_value.pop()
 
@@ -149,9 +149,9 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_num_bytes.recov.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_receive_fail_telem(self):
         # ReceiveFailure
@@ -165,7 +165,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_rx_failure.telem.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
     def test_receive_fail_recov(self):
         # ReceiveFailure
@@ -179,7 +179,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcps_jln_stc.bad_rx_failure.recov.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
     def test_real_file(self):
 
@@ -192,7 +192,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcpt_20140504_015742.telem.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, 'adcpt_20140504_015742.DAT'), 'rb') as file_handle:
             parser = AdcpsJlnStcParser(self._recov_config,
@@ -203,7 +203,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(result, 'adcpt_20140504_015742.recov.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
     def test_bug_2979_1(self):
         """
@@ -217,9 +217,9 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             result = parser.get_records(100)
 
-            self.assertEquals(len(result), 13)
+            self.assertEqual(len(result), 13)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
     def test_bug_2979_2(self):
         """
@@ -233,7 +233,7 @@ class AdcpsJlnStcParserUnitTestCase(ParserUnitTestCase):
 
             result = parser.get_records(100)
 
-            self.assertEquals(len(result), 0)
+            self.assertEqual(len(result), 0)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 

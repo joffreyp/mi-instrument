@@ -180,7 +180,7 @@ class CgParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(result, [particle])
         self.assertEqual(self.file_ingested_value, ingested)
 
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], particle)
 
     def test_simple(self):
@@ -199,7 +199,7 @@ class CgParserUnitTestCase(ParserUnitTestCase):
         # no data left, do not move the position
         result = self.parser.get_records(1)
         self.assertEqual(result, [])
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.particle_a)
         self.assertEqual(self.exception_callback_value, None)
 
@@ -235,7 +235,7 @@ class CgParserUnitTestCase(ParserUnitTestCase):
         # no data left, do not move the position
         result = self.parser.get_records(1)
         self.assertEqual(result, [])
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.particle_a)
         self.assertEqual(self.exception_callback_value, None)
 

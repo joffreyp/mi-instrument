@@ -1288,7 +1288,7 @@ class CAMDSProtocol(CommandResponseInstrumentProtocol):
             raise InstrumentParameterException('Set command requires a parameter dict.')
 
         # Before sets are executed, we must first validate certain params that cannot be validated by the UI
-        for key, val in params.iteritems():
+        for key, val in params.items():
 
             # CAMERA_GAIN must be an integer between 1 and 32, or equal to 255 (auto gain)
             if key == Parameter.CAMERA_GAIN[ParameterIndex.KEY]:
@@ -1313,7 +1313,7 @@ class CAMDSProtocol(CommandResponseInstrumentProtocol):
 
         self._verify_not_readonly(*args, **kwargs)
 
-        for key, val in params.iteritems():
+        for key, val in params.items():
             log.debug("In _set_params, %s, %s", key, val)
 
             # These are driver specific parameters. They are not set on the instrument.
@@ -1376,7 +1376,7 @@ class CAMDSProtocol(CommandResponseInstrumentProtocol):
 
         try:
 
-            if isinstance(val, basestring):
+            if isinstance(val, str):
                 val = ''.join(chr(int(x)) for x in val.split(':'))
 
             else:
@@ -1830,7 +1830,7 @@ class CAMDSProtocol(CommandResponseInstrumentProtocol):
         # set default preset position
         preset_number = DEFAULT_USER_PRESET_POSITION
 
-        for key, value in pd.iteritems():
+        for key, value in pd.items():
             if key == Parameter.PRESET_NUMBER[ParameterIndex.KEY]:
                 preset_number = value
 
@@ -1900,7 +1900,7 @@ class CAMDSProtocol(CommandResponseInstrumentProtocol):
         # Check if the user set a preset position, if so, make the camera go to that position
         pd = self._param_dict.get_all()
 
-        for key, value in pd.items():
+        for key, value in list(pd.items()):
             if key == Parameter.PRESET_NUMBER[ParameterIndex.KEY]:
                 preset_number = value
 

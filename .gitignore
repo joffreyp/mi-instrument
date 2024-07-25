@@ -14,3 +14,4 @@ parts
 .cache
 particle.yml
 .*DS_Store
+.venv

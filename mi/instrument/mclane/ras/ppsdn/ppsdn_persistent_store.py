@@ -16,8 +16,8 @@ from mi.core.persistent_store import PersistentStoreDict
 class PpsdnPersistentStoreDict(PersistentStoreDict):
     def __init__(self, reference_designator, host = "127.0.0.1", port = "5432"):
         PersistentStoreDict.__init__(self, "ppsdn", reference_designator, host, port)
-        self.CURRENT_FILTER_KEY = u"CURRENT_FILTER"
-        self.TOTAL_FILTERS_KEY = u"TOTAL_FILTERS"
+        self.CURRENT_FILTER_KEY = "CURRENT_FILTER"
+        self.TOTAL_FILTERS_KEY = "TOTAL_FILTERS"
 
     def isInitialized(self):
         with self.rLock:

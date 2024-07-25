@@ -135,7 +135,7 @@ class AdcptAcfgmPd0DclParserUnitTestCase(ParserUnitTestCase):
 
             #try to get a particle, should get none
             parser.get_records(1)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
     def test_live_data(self):
         files_without_records = [
@@ -293,7 +293,7 @@ def convert_yml(input_file):
     def create_internal_timestamp(record):
         rtc = record['real_time_clock']
         dts = datetime(rtc[0] + 2000, *rtc[1:-1])
-        print dts
+        print(dts)
 
         rtc_time = (dts - ntp_epoch).total_seconds() + rtc[-1] / 100.0
         return rtc_time

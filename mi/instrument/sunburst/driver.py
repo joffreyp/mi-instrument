@@ -925,7 +925,7 @@ class SamiProtocol(CommandResponseInstrumentProtocol):
 
         self._wakeup()
 
-        for cycle_num in xrange(cycles):
+        for cycle_num in range(cycles):
             for command_num in range(command_count):
                 self._do_cmd_resp_no_wakeup(command, duration, timeout=timeout,
                                             response_regex=SAMI_NEW_LINE_REGEX_MATCHER)
@@ -1537,7 +1537,7 @@ class SamiProtocol(CommandResponseInstrumentProtocol):
         old_config = self._param_dict.get_config()
 
         # Compare values here to send config change event
-        for key, val in params.iteritems():
+        for key, val in params.items():
             if val != old_config.get(key):
                 log.debug("Configuration has changed.")
                 changed = True
@@ -1880,7 +1880,7 @@ class SamiProtocol(CommandResponseInstrumentProtocol):
         """
 
         cs = 0
-        for index in xrange(0, len(s), 2):
+        for index in range(0, len(s), 2):
             cs += int(s[index:index + 2], 16)
         cs &= 0xFF
         return cs

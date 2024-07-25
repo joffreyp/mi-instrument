@@ -27,9 +27,9 @@ class WhichDriver():
         """
         self.fetch_metadata()
         if self.metadata.driver_name:
-            print "%s/%s/%s" % (self.metadata.driver_make,
+            print("%s/%s/%s" % (self.metadata.driver_make,
                                 self.metadata.driver_model,
-                                self.metadata.driver_name)
+                                self.metadata.driver_name))
 
 
 if __name__ == '__main__':

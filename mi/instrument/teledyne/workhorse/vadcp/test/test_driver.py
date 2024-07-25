@@ -374,7 +374,7 @@ class VADCPMixin(DriverTestMixin):
         WorkhorseParameter.SYNCH_DELAY: {TYPE: int, READONLY: True, DA: True, STARTUP: True, DEFAULT: 0, VALUE: 0},
     }
 
-    for key in _driver_parameters_slave.keys():
+    for key in list(_driver_parameters_slave.keys()):
         _vadcp_driver_parameters[key + '_5th'] = _driver_parameters_slave[key]
 
     _driver_capabilities = {
@@ -407,26 +407,26 @@ class VADCPMixin(DriverTestMixin):
     }
 
     _system_configuration_data_parameters_VADCP = {
-        AdcpSystemConfigurationKey.SERIAL_NUMBER: {'type': unicode, 'value': "61247"},
+        AdcpSystemConfigurationKey.SERIAL_NUMBER: {'type': str, 'value': "61247"},
         AdcpSystemConfigurationKey.TRANSDUCER_FREQUENCY: {'type': int, 'value': 614400},
-        AdcpSystemConfigurationKey.CONFIGURATION: {'type': unicode, 'value': "4 BEAM, JANUS"},
-        AdcpSystemConfigurationKey.MATCH_LAYER: {'type': unicode, 'value': "10"},
+        AdcpSystemConfigurationKey.CONFIGURATION: {'type': str, 'value': "4 BEAM, JANUS"},
+        AdcpSystemConfigurationKey.MATCH_LAYER: {'type': str, 'value': "10"},
         AdcpSystemConfigurationKey.BEAM_ANGLE: {'type': int, 'value': 20},
-        AdcpSystemConfigurationKey.BEAM_PATTERN: {'type': unicode, 'value': "CONVEX"},
-        AdcpSystemConfigurationKey.ORIENTATION: {'type': unicode, 'value': "UP"},
-        AdcpSystemConfigurationKey.SENSORS: {'type': unicode,
+        AdcpSystemConfigurationKey.BEAM_PATTERN: {'type': str, 'value': "CONVEX"},
+        AdcpSystemConfigurationKey.ORIENTATION: {'type': str, 'value': "UP"},
+        AdcpSystemConfigurationKey.SENSORS: {'type': str,
                                              'value': "HEADING  TILT 1  TILT 2  TEMPERATURE"},
         AdcpSystemConfigurationKey.TEMPERATURE_SENSOR_OFFSET: {'type': float, 'value': 0.03},
-        AdcpSystemConfigurationKey.CPU_FIRMWARE: {'type': unicode, 'value': "50.40 [0]"},
-        AdcpSystemConfigurationKey.BOOT_CODE_REQUIRED: {'type': unicode, 'value': "1.16"},
-        AdcpSystemConfigurationKey.BOOT_CODE_ACTUAL: {'type': unicode, 'value': "1.16"},
-        AdcpSystemConfigurationKey.DEMOD_1_VERSION: {'type': unicode, 'value': "ad48"},
-        AdcpSystemConfigurationKey.DEMOD_1_TYPE: {'type': unicode, 'value': "1f"},
-        AdcpSystemConfigurationKey.DEMOD_2_VERSION: {'type': unicode, 'value': "ad48"},
-        AdcpSystemConfigurationKey.DEMOD_2_TYPE: {'type': unicode, 'value': "1f"},
-        AdcpSystemConfigurationKey.POWER_TIMING_VERSION: {'type': unicode, 'value': "85d3"},
-        AdcpSystemConfigurationKey.POWER_TIMING_TYPE: {'type': unicode, 'value': "6"},
-        AdcpSystemConfigurationKey.BOARD_SERIAL_NUMBERS: {'type': unicode,
+        AdcpSystemConfigurationKey.CPU_FIRMWARE: {'type': str, 'value': "50.40 [0]"},
+        AdcpSystemConfigurationKey.BOOT_CODE_REQUIRED: {'type': str, 'value': "1.16"},
+        AdcpSystemConfigurationKey.BOOT_CODE_ACTUAL: {'type': str, 'value': "1.16"},
+        AdcpSystemConfigurationKey.DEMOD_1_VERSION: {'type': str, 'value': "ad48"},
+        AdcpSystemConfigurationKey.DEMOD_1_TYPE: {'type': str, 'value': "1f"},
+        AdcpSystemConfigurationKey.DEMOD_2_VERSION: {'type': str, 'value': "ad48"},
+        AdcpSystemConfigurationKey.DEMOD_2_TYPE: {'type': str, 'value': "1f"},
+        AdcpSystemConfigurationKey.POWER_TIMING_VERSION: {'type': str, 'value': "85d3"},
+        AdcpSystemConfigurationKey.POWER_TIMING_TYPE: {'type': str, 'value': "6"},
+        AdcpSystemConfigurationKey.BOARD_SERIAL_NUMBERS: {'type': str,
                                                           'value': "9A  00 00 06 83 8B 94  09 CPU727-2011-00E,"
                                                                    "B8  00 00 06 B2 B7 C6  09 DSP727-2001-03H,"
                                                                    "3B  00 00 06 B3 32 FD  09 PIO727-3000-00G,"
@@ -635,22 +635,22 @@ class VADCPMixin(DriverTestMixin):
                                                      -32768, -32768, -32768, -32768]},
     }
 
-    _pd0_parameters = dict(_pd0_parameters_base.items() +
-                           _beam_parameters.items())
-    _pd0_parameters_slave = dict(_pd0_parameters_base.items() +
-                           _beam_parameters_slave.items())
+    _pd0_parameters = dict(list(_pd0_parameters_base.items()) +
+                           list(_beam_parameters.items()))
+    _pd0_parameters_slave = dict(list(_pd0_parameters_base.items()) +
+                           list(_beam_parameters_slave.items()))
 
     _pt2_dict = {
         AdcpAncillarySystemDataKey.ADCP_AMBIENT_CURRENT: {'type': float, 'value': "20.32"},
         AdcpAncillarySystemDataKey.ADCP_ATTITUDE_TEMP: {'type': float, 'value': "24.65"},
-        AdcpAncillarySystemDataKey.ADCP_INTERNAL_MOISTURE: {'type': unicode, 'value': "8F0Ah"}
+        AdcpAncillarySystemDataKey.ADCP_INTERNAL_MOISTURE: {'type': str, 'value': "8F0Ah"}
     }
 
     _pt4_dict = {
         AdcpTransmitPathKey.ADCP_TRANSIT_CURRENT: {'type': float, 'value': "2.0"},
         AdcpTransmitPathKey.ADCP_TRANSIT_VOLTAGE: {'type': float, 'value': "60.1"},
         AdcpTransmitPathKey.ADCP_TRANSIT_IMPEDANCE: {'type': float, 'value': "29.8"},
-        AdcpTransmitPathKey.ADCP_TRANSIT_TEST_RESULT: {'type': unicode, 'value': "$0 ... PASS"},
+        AdcpTransmitPathKey.ADCP_TRANSIT_TEST_RESULT: {'type': str, 'value': "$0 ... PASS"},
 
     }
 
@@ -1005,7 +1005,7 @@ class VadcpDriverUnitTest(WorkhorseDriverUnitTest, VADCPMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
 
 ###############################################################################
@@ -1042,7 +1042,7 @@ class VadcpDriverIntegrationTest(WorkhorseDriverIntegrationTest, VADCPMixin):
 
         if config['instrument_type'] != ConfigTypes.MULTI:
             config = {'only one port agent here!': config}
-        for name, each in config.items():
+        for name, each in list(config.items()):
             if type(each) != dict:
                 continue
             port_agent_host = each.get('device_addr')
@@ -1065,13 +1065,13 @@ class VadcpDriverIntegrationTest(WorkhorseDriverIntegrationTest, VADCPMixin):
         """
         if self.port_agents:
             log.debug("found port agents, now stop them")
-            for agent in self.port_agents.values():
+            for agent in list(self.port_agents.values()):
                 agent.stop()
         self.port_agents = {}
 
     def port_agent_comm_config(self):
         config = {}
-        for name, each in self.port_agents.items():
+        for name, each in list(self.port_agents.items()):
             port = each.get_data_port()
             cmd_port = each.get_command_port()
 
@@ -1141,16 +1141,16 @@ class VadcpDriverIntegrationTest(WorkhorseDriverIntegrationTest, VADCPMixin):
         self.assertTrue(isinstance(drv_pid, int))
 
         self.assertNotEqual(self.port_agents, None)
-        for port_agent in self.port_agents.values():
+        for port_agent in list(self.port_agents.values()):
             pagent_pid = port_agent.get_pid()
             self.assertTrue(isinstance(pagent_pid, int))
 
         # Send a test message to the process interface, confirm result.
         reply = self.driver_client.cmd_dvr('process_echo')
-        self.assert_(reply.startswith('ping from resource ppid:'))
+        self.assertTrue(reply.startswith('ping from resource ppid:'))
 
         reply = self.driver_client.cmd_dvr('driver_ping', 'foo')
-        self.assert_(reply.startswith('driver_ping: foo'))
+        self.assertTrue(reply.startswith('driver_ping: foo'))
 
         # Test the event thread publishes and client side picks up events.
         events = [
@@ -1236,7 +1236,7 @@ class QualFromIDK(WorkhorseDriverQualificationTest, VADCPMixin):
 
         if config['instrument_type'] != ConfigTypes.MULTI:
             config = {'only one port agent here!': config}
-        for name, each in config.items():
+        for name, each in list(config.items()):
             if type(each) != dict:
                 continue
             port_agent_host = each.get('device_addr')
@@ -1260,13 +1260,13 @@ class QualFromIDK(WorkhorseDriverQualificationTest, VADCPMixin):
         Stop the port agent.
         """
         if self.port_agents:
-            for agent in self.port_agents.values():
+            for agent in list(self.port_agents.values()):
                 agent.stop()
         self.port_agents = {}
 
     def port_agent_comm_config(self):
         config = {}
-        for name, each in self.port_agents.items():
+        for name, each in list(self.port_agents.items()):
             port = each.get_data_port()
             cmd_port = each.get_command_port()
 
@@ -1279,7 +1279,7 @@ class QualFromIDK(WorkhorseDriverQualificationTest, VADCPMixin):
 
     def create_multi_comm_config(self, comm_config):
         result = {}
-        for name, config in comm_config.configs.items():
+        for name, config in list(comm_config.configs.items()):
             if config.method() == ConfigTypes.TCP:
                 result[name] = self.create_ethernet_comm_config(config)
             elif config.method() == ConfigTypes.SERIAL:

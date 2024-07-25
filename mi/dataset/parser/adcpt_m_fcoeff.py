@@ -297,10 +297,10 @@ class AdcptMFCoeffParser(SimpleParser):
 
         # Construct parsed data list to hand over to the Data Particle class for particle creation
         # Make all the collected data effectively into one long dictionary
-        parsed_dict = dict(chain(file_time_dict.iteritems(),
-                                 dir_freq_dict.iteritems(),
-                                 freq_band_dict.iteritems(),
-                                 sensor_data_dict.iteritems()))
+        parsed_dict = dict(chain(iter(file_time_dict.items()),
+                                 iter(dir_freq_dict.items()),
+                                 iter(freq_band_dict.items()),
+                                 iter(sensor_data_dict.items())))
 
         error_flag = False
         # Check if all parameter data is accounted for

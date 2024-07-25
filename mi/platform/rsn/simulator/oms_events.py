@@ -12,11 +12,11 @@
 __author__ = 'Carlos Rueda'
 __license__ = 'Apache 2.0'
 
-import httplib
+import http.client
 import json
 import time
 from time import sleep
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 import ntplib
 import yaml
@@ -115,7 +115,7 @@ class EventNotifier(object):
             url4conn = o.netloc
             path     = o.path
 
-            conn = httplib.HTTPConnection(url4conn)
+            conn = http.client.HTTPConnection(url4conn)
             conn.request("POST", path, body=payload, headers=headers)
             response = conn.getresponse()
             data = response.read()
@@ -153,7 +153,7 @@ class EventGenerator(object):
         if self._index >= len(EventInfo.EVENT_TYPES):
             self._index = 0
 
-        event_type = EventInfo.EVENT_TYPES.values()[self._index]
+        event_type = list(EventInfo.EVENT_TYPES.values())[self._index]
         self._index += 1
 
         platform_id = "TODO_some_platform_id"
@@ -205,37 +205,37 @@ if __name__ == "__main__":  # pragma: no cover
         from gevent.pywsgi import WSGIServer
         def application(environ, start_response):
             #print('listener got environ=%s' % str(environ))
-            print(" ".join(('%s=%s' % (k, environ[k])) for k in [
-                'CONTENT_LENGTH','CONTENT_TYPE', 'HTTP_ACCEPT']))
+            print((" ".join(('%s=%s' % (k, environ[k])) for k in [
+                'CONTENT_LENGTH','CONTENT_TYPE', 'HTTP_ACCEPT'])))
             input = environ['wsgi.input']
             body = "".join(input.readlines())
-            print('body=\n%s' % body)
+            print(('body=\n%s' % body))
             #
             # note: the expected content format is JSON and we can in general
             # parse with either json or yaml ("every JSON file is also a valid
             # YAML file" -- http://yaml.org/spec/1.2/spec.html#id2759572):
             #
             event_instance = yaml.load(body)
-            print('event_instance=%s' % str(event_instance))
+            print(('event_instance=%s' % str(event_instance)))
 
             # respond OK:
             headers = [('Content-Type', 'text/plain') ]
             status = '200 OK'
             start_response(status, headers)
             return "MY-RESPONSE. BYE"
-        print("%s:%s: listening for event notifications..." % (host, port))
+        print(("%s:%s: listening for event notifications..." % (host, port)))
         WSGIServer((host, port), application).serve_forever()
 
     elif len(sys.argv) > 1 and sys.argv[1] == "notifier":
         # run notifier
         notifier = EventNotifier()
         url = "http://%s:%s" % (host, port)
-        for event_type in EventInfo.EVENT_TYPES.keys():
+        for event_type in list(EventInfo.EVENT_TYPES.keys()):
             notifier.add_listener(url, event_type)
-            print("registered listener to event_type=%r" % event_type)
+            print(("registered listener to event_type=%r" % event_type))
         generator = EventGenerator(notifier)
         secs = 15
-        print("generating events for %s seconds ..." % secs)
+        print(("generating events for %s seconds ..." % secs))
         generator.start()
         sleep(secs)
         generator.stop()

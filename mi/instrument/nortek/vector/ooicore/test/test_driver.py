@@ -157,7 +157,7 @@ class VectorDriverTestMixinSub(DriverTestMixinSub):
     }
 
     _sample_parameters_02 = {
-        VectorVelocityHeaderDataParticleKey.TIMESTAMP: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        VectorVelocityHeaderDataParticleKey.TIMESTAMP: {TYPE: str, VALUE: '', REQUIRED: True},
         VectorVelocityHeaderDataParticleKey.NUMBER_OF_RECORDS: {TYPE: int, VALUE: 0, REQUIRED: True},
         VectorVelocityHeaderDataParticleKey.NOISE1: {TYPE: int, VALUE: 0, REQUIRED: True},
         VectorVelocityHeaderDataParticleKey.NOISE2: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -168,7 +168,7 @@ class VectorDriverTestMixinSub(DriverTestMixinSub):
     }
 
     _system_data_parameter = {
-        VectorSystemDataParticleKey.TIMESTAMP: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        VectorSystemDataParticleKey.TIMESTAMP: {TYPE: str, VALUE: '', REQUIRED: True},
         VectorSystemDataParticleKey.BATTERY: {TYPE: int, VALUE: 0, REQUIRED: True},
         VectorSystemDataParticleKey.SOUND_SPEED: {TYPE: int, VALUE: 0, REQUIRED: True},
         VectorSystemDataParticleKey.HEADING: {TYPE: int, VALUE: 0, REQUIRED: True},

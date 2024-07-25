@@ -349,7 +349,7 @@ class DriverGenerator:
         @brief Generate stub driver test code
         """
         if(os.path.exists(self.driver_test_path()) and not self.force):
-            print "Warning: driver test file exists (" + self.driver_test_path() + ") not overwriting"
+            print("Warning: driver test file exists (" + self.driver_test_path() + ") not overwriting")
         else:
             template = self._get_template(self.test_template())
             ofile = open( self.driver_test_path(), 'w' )
@@ -364,21 +364,21 @@ class DriverGenerator:
         strings_path = "%s/%s" % (self.resource_dir(),
                                      self.resource_strings_filename())
         if(os.path.exists(strings_path) and not self.force):
-            print "Warning: driver resource file exists (" + strings_path + ") not overwriting"
+            print("Warning: driver resource file exists (" + strings_path + ") not overwriting")
         else:
             try:
                 shutil.copyfile(self.strings_template(), strings_path)
             except IOError as e:
-                print "Encountered problem writing strings template, complete by hand"
+                print("Encountered problem writing strings template, complete by hand")
         
     def display_report(self):
         """
         @brief Display a report of the files created to STDOUT
         """
         print( "*** Generation Complete ***" )
-        print(" - Driver File: " + self.driver_dir() + "/" + self.driver_filename())
-        print(" - Test File: " + self.driver_test_dir() + "/" + self.driver_test_filename())
-        print(" - Resource Directory: " + self.resource_dir())
+        print((" - Driver File: " + self.driver_dir() + "/" + self.driver_filename()))
+        print((" - Test File: " + self.driver_test_dir() + "/" + self.driver_test_filename()))
+        print((" - Resource Directory: " + self.resource_dir()))
 
 
     def generate(self):

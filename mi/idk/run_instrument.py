@@ -272,7 +272,7 @@ class RunInstrument(MiIntTestCase):
             'raw' : 'ctd_raw_param_dict'
         }
 
-        for (stream_name, param_dict_name) in streams.iteritems():
+        for (stream_name, param_dict_name) in streams.items():
             pd_id = dataset_management.read_parameter_dictionary_by_name(DEFAULT_PARAM_DICT, id_only=True)
             if (not pd_id):
                 log.error("No pd_id found for param_dict '%s'" % DEFAULT_PARAM_DICT)
@@ -313,7 +313,7 @@ class RunInstrument(MiIntTestCase):
 
         # A callback for processing subscribed-to data.
         def recv_data(message, stream_route, stream_id):
-            print 'Received message on ' + str(stream_id) + ' (' + str(stream_route.exchange_point) + ',' + str(stream_route.routing_key) + ')'
+            print('Received message on ' + str(stream_id) + ' (' + str(stream_route.exchange_point) + ',' + str(stream_route.routing_key) + ')')
             log.info('Received message on %s (%s,%s)', stream_id, stream_route.exchange_point, stream_route.routing_key)
              
             self.pipeData = open(PIPE_PATH, "w", 1) 
@@ -325,7 +325,7 @@ class RunInstrument(MiIntTestCase):
             #if len(self._samples_received) == count:
                 #self._async_data_result.set()
 
-        for (stream_name, stream_config) in self._stream_config.iteritems():
+        for (stream_name, stream_config) in self._stream_config.items():
             
             stream_id = stream_config['stream_id']
             
@@ -336,7 +336,7 @@ class RunInstrument(MiIntTestCase):
             sub = StandaloneStreamSubscriber(exchange_name, recv_data)
             sub.start()
             self._data_subscribers.append(sub)
-            print 'stream_id: %s' % stream_id
+            print('stream_id: %s' % stream_id)
             sub_id = pubsub_client.create_subscription(name=exchange_name, stream_ids=[stream_id])
             pubsub_client.activate_subscription(sub_id)
             sub.subscription_id = sub_id # Bind the subscription to the standalone subscriber (easier cleanup, not good in real practice)
@@ -371,25 +371,25 @@ class RunInstrument(MiIntTestCase):
 
         try:
             state = self._ia_client.get_agent_state()
-            print "AgentState: " + str(state)
+            print("AgentState: " + str(state))
         
             cmd = AgentCommand(command=ResourceAgentEvent.INITIALIZE)
             retval = self._ia_client.execute_agent(cmd)
 
             state = self._ia_client.get_agent_state()
-            print "AgentState: " + str(state)
+            print("AgentState: " + str(state))
             
             res_state = self._ia_client.get_resource_state()
-            print "DriverState: " + str(res_state)
+            print("DriverState: " + str(res_state))
     
             cmd = AgentCommand(command=ResourceAgentEvent.GO_ACTIVE)
             retval = self._ia_client.execute_agent(cmd)
 
             state = self._ia_client.get_agent_state()
-            print "AgentState: " + str(state)
+            print("AgentState: " + str(state))
     
             res_state = self._ia_client.get_resource_state()
-            print "DriverState: " + str(res_state)
+            print("DriverState: " + str(res_state))
 
             """
             If the agent is in STREAMING state, it will not accept the run
@@ -400,10 +400,10 @@ class RunInstrument(MiIntTestCase):
                 retval = self._ia_client.execute_agent(cmd)
 
             state = self._ia_client.get_agent_state()
-            print "AgentState: " + str(state)
+            print("AgentState: " + str(state))
             
             res_state = self._ia_client.get_resource_state()
-            print "DriverState: " + str(res_state)
+            print("DriverState: " + str(res_state))
             
         except:
             log.error("bring_instrument_active(): Exception occurred; shutting down.", exc_info=True)
@@ -434,10 +434,10 @@ class RunInstrument(MiIntTestCase):
         self.res_cmds = [x.name for x in retval if x.cap_type==CapabilityType.RES_CMD]
         self.res_pars = [x.name for x in retval if x.cap_type==CapabilityType.RES_PAR]
         
-        print "\n------------------>>>> Current Capabilities <<<<------------------"
-        print "Agent Commands: " + str(self.agt_cmds)
+        print("\n------------------>>>> Current Capabilities <<<<------------------")
+        print("Agent Commands: " + str(self.agt_cmds))
         #print "Agent Parameters: " + str(self.agt_pars)
-        print "Resource Commands: " + str(self.res_cmds)
+        print("Resource Commands: " + str(self.res_cmds))
         #print "Resource Parameters: " + str(self.res_pars)
 
     def send_agent_command(self, command):
@@ -447,7 +447,7 @@ class RunInstrument(MiIntTestCase):
         
         DA_WAIT_PERIOD = 60
         waiting = False
-        print "Input command: " + str(command)
+        print("Input command: " + str(command))
         if command == 'RESOURCE_AGENT_EVENT_GO_DIRECT_ACCESS':
             cmd = AgentCommand(command = command, 
                                kwargs={'session_type': DirectAccessTypes.telnet,
@@ -458,9 +458,9 @@ class RunInstrument(MiIntTestCase):
             cmd = AgentCommand(command = command)
             
         retval = self._ia_client.execute_agent(cmd)
-        print "Results of command: " + str(retval)
+        print("Results of command: " + str(retval))
         while waiting:
-            print "Waiting " + str(DA_WAIT_PERIOD) + " seconds for you to test direct access."
+            print("Waiting " + str(DA_WAIT_PERIOD) + " seconds for you to test direct access.")
             gevent.sleep(DA_WAIT_PERIOD)
             still_waiting = prompt.text('Still waiting? (y/n)')
             if still_waiting is 'n':
@@ -477,10 +477,10 @@ class RunInstrument(MiIntTestCase):
         elif command == DriverEvent.SET:
             self._set_param()
         else:
-            print "Input command: " + str(command)
+            print("Input command: " + str(command))
             cmd = AgentCommand(command = command)
             retval = self._ia_client.execute_resource(cmd)
-            print "Results of command: " + str(retval)
+            print("Results of command: " + str(retval))
 
     def _get_param(self):
         """
@@ -489,17 +489,17 @@ class RunInstrument(MiIntTestCase):
         """
         
         _all_params = self._ia_client.get_resource('DRIVER_PARAMETER_ALL')
-        print "Parameters you can get are: " + str(_all_params)
+        print("Parameters you can get are: " + str(_all_params))
         _param_valid = False
         while _param_valid is False:
             _param = prompt.text('\nEnter a single parameter')
             if _param in _all_params:
                 _param_valid = True
             else:
-                print 'Invalid parameter: ' + _param 
+                print('Invalid parameter: ' + _param) 
                 
         reply = self._ia_client.get_resource([_param])
-        print 'Reply is :' + str(reply)
+        print('Reply is :' + str(reply))
                                                                     
     def _set_param(self):
         """
@@ -507,14 +507,14 @@ class RunInstrument(MiIntTestCase):
         """
         
         _all_params = self._ia_client.get_resource('DRIVER_PARAMETER_ALL')
-        print "Parameters you can set are: " + str(_all_params)
+        print("Parameters you can set are: " + str(_all_params))
         _param_valid = False
         while _param_valid is False:
             _param = prompt.text('\nEnter a single parameter')
             if _param in _all_params:
                 _param_valid = True
             else:
-                print 'Invalid parameter: ' + _param 
+                print('Invalid parameter: ' + _param) 
 
         _value = prompt.text('Enter value')
         _value = _value.lower()
@@ -576,8 +576,8 @@ class RunInstrument(MiIntTestCase):
                     self.data_port = int(sport)
                     continuing = False
                 except ValueError as e:
-                    print "Error converting port to number: " + str(e)
-                    print "Please enter a valid port number.\n"
+                    print("Error converting port to number: " + str(e))
+                    print("Please enter a valid port number.\n")
 
     def fetch_driver_class(self):
         self.driver_class = prompt.text( 'Driver Class', self.driver_class )

@@ -75,12 +75,10 @@ class CamhdAInstrumentDataParticle(DataParticle):
         return [self._encode_value(CamhdAParticleKey.FILE_PATH, self.raw_data, str)]
 
 
-class CamhdAParser(SimpleParser):
+class CamhdAParser(SimpleParser, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Parser for camhd_a video files
     """
-
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, config, stream_handle, exception_callback):
         """

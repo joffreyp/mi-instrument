@@ -7,7 +7,7 @@
 @brief Test code for a Parad_k_stc_imodem data parser
 """
 import struct, ntplib
-from StringIO import StringIO
+from io import StringIO
 
 from nose.plugins.attrib import attr
 
@@ -236,7 +236,7 @@ class Parad_k_stc_imodemParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(result, [])
         self.assertEqual(self.parser._state[StateKey.POSITION], 128)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 128)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.particle_d_eng)
 
     def test_simple_recovered(self):
@@ -262,7 +262,7 @@ class Parad_k_stc_imodemParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(result, [])
         self.assertEqual(self.parser._state[StateKey.POSITION], 128)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 128)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.particle_d_eng_rec)
 
     def timestamp_to_ntp(self, hex_timestamp):
@@ -277,7 +277,7 @@ class Parad_k_stc_imodemParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(self.parser._state[StateKey.POSITION], position)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], position)
 
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], particle)
 
     def test_get_many(self):

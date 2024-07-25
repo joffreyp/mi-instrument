@@ -326,12 +326,11 @@ class NortekProtocolParameterDict(ProtocolParameterDict):
 # Protocol
 ###############################################################################
 # noinspection PyUnusedLocal,PyMethodMayBeStatic
-class NortekInstrumentProtocol(CommandResponseInstrumentProtocol):
+class NortekInstrumentProtocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class for Nortek driver.
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -488,7 +487,7 @@ class NortekInstrumentProtocol(CommandResponseInstrumentProtocol):
         set_params = False
 
         # For each key, value in the params list set the value in parameters copy.
-        for name, value in params.iteritems():
+        for name, value in params.items():
             try:
                 if name in constraints:
                     var_type, minimum, maximum = constraints[name]

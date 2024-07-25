@@ -247,7 +247,7 @@ class CIOMSSimulator(CIOMSClient):
         if platform_id not in self._pnodes:
             return {platform_id: InvalidResponse.PLATFORM_ID}
 
-        return {platform_id: self._pnodes[platform_id].missions.keys()}
+        return {platform_id: list(self._pnodes[platform_id].missions.keys())}
 
     def get_mission_status(self, platform_id):
         self._enter()

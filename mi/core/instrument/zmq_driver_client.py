@@ -17,7 +17,7 @@ import ion.services.mi.zmq_driver_client as zdc
 c = zdc.ZmqDriverClient('localhost', 5556, 5557)
 """
 
-import thread
+import _thread
 import logging
 import time
 
@@ -98,7 +98,7 @@ class ZmqDriverClient(DriverClient):
             sock.close()
             context.term()
             log.info('Client event socket closed.')
-        self.event_thread = thread.start_new_thread(recv_evt_messages, (self,))
+        self.event_thread = _thread.start_new_thread(recv_evt_messages, (self,))
         log.info('Driver client messaging started.')
         
     def stop_messaging(self):

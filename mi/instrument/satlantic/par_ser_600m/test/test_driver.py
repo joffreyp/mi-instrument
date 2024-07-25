@@ -143,19 +143,19 @@ class PARMixin(DriverTestMixin):
         # Parameters defined in the IOS
         SatlanticPARConfigParticleKey.BAUD_RATE: {TYPE: int, READONLY: True, DA: True, STARTUP: False, VALUE: 19200, REQUIRED: True},
         SatlanticPARConfigParticleKey.MAX_RATE: {TYPE: float, READONLY: False, DA: True, STARTUP: True, VALUE: 0.5, REQUIRED: True},
-        SatlanticPARConfigParticleKey.SERIAL_NUM: {TYPE: unicode, READONLY: True, DA: False, STARTUP: False, VALUE: '4278190306', REQUIRED: True},
-        SatlanticPARConfigParticleKey.FIRMWARE: {TYPE: unicode, READONLY: True, DA: False, STARTUP: False, VALUE: '1.0.0', REQUIRED: True},
-        SatlanticPARConfigParticleKey.TYPE: {TYPE: unicode, READONLY: True, DA: False, STARTUP: False, VALUE: 'SATPAR', REQUIRED: True},
+        SatlanticPARConfigParticleKey.SERIAL_NUM: {TYPE: str, READONLY: True, DA: False, STARTUP: False, VALUE: '4278190306', REQUIRED: True},
+        SatlanticPARConfigParticleKey.FIRMWARE: {TYPE: str, READONLY: True, DA: False, STARTUP: False, VALUE: '1.0.0', REQUIRED: True},
+        SatlanticPARConfigParticleKey.TYPE: {TYPE: str, READONLY: True, DA: False, STARTUP: False, VALUE: 'SATPAR', REQUIRED: True},
     }
 
     _sample_parameters = {
-        PARDataKey.SERIAL_NUM: {TYPE: unicode, VALUE: '4278190306', REQUIRED: True},
+        PARDataKey.SERIAL_NUM: {TYPE: str, VALUE: '4278190306', REQUIRED: True},
         PARDataKey.COUNTS: {TYPE: int, VALUE: 2157023616, REQUIRED: True},
         PARDataKey.TIMER: {TYPE: float, VALUE: 49.02, REQUIRED: True}
     }
 
     _sample_parameters_new = {
-        PARDataKeyNew.SERIAL_NUM: {TYPE: unicode, VALUE: '1017', REQUIRED: True},
+        PARDataKeyNew.SERIAL_NUM: {TYPE: str, VALUE: '1017', REQUIRED: True},
         PARDataKeyNew.TIMER: {TYPE: float, VALUE: 276.415, REQUIRED: True},
         PARDataKeyNew.PAR: {TYPE: float, VALUE: 15.456, REQUIRED: True},
         PARDataKeyNew.PITCH: {TYPE: float, VALUE: 77.1, REQUIRED: True},
@@ -271,7 +271,7 @@ class SatlanticParProtocolUnitTest(InstrumentDriverUnitTestCase, PARMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities), sorted(protocol._filter_capabilities(test_capabilities)))
+        self.assertEqual(sorted(driver_capabilities), sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_chunker(self):
         """
@@ -834,7 +834,7 @@ class SatlanticParProtocolQualificationTest(InstrumentDriverQualificationTestCas
                                                                PARProtocolEvent.ACQUIRE_STATUS,
                                                                PARProtocolEvent.START_AUTOSAMPLE],
                         AgentCapabilityType.RESOURCE_INTERFACE: None,
-                        AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()}
+                        AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())}
 
         self.assert_enter_command_mode()
         self.assert_capabilities(capabilities)
@@ -845,7 +845,7 @@ class SatlanticParProtocolQualificationTest(InstrumentDriverQualificationTestCas
         capabilities = {AgentCapabilityType.AGENT_COMMAND: self._common_agent_commands(ResourceAgentState.STREAMING),
                         AgentCapabilityType.RESOURCE_COMMAND: [PARProtocolEvent.STOP_AUTOSAMPLE,
                                                                PARProtocolEvent.ACQUIRE_STATUS, ],
-                        AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()}
+                        AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())}
 
         self.assert_start_autosample()
         self.assert_capabilities(capabilities)

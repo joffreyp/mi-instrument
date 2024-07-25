@@ -46,7 +46,7 @@ class DriverDict(InstrumentDict):
         @retval The value associated with the command
         @throw KeyError if no value exists
         """
-        if (name == None) or (name not in self._driver_dict.keys()):
+        if (name == None) or (name not in list(self._driver_dict.keys())):
             raise KeyError("Invalid name: %s" % name)
                     
         return self._driver_dict[name]

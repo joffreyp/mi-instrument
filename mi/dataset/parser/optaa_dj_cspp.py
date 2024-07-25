@@ -270,7 +270,7 @@ class OptaaDjCsppInstrumentDataParticle(DataParticle):
         counts_list = tab_str_stripped.split('\t')
 
         # return a list of integers
-        return map(int, counts_list)
+        return list(map(int, counts_list))
 
 
 class OptaaDjCsppInstrumentRecoveredDataParticle(OptaaDjCsppInstrumentDataParticle):

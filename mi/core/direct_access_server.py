@@ -27,10 +27,10 @@ class DirectAccessTypes:
     # telnet - supports telnet
     # vsp    - supports virtual serial port via com0com on the client end
     # ssh    - not implemented yeet
-    (ssh, telnet, vsp) = range(2, 5)
+    (ssh, telnet, vsp) = list(range(2, 5))
     
 class SessionCloseReasons:
-    enum_range = range(0, 9)
+    enum_range = list(range(0, 9))
     
     (client_closed, 
      inactivity_timeout, 
@@ -225,7 +225,7 @@ class TcpServer(object):
                     self._exit_handler(SessionCloseReasons.client_closed)
                 self.activity_seen = True;
                 return input_data
-            except gevent.socket.error, error:
+            except gevent.socket.error as error:
                 if error.errno == errno.EAGAIN or error.errno == errno.EWOULDBLOCK:
                     # exceptions that indicate that nothing is available to read
                     if self.stop_server:

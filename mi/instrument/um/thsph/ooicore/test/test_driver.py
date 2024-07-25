@@ -275,7 +275,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, THSPHMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -405,7 +405,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, THSPHMixinS
                 ProtocolEvent.ACQUIRE_SAMPLE,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

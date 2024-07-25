@@ -200,7 +200,7 @@ class NutnrJCsppDataParticle(DataParticle):
             if name == self._spectral_channels:
                 # spectral channels is an array of ints, need to do the extra map
                 results.append(self._encode_value(name,
-                                                  map(int, params[index:GRP_SPECTRAL_END]),
+                                                  list(map(int, params[index:GRP_SPECTRAL_END])),
                                                   encode_function))
             else:
                 results.append(self._encode_value(name, params[index], encode_function))
@@ -372,7 +372,7 @@ class NutnrJCsppParser(SimpleParser):
                     header_part_value = header_part_match.group(
                         HeaderPartMatchesGroupNumber.HEADER_PART_MATCH_GROUP_VALUE)
 
-                    if header_part_key in self._header_state.keys():
+                    if header_part_key in list(self._header_state.keys()):
                         self._header_state[header_part_key] = string.rstrip(header_part_value)
 
                 else:

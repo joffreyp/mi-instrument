@@ -94,7 +94,7 @@ class DostaLnWfpSioParserUnitTestCase(ParserUnitTestCase):
 
         result = self.parser.get_records(1)
         self.assertEqual(result, [self.particle_1d])
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         self.stream_handle.close()
 
@@ -112,7 +112,7 @@ class DostaLnWfpSioParserUnitTestCase(ParserUnitTestCase):
         result = self.parser.get_records(4)
         self.assertEqual(result,
                          [self.particle_1a, self.particle_1b, self.particle_1c, self.particle_1d])
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         self.stream_handle.close()
     
@@ -130,7 +130,7 @@ class DostaLnWfpSioParserUnitTestCase(ParserUnitTestCase):
         result = self.parser.get_records(100)
 
         self.assert_particles(result, 'node58p1_0.we_wfp.yml', RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         self.stream_handle.close()
 
@@ -142,7 +142,7 @@ class DostaLnWfpSioParserUnitTestCase(ParserUnitTestCase):
         log.debug('--Starting test_bad_data')
         self.parser = DostaLnWfpSioParser(self.config, self.stream_handle, self.exception_callback)
         self.parser.get_records(1)
-        self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def test_bad_e_record(self):
         """
@@ -155,7 +155,7 @@ class DostaLnWfpSioParserUnitTestCase(ParserUnitTestCase):
 
         self.parser = DostaLnWfpSioParser(self.config, self.stream_handle, self.exception_callback)
         self.parser.get_records(1)
-        self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def particle_to_yml(self, particles, filename, mode='w'):
         """

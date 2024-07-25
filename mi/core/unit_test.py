@@ -73,7 +73,7 @@ class ParticleTestMixin(object):
         """
         if isinstance(data_particle, DataParticle):
             sample_dict = data_particle.generate_dict()
-        elif isinstance(data_particle, basestring):
+        elif isinstance(data_particle, str):
             sample_dict = json.loads(data_particle)
         elif isinstance(data_particle, dict):
             sample_dict = data_particle
@@ -110,7 +110,7 @@ class ParticleTestMixin(object):
             if key == None:
                 raise IDKException("value_id not defined")
 
-            if key in result.keys():
+            if key in list(result.keys()):
                 raise IDKException("duplicate value detected for %s" % key)
 
             result[key] = param.get('value')

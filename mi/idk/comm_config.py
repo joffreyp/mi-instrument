@@ -123,9 +123,9 @@ class CommConfig(object):
         """
         @brief Pretty print object configuration to stdout.  This method should be sub classed.
         """
-        print("Type: " + self.method())
-        print("PA Command Port: " + str(self.command_port))
-        print("PA Data Port: " + str(self.data_port))
+        print(("Type: " + self.method()))
+        print(("PA Command Port: " + str(self.command_port)))
+        print(("PA Data Port: " + str(self.data_port)))
 
     def serialize(self):
         """
@@ -326,8 +326,8 @@ class CommConfigEthernet(CommConfig):
 
     def display_config(self):
         CommConfig.display_config(self)
-        print( "Device Address: " + self.device_addr )
-        print( "Device Port: " + str(self.device_port))
+        print(( "Device Address: " + self.device_addr ))
+        print(( "Device Port: " + str(self.device_port)))
 
     def _config_dictionary(self):
         config = CommConfig._config_dictionary(self)
@@ -371,9 +371,9 @@ class CommConfigRSN(CommConfig):
 
     def display_config(self):
         CommConfig.display_config(self)
-        print( "Device Address: " + self.device_addr )
-        print( "Device Port: " + str(self.device_port))
-        print( "Instrument Command Port: " + str(self.instrument_command_port))
+        print(( "Device Address: " + self.device_addr ))
+        print(( "Device Port: " + str(self.device_port)))
+        print(( "Instrument Command Port: " + str(self.instrument_command_port)))
 
     def _config_dictionary(self):
         config = CommConfig._config_dictionary(self)
@@ -415,9 +415,9 @@ class CommConfigBOTPT(CommConfig):
 
     def display_config(self):
         CommConfig.display_config(self)
-        print("Device Address: " + self.device_addr)
-        print("Device TX Port: " + str(self.device_tx_port))
-        print("Device RX Port: " + str(self.device_rx_port))
+        print(("Device Address: " + self.device_addr))
+        print(("Device TX Port: " + str(self.device_tx_port)))
+        print(("Device RX Port: " + str(self.device_rx_port)))
 
     def _config_dictionary(self):
         config = CommConfig._config_dictionary(self)
@@ -505,12 +505,12 @@ class CommConfigSerial(CommConfig):
         FLOW_CONTROL = ['none', 'hardware', 'software']
 
         CommConfig.display_config(self)
-        print( "Device OS Port: " + str(self.device_os_port))
-        print( "Device Baud: " + str(self.device_baud))
-        print( "Device Data Bits: " + str(self.device_data_bits))
-        print( "Device Parity: " + PARITY[self.device_parity])
-        print( "Device Stop Bits: " + str(self.device_stop_bits))
-        print( "Device Flow Control: " + FLOW_CONTROL[self.device_flow_control])
+        print(( "Device OS Port: " + str(self.device_os_port)))
+        print(( "Device Baud: " + str(self.device_baud)))
+        print(( "Device Data Bits: " + str(self.device_data_bits)))
+        print(( "Device Parity: " + PARITY[self.device_parity]))
+        print(( "Device Stop Bits: " + str(self.device_stop_bits)))
+        print(( "Device Flow Control: " + FLOW_CONTROL[self.device_flow_control]))
 
     def _config_dictionary(self):
         config = CommConfig._config_dictionary(self)
@@ -540,7 +540,7 @@ class CommConfigMulti(CommConfig):
 
     def _init_from_yaml(self, yaml_input):
         CommConfig._init_from_yaml(self, yaml_input)
-        for key, value in yaml_input.get('comm', {}).get('configs').items():
+        for key, value in list(yaml_input.get('comm', {}).get('configs').items()):
             method = value['comm'].get('method')
             if method == ConfigTypes.SERIAL:
                 self.configs[key] = CommConfigSerial(None)
@@ -553,11 +553,11 @@ class CommConfigMulti(CommConfig):
             self.configs[key]._init_from_yaml(yaml_input['comm']['configs'][key])
 
     def get_from_console(self):
-        print 'Please create this comm config by hand...'
+        print('Please create this comm config by hand...')
 
     def display_config(self):
-        for name, config in self.configs.items():
-            print name
+        for name, config in list(self.configs.items()):
+            print(name)
             config.display_config()
 
     def _config_dictionary(self):
@@ -565,7 +565,7 @@ class CommConfigMulti(CommConfig):
             'config_type': self.method(),
             'configs': {},
         }
-        for name, config in self.configs.items():
+        for name, config in list(self.configs.items()):
             result['configs']['name'] = config._config_dictionary()
         return result
 

@@ -114,8 +114,8 @@ class CtdbpPParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(2)
 
-            self.assertEquals(len(particles), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertEqual(len(particles), 1)
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
         log.debug('===== END TEST 4: INVALID RECORD =====')
 
     def test_invalid_value(self):
@@ -130,8 +130,8 @@ class CtdbpPParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(2)
 
-            self.assertEquals(len(particles), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertEqual(len(particles), 1)
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
         log.debug('===== END TEST 5: INVALID VALUE =====')
 
     def test_no_particles(self):
@@ -144,5 +144,5 @@ class CtdbpPParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(1)
 
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
         log.debug('===== END TEST 6: NO PARTICLES =====')

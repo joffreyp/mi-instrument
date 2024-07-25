@@ -972,12 +972,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 # Protocol
 ###########################################################################
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -1874,7 +1873,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         # Handle the rest of the normal instrument parameters
         skip_these = (Parameter.FIT_WAVELENGTH_HIGH, Parameter.FIT_WAVELENGTH_LOW, Parameter.NUM_LIGHT_SAMPLES,
                       Parameter.TIME_LIGHT_SAMPLE)
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             if key in skip_these:
                 continue
 
@@ -2195,7 +2194,7 @@ class Protocol(CommandResponseInstrumentProtocol):
 
     @staticmethod
     def _is_true(x):
-        if isinstance(x, basestring):
+        if isinstance(x, str):
             return x.lower() == 'true'
 
         return x

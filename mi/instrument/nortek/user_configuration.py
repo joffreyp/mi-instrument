@@ -354,7 +354,7 @@ class UserConfiguration(LittleEndianStructure):
         for field in self._fields_:
             name = field[0]
             value = getattr(self, name)
-            if not isinstance(value, (int, long)):
+            if not isinstance(value, int):
                 value = str(list(value))
 
             rdict[name] = value
@@ -366,7 +366,7 @@ class UserConfiguration(LittleEndianStructure):
             name = field[0]
             this = getattr(self, name)
             that = getattr(other, name)
-            if not isinstance(this, (int, long)):
+            if not isinstance(this, int):
                 this = list(this)
                 that = list(that)
 

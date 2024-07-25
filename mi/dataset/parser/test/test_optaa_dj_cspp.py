@@ -147,7 +147,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
 
         # check the values against expected results.
         self.assert_particles(particles, '11079364_ACS_ACS_one_data_record.yml', RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         log.debug('===== END TEST HAPPY PATH SINGLE =====')
@@ -174,7 +174,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
 
         # check all the values against expected results.
         self.assert_particles(particles, '11079364_ACS_ACS_recov.yml', RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         # Telemetered
@@ -219,7 +219,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
 
         # check all the values against expected results.
         self.assert_particles(particles, '11079419_ACS_ACS_recov.yml', RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         log.debug('===== END TEST REAL FILE 2 =====')
@@ -247,7 +247,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
 
         log.debug("*** test_long_stream Num particles is: %s", len(particles))
         self.assertEqual(len(particles), 1044)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         log.debug('===== END TEST LONG STREAM =====')
@@ -303,7 +303,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
         self.assertTrue(self.exception_callback_value is not None)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         # 21 bad records
         self.assertEqual(len(self.exception_callback_value), 21)
@@ -340,7 +340,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
         self.assertTrue(self.exception_callback_value is not None)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         # 1 bad record
         self.assertEqual(len(self.exception_callback_value), 1)
@@ -377,7 +377,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
         self.assertTrue(self.exception_callback_value is not None)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         # 1 bad record
         self.assertEqual(len(self.exception_callback_value), 1)
@@ -420,7 +420,7 @@ class OptaaDjCsppParserUnitTestCase(ParserUnitTestCase):
         # check all the values against expected results.
         self.assert_particles(particles, '11079364_ACS_ACS_no_trailing_tab.yml', RESOURCE_PATH)
 
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         log.debug('===== END TEST NO TRAILING TAB =====')

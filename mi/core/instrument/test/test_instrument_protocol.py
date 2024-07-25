@@ -250,23 +250,23 @@ class TestUnitInstrumentProtocol(MiUnitTestCase):
                              default_value=15)
         self.protocol._param_dict.set_default("bar")
                 
-        self.assertEquals(self.protocol._param_dict.get("foo"), 10)
-        self.assertEquals(self.protocol._param_dict.get("bar"), 15)
+        self.assertEqual(self.protocol._param_dict.get("foo"), 10)
+        self.assertEqual(self.protocol._param_dict.get("bar"), 15)
         result = self.protocol.get_cached_config()
-        self.assertEquals(result['foo'], 10)
-        self.assertEquals(result['bar'], 15)
+        self.assertEqual(result['foo'], 10)
+        self.assertEqual(result['bar'], 15)
 
         self.protocol._param_dict.update("bar=20")
         result = self.protocol.get_cached_config()
-        self.assertEquals(result['foo'], 10)
-        self.assertEquals(result['bar'], 20)
-        self.assertEquals(self.protocol._param_dict.get("bar"), 20)
+        self.assertEqual(result['foo'], 10)
+        self.assertEqual(result['bar'], 20)
+        self.assertEqual(self.protocol._param_dict.get("bar"), 20)
         
         # get and check the running config
         result = self.protocol.get_cached_config()
         self.assertTrue(isinstance(result, dict))
-        self.assertEquals(result['foo'], 10)
-        self.assertEquals(result['bar'], 20)
+        self.assertEqual(result['foo'], 10)
+        self.assertEqual(result['bar'], 20)
 
     def test_init_values(self):
         """
@@ -315,12 +315,12 @@ class TestUnitInstrumentProtocol(MiUnitTestCase):
         self.protocol.set_init_params({DriverConfigKey.PARAMETERS: {"foo": 1111, "baz":2222, "bat": 11, "qux": 22}})
         result = self.protocol.get_startup_config()
         
-        self.assertEquals(len(result), 5)
-        self.assertEquals(result["foo"], 1111) # init param
-        self.assertEquals(result["bar"], 0)    # init param with default value
-        self.assertEquals(result["baz"], 2222) # non-init param, but value specified
-        self.assertEquals(result["bat"], 11)   # set param
-        self.assertEquals(result["qux"], 22)   # set param
+        self.assertEqual(len(result), 5)
+        self.assertEqual(result["foo"], 1111) # init param
+        self.assertEqual(result["bar"], 0)    # init param with default value
+        self.assertEqual(result["baz"], 2222) # non-init param, but value specified
+        self.assertEqual(result["bat"], 11)   # set param
+        self.assertEqual(result["qux"], 22)   # set param
         self.assertIsNone(result.get("rok"))   # defined in paramdict, no config
 
     def test_apply_startup_params(self):
@@ -471,22 +471,22 @@ class TestUnitInstrumentProtocol(MiUnitTestCase):
         # Now do the real testing       
         result = self.protocol.get_config_metadata_dict()
         
-        self.assert_(isinstance(result[ConfigMetadataKey.DRIVER], dict))
-        self.assert_(isinstance(result[ConfigMetadataKey.COMMANDS], dict))
-        self.assert_(isinstance(result[ConfigMetadataKey.PARAMETERS], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.DRIVER], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.COMMANDS], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.PARAMETERS], dict))
         
-        self.assertEquals(result[ConfigMetadataKey.DRIVER],
+        self.assertEqual(result[ConfigMetadataKey.DRIVER],
                           {DriverDictKey.VENDOR_SW_COMPATIBLE:True})
 
         # Check a few in the cmd list...the leaves in the structure are
         # tested in the cmd dict test cases
-        self.assert_("cmd1" in result[ConfigMetadataKey.COMMANDS].keys())
-        self.assert_("cmd2" in result[ConfigMetadataKey.COMMANDS].keys())
+        self.assertTrue("cmd1" in list(result[ConfigMetadataKey.COMMANDS].keys()))
+        self.assertTrue("cmd2" in list(result[ConfigMetadataKey.COMMANDS].keys()))
                 
         # Check a few in the param list...the leaves in the structure are
         # tested in the param dict test cases
-        self.assert_("foo" in result[ConfigMetadataKey.PARAMETERS].keys())
-        self.assert_("bar" in result[ConfigMetadataKey.PARAMETERS].keys())
+        self.assertTrue("foo" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
+        self.assertTrue("bar" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
 
     def test_verify_muttable(self):
         """

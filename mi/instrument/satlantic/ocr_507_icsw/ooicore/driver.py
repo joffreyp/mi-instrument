@@ -221,13 +221,12 @@ class SatlanticOCR507ConfigurationParticleKey(BaseEnum):
     NETWORK_BAUD_RATE = "network_baud_rate"
 
 
-class SatlanticOCR507DataParticle(DataParticle):
+class SatlanticOCR507DataParticle(DataParticle, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Routines for parsing raw data into a data particle structure for the
     Satlantic OCR507 sensor. Overrides the building of values, and the rest comes
     along for free.
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
     _data_particle_type = DataParticleType.PARSED
 
     def _build_parsed_values(self):
@@ -273,7 +272,7 @@ class SatlanticOCR507DataParticle(DataParticle):
             regulated_input_voltage, analog_rail_voltage, internal_temp, frame_counter, checksum \
                 = struct.unpack('!h7IHHHBB', match.group('binary_data') + match.group('checksum'))
 
-        except struct.error, e:
+        except struct.error as e:
             raise SampleException(e)
 
         result = [{DataParticleKey.VALUE_ID: SatlanticOCR507DataParticleKey.INSTRUMENT_ID,
@@ -667,7 +666,7 @@ class SatlanticOCR507InstrumentProtocol(CommandResponseInstrumentProtocol):
         cmd_line = ""
         result = ""
         prompt = ""
-        for retry_num in xrange(retry_count):
+        for retry_num in range(retry_count):
             # Clear line and prompt buffers for result.
             self._linebuf = ''
             self._promptbuf = ''
@@ -1053,7 +1052,7 @@ class SatlanticOCR507InstrumentProtocol(CommandResponseInstrumentProtocol):
         sample = self._extract_sample(self._data_particle_type, self._data_particle_regex, chunk, timestamp) or \
                  self._extract_sample(self._config_particle_type, self._config_particle_regex, chunk, timestamp)
         if not sample:
-            raise InstrumentProtocolException(u'unhandled chunk received by _got_chunk: [{0!r:s}]'.format(chunk))
+            raise InstrumentProtocolException('unhandled chunk received by _got_chunk: [{0!r:s}]'.format(chunk))
         return sample
 
     def _confirm_autosample_mode(self):

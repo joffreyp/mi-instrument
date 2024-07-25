@@ -366,7 +366,7 @@ class DriverTestMixinSub(Pco2DriverTestMixinSub):
         sample_dict = self.get_data_particle_values_as_dict(data_particle)
         record_type = sample_dict.get(Pco2wSamiSampleDataParticleKey.RECORD_TYPE)
         required_record_type = 4
-        self.assertEquals(record_type, required_record_type)
+        self.assertEqual(record_type, required_record_type)
 
     def assert_particle_sami_blank_sample(self, data_particle, verify_values=False):
         """
@@ -390,7 +390,7 @@ class DriverTestMixinSub(Pco2DriverTestMixinSub):
         sample_dict = self.get_data_particle_values_as_dict(data_particle)
         record_type = sample_dict.get(Pco2wSamiSampleDataParticleKey.RECORD_TYPE)
         required_record_type = 5
-        self.assertEquals(record_type, required_record_type)
+        self.assertEqual(record_type, required_record_type)
 
     def assert_particle_configuration(self, data_particle, verify_values=False):
         """
@@ -555,7 +555,7 @@ class DriverUnitTest(Pco2DriverUnitTest, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -674,14 +674,14 @@ class DriverIntegrationTest(Pco2DriverIntegrationTest, DriverTestMixinSub):
 
         self.assert_initialize_driver()
 
-        for (key, val) in startup_values.iteritems():
+        for (key, val) in startup_values.items():
             self.assert_get(key, val)
 
         self.assert_set_bulk(new_values)
 
         self.driver_client.cmd_dvr('apply_startup_params')
 
-        for (key, val) in startup_values.iteritems():
+        for (key, val) in startup_values.items():
             self.assert_get(key, val)
 
     def test_set(self):
@@ -975,7 +975,7 @@ class DriverQualificationTest(Pco2DriverQualificationTest, DriverTestMixinSub):
                 ProtocolEvent.REAGENT_FLUSH_100ML
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

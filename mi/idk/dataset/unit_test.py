@@ -67,7 +67,7 @@ class DataSetTestConfig(InstrumentDriverTestConfig):
         super(DataSetTestConfig, self).initialize(*args, **kwargs)
 
         log.debug("Dataset Agent Test Config:")
-        for property, value in vars(self).iteritems():
+        for property, value in vars(self).items():
             log.debug("key: %s, value: %s", property, value)
 
         log.debug("Dataset Agent Test Initialized")
@@ -286,7 +286,7 @@ class DataSetTestCase(MiIntTestCase):
             elif os.path.isdir(stored_data_dir):
                 remove_all_files(stored_data_dir)
 
-    def create_sample_data(self, filename, dest_filename=None, mode=0644, create=True, copy_metadata=True):
+    def create_sample_data(self, filename, dest_filename=None, mode=0o644, create=True, copy_metadata=True):
         """
         Search for a data file in the driver resource directory and if the file
         is not found there then search using the filename directly.  Then copy
@@ -338,7 +338,7 @@ class DataSetTestCase(MiIntTestCase):
         return dest_path
 
     def create_sample_data_set_dir(self, filename, dest_dir, dest_filename=None,
-                                   mode=0644, create=True, copy_metadata=True):
+                                   mode=0o644, create=True, copy_metadata=True):
         """
         Search for a data file in the driver resource directory and if the file
         is not found there then search using the filename directly.  Then copy
@@ -901,7 +901,7 @@ class DataSetAgentTestCase(DataSetTestCase):
 
         log.debug("Fetch %d sample(s) from stream '%s'" % (sample_count, stream_name))
         while(len(result) < sample_count):
-            if(self.data_subscribers.samples_received.has_key(stream_name) and
+            if(stream_name in self.data_subscribers.samples_received and
                len(self.data_subscribers.samples_received.get(stream_name))):
                 log.trace("get_samples() received sample #%d!", i)
                 result.append(self.data_subscribers.samples_received[stream_name].pop(0))
@@ -912,7 +912,7 @@ class DataSetAgentTestCase(DataSetTestCase):
             if(start_time + timeout < time.time()):
                 raise SampleTimeout("DataSetQualificationTestCase.get_samples")
 
-            if(not self.data_subscribers.samples_received.has_key(stream_name) or
+            if(stream_name not in self.data_subscribers.samples_received or
                len(self.data_subscribers.samples_received.get(stream_name)) == 0):
                 log.debug("No samples in queue, sleep for a bit")
                 gevent.sleep(.2)
@@ -924,10 +924,10 @@ class DataSetAgentTestCase(DataSetTestCase):
         """
         Verify that a queue has size samples in it.
         """
-        if(not self.data_subscribers.samples_received.has_key(stream_name) and size == 0):
+        if(stream_name not in self.data_subscribers.samples_received and size == 0):
             return
 
-        self.assertTrue(self.data_subscribers.samples_received.has_key(stream_name), msg="Sample queue does not exists")
+        self.assertTrue(stream_name in self.data_subscribers.samples_received, msg="Sample queue does not exists")
         self.assertEqual(len(self.data_subscribers.samples_received.get(stream_name)), size)
 
     def assert_data_values(self, particles, dataset_definition_file):

@@ -296,14 +296,14 @@ class PhsenSamiSampleDataParticle(DataParticle):
         ref_regex = r'([0-9A-Fa-f]{4})' * 16
         ref_regex_matcher = re.compile(ref_regex)
         ref_match = ref_regex_matcher.match(ref_measurements_string)
-        ref_measurements = map(unhex, list(ref_match.groups()))
+        ref_measurements = list(map(unhex, list(ref_match.groups())))
 
         # 92 ph measurements (23 sets of 4 measurement types)
         # each 2 bytes (4 hex digits)
         ph_regex = r'([0-9A-Fa-f]{4})' * 92
         ph_regex_matcher = re.compile(ph_regex)
         ph_match = ph_regex_matcher.match(ph_measurements_string)
-        ph_measurements = map(unhex, list(ph_match.groups()))
+        ph_measurements = list(map(unhex, list(ph_match.groups())))
 
         # fill out the data particle with values
         for key in particle_keys:
@@ -679,7 +679,7 @@ class Protocol(SamiProtocol):
 
             self._wakeup()
 
-            for cycle_num in xrange(flush_cycles):
+            for cycle_num in range(flush_cycles):
                 self._do_cmd_resp_no_wakeup(InstrumentCommand.PHSEN_PUMP_REAGENT,
                                             flush_duration_str,
                                             timeout=flush_timeout,

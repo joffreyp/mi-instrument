@@ -55,16 +55,16 @@ class NutnrNParserUnitTestCase(ParserUnitTestCase):
             log.info("Starting Long Test, Takes a minute")
 
             particles = parser.get_records(20000)
-            self.assertEquals(len(particles), 20000)
+            self.assertEqual(len(particles), 20000)
 
             particles2 = parser.get_records(20000)
-            self.assertEquals(len(particles2), 20000)
+            self.assertEqual(len(particles2), 20000)
 
             particles3 = parser.get_records(20000)
-            self.assertEquals(len(particles3), 20000)
+            self.assertEqual(len(particles3), 20000)
 
             particles4 = parser.get_records(15000)
-            self.assertEquals(len(particles4), 13245)
+            self.assertEqual(len(particles4), 13245)
 
             self.assertEqual(len(self.exception_callback_value), 16)
             for i in range(0, len(self.exception_callback_value)):
@@ -78,9 +78,9 @@ class NutnrNParserUnitTestCase(ParserUnitTestCase):
             parser = NutnrNParser(file_handle, self.exception_callback)
 
             particles = parser.get_records(1)
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_unknown_at_start(self):
         """
@@ -93,7 +93,7 @@ class NutnrNParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, "suna_short.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], SampleException)
 
     def test_bad_time(self):
@@ -105,9 +105,9 @@ class NutnrNParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(2)
             # 2 particles in file, but 1 has bad time, so should only get 1 back
-            self.assertEquals(len(particles), 1)
+            self.assertEqual(len(particles), 1)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], SampleException)
 
     def test_bad_checksum(self):
@@ -119,10 +119,10 @@ class NutnrNParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(8)
             # one has the checksum error
-            self.assertEquals(len(particles), 7)
+            self.assertEqual(len(particles), 7)
 
             # make sure we get the rest of the particles as expected
             self.assert_particles(particles, "suna_bad_checksum.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], SampleException)

@@ -243,10 +243,10 @@ class TestUnitProtocolParameterDict(TestUnitStringsDict):
         """
         result = self.param_dict.get_direct_access_list()
         self.assertTrue(isinstance(result, list))
-        self.assertEquals(len(result), 3)
-        self.assert_("foo" in result)
-        self.assert_("baz" in result)
-        self.assert_("qut" in result)
+        self.assertEqual(len(result), 3)
+        self.assertTrue("foo" in result)
+        self.assertTrue("baz" in result)
+        self.assertTrue("qut" in result)
 
     def test_get_startup_list(self):
         """
@@ -254,22 +254,22 @@ class TestUnitProtocolParameterDict(TestUnitStringsDict):
         """
         result = self.param_dict.get_startup_list()
         self.assertTrue(isinstance(result, list))
-        self.assertEquals(len(result), 2)
-        self.assert_("foo" in result)
-        self.assert_("bar" in result)
+        self.assertEqual(len(result), 2)
+        self.assertTrue("foo" in result)
+        self.assertTrue("bar" in result)
 
     def test_set_default(self):
         """
         Test setting a default value
         """
         result = self.param_dict.get_config()
-        self.assertEquals(result["foo"], None)
+        self.assertEqual(result["foo"], None)
         self.param_dict.set_default("foo")
-        self.assertEquals(self.param_dict.get("foo"), 10)
+        self.assertEqual(self.param_dict.get("foo"), 10)
         self.param_dict.update("foo=1000")
-        self.assertEquals(self.param_dict.get("foo"), 1000)
+        self.assertEqual(self.param_dict.get("foo"), 1000)
         self.param_dict.set_default("foo")
-        self.assertEquals(self.param_dict.get("foo"), 10)
+        self.assertEqual(self.param_dict.get("foo"), 10)
 
         self.assertRaises(ValueError, self.param_dict.set_default, "qux")
 
@@ -281,17 +281,17 @@ class TestUnitProtocolParameterDict(TestUnitStringsDict):
 foo=100
 bar=200, baz=300
 """
-        self.assertNotEquals(self.param_dict.get("foo"), 100)
-        self.assertNotEquals(self.param_dict.get("bar"), 200)
-        self.assertNotEquals(self.param_dict.get("baz"), 300)
+        self.assertNotEqual(self.param_dict.get("foo"), 100)
+        self.assertNotEqual(self.param_dict.get("bar"), 200)
+        self.assertNotEqual(self.param_dict.get("baz"), 300)
         result = self.param_dict.update_many(sample_input)
         log.debug("result: %s", result)
-        self.assertEquals(result["foo"], True)
-        self.assertEquals(result["bar"], True)
-        self.assertEquals(result["baz"], True)
-        self.assertEquals(self.param_dict.get("foo"), 100)
-        self.assertEquals(self.param_dict.get("bar"), 200)
-        self.assertEquals(self.param_dict.get("baz"), 300)
+        self.assertEqual(result["foo"], True)
+        self.assertEqual(result["bar"], True)
+        self.assertEqual(result["baz"], True)
+        self.assertEqual(self.param_dict.get("foo"), 100)
+        self.assertEqual(self.param_dict.get("bar"), 200)
+        self.assertEqual(self.param_dict.get("baz"), 300)
 
     def test_update_specific_values(self):
         """
@@ -301,23 +301,23 @@ bar=200, baz=300
         sample_input = "foo=100, bar=200"
 
         # First verify we can set both
-        self.assertNotEquals(self.param_dict.get("foo"), 100)
-        self.assertNotEquals(self.param_dict.get("bar"), 200)
+        self.assertNotEqual(self.param_dict.get("foo"), 100)
+        self.assertNotEqual(self.param_dict.get("bar"), 200)
         self.assertTrue(self.param_dict.update(sample_input))
-        self.assertEquals(self.param_dict.get("foo"), 100)
-        self.assertEquals(self.param_dict.get("bar"), 200)
+        self.assertEqual(self.param_dict.get("foo"), 100)
+        self.assertEqual(self.param_dict.get("bar"), 200)
 
         # Now let's only have it update 1 parameter with a name
         sample_input = "foo=200, bar=300"
         self.assertTrue(self.param_dict.update(sample_input, target_params="foo"))
-        self.assertEquals(self.param_dict.get("foo"), 200)
-        self.assertEquals(self.param_dict.get("bar"), 200)
+        self.assertEqual(self.param_dict.get("foo"), 200)
+        self.assertEqual(self.param_dict.get("bar"), 200)
 
         # Now let's only have it update 1 parameter using a list
         sample_input = "foo=300, bar=400"
         self.assertTrue(self.param_dict.update(sample_input, target_params=["foo"]))
-        self.assertEquals(self.param_dict.get("foo"), 300)
-        self.assertEquals(self.param_dict.get("bar"), 200)
+        self.assertEqual(self.param_dict.get("foo"), 300)
+        self.assertEqual(self.param_dict.get("bar"), 200)
 
         # Test our exceptions
         with self.assertRaises(KeyError):
@@ -329,16 +329,16 @@ bar=200, baz=300
     def test_visibility_list(self):
         lst = self.param_dict.get_visibility_list(ParameterDictVisibility.READ_WRITE)
         lst.sort()
-        self.assertEquals(lst, ["bar", "foo"])
+        self.assertEqual(lst, ["bar", "foo"])
         lst = self.param_dict.get_visibility_list(ParameterDictVisibility.DIRECT_ACCESS)
         lst.sort()
-        self.assertEquals(lst, ["baz", "qut"])
+        self.assertEqual(lst, ["baz", "qut"])
         lst = self.param_dict.get_visibility_list(ParameterDictVisibility.READ_ONLY)
         lst.sort()
-        self.assertEquals(lst, ["bat", "qux"])
+        self.assertEqual(lst, ["bat", "qux"])
         lst = self.param_dict.get_visibility_list(ParameterDictVisibility.IMMUTABLE)
         lst.sort()
-        self.assertEquals(lst, ["dil", "pho"])
+        self.assertEqual(lst, ["dil", "pho"])
 
     def test_function_values(self):
         """
@@ -525,13 +525,13 @@ bar=200, baz=300
                                       startup_param=True,
                                       value=1000,
                                       visibility=ParameterDictVisibility.READ_WRITE)
-        self.assertEquals(new_param.get_value(), 1000)
-        self.assertEquals(self.param_dict.get("foo"), None)
+        self.assertEqual(new_param.get_value(), 1000)
+        self.assertEqual(self.param_dict.get("foo"), None)
         # overwrites existing param
         self.param_dict.add_parameter(new_param)
-        self.assertEquals(self.param_dict.get("foo"), 1000)
+        self.assertEqual(self.param_dict.get("foo"), 1000)
         self.param_dict.set_value("foo", 2000)
-        self.assertEquals(self.param_dict.get("foo"), 2000)
+        self.assertEqual(self.param_dict.get("foo"), 2000)
 
     def test_invalid_type(self):
         self.assertRaises(InstrumentParameterException,

@@ -179,8 +179,8 @@ class DriverTestMixinSub(DriverTestMixin):
     }
 
     _flortD_mnu_parameters = {
-        FlortMenuParticleKey.SERIAL_NUM: {TYPE: unicode, VALUE: 'BBFL2W-993', REQUIRED: True},
-        FlortMenuParticleKey.FIRMWARE_VER: {TYPE: unicode, VALUE: 'Triplet5.20', REQUIRED: True},
+        FlortMenuParticleKey.SERIAL_NUM: {TYPE: str, VALUE: 'BBFL2W-993', REQUIRED: True},
+        FlortMenuParticleKey.FIRMWARE_VER: {TYPE: str, VALUE: 'Triplet5.20', REQUIRED: True},
         FlortMenuParticleKey.AVE: {TYPE: int, VALUE: 1, REQUIRED: True},
         FlortMenuParticleKey.PKT: {TYPE: int, VALUE: 0, REQUIRED: True},
         FlortMenuParticleKey.M1D: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -194,10 +194,10 @@ class DriverTestMixinSub(DriverTestMixin):
         FlortMenuParticleKey.SET: {TYPE: int, VALUE: 0, REQUIRED: True},
         FlortMenuParticleKey.REC: {TYPE: int, VALUE: 1, REQUIRED: True},
         FlortMenuParticleKey.MAN: {TYPE: int, VALUE: 0, REQUIRED: True},
-        FlortMenuParticleKey.INT: {TYPE: unicode, VALUE: '00:00:10', REQUIRED: True},
-        FlortMenuParticleKey.DAT: {TYPE: unicode, VALUE: '07/11/13', REQUIRED: True},
-        FlortMenuParticleKey.CLK: {TYPE: unicode, VALUE: '12:48:34', REQUIRED: True},
-        FlortMenuParticleKey.MST: {TYPE: unicode, VALUE: '12:48:31', REQUIRED: True},
+        FlortMenuParticleKey.INT: {TYPE: str, VALUE: '00:00:10', REQUIRED: True},
+        FlortMenuParticleKey.DAT: {TYPE: str, VALUE: '07/11/13', REQUIRED: True},
+        FlortMenuParticleKey.CLK: {TYPE: str, VALUE: '12:48:34', REQUIRED: True},
+        FlortMenuParticleKey.MST: {TYPE: str, VALUE: '12:48:31', REQUIRED: True},
         FlortMenuParticleKey.MEM: {TYPE: int, VALUE: 4095, REQUIRED: True}
     }
 
@@ -340,7 +340,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -815,7 +815,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
                                                    ProtocolEvent.START_DIRECT,
                                                    ProtocolEvent.RUN_WIPER],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_enter_command_mode()
@@ -827,7 +827,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         capabilities = {
             AgentCapabilityType.AGENT_COMMAND: self._common_agent_commands(ResourceAgentState.STREAMING),
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.STOP_AUTOSAMPLE],
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()}
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())}
 
         self.assert_start_autosample()
         self.assert_capabilities(capabilities)

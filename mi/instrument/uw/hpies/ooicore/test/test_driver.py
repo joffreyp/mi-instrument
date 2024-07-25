@@ -314,8 +314,8 @@ class UtilMixin(DriverTestMixin):
     _header_sample = {
         DataHeaderParticleKey.DATA_VALID: {TYPE: int, VALUE: True, REQUIRED: True},
         DataHeaderParticleKey.VERSION: {TYPE: int, VALUE: 0, REQUIRED: True},
-        DataHeaderParticleKey.TYPE: {TYPE: unicode, VALUE: 'f', REQUIRED: True},
-        DataHeaderParticleKey.DESTINATION: {TYPE: unicode, VALUE: 'a', REQUIRED: True},
+        DataHeaderParticleKey.TYPE: {TYPE: str, VALUE: 'f', REQUIRED: True},
+        DataHeaderParticleKey.DESTINATION: {TYPE: str, VALUE: 'a', REQUIRED: True},
         DataHeaderParticleKey.INDEX_START: {TYPE: int, VALUE: 0, REQUIRED: True},
         DataHeaderParticleKey.INDEX_STOP: {TYPE: int, VALUE: 382, REQUIRED: True},
         DataHeaderParticleKey.HCNO: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -365,8 +365,8 @@ class UtilMixin(DriverTestMixin):
         HEFStatusParticleKey.HCNO: {TYPE: int, VALUE: 1, REQUIRED: True},
         HEFStatusParticleKey.HCNO_LAST_CAL: {TYPE: int, VALUE: 1, REQUIRED: True},
         HEFStatusParticleKey.HCNO_LAST_COMP: {TYPE: int, VALUE: 1, REQUIRED: True},
-        HEFStatusParticleKey.OFILE: {TYPE: unicode, VALUE: 'C:\\filename.0', REQUIRED: True},
-        HEFStatusParticleKey.IFOK: {TYPE: unicode, VALUE: 'OK', REQUIRED: True},
+        HEFStatusParticleKey.OFILE: {TYPE: str, VALUE: 'C:\\filename.0', REQUIRED: True},
+        HEFStatusParticleKey.IFOK: {TYPE: str, VALUE: 'OK', REQUIRED: True},
         HEFStatusParticleKey.N_COMPASS_WRITES: {TYPE: int, VALUE: 1, REQUIRED: True},
         HEFStatusParticleKey.N_COMPASS_FAIL_WRITES: {TYPE: int, VALUE: 0, REQUIRED: True},
         HEFStatusParticleKey.MOTOR_POWER_UPS: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -500,7 +500,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, UtilMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -750,7 +750,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, UtilMixin):
             Parameter.M2A_LED: 1,
         }
 
-        for key in direct_access_parameters.keys():
+        for key in list(direct_access_parameters.keys()):
             # command = '#3_%s %s' % (key, direct_access_parameters[key])
             command = hef_command(key, direct_access_parameters[key])
             log.debug('djm - command: %s', command)
@@ -767,7 +767,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, UtilMixin):
         self.assert_enter_command_mode()
 
         # verify that all direct access parameters are restored
-        for key in self._driver_parameters.keys():
+        for key in list(self._driver_parameters.keys()):
             # verify access of parameters - default values
             if self._driver_parameters[key][self.DA]:
                 log.debug('checking direct access parameter: %s', key)
@@ -808,7 +808,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, UtilMixin):
         """
         self.assert_enter_command_mode()
 
-        for key in self._driver_parameters.keys():
+        for key in list(self._driver_parameters.keys()):
             if self._driver_parameters[key][self.STARTUP]:
                 self.assert_get_parameter(key, self._driver_parameters[key][self.VALUE])
 
@@ -832,7 +832,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, UtilMixin):
                 ProtocolEvent.SET,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

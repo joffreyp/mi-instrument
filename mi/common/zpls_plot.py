@@ -55,7 +55,7 @@ class ZPLSPlot(object):
         """
         Generate plots for all channels in data set
         """
-        freq_to_channel = {v: k for k, v in self.frequency_dict.iteritems()}
+        freq_to_channel = {v: k for k, v in self.frequency_dict.items()}
         data_axes = []
         for index, frequency in enumerate(sorted(freq_to_channel)):
             channel = freq_to_channel[frequency]
@@ -123,7 +123,7 @@ class ZPLSPlot(object):
         # Calculate the power data range across each channel
         max_db = {}
         min_db = {}
-        for channel, channel_data in power_dict.iteritems():
+        for channel, channel_data in power_dict.items():
             all_power_data = np.concatenate(channel_data)
             max_db[channel] = np.nanpercentile(all_power_data, ZPLSPlot.upper_percentile)
             min_db[channel] = np.nanpercentile(all_power_data, ZPLSPlot.lower_percentile)

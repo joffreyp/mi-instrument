@@ -34,7 +34,7 @@ class TestRasflPersistentStoreDict(MiUnitTest):
         self.assertTrue(self.rasflPersistentStoreDict.isInitialized())
 
     def test_initialize_fail_badType(self):
-        totalCollectionBags = u"this will fail"
+        totalCollectionBags = "this will fail"
         self.assertIsNot(type(totalCollectionBags), int)
         with self.assertRaises(TypeError) as contextManager:
             self.rasflPersistentStoreDict.initialize(totalCollectionBags)

@@ -290,9 +290,8 @@ NUTR_B_DCL_IGNORE_REGEX = \
 NUTR_B_DCL_IGNORE_MATCHER = re.compile(NUTR_B_DCL_IGNORE_REGEX)
 
 
-class NutnrBDclParser(Parser):
+class NutnrBDclParser(Parser, metaclass=get_logging_metaclass(log_level='debug')):
 
-    __metaclass__ = get_logging_metaclass(log_level='debug')
     """
     Parser for nutnr_b_dcl data.
     In addition to the standard parser constructor parameters,

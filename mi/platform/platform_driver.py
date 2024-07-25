@@ -59,12 +59,11 @@ class PlatformDriverCapability(BaseEnum):
     pass
 
 
-class PlatformDriver(object):
+class PlatformDriver(object, metaclass=META_LOGGER):
     """
     A platform driver handles a particular platform in a platform network.
     This base class provides a common interface and supporting functionality.
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, event_callback):
         """
@@ -114,7 +113,7 @@ class PlatformDriver(object):
         """
         res_cmds = self._fsm.get_events(current_state)
         res_cmds = self._filter_capabilities(res_cmds)
-        res_params = self._param_dict.keys()
+        res_params = list(self._param_dict.keys())
 
         return [res_cmds, res_params]
 

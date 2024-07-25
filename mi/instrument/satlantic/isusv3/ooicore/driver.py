@@ -915,7 +915,7 @@ class Protocol(MenuInstrumentProtocol):
             # the command.  I need to pass the "final command" parameter as a value,
             # and there is no build handler for all of the possible values.   
             #
-            for (key, val) in params.iteritems():
+            for (key, val) in params.items():
                 dest_submenu = self._param_dict.get_menu_path_write(key)
                 self._param_dict.get_submenu_write(key)
                 self._navigate_and_execute(None, value=val, dest_submenu=dest_submenu, timeout=5)
@@ -1198,7 +1198,7 @@ class Protocol(MenuInstrumentProtocol):
         self._go_to_root_menu()
 
         new_config = self._param_dict.get_config()            
-        if (new_config != old_config) and (None not in old_config.values()):
+        if (new_config != old_config) and (None not in list(old_config.values())):
             debug_string =  "--------> DHE: publishing CONFIG_CHANGE event"
             log.debug(debug_string)
             self._driver_event(DriverAsyncEvent.CONFIG_CHANGE)            

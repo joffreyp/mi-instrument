@@ -21,7 +21,7 @@ class NodeYAML(object):
     def factory(node_config, stream_definitions):
         if node_config is None:
             return NullNodeYAML()
-        if "port_info" in node_config.keys():
+        if "port_info" in list(node_config.keys()):
             return PortNodeYAML(node_config, stream_definitions)
         else:
             return NoPortNodeYAML(node_config, stream_definitions)
@@ -87,7 +87,7 @@ class NodeYAML(object):
 
     def _validate_node_port_info(self):
         port_oms_port_cntl_id = 'port_oms_port_cntl_id'
-        for port_id, port_dict in self.node_port_info.iteritems():
+        for port_id, port_dict in self.node_port_info.items():
             if not port_dict or not port_oms_port_cntl_id in port_dict:
                 raise NodeConfigurationFileException(msg="%s is missing from %s" % (port_oms_port_cntl_id, port_id))
 
@@ -129,21 +129,21 @@ class ParameterDefinition(object):
         self.scale_factor = parameter_dict.get(SCALE, 1)
 
     def validate(self):
-        if not isinstance(self.omc_parameter_name, basestring):
+        if not isinstance(self.omc_parameter_name, str):
             raise ParameterException(msg="omc_parameter_name, %s is not a string" % self.omc_parameter_name)
 
-        if not isinstance(self.ion_parameter_name, basestring):
+        if not isinstance(self.ion_parameter_name, str):
             raise ParameterException(msg="ion_parameter_name, %s is not a string" % self.ion_parameter_name)
 
-        if not isinstance(self.monitor_cycle_seconds, (int, long, float)):
+        if not isinstance(self.monitor_cycle_seconds, (int, float)):
             raise ParameterException(msg="monitor_cycle_seconds, %s is not a numeric type" % self.monitor_cycle_seconds)
 
-        if not isinstance(self.scale_factor, (int, long, float)):
+        if not isinstance(self.scale_factor, (int, float)):
             raise ParameterException(msg="scale_factor, %s is not a numeric type" % self.scale_factor)
 
     def format(self, var_map):
         name = self.omc_parameter_name
-        for k, v in var_map.iteritems():
+        for k, v in var_map.items():
             name = name.replace('{%s}' % k, str(v))
 
         return name, RealizedParameter(name, self.ion_parameter_name, self.scale_factor, self.monitor_cycle_seconds)
@@ -193,4 +193,4 @@ class Streams(MutableMapping):
         return self._streams.__delitem__(key)
 
     def validate(self):
-        [s.validate() for s in self._streams.itervalues()]
+        [s.validate() for s in self._streams.values()]

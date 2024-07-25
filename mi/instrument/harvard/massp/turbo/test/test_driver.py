@@ -426,7 +426,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
                 time.sleep(.1)
                 self.assertEqual(driver._protocol.get_current_state(), ProtocolState.AT_SPEED)
                 self.responses = each
-                for x in xrange(CURRENT_STABILIZE_RETRIES+1):
+                for x in range(CURRENT_STABILIZE_RETRIES+1):
                     driver._protocol._protocol_fsm.on_event(Capability.ACQUIRE_STATUS)
                     time.sleep(.1)
             except Exception as e:
@@ -453,7 +453,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -497,7 +497,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase):
         """
         self.assert_initialize_driver()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.items():
+        for key, value in list(startup_params.items()):
             self.assert_get(key, value)
 
     # while this is an integration test, it can be run without access to the instrument
@@ -509,7 +509,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase):
         constraints = ParameterConstraints.dict()
         parameters = Parameter.reverse_dict()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.items():
+        for key, value in list(startup_params.items()):
             if key in parameters and parameters[key] in constraints:
                 _, minimum, maximum = constraints[parameters[key]]
                 self.assert_set(key, maximum-1)
@@ -614,7 +614,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         constraints = ParameterConstraints.dict()
         parameters = Parameter.reverse_dict()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.items():
+        for key, value in list(startup_params.items()):
             self.assert_get_parameter(key, value)
             if key in parameters and parameters[key] in constraints:
                 _, minimum, maximum = constraints[parameters[key]]
@@ -662,7 +662,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.START_TURBO],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)
@@ -678,7 +678,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.STOP_TURBO, ProtocolEvent.ACQUIRE_STATUS],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)
@@ -693,7 +693,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.STOP_TURBO, ProtocolEvent.ACQUIRE_STATUS],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)
@@ -710,7 +710,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.ACQUIRE_STATUS],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

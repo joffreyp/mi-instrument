@@ -408,7 +408,7 @@ class WavssADclParserUnitTestCase(ParserUnitTestCase):
             # check that there were 3 recoverable sample exceptions
             self.assertEqual(len(self.exception_callback_value), n_test)
             for i in range(0, n_test):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
     def test_unexpected(self):
         """
@@ -422,7 +422,7 @@ class WavssADclParserUnitTestCase(ParserUnitTestCase):
 
             self.assertEqual(len(particles), 2)
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
     def test_bug_10046(self):
         """

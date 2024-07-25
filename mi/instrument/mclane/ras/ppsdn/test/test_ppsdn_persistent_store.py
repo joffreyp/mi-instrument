@@ -34,7 +34,7 @@ class TestPpsdnPersistentStoreDict(MiUnitTest):
         self.assertTrue(self.ppsdnPersistentStoreDict.isInitialized())
 
     def test_initialize_fail_badType(self):
-        totalFilters = u"this will fail"
+        totalFilters = "this will fail"
         self.assertIsNot(type(totalFilters), int)
         with self.assertRaises(TypeError) as contextManager:
             self.ppsdnPersistentStoreDict.initialize(totalFilters)

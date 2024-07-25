@@ -8,7 +8,7 @@
 """
 
 import os
-from StringIO import StringIO
+from io import StringIO
 
 import ntplib
 from nose.plugins.attrib import attr
@@ -328,9 +328,9 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
 
         log.debug("INVALID FAMILY GET 1 RECORD")
         result = self.parser.get_records(1)
-        self.assertEquals(len(result), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(result), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.debug("================= END INVALID FAMILY ======================")
 
@@ -352,9 +352,9 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
         # and invalid checksum is encountered.  No data can
         # be trusted at that point
 
-        self.assertEquals(len(result), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(result), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.debug("============== END INVALID HEADER CHECKSUM ==================")
 
@@ -375,9 +375,9 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
         log.debug("INVALID PAYLOAD CHECKSUM VERIFY CONTENTS")
         self.verify_contents(result, self.expected_particle2_header_checksum)
 
-        self.assertEquals(len(result), 1)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertEqual(len(result), 1)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         log.debug("============== END INVALID PAYLOAD CHECKSUM ==================")
 
@@ -392,9 +392,9 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
 
         log.debug("INVALID ID GET 1 RECORD")
         result = self.parser.get_records(1)
-        self.assertEquals(len(result), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(result), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.debug("================= END INVALID ID ======================")
 
@@ -416,9 +416,9 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
         # Per IDD processing should stop once a header with
         # and invalid sync byte is encountered.
 
-        self.assertEquals(len(result), 0)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(result), 0)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.debug("=================== END MISSING SYNC ======================")
 
@@ -479,6 +479,6 @@ class Vel3dKWfpParserUnitTestCase(ParserUnitTestCase):
             particles = self.parser.get_records(1000)
 
             self.assert_particles(particles, 'A0000010_5_1_5.yml', RESOURCE_PATH)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         log.info("END REAL FILE 4")

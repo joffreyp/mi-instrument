@@ -1,12 +1,12 @@
 
 import logging.handlers
-import StringIO
+import io
 import threading
 import sys
 import os
 
 try:
-    unicode
+    str
     _unicode = True
 except NameError:
     _unicode = False
@@ -27,7 +27,7 @@ class BlockIOFileHandler(logging.handlers.RotatingFileHandler):
     """
     def __init__(self, filename, mode='a', maxBytes=0, backupCount=0, encoding=None, delay=0):
         super(BlockIOFileHandler,self).__init__(filename, mode, maxBytes, backupCount, encoding, delay)
-        self._buffer = StringIO.StringIO()
+        self._buffer = io.StringIO()
         self._lock = threading.Lock()
         self._write_level = logging.ERROR
         self._first_write = True
@@ -59,7 +59,7 @@ class BlockIOFileHandler(logging.handlers.RotatingFileHandler):
             self._write = self._write_default
         else:
             try:
-                if isinstance(msg, unicode) and getattr(self.stream, 'encoding', None):
+                if isinstance(msg, str) and getattr(self.stream, 'encoding', None):
                     self._ufs = '%s\n'.decode(self.stream.encoding)
                     try:
                         self._write_unicode_format(msg)
@@ -82,8 +82,8 @@ class BlockIOFileHandler(logging.handlers.RotatingFileHandler):
         self._buffer.write(self._ufs % msg)
 
     def _write_encoded_string(self, msg):
-        unicode = (self._ufs % msg).encode(self.stream.encoding)
-        self._buffer.write(unicode)
+        str = (self._ufs % msg).encode(self.stream.encoding)
+        self._buffer.write(str)
 
     def _write_utf(self, msg):
         self._write_default(msg.encode("UTF-8"))
@@ -130,8 +130,8 @@ class BlockIOFileHandler(logging.handlers.RotatingFileHandler):
             if DEBUG_POSITION:
                 self.stream.seek(0, 2)  #due to non-posix-compliant Windows feature
                 position = self.stream.tell()
-                if position <> self._file_size:
-                    print >> sys.stderr, 'BLOCK LOGGER FILE SIZE ERROR: calculated %d, filesystem reports %d bytes' % (self._file_size, position)
+                if position != self._file_size:
+                    print('BLOCK LOGGER FILE SIZE ERROR: calculated %d, filesystem reports %d bytes' % (self._file_size, position), file=sys.stderr)
             else:
                 position = self._file_size
             if position >= self.maxBytes:

@@ -84,7 +84,7 @@ class PackageDriver(mi.idk.package_driver.PackageDriver):
         return new_version
 
     def run(self):
-        print "*** Starting Driver Packaging Process ***"
+        print("*** Starting Driver Packaging Process ***")
 
         # store the original directory since we will be navigating away from it
         original_dir = os.getcwd()
@@ -117,7 +117,7 @@ class PackageDriver(mi.idk.package_driver.PackageDriver):
         # go back to the original directory
         os.chdir(original_dir)
 
-        print "Package Created: " + self.archive_path()
+        print("Package Created: " + self.archive_path())
 
     ###
     #   Private Methods

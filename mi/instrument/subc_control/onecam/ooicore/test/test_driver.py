@@ -229,7 +229,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
     def test_capabilities(self):
         """

@@ -247,7 +247,7 @@ class ZPLSCEchogramGenerator(object):
                         break
 
         if valid_input and self.deployments:
-            if not isinstance(self.deployments, types.ListType):
+            if not isinstance(self.deployments, list):
                 self.deployments = [self.deployments]
 
             for index in range(len(self.deployments)):
@@ -594,7 +594,7 @@ class ZPLSCEchogramGenerator(object):
                     except OSError:
                         continue
 
-                    for date_dir, entire_month in echogram_dates.items():
+                    for date_dir, entire_month in list(echogram_dates.items()):
                         self.zplsc_24_datafile_prefix = zplsc_24_deployment_prefix + 'sn' + self.serial_num + '-'
 
                         if entire_month:

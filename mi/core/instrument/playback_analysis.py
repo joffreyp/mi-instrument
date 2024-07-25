@@ -102,8 +102,8 @@ def walk_tree(root, sensor):
             files = [f for f in files if sensor in f]
         if files:
             files.sort()
-            print('Processing %d files in %s: ' % (len(files), path))
-            for index in tqdm(xrange(len(files)), leave=True):
+            print(('Processing %d files in %s: ' % (len(files), path)))
+            for index in tqdm(range(len(files)), leave=True):
                 f = files[index]
                 sensor = find_sensor(f)
                 time_range = find_time_range(f)
@@ -172,10 +172,10 @@ def main():
             results.setdefault(sensor, {}).setdefault('binary', []).append(_)
 
     for sensor in results:
-        print sensor
-        print 'chunky', analyze(results[sensor].get('chunky', []))
-        print 'ascii', analyze(results[sensor].get('ascii', []))
-        print 'binary', analyze(results[sensor].get('binary', []))
+        print(sensor)
+        print('chunky', analyze(results[sensor].get('chunky', [])))
+        print('ascii', analyze(results[sensor].get('ascii', [])))
+        print('binary', analyze(results[sensor].get('binary', [])))
 
 
 if __name__ == '__main__':

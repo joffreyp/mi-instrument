@@ -629,8 +629,8 @@ class AdcpPd0Parser(SimpleParser):
     def __init__(self, *args, **kwargs):
         super(AdcpPd0Parser, self).__init__(*args, **kwargs)
         self._particle_classes = self._config[DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT]
-        self._particle_classes = {k: globals()[v] for k, v in self._particle_classes.iteritems()}
-        self._glider = GliderConfig in self._particle_classes.values()
+        self._particle_classes = {k: globals()[v] for k, v in self._particle_classes.items()}
+        self._glider = GliderConfig in list(self._particle_classes.values())
         self._last_values = {}
 
     def _changed(self, particle):

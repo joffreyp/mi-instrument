@@ -74,7 +74,7 @@ class AdcptMWVSParserUnitTestCase(ParserUnitTestCase):
                 elif isinstance(val.get('value'), list):
                     if isinstance(val.get('value')[0], float):
                         fid.write('    %s: [' % (val.get('value_id')))
-                        fid.write(", ".join(map(lambda x: '{0:06f}'.format(x), val.get('value'))))
+                        fid.write(", ".join(['{0:06f}'.format(x) for x in val.get('value')]))
                         fid.write(']\n')
                     else:
                         fid.write('    %s: %s\n' % (val.get('value_id'), val.get('value')))
@@ -204,7 +204,7 @@ class AdcptMWVSParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(len(self.exception_callback_value), 5)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
             log.debug('Exception: %s', self.exception_callback_value[i])
 
         fid.close()
@@ -222,7 +222,7 @@ class AdcptMWVSParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(len(result), 1)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
             log.debug('Exception: %s', self.exception_callback_value[i])
 
         fid.close()

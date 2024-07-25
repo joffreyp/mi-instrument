@@ -68,7 +68,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(NUM_PARTICLES_TO_REQUEST)
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assert_particles(particles, "happy_path.yml", RESOURCE_PATH)
 
@@ -97,7 +97,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(NUM_PARTICLES_TO_REQUEST)
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assert_particles(particles, "invalid_metadata_timestamp.yml", RESOURCE_PATH)
 
@@ -126,7 +126,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(NUM_PARTICLES_TO_REQUEST)
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assert_particles(particles, "invalid_record_type.yml", RESOURCE_PATH)
 
@@ -155,7 +155,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(NUM_PARTICLES_TO_REQUEST)
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assert_particles(particles, "power_record_missing_timestamp.yml", RESOURCE_PATH)
 
@@ -183,7 +183,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(NUM_PARTICLES_TO_REQUEST)
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assertEqual(self._exception_occurred, False)
 
@@ -211,7 +211,7 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             log.info(len(particles))
 
-            self.assertEquals(len(particles), NUM_EXPECTED_PARTICLES)
+            self.assertEqual(len(particles), NUM_EXPECTED_PARTICLES)
 
             self.assertEqual(self._exception_occurred, False)
 

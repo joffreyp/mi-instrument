@@ -157,6 +157,6 @@ class WcSbeCsppParserUnitTestCase(ParserUnitTestCase):
 
         parser.get_records(20)
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         stream_handle.close()

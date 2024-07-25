@@ -26,8 +26,8 @@ def dict_equal(ldict, rdict, ignore_keys=[]):
     if not isinstance(ignore_keys, list):
         ignore_keys = [ignore_keys]
 
-    for key in set(ldict.keys() + rdict.keys()):
-        if key in ldict.keys() and key in rdict.keys():
+    for key in set(list(ldict.keys()) + list(rdict.keys())):
+        if key in list(ldict.keys()) and key in list(rdict.keys()):
             if key not in ignore_keys and ldict[key] != rdict[key]:
                 log.debug("Key '%s' %s != %s", key, ldict[key], rdict[key])
                 return False
@@ -46,7 +46,7 @@ def hex2value(hex_value, divisor=None):
     @param divisor: if present, used as a divisor for the value
     @return: equivalent value of the converted hex string
     """
-    if not isinstance(hex_value, basestring):
+    if not isinstance(hex_value, str):
         raise ValueError("hex value not a string")
 
     if divisor == 0:

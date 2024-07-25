@@ -154,120 +154,120 @@ class BotptTestMixinSub(DriverTestMixin):
     }
 
     lily_sample_parameters_01 = {
-        particles.LilySampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'LILY', REQUIRED: True},
-        particles.LilySampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/06/24 23:36:02', REQUIRED: True},
+        particles.LilySampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'LILY', REQUIRED: True},
+        particles.LilySampleParticleKey.TIME: {TYPE: str, VALUE: '2013/06/24 23:36:02', REQUIRED: True},
         particles.LilySampleParticleKey.X_TILT: {TYPE: float, VALUE: -235.500, REQUIRED: True},
         particles.LilySampleParticleKey.Y_TILT: {TYPE: float, VALUE: 25.930, REQUIRED: True},
         particles.LilySampleParticleKey.MAG_COMPASS: {TYPE: float, VALUE: 194.30, REQUIRED: True},
         particles.LilySampleParticleKey.TEMP: {TYPE: float, VALUE: 26.04, REQUIRED: True},
         particles.LilySampleParticleKey.SUPPLY_VOLTS: {TYPE: float, VALUE: 11.96, REQUIRED: True},
-        particles.LilySampleParticleKey.SN: {TYPE: unicode, VALUE: 'N9655', REQUIRED: True},
+        particles.LilySampleParticleKey.SN: {TYPE: str, VALUE: 'N9655', REQUIRED: True},
     }
 
     lily_sample_parameters_02 = {
-        particles.LilySampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'LILY', REQUIRED: True},
-        particles.LilySampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/06/24 23:36:04', REQUIRED: True},
+        particles.LilySampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'LILY', REQUIRED: True},
+        particles.LilySampleParticleKey.TIME: {TYPE: str, VALUE: '2013/06/24 23:36:04', REQUIRED: True},
         particles.LilySampleParticleKey.X_TILT: {TYPE: float, VALUE: -235.349, REQUIRED: True},
         particles.LilySampleParticleKey.Y_TILT: {TYPE: float, VALUE: 26.082, REQUIRED: True},
         particles.LilySampleParticleKey.MAG_COMPASS: {TYPE: float, VALUE: 194.26, REQUIRED: True},
         particles.LilySampleParticleKey.TEMP: {TYPE: float, VALUE: 26.04, REQUIRED: True},
         particles.LilySampleParticleKey.SUPPLY_VOLTS: {TYPE: float, VALUE: 11.96, REQUIRED: True},
-        particles.LilySampleParticleKey.SN: {TYPE: unicode, VALUE: 'N9655', REQUIRED: True},
+        particles.LilySampleParticleKey.SN: {TYPE: str, VALUE: 'N9655', REQUIRED: True},
     }
 
     nano_sample_parameters_01 = {
-        particles.NanoSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'NANO', REQUIRED: True},
-        particles.NanoSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/08/22 22:48:36.013', REQUIRED: True},
+        particles.NanoSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'NANO', REQUIRED: True},
+        particles.NanoSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/08/22 22:48:36.013', REQUIRED: True},
         particles.NanoSampleParticleKey.PRESSURE: {TYPE: float, VALUE: 13.888533, REQUIRED: True},
         particles.NanoSampleParticleKey.TEMP: {TYPE: float, VALUE: 26.147947328, REQUIRED: True},
-        particles.NanoSampleParticleKey.PPS_SYNC: {TYPE: unicode, VALUE: u'V', REQUIRED: True},
+        particles.NanoSampleParticleKey.PPS_SYNC: {TYPE: str, VALUE: 'V', REQUIRED: True},
     }
 
     nano_sample_parameters_02 = {
-        particles.NanoSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'NANO', REQUIRED: True},
-        particles.NanoSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/08/22 23:13:36.000', REQUIRED: True},
+        particles.NanoSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'NANO', REQUIRED: True},
+        particles.NanoSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/08/22 23:13:36.000', REQUIRED: True},
         particles.NanoSampleParticleKey.PRESSURE: {TYPE: float, VALUE: 13.884067, REQUIRED: True},
         particles.NanoSampleParticleKey.TEMP: {TYPE: float, VALUE: 26.172926006, REQUIRED: True},
-        particles.NanoSampleParticleKey.PPS_SYNC: {TYPE: unicode, VALUE: u'P', REQUIRED: True},
+        particles.NanoSampleParticleKey.PPS_SYNC: {TYPE: str, VALUE: 'P', REQUIRED: True},
     }
 
     iris_sample_parameters_01 = {
-        particles.IrisSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'IRIS', REQUIRED: True},
-        particles.IrisSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/05/29 00:25:34', REQUIRED: True},
+        particles.IrisSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'IRIS', REQUIRED: True},
+        particles.IrisSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/05/29 00:25:34', REQUIRED: True},
         particles.IrisSampleParticleKey.X_TILT: {TYPE: float, VALUE: -0.0882, REQUIRED: True},
         particles.IrisSampleParticleKey.Y_TILT: {TYPE: float, VALUE: -0.7524, REQUIRED: True},
         particles.IrisSampleParticleKey.TEMP: {TYPE: float, VALUE: 28.45, REQUIRED: True},
-        particles.IrisSampleParticleKey.SN: {TYPE: unicode, VALUE: 'N8642', REQUIRED: True}
+        particles.IrisSampleParticleKey.SN: {TYPE: str, VALUE: 'N8642', REQUIRED: True}
     }
 
     iris_sample_parameters_02 = {
-        particles.IrisSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'IRIS', REQUIRED: True},
-        particles.IrisSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/05/29 00:25:36', REQUIRED: True},
+        particles.IrisSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'IRIS', REQUIRED: True},
+        particles.IrisSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/05/29 00:25:36', REQUIRED: True},
         particles.IrisSampleParticleKey.X_TILT: {TYPE: float, VALUE: -0.0885, REQUIRED: True},
         particles.IrisSampleParticleKey.Y_TILT: {TYPE: float, VALUE: -0.7517, REQUIRED: True},
         particles.IrisSampleParticleKey.TEMP: {TYPE: float, VALUE: 28.49, REQUIRED: True},
-        particles.IrisSampleParticleKey.SN: {TYPE: unicode, VALUE: 'N8642', REQUIRED: True}
+        particles.IrisSampleParticleKey.SN: {TYPE: str, VALUE: 'N8642', REQUIRED: True}
     }
 
     heat_sample_parameters_01 = {
-        particles.HeatSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'HEAT', REQUIRED: True},
-        particles.HeatSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/04/19 22:54:11', REQUIRED: True},
+        particles.HeatSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'HEAT', REQUIRED: True},
+        particles.HeatSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/04/19 22:54:11', REQUIRED: True},
         particles.HeatSampleParticleKey.X_TILT: {TYPE: int, VALUE: -1, REQUIRED: True},
         particles.HeatSampleParticleKey.Y_TILT: {TYPE: int, VALUE: 1, REQUIRED: True},
         particles.HeatSampleParticleKey.TEMP: {TYPE: int, VALUE: 25, REQUIRED: True}
     }
 
     heat_sample_parameters_02 = {
-        particles.HeatSampleParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'HEAT', REQUIRED: True},
-        particles.HeatSampleParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/04/19 22:54:11', REQUIRED: True},
+        particles.HeatSampleParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'HEAT', REQUIRED: True},
+        particles.HeatSampleParticleKey.TIME: {TYPE: str, VALUE: '2013/04/19 22:54:11', REQUIRED: True},
         particles.HeatSampleParticleKey.X_TILT: {TYPE: int, VALUE: 1, REQUIRED: True},
         particles.HeatSampleParticleKey.Y_TILT: {TYPE: int, VALUE: 1, REQUIRED: True},
         particles.HeatSampleParticleKey.TEMP: {TYPE: int, VALUE: 25, REQUIRED: True}
     }
 
     botpt_status_parameters_01 = {
-        particles.BotptStatusParticleKey.LILY1: {TYPE: unicode, VALUE: samples.LILY_FILTERED_STATUS1, REQUIRED: True},
-        particles.BotptStatusParticleKey.LILY2: {TYPE: unicode, VALUE: samples.LILY_FILTERED_STATUS2, REQUIRED: True},
-        particles.BotptStatusParticleKey.IRIS1: {TYPE: unicode, VALUE: samples.IRIS_FILTERED_STATUS1, REQUIRED: True},
-        particles.BotptStatusParticleKey.IRIS2: {TYPE: unicode, VALUE: samples.IRIS_FILTERED_STATUS2, REQUIRED: True},
-        particles.BotptStatusParticleKey.NANO: {TYPE: unicode, VALUE: samples.NANO_FILTERED_STATUS, REQUIRED: True},
-        particles.BotptStatusParticleKey.SYST: {TYPE: unicode, VALUE: samples.SYST_FILTERED_STATUS, REQUIRED: True},
+        particles.BotptStatusParticleKey.LILY1: {TYPE: str, VALUE: samples.LILY_FILTERED_STATUS1, REQUIRED: True},
+        particles.BotptStatusParticleKey.LILY2: {TYPE: str, VALUE: samples.LILY_FILTERED_STATUS2, REQUIRED: True},
+        particles.BotptStatusParticleKey.IRIS1: {TYPE: str, VALUE: samples.IRIS_FILTERED_STATUS1, REQUIRED: True},
+        particles.BotptStatusParticleKey.IRIS2: {TYPE: str, VALUE: samples.IRIS_FILTERED_STATUS2, REQUIRED: True},
+        particles.BotptStatusParticleKey.NANO: {TYPE: str, VALUE: samples.NANO_FILTERED_STATUS, REQUIRED: True},
+        particles.BotptStatusParticleKey.SYST: {TYPE: str, VALUE: samples.SYST_FILTERED_STATUS, REQUIRED: True},
     }
 
     lily_leveling_parameters_01 = {
-        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'LILY', REQUIRED: True},
-        particles.LilyLevelingParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/07/24 20:36:27', REQUIRED: True},
+        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'LILY', REQUIRED: True},
+        particles.LilyLevelingParticleKey.TIME: {TYPE: str, VALUE: '2013/07/24 20:36:27', REQUIRED: True},
         particles.LilyLevelingParticleKey.X_TILT: {TYPE: float, VALUE: 14.667, REQUIRED: True},
         particles.LilyLevelingParticleKey.Y_TILT: {TYPE: float, VALUE: 81.642, REQUIRED: True},
         particles.LilyLevelingParticleKey.MAG_COMPASS: {TYPE: float, VALUE: 185.21, REQUIRED: True},
         particles.LilyLevelingParticleKey.TEMP: {TYPE: float, VALUE: 33.67, REQUIRED: True},
         particles.LilyLevelingParticleKey.SUPPLY_VOLTS: {TYPE: float, VALUE: 11.59, REQUIRED: True},
-        particles.LilyLevelingParticleKey.SN: {TYPE: unicode, VALUE: u'N9651', REQUIRED: True},
-        particles.LilyLevelingParticleKey.STATUS: {TYPE: unicode, VALUE: u'None', REQUIRED: True}
+        particles.LilyLevelingParticleKey.SN: {TYPE: str, VALUE: 'N9651', REQUIRED: True},
+        particles.LilyLevelingParticleKey.STATUS: {TYPE: str, VALUE: 'None', REQUIRED: True}
     }
 
     lily_leveling_parameters_02 = {
-        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'LILY', REQUIRED: True},
-        particles.LilyLevelingParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/06/28 17:29:21', REQUIRED: True},
+        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'LILY', REQUIRED: True},
+        particles.LilyLevelingParticleKey.TIME: {TYPE: str, VALUE: '2013/06/28 17:29:21', REQUIRED: True},
         particles.LilyLevelingParticleKey.X_TILT: {TYPE: float, VALUE: -2.277, REQUIRED: True},
         particles.LilyLevelingParticleKey.Y_TILT: {TYPE: float, VALUE: -2.165, REQUIRED: True},
         particles.LilyLevelingParticleKey.MAG_COMPASS: {TYPE: float, VALUE: 190.81, REQUIRED: True},
         particles.LilyLevelingParticleKey.TEMP: {TYPE: float, VALUE: 25.69, REQUIRED: True},
         particles.LilyLevelingParticleKey.SUPPLY_VOLTS: {TYPE: float, VALUE: 11.87, REQUIRED: True},
-        particles.LilyLevelingParticleKey.SN: {TYPE: unicode, VALUE: u'N9651', REQUIRED: True},
-        particles.LilyLevelingParticleKey.STATUS: {TYPE: unicode, VALUE: u'Leveled', REQUIRED: True}
+        particles.LilyLevelingParticleKey.SN: {TYPE: str, VALUE: 'N9651', REQUIRED: True},
+        particles.LilyLevelingParticleKey.STATUS: {TYPE: str, VALUE: 'Leveled', REQUIRED: True}
     }
 
     lily_leveling_parameters_03 = {
-        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: unicode, VALUE: u'LILY', REQUIRED: True},
-        particles.LilyLevelingParticleKey.TIME: {TYPE: unicode, VALUE: u'2013/06/28 18:04:41', REQUIRED: True},
+        particles.LilyLevelingParticleKey.SENSOR_ID: {TYPE: str, VALUE: 'LILY', REQUIRED: True},
+        particles.LilyLevelingParticleKey.TIME: {TYPE: str, VALUE: '2013/06/28 18:04:41', REQUIRED: True},
         particles.LilyLevelingParticleKey.X_TILT: {TYPE: float, VALUE: -7.390, REQUIRED: True},
         particles.LilyLevelingParticleKey.Y_TILT: {TYPE: float, VALUE: -14.063, REQUIRED: True},
         particles.LilyLevelingParticleKey.MAG_COMPASS: {TYPE: float, VALUE: 190.91, REQUIRED: True},
         particles.LilyLevelingParticleKey.TEMP: {TYPE: float, VALUE: 25.83, REQUIRED: True},
         particles.LilyLevelingParticleKey.SUPPLY_VOLTS: {TYPE: float, VALUE: 11.87, REQUIRED: True},
-        particles.LilyLevelingParticleKey.SN: {TYPE: unicode, VALUE: u'N9651', REQUIRED: True},
-        particles.LilyLevelingParticleKey.STATUS: {TYPE: unicode, VALUE: u'Switching to Y', REQUIRED: True}
+        particles.LilyLevelingParticleKey.SN: {TYPE: str, VALUE: 'N9651', REQUIRED: True},
+        particles.LilyLevelingParticleKey.STATUS: {TYPE: str, VALUE: 'Switching to Y', REQUIRED: True}
     }
 
     def assert_driver_parameters(self, current_parameters, verify_values=False):
@@ -554,7 +554,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, BotptTestMixinSub):
         # feed in a leveling complete status message
         self._send_port_agent_packet(driver, samples.LEVELED_STATUS)
         # Assert we have returned to the command state
-        self.assertEquals(driver._protocol.get_current_state(), ProtocolState.AUTOSAMPLE)
+        self.assertEqual(driver._protocol.get_current_state(), ProtocolState.AUTOSAMPLE)
 
         expected = [call(ProtocolEvent.GET, Parameter.ALL),  # startup get ALL
                     call(ProtocolEvent.START_LEVELING),      # start leveling
@@ -659,7 +659,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, BotptTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -907,7 +907,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, BotptTestMi
         Verify we can run through the test cycle 4 times
         """
         self.assert_enter_command_mode()
-        for x in xrange(4):
+        for x in range(4):
             log.debug('test_cycle -- PASS %d', x + 1)
             self.assert_cycle()
 
@@ -990,7 +990,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, BotptTestMi
                 ProtocolEvent.STOP_LEVELING,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

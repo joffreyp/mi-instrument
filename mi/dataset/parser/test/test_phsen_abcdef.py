@@ -45,7 +45,7 @@ class PhsenRecoveredParserUnitTestCase(ParserUnitTestCase):
             parser = PhsenRecoveredParser(self.config, stream_handle, self.exception_callback)
             particles = parser.get_records(20)
             self.assert_particles(particles, "SAMI_P0080_180713_simple.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_get_many(self):
         """
@@ -57,7 +57,7 @@ class PhsenRecoveredParserUnitTestCase(ParserUnitTestCase):
             parser = PhsenRecoveredParser(self.config, stream_handle, self.exception_callback)
             result = parser.get_records(3)
             self.assert_particles(result, 'SAMI_P0080_180713_multiple.yml', RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_long(self):
         """
@@ -67,8 +67,8 @@ class PhsenRecoveredParserUnitTestCase(ParserUnitTestCase):
             parser = PhsenRecoveredParser(self.config, stream_handle, self.exception_callback)
             # request more particles than available, only 29 in file
             result = parser.get_records(32)
-            self.assertEquals(len(result), 29)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(len(result), 29)
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_invalid_num_fields_ph(self):
         """
@@ -131,7 +131,7 @@ class PhsenRecoveredParserUnitTestCase(ParserUnitTestCase):
         with open(os.path.join(RESOURCE_PATH, 'SAMI_P0080_180713_alpha_field.txt')) as stream_handle:
             parser = PhsenRecoveredParser(self.config, stream_handle, self.exception_callback)
             parser.get_records(1)
-            print self.exception_callback_value
+            print(self.exception_callback_value)
             self.assertIsInstance(self.exception_callback_value[0], SampleException)
 
     def test_no_data_tag(self):
@@ -151,7 +151,7 @@ class PhsenRecoveredParserUnitTestCase(ParserUnitTestCase):
             parser = PhsenRecoveredParser(self.config, stream_handle, self.exception_callback)
             result = parser.get_records(12)
             self.assert_particles(result, "SAMI_P0080_180713_control_ph.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_bug_3608(self):
         """

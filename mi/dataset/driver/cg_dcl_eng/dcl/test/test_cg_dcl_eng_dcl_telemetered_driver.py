@@ -32,7 +32,7 @@ class DriverTest(unittest.TestCase):
                 # particle key names should match
                 self.assertListEqual(sorted(prev_particles.keys()), sorted(particles.keys()))
                 # compare number of samples across one of the particle keys
-                for p in prev_particles.keys():
+                for p in list(prev_particles.keys()):
                     log.debug('%s: %d %d', p, len(prev_particles[p]), len(particles[p]))
                     self.assertEqual(len(prev_particles[p]), len(particles[p]))
         else:
@@ -52,7 +52,7 @@ class DriverTest(unittest.TestCase):
         log.debug("SAMPLES: %s", particle_data_handler._samples)
         log.debug("FAILURE: %s", particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, False)
+        self.assertEqual(particle_data_handler._failure, False)
         self.assertNoParticleRegression(source_file_path, particle_data_handler)
 
     def test_13694(self):
@@ -66,7 +66,7 @@ class DriverTest(unittest.TestCase):
         log.debug('SAMPLES: %s', particle_data_handler._samples)
         log.debug('FAILURE: %s', particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, True)
+        self.assertEqual(particle_data_handler._failure, True)
         self.assertNoParticleRegression(source_file_path, particle_data_handler)
 
 

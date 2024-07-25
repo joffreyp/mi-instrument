@@ -141,7 +141,7 @@ class InstrumentFSM(object):
         @retval list of events handled.
         """
         events = []
-        for (key, handler) in self.state_handlers.iteritems():
+        for (key, handler) in self.state_handlers.items():
             state = key[0]
             event = key[1]
             if not ((event == self.enter_event) or (event == self.exit_event)):

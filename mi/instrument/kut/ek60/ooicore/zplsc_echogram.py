@@ -76,7 +76,7 @@ def read_datagram_header(chunk):
     internal = values[2] * (2 ** 32) + values[1]
 
     # create the datagram header dictionary
-    datagram_header = dict(zip(field_names, [values[0], internal]))
+    datagram_header = dict(list(zip(field_names, [values[0], internal])))
     return datagram_header
 
 
@@ -97,11 +97,11 @@ def read_config_header(chunk):
     values.pop(4)  # drop the spare field
 
     # strip the trailing zero byte padding from the strings
-    for i in xrange(4):
+    for i in range(4):
         values[i] = values[i].strip('\x00')
 
     # create the configuration header dictionary
-    config_header = dict(zip(field_names, values))
+    config_header = dict(list(zip(field_names, values)))
     return config_header
 
 
@@ -135,7 +135,7 @@ def read_config_transducer(chunk):
         values[i] = values[i].strip('\x00')
 
     # put it back together, dropping the spare strings
-    config_transducer = dict(zip(field_names[0:17], values[0:17]))
+    config_transducer = dict(list(zip(field_names[0:17], values[0:17])))
     config_transducer[field_names[17]] = pulse_length_table
     config_transducer[field_names[18]] = gain_table
     config_transducer[field_names[19]] = sa_correction_table

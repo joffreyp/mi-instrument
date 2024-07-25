@@ -164,7 +164,7 @@ class PolledScheduler(Scheduler):
         @param name: name of the job we are looking for
         @return: Tuple containing (job, alias, jobstore)
         """
-        for (alias, jobstore) in self._jobstores.items():
+        for (alias, jobstore) in list(self._jobstores.items()):
             for job in tuple(jobstore.jobs):
                 if(isinstance(job, PolledIntervalJob) and name == job.name):
                     return (job, alias, jobstore)
@@ -178,7 +178,7 @@ class PolledScheduler(Scheduler):
         @param name: name of the job we are looking for
         @return: PolledIntervalJob with the matching name or None if not found.
         """
-        for (alias, jobstore) in self._jobstores.items():
+        for (alias, jobstore) in list(self._jobstores.items()):
             for job in tuple(jobstore.jobs):
                 if(isinstance(job, PolledIntervalJob) and name == job.name):
                     return job
@@ -196,7 +196,7 @@ class PolledScheduler(Scheduler):
         self._jobstores_lock.acquire()
         try:
             log.debug("_process_jobs lock acquired")
-            for (alias, jobstore) in self._jobstores.items():
+            for (alias, jobstore) in list(self._jobstores.items()):
                 for job in tuple(jobstore.jobs):
                     log.debug("_process_jobs process job %s" % job)
                     if isinstance(job, PolledIntervalJob):

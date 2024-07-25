@@ -257,7 +257,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, AntelopeTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -358,7 +358,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, AntelopeTestMix
         # Create the base directory if it doesn't exist, then set the permission to read only.
         if not os.path.exists(base_dir):
             os.makedirs(base_dir)
-        os.chmod(base_dir, 0444)
+        os.chmod(base_dir, 0o444)
 
         # Initialize the antelope instrument driver.
         self.assert_initialize_driver()
@@ -380,7 +380,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, AntelopeTestMix
         self.assert_current_state(ProtocolState.WRITE_ERROR)
 
         # Set the base directory to to read/write.
-        os.chmod(base_dir, 0777)
+        os.chmod(base_dir, 0o777)
         self.clear_events()
 
         # Simulate the user clearing the write error, start auto sampling again and then assert the data files.

@@ -127,7 +127,7 @@ class HelperTestMixin:
             # network with just a single platform (no children).
             #
             cls.PLATFORM_ID = 'LJ01D'
-            print("PLAT_NETWORK=single -> using base platform: %r" % cls.PLATFORM_ID)
+            print(("PLAT_NETWORK=single -> using base platform: %r" % cls.PLATFORM_ID))
             cls.SUBPLATFORM_IDS = []
             cls.ATTR_NAMES = ['input_voltage|0', 'input_bus_current|0']
             cls.WRITABLE_ATTR_NAMES = ['input_bus_current|0']
@@ -135,7 +135,7 @@ class HelperTestMixin:
             cls.PORT_ID = '1'
             cls.INSTRUMENT_ID = 'LJ01D_port_1_instrument_1'
         else:
-            print("PLAT_NETWORK undefined -> using base platform: %r" % cls.PLATFORM_ID)
+            print(("PLAT_NETWORK undefined -> using base platform: %r" % cls.PLATFORM_ID))
 
     def _verify_valid_platform_id(self, platform_id, dic):
         """
@@ -144,9 +144,9 @@ class HelperTestMixin:
         """
         self.assertIsInstance(dic, dict)
         self.assertIn(platform_id, dic)
-        self.assertEquals(1, len(dic))
+        self.assertEqual(1, len(dic))
         val = dic[platform_id]
-        self.assertNotEquals(InvalidResponse.PLATFORM_ID, val)
+        self.assertNotEqual(InvalidResponse.PLATFORM_ID, val)
         return val
 
     def _verify_invalid_platform_id(self, platform_id, dic):
@@ -156,9 +156,9 @@ class HelperTestMixin:
         """
         self.assertIsInstance(dic, dict)
         self.assertIn(platform_id, dic)
-        self.assertEquals(1, len(dic))
+        self.assertEqual(1, len(dic))
         val = dic[platform_id]
-        self.assertEquals(InvalidResponse.PLATFORM_ID, val)
+        self.assertEqual(InvalidResponse.PLATFORM_ID, val)
 
     def _verify_valid_attribute_id(self, attr_id, dic):
         """
@@ -168,7 +168,7 @@ class HelperTestMixin:
         self.assertIn(attr_id, dic, "%s in %s" %(attr_id, dic))
         val = dic[attr_id]
         self.assertIsInstance(val, (tuple, list))
-        self.assertNotEquals(InvalidResponse.ATTRIBUTE_ID, val)
+        self.assertNotEqual(InvalidResponse.ATTRIBUTE_ID, val)
         return val
 
     def _verify_invalid_attribute_id(self, attr_id, dic):
@@ -178,7 +178,7 @@ class HelperTestMixin:
         """
         self.assertIn(attr_id, dic)
         val = dic[attr_id]
-        self.assertEquals(InvalidResponse.ATTRIBUTE_ID, val,
+        self.assertEqual(InvalidResponse.ATTRIBUTE_ID, val,
                           "attr_id=%r, val=%r but expected=%r" % (
                           attr_id, val, InvalidResponse.ATTRIBUTE_ID))
 
@@ -189,7 +189,7 @@ class HelperTestMixin:
         """
         self.assertIn(attr_id, dic)
         val = dic[attr_id]
-        self.assertEquals(InvalidResponse.ATTRIBUTE_VALUE_OUT_OF_RANGE, val,
+        self.assertEqual(InvalidResponse.ATTRIBUTE_VALUE_OUT_OF_RANGE, val,
                           "attr_id=%r, val=%r but expected=%r" % (
                           attr_id, val, InvalidResponse.ATTRIBUTE_VALUE_OUT_OF_RANGE))
 
@@ -200,7 +200,7 @@ class HelperTestMixin:
         """
         self.assertIn(attr_id, dic)
         val = dic[attr_id]
-        self.assertEquals(InvalidResponse.ATTRIBUTE_NOT_WRITABLE, val,
+        self.assertEqual(InvalidResponse.ATTRIBUTE_NOT_WRITABLE, val,
                           "Expecting val=%s for attr_id=%r. Got val=%r" % (
                               InvalidResponse.ATTRIBUTE_NOT_WRITABLE,
                               attr_id,
@@ -213,7 +213,7 @@ class HelperTestMixin:
         """
         self.assertIn(port_id, dic)
         val = dic[port_id]
-        self.assertNotEquals(InvalidResponse.PORT_ID, val)
+        self.assertNotEqual(InvalidResponse.PORT_ID, val)
         return val
 
     def _verify_invalid_port_id(self, port_id, dic):
@@ -223,7 +223,7 @@ class HelperTestMixin:
         """
         self.assertIn(port_id, dic)
         val = dic[port_id]
-        self.assertEquals(InvalidResponse.PORT_ID, val)
+        self.assertEqual(InvalidResponse.PORT_ID, val)
 
     def _verify_valid_instrument_id(self, instrument_id, dic):
         """
@@ -247,14 +247,14 @@ class HelperTestMixin:
         """
         self.assertIn(instrument_id, dic)
         val = dic[instrument_id]
-        self.assertEquals(val, InvalidResponse.MISSING_INSTRUMENT_ATTRIBUTE)
+        self.assertEqual(val, InvalidResponse.MISSING_INSTRUMENT_ATTRIBUTE)
 
     def _verify_instrument_disconnected(self, instrument_id, result):
         """
         verifies the result is equal to NormalResponse.INSTRUMENT_DISCONNECTED.
         """
         expected = NormalResponse.INSTRUMENT_DISCONNECTED
-        self.assertEquals(expected, result, "instrument_id=%r: expecting %r but "
+        self.assertEqual(expected, result, "instrument_id=%r: expecting %r but "
                     "got result=%r" % (instrument_id, expected, result))
 
     def _dispatch_simulator(self, oms_uri, inactivity_period=180):

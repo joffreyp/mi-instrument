@@ -11,7 +11,7 @@ to send data through that TCP connection
 
 # Needed because we import the time module below.  With out this '.' is search first
 # and we import ourselves.
-from __future__ import absolute_import
+
 
 __author__ = 'Bill French'
 __license__ = 'Apache 2.0'
@@ -22,13 +22,13 @@ log = get_logger()
 import time
 import errno
 import socket
-import thread
+import _thread
 
 from mi.core.exceptions import InstrumentConnectionException
 
 LOCALHOST='localhost'
 DEFAULT_TIMEOUT=15
-DEFAULT_PORT_RANGE=range(12200,12300)
+DEFAULT_PORT_RANGE=list(range(12200,12300))
 
 class TCPSimulatorServer(object):
     """
@@ -52,7 +52,7 @@ class TCPSimulatorServer(object):
         self.__bind(port_range)
         self.socket.listen(0)
 
-        thread.start_new_thread(self.__accept,())
+        _thread.start_new_thread(self.__accept,())
 
     def __bind(self, port_range):
         """
@@ -133,7 +133,7 @@ class TCPSimulatorClient(object):
         self.clear_buffer()
         self._done = False
 
-        thread.start_new_thread(self.__listen, ())
+        _thread.start_new_thread(self.__listen, ())
 
     def __listen(self):
         """

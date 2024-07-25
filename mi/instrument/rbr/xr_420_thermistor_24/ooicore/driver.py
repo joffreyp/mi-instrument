@@ -486,11 +486,10 @@ class XR_420EngineeringDataParticle(DataParticle):
 ###############################################################################
 #   Protocol for XR-420
 ###############################################################################
-class InstrumentProtocol(CommandResponseInstrumentProtocol):
+class InstrumentProtocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     This protocol implements a simple command-response interaction for the XR-420 instrument.
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -599,7 +598,7 @@ class InstrumentProtocol(CommandResponseInstrumentProtocol):
         if expected_prompt is None:
             prompt_list = self._prompts.list()
         else:
-            if isinstance(expected_prompt, basestring):
+            if isinstance(expected_prompt, str):
                 prompt_list = [expected_prompt]
             else:
                 prompt_list = expected_prompt
@@ -809,7 +808,7 @@ class InstrumentProtocol(CommandResponseInstrumentProtocol):
         update_params = False
         set_advance_params = False
 
-        for (key, val) in params_to_set.iteritems():
+        for (key, val) in params_to_set.items():
             try:
                 if key in AdvancedFunctionsParameters.list():
                     old_val = self._param_dict.get(key)
@@ -994,7 +993,7 @@ class InstrumentProtocol(CommandResponseInstrumentProtocol):
     ########################################################################
     def _check_for_set_failures(self, params_to_check):
             device_parameters = self._param_dict.get_config()
-            for key in params_to_check.keys():
+            for key in list(params_to_check.keys()):
                 log.debug("Verify set, key: %s", key)
                 if params_to_check[key] != device_parameters[key]:
                     msg = "SET FAILURE: %s is %s and should have been set to %s" % (key, device_parameters[key], params_to_check[key])

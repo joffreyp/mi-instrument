@@ -124,8 +124,8 @@ class SatlanticMixin(DriverTestMixin):
     }
 
     _sample_parameters = {
-        SatlanticOCR507DataParticleKey.INSTRUMENT_ID: {TYPE: unicode, VALUE: 'SATDI7', REQUIRED: True},
-        SatlanticOCR507DataParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '0233', REQUIRED: True},
+        SatlanticOCR507DataParticleKey.INSTRUMENT_ID: {TYPE: str, VALUE: 'SATDI7', REQUIRED: True},
+        SatlanticOCR507DataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '0233', REQUIRED: True},
         SatlanticOCR507DataParticleKey.TIMER: {TYPE: float, VALUE: 1310692.31, REQUIRED: True},
         SatlanticOCR507DataParticleKey.SAMPLE_DELAY: {TYPE: int, VALUE: -133, REQUIRED: True},
         SatlanticOCR507DataParticleKey.SAMPLES: {TYPE: list, VALUE: [2147593856,
@@ -143,12 +143,12 @@ class SatlanticMixin(DriverTestMixin):
     }
 
     _config_parameters = {
-        SatlanticOCR507ConfigurationParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: '3.0A - SatNet Type B',
+        SatlanticOCR507ConfigurationParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: '3.0A - SatNet Type B',
                                                                    REQUIRED: True},
-        SatlanticOCR507ConfigurationParticleKey.INSTRUMENT_ID: {TYPE: unicode, VALUE: 'SATDI7', REQUIRED: True},
-        SatlanticOCR507ConfigurationParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '0233', REQUIRED: True},
+        SatlanticOCR507ConfigurationParticleKey.INSTRUMENT_ID: {TYPE: str, VALUE: 'SATDI7', REQUIRED: True},
+        SatlanticOCR507ConfigurationParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '0233', REQUIRED: True},
         SatlanticOCR507ConfigurationParticleKey.TELEMETRY_BAUD_RATE: {TYPE: int, VALUE: 57600, REQUIRED: True},
-        SatlanticOCR507ConfigurationParticleKey.MAX_FRAME_RATE: {TYPE: unicode, VALUE: '1', REQUIRED: True},
+        SatlanticOCR507ConfigurationParticleKey.MAX_FRAME_RATE: {TYPE: str, VALUE: '1', REQUIRED: True},
         SatlanticOCR507ConfigurationParticleKey.INIT_SILENT_MODE: {TYPE: int, VALUE: 0, REQUIRED: True},
         SatlanticOCR507ConfigurationParticleKey.INIT_POWER_DOWN: {TYPE: int, VALUE: 0, REQUIRED: True},
         SatlanticOCR507ConfigurationParticleKey.INIT_AUTO_TELEMETRY: {TYPE: int, VALUE: 1, REQUIRED: True},
@@ -265,7 +265,7 @@ class SatlanticProtocolUnitTest(InstrumentDriverUnitTestCase, SatlanticMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -598,7 +598,7 @@ class SatlanticProtocolQualificationTest(InstrumentDriverQualificationTestCase, 
         capabilities[AgentCapabilityType.RESOURCE_COMMAND] = [SatlanticProtocolEvent.START_AUTOSAMPLE,
                                                               SatlanticProtocolEvent.ACQUIRE_STATUS]
         capabilities[AgentCapabilityType.RESOURCE_INTERFACE] = None
-        capabilities[AgentCapabilityType.RESOURCE_PARAMETER] = self._driver_parameters.keys()
+        capabilities[AgentCapabilityType.RESOURCE_PARAMETER] = list(self._driver_parameters.keys())
 
         self.assert_enter_command_mode()
         self.assert_capabilities(capabilities)
@@ -609,7 +609,7 @@ class SatlanticProtocolQualificationTest(InstrumentDriverQualificationTestCase, 
         capabilities = {}
         capabilities[AgentCapabilityType.AGENT_COMMAND] = self._common_agent_commands(ResourceAgentState.STREAMING)
         capabilities[AgentCapabilityType.RESOURCE_COMMAND] = [SatlanticProtocolEvent.STOP_AUTOSAMPLE]
-        capabilities[AgentCapabilityType.RESOURCE_PARAMETER] = self._driver_parameters.keys()
+        capabilities[AgentCapabilityType.RESOURCE_PARAMETER] = list(self._driver_parameters.keys())
 
         self.assert_start_autosample()
         self.assert_capabilities(capabilities)

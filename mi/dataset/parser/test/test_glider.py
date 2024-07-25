@@ -8,7 +8,7 @@
 """
 
 import os
-from StringIO import StringIO
+from io import StringIO
 from nose.plugins.attrib import attr
 
 from mi.core.exceptions import ConfigurationException
@@ -284,7 +284,7 @@ class GliderParserUnitTestCase(ParserUnitTestCase):
         log.debug("Data in particle: %s", data_dict)
         log.debug("Expected Data: %s", expected_values)
 
-        for key in expected_values.keys():
+        for key in list(expected_values.keys()):
             for value in data_dict['values']:
                 if value['value_id'] == key:
                     self.assertEqual(value['value'], expected_values[key])
@@ -341,7 +341,7 @@ class CtdgvTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(1)
             self.assert_particles(record, 'single_ctdgv_record.mrg.result.yml', CTDGV_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_multiple_yml(self):
         """
@@ -351,7 +351,7 @@ class CtdgvTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(4)
             self.assert_particles(record, 'multiple_ctdgv_record.mrg.result.yml', CTDGV_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_real(self):
         """
@@ -360,26 +360,26 @@ class CtdgvTelemeteredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(CTDGV_RESOURCE_PATH, 'unit_363_2013_199_0_0.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(1107)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
         with open(os.path.join(CTDGV_RESOURCE_PATH, 'unit_363_2013_199_5_0.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(108)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
         with open(os.path.join(CTDGV_RESOURCE_PATH, 'unit_363_2013_245_6_6.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(240)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
         with open(os.path.join(CTDGV_RESOURCE_PATH, 'unit_364_2013_192_1_0.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(4)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -457,7 +457,7 @@ class DOSTATelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(4)
             self.assert_particles(record, 'multiple_dosta_record.mrg.result.yml', DOSTA_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_real(self):
         """
@@ -466,8 +466,8 @@ class DOSTATelemeteredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(DOSTA_RESOURCE_PATH, 'unit_363_2013_245_6_6.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(240)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -535,7 +535,7 @@ class FLORTTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(4)
             self.assert_particles(record, 'multiple_flort_record.mrg.result.yml', FLORT_M_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -605,7 +605,7 @@ class FlortOTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(5)
             self.assert_particles(record, 'merged_flort_o_telemetered_data.mrg.result.yml', FLORT_O_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -645,7 +645,7 @@ class FlortORecoveredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(5)
             self.assert_particles(record, 'merged_flort_o_recovered_data.mrg.result.yml', FLORT_O_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -684,7 +684,7 @@ class PARADTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(4)
             self.assert_particles(record, 'multiple_parad_record.mrg.result.yml', PARAD_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -751,7 +751,7 @@ class FLORDTelemeteredGliderTest(GliderParserUnitTestCase):
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             record = parser.get_records(4)
             self.assert_particles(record, 'multiple_flord_record.mrg.result.yml', FLORD_M_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_real(self):
         """
@@ -760,8 +760,8 @@ class FLORDTelemeteredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(FLORD_M_RESOURCE_PATH, 'unit_363_2013_245_6_6.mrg'), 'rU') as file_handle:
             parser = GliderParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(240)
-            self.assert_(len(records) > 0)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 0)
+            self.assertEqual(self.exception_callback_value, [])
 
 
 @attr('UNIT', group='mi')
@@ -1262,7 +1262,7 @@ class ENGRecoveredGliderTest(GliderParserUnitTestCase):
             particles = parser.get_records(13)
             self.assert_particles(particles, 'multiple_glider_record_recovered-engDataOnly.mrg.result.yml',
                                   ENG_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_real(self):
         """
@@ -1271,8 +1271,8 @@ class ENGRecoveredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(ENG_RESOURCE_PATH, 'unit_363_2013_245_6_6.mrg'), 'rU') as file_handle:
             parser = GliderEngineeringParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(240)
-            self.assert_(len(records) > 3)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 3)
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_ingest_errors(self):
         """
@@ -1287,7 +1287,7 @@ class ENGRecoveredGliderTest(GliderParserUnitTestCase):
 
             # self.assert_particles(particles, 'multiple_glider_record_recovered-engDataOnly.mrg.result.yml',
             #                       ENG_RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_for_69_file(self):
         """
@@ -1296,8 +1296,8 @@ class ENGRecoveredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(ENG_RESOURCE_PATH, 'cp_388_2016_012_0_0.mrg'), 'rU') as file_handle:
             parser = GliderEngineeringParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(2000)
-            self.assert_(len(records) > 3)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 3)
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_69_values(self):
         """
@@ -1329,5 +1329,5 @@ class ENGRecoveredGliderTest(GliderParserUnitTestCase):
         with open(os.path.join(ENG_RESOURCE_PATH, 'cp_388_2016_012_1_0.mrg'), 'rU') as file_handle:
             parser = GliderEngineeringParser(self.config, file_handle, self.exception_callback)
             records = parser.get_records(2000)
-            self.assert_(len(records) > 3)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertTrue(len(records) > 3)
+            self.assertEqual(self.exception_callback_value, [])

@@ -108,7 +108,7 @@ class SwitchDriver():
             for model in sorted(drivers[make].keys()):
                 for name in sorted(drivers[make][model].keys()):
                     for version in sorted(drivers[make][model][name]):
-                        print "%s %s %s %s" % (make, model, name, version)
+                        print("%s %s %s %s" % (make, model, name, version))
 
     @staticmethod
     def get_drivers():

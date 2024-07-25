@@ -236,8 +236,8 @@ class ParameterConstraints(BaseEnum):
 class DriverTestMixinSub(DriverTestMixin):
 
     _reference_dark_sample_parameters = OrderedDict([
-        (SUNASampleDataParticleKey.FRAME_TYPE, {'type': unicode, 'value': "SDF"}),
-        (SUNASampleDataParticleKey.SERIAL_NUM, {'type': unicode, 'value': "0344"}),
+        (SUNASampleDataParticleKey.FRAME_TYPE, {'type': str, 'value': "SDF"}),
+        (SUNASampleDataParticleKey.SERIAL_NUM, {'type': str, 'value': "0344"}),
         (SUNASampleDataParticleKey.SAMPLE_DATE, {'type': int, 'value': 2014125}),
         (SUNASampleDataParticleKey.SAMPLE_TIME, {'type': float, 'value': 21.278082}),
         (SUNASampleDataParticleKey.NITRATE_CONCEN, {'type': float, 'value': 0.00}),
@@ -298,8 +298,8 @@ class DriverTestMixinSub(DriverTestMixin):
     ])
 
     _reference_sample_parameters = OrderedDict([
-        (SUNASampleDataParticleKey.FRAME_TYPE, {'type': unicode, 'value': "SLF"}),
-        (SUNASampleDataParticleKey.SERIAL_NUM, {'type': unicode, 'value': "0379"}),
+        (SUNASampleDataParticleKey.FRAME_TYPE, {'type': str, 'value': "SLF"}),
+        (SUNASampleDataParticleKey.SERIAL_NUM, {'type': str, 'value': "0379"}),
         (SUNASampleDataParticleKey.SAMPLE_DATE, {'type': int, 'value': 2015090}),
         (SUNASampleDataParticleKey.SAMPLE_TIME, {'type': float, 'value': 2.940748}),
         (SUNASampleDataParticleKey.NITRATE_CONCEN, {'type': float, 'value': 63.7}),
@@ -370,40 +370,40 @@ class DriverTestMixinSub(DriverTestMixin):
     ])
 
     _reference_status_parameters = {
-        SUNAStatusDataParticleKey.SENSOR_TYPE: {'type': unicode, 'value': "SUNA"},
-        SUNAStatusDataParticleKey.SENSOR_VERSION: {'type': unicode, 'value': "V2"},
-        SUNAStatusDataParticleKey.SERIAL_NUMBER: {'type': unicode, 'value': '344'},
-        SUNAStatusDataParticleKey.INTEGRATED_WIPER: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.EXT_POWER_PORT: {'type': unicode, 'value': "Missing"},
-        SUNAStatusDataParticleKey.LAMP_SHUTTER: {'type': unicode, 'value': "Missing"},
-        SUNAStatusDataParticleKey.REF_DETECTOR: {'type': unicode, 'value': "Missing"},
-        SUNAStatusDataParticleKey.PROTECTR: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.SUPER_CAPACITORS: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.PSB_SUPERVISOR: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.USB_COMM: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.RELAY_MODULE: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.SDII2_INTERFACE: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.ANALOG_OUTPUT: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.DATA_LOGGING: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.APF_INTERFACE: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.SCHEDULING: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.LAMP_FAN: {'type': unicode, 'value': "Available"},
-        SUNAStatusDataParticleKey.ADDR_LAMP_TEMP: {'type': unicode, 'value': '10d0fda4020800eb'},
-        SUNAStatusDataParticleKey.ADDR_SPEC_TEMP: {'type': unicode, 'value': '1086818d020800d8'},
-        SUNAStatusDataParticleKey.SENSOR_ADDR_HOUS_TEMP: {'type': unicode, 'value': '10707b6a020800cc'},
-        SUNAStatusDataParticleKey.SERIAL_NUM_SPECT: {'type': unicode, 'value': '86746'},
-        SUNAStatusDataParticleKey.SERIAL_NUM_LAMP: {'type': unicode, 'value': "C3.D01.1590"},
-        SUNAStatusDataParticleKey.STUPSTUS: {'type': unicode, 'value': "Done"},
+        SUNAStatusDataParticleKey.SENSOR_TYPE: {'type': str, 'value': "SUNA"},
+        SUNAStatusDataParticleKey.SENSOR_VERSION: {'type': str, 'value': "V2"},
+        SUNAStatusDataParticleKey.SERIAL_NUMBER: {'type': str, 'value': '344'},
+        SUNAStatusDataParticleKey.INTEGRATED_WIPER: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.EXT_POWER_PORT: {'type': str, 'value': "Missing"},
+        SUNAStatusDataParticleKey.LAMP_SHUTTER: {'type': str, 'value': "Missing"},
+        SUNAStatusDataParticleKey.REF_DETECTOR: {'type': str, 'value': "Missing"},
+        SUNAStatusDataParticleKey.PROTECTR: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.SUPER_CAPACITORS: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.PSB_SUPERVISOR: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.USB_COMM: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.RELAY_MODULE: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.SDII2_INTERFACE: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.ANALOG_OUTPUT: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.DATA_LOGGING: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.APF_INTERFACE: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.SCHEDULING: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.LAMP_FAN: {'type': str, 'value': "Available"},
+        SUNAStatusDataParticleKey.ADDR_LAMP_TEMP: {'type': str, 'value': '10d0fda4020800eb'},
+        SUNAStatusDataParticleKey.ADDR_SPEC_TEMP: {'type': str, 'value': '1086818d020800d8'},
+        SUNAStatusDataParticleKey.SENSOR_ADDR_HOUS_TEMP: {'type': str, 'value': '10707b6a020800cc'},
+        SUNAStatusDataParticleKey.SERIAL_NUM_SPECT: {'type': str, 'value': '86746'},
+        SUNAStatusDataParticleKey.SERIAL_NUM_LAMP: {'type': str, 'value': "C3.D01.1590"},
+        SUNAStatusDataParticleKey.STUPSTUS: {'type': str, 'value': "Done"},
         SUNAStatusDataParticleKey.BAUD_RATE: {'type': int, 'value': 57600},
-        SUNAStatusDataParticleKey.MSG_LEVEL: {'type': unicode, 'value': "Info"},
+        SUNAStatusDataParticleKey.MSG_LEVEL: {'type': str, 'value': "Info"},
         SUNAStatusDataParticleKey.MSG_FILE_SIZE: {'type': int, 'value': 2},
         SUNAStatusDataParticleKey.DATA_FILE_SIZE: {'type': int, 'value': 5},
-        SUNAStatusDataParticleKey.OUTPUT_FRAME_TYPE: {'type': unicode, 'value': "Full_ASCII"},
-        SUNAStatusDataParticleKey.LOGGING_FRAME_TYPE: {'type': unicode, 'value': "Full_ASCII"},
-        SUNAStatusDataParticleKey.OUTPUT_DARK_FRAME: {'type': unicode, 'value': "Output"},
-        SUNAStatusDataParticleKey.LOGGING_DARK_FRAME: {'type': unicode, 'value': "Output"},
-        SUNAStatusDataParticleKey.TIMERESL: {'type': unicode, 'value': "Fractsec"},
-        SUNAStatusDataParticleKey.LOG_FILE_TYPE: {'type': unicode, 'value': "Acquisition"},
+        SUNAStatusDataParticleKey.OUTPUT_FRAME_TYPE: {'type': str, 'value': "Full_ASCII"},
+        SUNAStatusDataParticleKey.LOGGING_FRAME_TYPE: {'type': str, 'value': "Full_ASCII"},
+        SUNAStatusDataParticleKey.OUTPUT_DARK_FRAME: {'type': str, 'value': "Output"},
+        SUNAStatusDataParticleKey.LOGGING_DARK_FRAME: {'type': str, 'value': "Output"},
+        SUNAStatusDataParticleKey.TIMERESL: {'type': str, 'value': "Fractsec"},
+        SUNAStatusDataParticleKey.LOG_FILE_TYPE: {'type': str, 'value': "Acquisition"},
         SUNAStatusDataParticleKey.ACQCOUNT: {'type': int, 'value': 10},
         SUNAStatusDataParticleKey.CNTCOUNT: {'type': int, 'value': 130},
         SUNAStatusDataParticleKey.NITRATE_MIN: {'type': float, 'value': -5.000},
@@ -411,16 +411,16 @@ class DriverTestMixinSub(DriverTestMixin):
         SUNAStatusDataParticleKey.WAVELENGTH_LOW: {'type': float, 'value': 217.00},
         SUNAStatusDataParticleKey.WAVELENGTH_HIGH: {'type': float, 'value': 250.00},
         SUNAStatusDataParticleKey.SDI12_ADDR: {'type': int, 'value': 48},
-        SUNAStatusDataParticleKey.DATAMODE: {'type': unicode, 'value': "Real"},
-        SUNAStatusDataParticleKey.OPERATING_MODE: {'type': unicode, 'value': "Polled"},
-        SUNAStatusDataParticleKey.OPERATION_CTRL: {'type': unicode, 'value': "Duration"},
-        SUNAStatusDataParticleKey.EXTL_DEV: {'type': unicode, 'value': "None"},
+        SUNAStatusDataParticleKey.DATAMODE: {'type': str, 'value': "Real"},
+        SUNAStatusDataParticleKey.OPERATING_MODE: {'type': str, 'value': "Polled"},
+        SUNAStatusDataParticleKey.OPERATION_CTRL: {'type': str, 'value': "Duration"},
+        SUNAStatusDataParticleKey.EXTL_DEV: {'type': str, 'value': "None"},
         SUNAStatusDataParticleKey.PRERUN_TIME: {'type': int, 'value': 0},
-        SUNAStatusDataParticleKey.DEV_DURING_ACQ: {'type': unicode, 'value': "Off"},
-        SUNAStatusDataParticleKey.WATCHDOG_TIME: {'type': unicode, 'value': "On"},
+        SUNAStatusDataParticleKey.DEV_DURING_ACQ: {'type': str, 'value': "Off"},
+        SUNAStatusDataParticleKey.WATCHDOG_TIME: {'type': str, 'value': "On"},
         SUNAStatusDataParticleKey.COUNTDOWN: {'type': int, 'value': 15},
         SUNAStatusDataParticleKey.FIXED_TIME: {'type': int, 'value': 60},
-        SUNAStatusDataParticleKey.PERIODIC_INTERVAL: {'type': unicode, 'value': "1m"},
+        SUNAStatusDataParticleKey.PERIODIC_INTERVAL: {'type': str, 'value': "1m"},
         SUNAStatusDataParticleKey.PERIODIC_OFFSET: {'type': int, 'value': 0},
         SUNAStatusDataParticleKey.PERIODIC_DURATION: {'type': int, 'value': 5},
         SUNAStatusDataParticleKey.PERIODIC_SAMPLES: {'type': int, 'value': 5},
@@ -428,7 +428,7 @@ class DriverTestMixinSub(DriverTestMixin):
         SUNAStatusDataParticleKey.APF_TIMEOUT: {'type': float, 'value': 10.0000},
         SUNAStatusDataParticleKey.STABILITY_TIME: {'type': int, 'value': 5},
         SUNAStatusDataParticleKey.MIN_LAMP_ON: {'type': int, 'value': 0},
-        SUNAStatusDataParticleKey.SKIP_SLEEP: {'type': unicode, 'value': "Off"},
+        SUNAStatusDataParticleKey.SKIP_SLEEP: {'type': str, 'value': "Off"},
         SUNAStatusDataParticleKey.SWITCHOFF_TEMP: {'type': int, 'value': 35},
         SUNAStatusDataParticleKey.SPEC_PERIOD: {'type': int, 'value': 450},
         SUNAStatusDataParticleKey.DRKAVERS: {'type': int, 'value': 1},
@@ -438,26 +438,26 @@ class DriverTestMixinSub(DriverTestMixin):
         SUNAStatusDataParticleKey.LIGHT_SAMPLES: {'type': int, 'value': 58},
         SUNAStatusDataParticleKey.DARK_DURATION: {'type': int, 'value': 2},
         SUNAStatusDataParticleKey.LIGHT_DURATION: {'type': int, 'value': 58},
-        SUNAStatusDataParticleKey.TEMP_COMP: {'type': unicode, 'value': "Off"},
-        SUNAStatusDataParticleKey.SALINITY_FIT: {'type': unicode, 'value': "On"},
-        SUNAStatusDataParticleKey.BROMIDE_TRACING: {'type': unicode, 'value': "Off"},
+        SUNAStatusDataParticleKey.TEMP_COMP: {'type': str, 'value': "Off"},
+        SUNAStatusDataParticleKey.SALINITY_FIT: {'type': str, 'value': "On"},
+        SUNAStatusDataParticleKey.BROMIDE_TRACING: {'type': str, 'value': "Off"},
         SUNAStatusDataParticleKey.BASELINE_ORDER: {'type': int, 'value': 1},
         SUNAStatusDataParticleKey.CONCENTRATIONS_FIT: {'type': int, 'value': 3},
-        SUNAStatusDataParticleKey.DARK_CORR_METHOD: {'type': unicode, 'value': "SpecAverage"},
-        SUNAStatusDataParticleKey.DRKCOEFS: {'type': unicode, 'value': "Missing"},
+        SUNAStatusDataParticleKey.DARK_CORR_METHOD: {'type': str, 'value': "SpecAverage"},
+        SUNAStatusDataParticleKey.DRKCOEFS: {'type': str, 'value': "Missing"},
         SUNAStatusDataParticleKey.DAVGPRM_0: {'type': float, 'value': 500.000},
         SUNAStatusDataParticleKey.DAVGPRM_1: {'type': float, 'value': 0.00000},
         SUNAStatusDataParticleKey.DAVGPRM_2: {'type': float, 'value': 0.00000},
         SUNAStatusDataParticleKey.DAVGPRM_3: {'type': float, 'value': 0.000000},
         SUNAStatusDataParticleKey.ABSORBANCE_CUTOFF: {'type': float, 'value': 1.3000},
-        SUNAStatusDataParticleKey.TIME_ADJ: {'type': unicode, 'value': "On"},
+        SUNAStatusDataParticleKey.TIME_ADJ: {'type': str, 'value': "On"},
         SUNAStatusDataParticleKey.TIME_FACTOR: {'type': int, 'value': 1},
         SUNAStatusDataParticleKey.TIME_STEP: {'type': int, 'value': 20},
         SUNAStatusDataParticleKey.TIME_MAX: {'type': int, 'value': 20},
         SUNAStatusDataParticleKey.FIT_WAVE_LOW: {'type': float, 'value': 217.00},
         SUNAStatusDataParticleKey.FIT_WAVE_HIGH: {'type': float, 'value': 240.00},
         SUNAStatusDataParticleKey.LAMP_TIME: {'type': int, 'value': 172577},
-        SUNAStatusDataParticleKey.CALIBRATION_FILE: {'type': unicode, 'value': 'SNA0234H.cal'}
+        SUNAStatusDataParticleKey.CALIBRATION_FILE: {'type': str, 'value': 'SNA0234H.cal'}
     }
 
     _reference_test_parameters = {
@@ -483,7 +483,7 @@ class DriverTestMixinSub(DriverTestMixin):
         SUNATestDataParticleKey.SPEC_LIGHT_SD: {'type': int, 'value': 12009},
         SUNATestDataParticleKey.SPEC_LIGHT_MI: {'type': int, 'value': 455},
         SUNATestDataParticleKey.SPEC_LIGHT_MA: {'type': int, 'value': 52004},
-        SUNATestDataParticleKey.TEST_RESULT: {'type': unicode, 'value': "Ok"}
+        SUNATestDataParticleKey.TEST_RESULT: {'type': str, 'value': "Ok"}
     }
 
     def assert_data_particle_sample(self, data_particle, verify_values=False):
@@ -626,7 +626,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
             DataParticleKey.QUALITY_FLAG: DataParticleValue.OK,
             DataParticleKey.VALUES: [
                 {DataParticleKey.VALUE_ID: value_id, DataParticleKey.VALUE: value['value']}
-                for value_id, value in self._reference_dark_sample_parameters.iteritems()]
+                for value_id, value in self._reference_dark_sample_parameters.items()]
         }
         self.compare_parsed_data_particle(SUNASampleDataParticle, SUNA_ASCII_DARK_SAMPLE, expected_dark)
 
@@ -641,7 +641,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
             DataParticleKey.QUALITY_FLAG: DataParticleValue.OK,
             DataParticleKey.VALUES: [
                 {DataParticleKey.VALUE_ID: value_id, DataParticleKey.VALUE: value['value']}
-                for value_id, value in self._reference_sample_parameters.iteritems()]
+                for value_id, value in self._reference_sample_parameters.items()]
         }
         self.compare_parsed_data_particle(SUNASampleDataParticle, SUNA_ASCII_SAMPLE, expected_light)
 
@@ -676,7 +676,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     # noinspection PyPep8,PyPep8,PyPep8,PyPep8

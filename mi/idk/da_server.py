@@ -268,9 +268,9 @@ class DirectAccessServer():
         log.debug("IA State: %s", ia_state)
 
         if ia_state == DriverProtocolState.DIRECT_ACCESS:
-            print "Direct access server started, IP: %s Port: %s" % (ip_address, port)
+            print("Direct access server started, IP: %s Port: %s" % (ip_address, port))
             if token:
-                print "Token: %s" % token
+                print("Token: %s" % token)
 
             while ia_state == DriverProtocolState.DIRECT_ACCESS:
                 cmd = AgentCommand(command=ResourceAgentEvent.GET_RESOURCE_STATE)

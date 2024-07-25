@@ -192,12 +192,12 @@ class AddFields(logging.Filter):
         values = threading.local()
         if self.attribute_name:
             values = getattr(values, self.attribute_name)
-        for local_field_name, logging_field_name in self.thread_local_field_names.iteritems():
+        for local_field_name, logging_field_name in self.thread_local_field_names.items():
             if hasattr(values, local_field_name):
                 record.setattr(record, logging_field_name, getattr(values,local_field_name))
             elif isinstance(values, dict) and local_field_name in values:
                 record.setattr(record, logging_field_name, values[local_field_name])
 
         # add values constant for the container
-        for key,value in self.constant_field_values.iteritems():
+        for key,value in self.constant_field_values.items():
             setattr(record,key,value)

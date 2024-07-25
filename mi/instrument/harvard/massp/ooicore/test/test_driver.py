@@ -479,7 +479,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -555,7 +555,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
 
         if config['instrument_type'] != ConfigTypes.MULTI:
             config = {'only one port agent here!': config}
-        for name, each in config.items():
+        for name, each in list(config.items()):
             if type(each) != dict:
                 continue
             port_agent_host = each.get('device_addr')
@@ -581,7 +581,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         log.info("Stop port agent")
         if self.port_agents:
             log.debug("found port agents, now stop them")
-            for agent in self.port_agents.values():
+            for agent in list(self.port_agents.values()):
                 agent.stop()
         self.port_agents = {}
 
@@ -591,7 +591,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         @return config
         """
         config = {}
-        for name, each in self.port_agents.items():
+        for name, each in list(self.port_agents.items()):
             port = each.get_data_port()
             cmd_port = each.get_command_port()
 
@@ -629,7 +629,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         self.assertTrue(isinstance(drv_pid, int))
 
         self.assertNotEqual(self.port_agents, None)
-        for port_agent in self.port_agents.values():
+        for port_agent in list(self.port_agents.values()):
             pagent_pid = port_agent.get_pid()
             self.assertTrue(isinstance(pagent_pid, int))
 
@@ -637,10 +637,10 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         log.debug("before 'process_echo'")
         reply = self.driver_client.cmd_dvr('process_echo')
         log.debug("after 'process_echo'")
-        self.assert_(reply.startswith('ping from resource ppid:'))
+        self.assertTrue(reply.startswith('ping from resource ppid:'))
 
         reply = self.driver_client.cmd_dvr('driver_ping', 'foo')
-        self.assert_(reply.startswith('driver_ping: foo'))
+        self.assertTrue(reply.startswith('driver_ping: foo'))
 
         # Test the event thread publishes and client side picks up events.
         events = [
@@ -663,7 +663,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         Test get action for all parameters
         """
         self.assert_initialize_driver()
-        for key, value in massp_startup_config[DriverConfigKey.PARAMETERS].iteritems():
+        for key, value in massp_startup_config[DriverConfigKey.PARAMETERS].items():
             self.assert_get(key, value)
 
     def test_set_parameters(self):
@@ -680,7 +680,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         constraints = turbo.ParameterConstraints.dict()
         constraints.update(rga.ParameterConstraints.dict())
 
-        for name, parameter in parameters.iteritems():
+        for name, parameter in parameters.items():
             value = massp_startup_config[DriverConfigKey.PARAMETERS].get(parameter)
             # do we have a value to set?
             if value is not None:
@@ -914,7 +914,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
 
         if config['instrument_type'] != ConfigTypes.MULTI:
             config = {'only one port agent here!': config}
-        for name, each in config.items():
+        for name, each in list(config.items()):
             if type(each) != dict:
                 continue
             port_agent_host = each.get('device_addr')
@@ -940,7 +940,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         log.info("Stop port agent")
         if self.port_agents:
             log.debug("found port agents, now stop them")
-            for agent in self.port_agents.values():
+            for agent in list(self.port_agents.values()):
                 agent.stop()
         self.port_agents = {}
 
@@ -950,7 +950,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         @return config
         """
         config = {}
-        for name, each in self.port_agents.items():
+        for name, each in list(self.port_agents.items()):
             port = each.get_data_port()
             cmd_port = each.get_command_port()
 
@@ -1167,7 +1167,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         constraints = turbo.ParameterConstraints.dict()
         constraints.update(rga.ParameterConstraints.dict())
 
-        for name, parameter in parameters.iteritems():
+        for name, parameter in parameters.items():
             if parameter == Parameter.ALL:
                 continue
             if self._driver_parameters[parameter][self.READONLY]:
@@ -1203,7 +1203,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
                                                    ProtocolEvent.POWEROFF,
                                                    ProtocolEvent.START_MANUAL],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_enter_command_mode()
@@ -1218,7 +1218,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_execute_resource(Capability.ACQUIRE_SAMPLE)
@@ -1236,7 +1236,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.RESOURCE_COMMAND: [ProtocolEvent.STOP_AUTOSAMPLE,
                                                    ProtocolEvent.ACQUIRE_SAMPLE],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_execute_resource(Capability.START_AUTOSAMPLE)
@@ -1254,7 +1254,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_execute_resource(Capability.CALIBRATE)

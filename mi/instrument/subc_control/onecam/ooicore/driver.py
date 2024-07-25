@@ -1165,7 +1165,7 @@ class CAMHDProtocol(CommandResponseInstrumentProtocol):
         # Also, we need to make sure we don't send the lookat command twice in the above example.
         # Here we remove either pan/tilt from the list of params to be updated. This makes sure
         # we send the lookat only once, but with the user provided values for both pan and tilt.
-        for key, val in params.iteritems():
+        for key, val in params.items():
 
             # These are driver specific parameters. They are not set on the instrument.
             if key in [Parameter.STATUS_INTERVAL, Parameter.ELEMENTAL_IP_ADDRESS, Parameter.OUTPUT_GROUP_ID]:
@@ -1228,7 +1228,7 @@ class CAMHDProtocol(CommandResponseInstrumentProtocol):
         resp_regex = CAMHD_RESPONSE_PATTERN
 
         # second pass: now build individual 'set' commands for each param
-        for key, val in filtered_params.iteritems():
+        for key, val in filtered_params.items():
             log.debug("In _set_params, setting %s to %s", key, val)
 
             if key in [Parameter.PAN_POSITION, Parameter.TILT_POSITION, Parameter.PAN_TILT_SPEED]:

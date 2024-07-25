@@ -113,14 +113,14 @@ class PersistentStoreDict(MutableMapping):
                 return result[0]
 
     def __checkKeyType(self, key):
-        if type(key) not in [str, unicode]:
+        if type(key) not in [str, str]:
             raise TypeError("Key must be of type 'str' or 'unicode'.")
 
     def __checkValueType(self, value):
-        if type(value) not in [unicode, int, long, float, bool, dict, list]:
+        if type(value) not in [str, int, int, float, bool, dict, list]:
             raise TypeError("Value must be of type: 'unicode', 'int', 'long', 'float', 'bool', 'dict', or 'list'")
         if type(value) is dict:
-            for key, value in value.iteritems():
+            for key, value in value.items():
                 self.__checkValueType(key)
                 self.__checkValueType(value)
         if type(value) is list:

@@ -63,9 +63,9 @@ class NodeConfiguration(object):
 
     def _get_attrs(self):
         attrs = []
-        for stream, stream_instances in self.node_streams.iteritems():
-            for instance, params in stream_instances.iteritems():
-                attrs.extend(params.keys())
+        for stream, stream_instances in self.node_streams.items():
+            for instance, params in stream_instances.items():
+                attrs.extend(list(params.keys()))
         return attrs
 
     def __repr__(self):

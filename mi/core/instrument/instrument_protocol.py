@@ -63,11 +63,10 @@ class InitializationType(BaseEnum):
     DIRECTACCESS = 2
 
 
-class InstrumentProtocol(object):
+class InstrumentProtocol(object, metaclass=get_logging_metaclass('trace')):
     """
     Base instrument protocol class.
     """
-    __metaclass__ = get_logging_metaclass('trace')
 
     def __init__(self, driver_event):
         """
@@ -235,7 +234,7 @@ class InstrumentProtocol(object):
         log.debug("Read only params: %s", readonly_params)
 
         not_settable = []
-        for (key, val) in params_to_set.iteritems():
+        for (key, val) in params_to_set.items():
             if key in readonly_params:
                 not_settable.append(key)
         if len(not_settable) > 0:
@@ -460,7 +459,7 @@ class InstrumentProtocol(object):
         log.debug("Scheduler config: %r", self._get_scheduler_config())
         log.debug("Scheduler callbacks: %r", self._scheduler_callback)
         self._scheduler = DriverScheduler()
-        for name in self._scheduler_callback.keys():
+        for name in list(self._scheduler_callback.keys()):
             log.debug("Add job for callback: %s", name)
             self._add_scheduler_job(name)
 
@@ -503,7 +502,7 @@ class InstrumentProtocol(object):
         readonly = self._param_dict.get_visibility_list(ParameterDictVisibility.READ_ONLY)
         log.debug("apply_startup_params: Read only keys: %s", readonly)
 
-        for (key, val) in config.iteritems():
+        for (key, val) in config.items():
             if key in readonly:
                 raise InstrumentParameterException("Attempt to set read only parameter (%s)" % key)
 
@@ -553,7 +552,7 @@ class InstrumentProtocol(object):
 
         param_config = config.get(DriverConfigKey.PARAMETERS)
         if param_config:
-            for name in param_config.keys():
+            for name in list(param_config.keys()):
                 log.debug("Setting init value for %s to %s", name, param_config[name])
                 self._param_dict.set_init_value(name, param_config[name])
 
@@ -783,7 +782,7 @@ class InstrumentProtocol(object):
         except IndexError:
             raise InstrumentParameterException('Parameter required, none specified')
 
-        if isinstance(param_list, basestring):
+        if isinstance(param_list, str):
             param_list = [param_list]
         elif not isinstance(param_list, (list, tuple)):
             raise InstrumentParameterException("Expected a list, tuple or a string")
@@ -900,7 +899,7 @@ class CommandResponseInstrumentProtocol(InstrumentProtocol):
         if expected_prompt is None:
             prompt_list = self._get_prompts()
         else:
-            if isinstance(expected_prompt, basestring):
+            if isinstance(expected_prompt, str):
                 prompt_list = [expected_prompt]
             else:
                 prompt_list = expected_prompt
@@ -946,7 +945,7 @@ class CommandResponseInstrumentProtocol(InstrumentProtocol):
         if expected_prompt is None:
             prompt_list = self._get_prompts()
         else:
-            if isinstance(expected_prompt, basestring):
+            if isinstance(expected_prompt, str):
                 prompt_list = [expected_prompt]
             else:
                 prompt_list = expected_prompt

@@ -7,7 +7,7 @@
 @brief Test code for a vel3d_l_wfp parser for recovered and telemetered data
 """
 
-from StringIO import StringIO
+from io import StringIO
 
 import os
 from nose.plugins.attrib import attr
@@ -1430,9 +1430,9 @@ class Vel3dLWfpParserUnitTestCase(ParserUnitTestCase):
 
         result = self.parser.get_records(1)
 
-        self.assertEquals(len(result), 1)
-        self.assertEquals(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertEqual(len(result), 1)
+        self.assertEqual(len(self.exception_callback_value), 1)
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
         log.debug("============== END RECOVERED EXCESS DATA ==================")
 

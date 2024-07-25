@@ -262,7 +262,7 @@ class SBE54tpsStatusDataParticle(DataParticle):
         }
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -288,7 +288,7 @@ class SBE54tpsStatusDataParticle(DataParticle):
                             self.set_internal_timestamp(unix_time=timegm_to_float(py_timestamp))
 
         result = []
-        for key, value in values.iteritems():
+        for key, value in values.items():
             result.append({DataParticleKey.VALUE_ID: key, DataParticleKey.VALUE: value})
 
         return result
@@ -435,7 +435,7 @@ class SBE54tpsConfigurationDataParticle(DataParticle):
         }
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -478,7 +478,7 @@ class SBE54tpsConfigurationDataParticle(DataParticle):
                             values[key] = float(val)
 
         result = []
-        for key, value in values.iteritems():
+        for key, value in values.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -560,7 +560,7 @@ class SBE54tpsEventCounterDataParticle(DataParticle):
         }
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -585,7 +585,7 @@ class SBE54tpsEventCounterDataParticle(DataParticle):
                             values[key] = int(val)
 
         result = []
-        for key, value in values.iteritems():
+        for key, value in values.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -646,7 +646,7 @@ class SBE54tpsHardwareDataParticle(DataParticle):
         result = []
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -658,7 +658,7 @@ class SBE54tpsHardwareDataParticle(DataParticle):
                         else:
                             values[key] = val
 
-        for key, val in values.iteritems():
+        for key, val in values.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: val})
 
@@ -710,7 +710,7 @@ class SBE54tpsSampleDataParticle(DataParticle):
         }
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -735,7 +735,7 @@ class SBE54tpsSampleDataParticle(DataParticle):
                             values[key] = val
 
         result = []
-        for key, value in values.iteritems():
+        for key, value in values.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -803,7 +803,7 @@ class SBE54tpsSampleRefOscDataParticle(DataParticle):
         }
 
         for line in self.raw_data.split(NEWLINE):
-            for matcher, keys in matchers.iteritems():
+            for matcher, keys in matchers.items():
                 match = matcher.match(line)
 
                 if match:
@@ -834,7 +834,7 @@ class SBE54tpsSampleRefOscDataParticle(DataParticle):
                             self.set_internal_timestamp(unix_time=timegm_to_float(py_timestamp))
 
         result = []
-        for key, value in values.iteritems():
+        for key, value in values.items():
             result.append({DataParticleKey.VALUE_ID: key,
                            DataParticleKey.VALUE: value})
 
@@ -1382,7 +1382,7 @@ class Protocol(SeaBirdProtocol):
 
         self._verify_not_readonly(*args, **kwargs)
 
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             log.debug("KEY = " + str(key) + " VALUE = " + str(val))
             self._do_cmd_resp(InstrumentCommands.SET, key, val, **kwargs)
 

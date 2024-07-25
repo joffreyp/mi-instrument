@@ -94,9 +94,7 @@ class ZplscCParticleKey(BaseEnum):
     DEPTH_CHAN_4 = "zplsc_depth_range_channel_4"
 
 
-class ZplscCRecoveredDataParticle(DataParticle):
-    __metaclass__ = METACLASS
-
+class ZplscCRecoveredDataParticle(DataParticle, metaclass=METACLASS):
     def __init__(self, *args, **kwargs):
         super(ZplscCRecoveredDataParticle, self).__init__(*args, **kwargs)
         self._data_particle_type = DataParticleType.ZPLSC_C_PARTICLE_TYPE
@@ -115,7 +113,7 @@ class ZplscCRecoveredDataParticle(DataParticle):
         return [{DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: None}
                 if self.raw_data[name] is None else
                 {DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: value}
-                for name, value in self.raw_data.iteritems()]
+                for name, value in self.raw_data.items()]
 
 
 class AzfpProfileHeader(BigEndianStructure):
@@ -347,7 +345,7 @@ class ZplscCParser(SimpleParser):
                 _, timestamp, chan_data, depth_range = self.parse_record()
 
                 if not sv_dict:
-                    range_chan_data = range(1, len(chan_data)+1)
+                    range_chan_data = list(range(1, len(chan_data)+1))
                     sv_dict = {channel: [] for channel in range_chan_data}
                     frequencies = {channel: float(self.ph.frequency[channel-1]) for channel in range_chan_data}
 

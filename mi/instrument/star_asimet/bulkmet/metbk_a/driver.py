@@ -307,7 +307,7 @@ class METBK_StatusDataParticle(DataParticle):
 
         lines = match.group(11).split(NEWLINE)
         length = len(lines)
-        print ("length=%d; lines=%s" % (length, lines))
+        print(("length=%d; lines=%s" % (length, lines)))
         if length < 3:
             raise SampleException("METBK_StatusDataParticle: Not enough PTT lines in status data: [%s]", self.raw_data)
 
@@ -553,7 +553,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         """
         config = self.get_startup_config()
         log.debug("apply_startup_params: startup config = %s" % config)
-        if config.has_key(Parameter.SAMPLE_INTERVAL):
+        if Parameter.SAMPLE_INTERVAL in config:
             log.debug("apply_startup_params: setting sample_interval to %d" % config[Parameter.SAMPLE_INTERVAL])
             self._param_dict.set_value(Parameter.SAMPLE_INTERVAL, config[Parameter.SAMPLE_INTERVAL])
 

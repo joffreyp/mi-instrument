@@ -212,12 +212,12 @@ class PortNode(BaseNode):
                 self.state, other.state)
 
         # compare instruments:
-        instrument_ids = set(self.instruments.iterkeys())
-        other_instrument_ids = set(other.instruments.iterkeys())
+        instrument_ids = set(self.instruments.keys())
+        other_instrument_ids = set(other.instruments.keys())
         if instrument_ids != other_instrument_ids:
             return "port_id=%r: instrument IDs are different: %r != %r" % (
                 self.port_id, instrument_ids, other_instrument_ids)
-        for instrument_id, instrument in self.instruments.iteritems():
+        for instrument_id, instrument in self.instruments.items():
             other_instrument = other.instruments[instrument_id]
             diff = instrument.diff(other_instrument)
             if diff:
@@ -458,9 +458,9 @@ class PlatformNode(BaseNode):
             s.append("/name=%s" % self.name)
         s.append("/types=%s" % self.platform_types)
         s.append(">\n")
-        s.append("ports=%s\n" % list(self.ports.itervalues()))
-        s.append("attrs=%s\n" % list(self.attrs.itervalues()))
-        s.append("missions=%s\n" % list(self.missions.itervalues()))
+        s.append("ports=%s\n" % list(self.ports.values()))
+        s.append("attrs=%s\n" % list(self.attrs.values()))
+        s.append("missions=%s\n" % list(self.missions.values()))
         s.append("#subplatforms=%d\n" % len(self.subplatforms))
         s.append("#instruments=%d\n" % len(self.instruments))
         return ''.join(s)
@@ -471,7 +471,7 @@ class PlatformNode(BaseNode):
         """
         if self._parent:
             pairs.append((self.platform_id, self.parent.platform_id))
-        for sub_platform in self.subplatforms.itervalues():
+        for sub_platform in self.subplatforms.values():
             sub_platform.get_map(pairs)
         return pairs
 
@@ -502,38 +502,38 @@ class PlatformNode(BaseNode):
                 self.parent.platform_id, other.parent.platform_id)
 
         # compare attributes:
-        attr_ids = set(self.attrs.iterkeys())
-        other_attr_ids = set(other.attrs.iterkeys())
+        attr_ids = set(self.attrs.keys())
+        other_attr_ids = set(other.attrs.keys())
         if attr_ids != other_attr_ids:
             return "platform_id=%r: attribute IDs are different: %r != %r" % (
                 self.platform_id, attr_ids, other_attr_ids)
-        for attr_id, attr in self.attrs.iteritems():
+        for attr_id, attr in self.attrs.items():
             other_attr = other.attrs[attr_id]
             diff = attr.diff(other_attr)
             if diff:
                 return diff
 
         # compare ports:
-        port_ids = set(self.ports.iterkeys())
-        other_port_ids = set(other.ports.iterkeys())
+        port_ids = set(self.ports.keys())
+        other_port_ids = set(other.ports.keys())
         if port_ids != other_port_ids:
             return "platform_id=%r: port IDs are different: %r != %r" % (
                 self.platform_id, port_ids, other_port_ids)
-        for port_id, port in self.ports.iteritems():
+        for port_id, port in self.ports.items():
             other_port = other.ports[port_id]
             diff = port.diff(other_port)
             if diff:
                 return diff
 
         # compare sub-platforms:
-        subplatform_ids = set(self.subplatforms.iterkeys())
-        other_subplatform_ids = set(other.subplatforms.iterkeys())
+        subplatform_ids = set(self.subplatforms.keys())
+        other_subplatform_ids = set(other.subplatforms.keys())
         if subplatform_ids != other_subplatform_ids:
             return "platform_id=%r: subplatform IDs are different: %r != %r" % (
                     self.platform_id,
                     subplatform_ids, other_subplatform_ids)
 
-        for platform_id, node in self.subplatforms.iteritems():
+        for platform_id, node in self.subplatforms.items():
             other_node = other.subplatforms[platform_id]
             diff = node.diff(other_node)
             if diff:
@@ -622,7 +622,7 @@ class NetworkDefinition(BaseNode):
         """
         root = None
         if self._dummy_root and len(self._dummy_root.subplatforms) == 1:
-            root = self._dummy_root.subplatforms.values()[0]
+            root = list(self._dummy_root.subplatforms.values())[0]
         return root
 
     def get_map(self):

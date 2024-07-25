@@ -14,8 +14,8 @@ Options:
 
 """
 
-import httplib
-import xmlrpclib
+import http.client
+import xmlrpc.client
 
 import re
 import yaml
@@ -52,7 +52,7 @@ def process_oms_request():
     else:
         log.error('No data in the POSTed alert/alarm OMS Event ...')
 
-    return '', httplib.ACCEPTED
+    return '', http.client.ACCEPTED
 
 
 def start_web_service(oms_uri, alert_alarm_server_uri):
@@ -71,7 +71,7 @@ def start_web_service(oms_uri, alert_alarm_server_uri):
         log.info('DEBUG mode: OMS Alert Alarm Server not registering with OMS.')
     else:
         log.info('Getting the proxy for OMS server: %r', oms_uri)
-        proxy = xmlrpclib.ServerProxy(oms_uri)
+        proxy = xmlrpc.client.ServerProxy(oms_uri)
 
         log.info('Registering OMS Alerts & Alarms server as listener: %r', alert_alarm_server_uri)
         proxy.event.register_event_listener(alert_alarm_server_uri)

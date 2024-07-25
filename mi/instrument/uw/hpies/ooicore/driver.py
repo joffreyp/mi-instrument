@@ -253,7 +253,7 @@ class Parameter(DriverParameter):
 
     @classmethod
     def reverse_dict(cls):
-        return dict((v, k) for k, v in cls.dict().iteritems())
+        return dict((v, k) for k, v in cls.dict().items())
 
 
 class ParameterConstraints(BaseEnum):
@@ -485,9 +485,8 @@ class DataHeaderParticleKey(BaseEnum):
     STM_TIME = 'hpies_stm_timestamp'
 
 
-class HPIESDataParticle(DataParticle):
+class HPIESDataParticle(DataParticle, metaclass=get_logging_metaclass(log_level='trace')):
     _compiled_regex = None
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     def __init__(self, *args, **kwargs):
         super(HPIESDataParticle, self).__init__(*args, **kwargs)
@@ -1129,12 +1128,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 # Protocol
 ###########################################################################
 
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     particles = [
         DataHeaderParticle,  # HPIES_DATA_HEADER
@@ -2449,7 +2447,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         parameters = Parameter.reverse_dict()
 
         # step through the list of parameters
-        for key, val in params.iteritems():
+        for key, val in params.items():
             # if constraint exists, verify we have not violated it
             constraint_key = parameters.get(key)
             if constraint_key in constraints:
@@ -2485,7 +2483,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         self._verify_set_values(params)
         self._verify_not_readonly(*args, **kwargs)
 
-        for key, val in params.iteritems():
+        for key, val in params.items():
             if not key in old_config:
                 raise InstrumentParameterException('Attempted to set unknown parameter: %s to %s' % (key, val))
             command_response = self._do_cmd_resp(key, val, expected_prompt=Prompt.HEF_PROMPT)

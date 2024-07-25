@@ -754,14 +754,14 @@ class Listener(threading.Thread):
                     self.callback(data)
                 else:
                     if not self.delim:
-                        print 'from device:%s' % repr(data)
+                        print('from device:%s' % repr(data))
                     else:
                         self.linebuf += data
                         lines = str.split(self.linebuf, self.delim)
                         self.linebuf = lines[-1]
                         lines = lines[:-1]
                         for item in lines:
-                            print 'from device:%s' % item
+                            print('from device:%s' % item)
                 
             except socket.error:
                 time.sleep(.1)

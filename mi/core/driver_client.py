@@ -133,7 +133,7 @@ class ZmqDriverClient(DriverClient):
                         self.evt_callback(evt)
                 except zmq.ZMQError:
                     time.sleep(.5)
-                except Exception, e:
+                except Exception as e:
                     log.error('Driver client error reading from zmq event socket: ' + str(e))
                     log.error('Driver client error type: ' + str(type(e)))                    
             log.info('Client event socket closed.')
@@ -191,7 +191,7 @@ class ZmqDriverClient(DriverClient):
                 if delta >= driver_timeout:
                     raise InstDriverClientTimeoutError()
 
-            except Exception,e:
+            except Exception as e:
                 log.error('Driver client error writing to zmq socket: ' + str(e))
                 log.error('Driver client error type: ' + str(type(e)))
                 raise SystemError('exception writing to zmq socket: ' + str(e))
@@ -211,7 +211,7 @@ class ZmqDriverClient(DriverClient):
                 if delta >= driver_timeout:
                     raise InstDriverClientTimeoutError()
 
-            except Exception,e:
+            except Exception as e:
                 log.error('Driver client error reading from zmq socket: ' + str(e))
                 log.error('Driver client error type: ' + str(type(e)))
                 raise SystemError('exception reading from zmq socket: ' + str(e))

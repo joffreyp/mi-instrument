@@ -163,7 +163,7 @@ class DriverTestMixinSub(DriverTestMixin):
     }
 
     _status_parameters = {
-        RGAStatusParticleKey.ID: {TYPE: unicode, VALUE: responses['ID?'], REQUIRED: True},
+        RGAStatusParticleKey.ID: {TYPE: str, VALUE: responses['ID?'], REQUIRED: True},
         RGAStatusParticleKey.EE: {TYPE: int, VALUE: responses['EE?'], REQUIRED: True},
         RGAStatusParticleKey.IE: {TYPE: int, VALUE: responses['IE?'], REQUIRED: True},
         RGAStatusParticleKey.VF: {TYPE: int, VALUE: responses['VF?'], REQUIRED: True},
@@ -436,7 +436,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -496,7 +496,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         """
         self.assert_initialize_driver()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.items():
+        for key, value in list(startup_params.items()):
             self.assert_get(key, value)
 
     # while this is an integration test, it can be run without access to the instrument
@@ -508,7 +508,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
         constraints = ParameterConstraints.dict()
         parameters = Parameter.reverse_dict()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.iteritems():
+        for key, value in startup_params.items():
             if key in parameters and parameters[key] in constraints:
                 _, minimum, maximum = constraints[parameters[key]]
                 self.assert_set(key, maximum-1)
@@ -628,7 +628,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
         constraints = ParameterConstraints.dict()
         parameters = Parameter.reverse_dict()
         startup_params = self.test_config.driver_startup_config[DriverConfigKey.PARAMETERS]
-        for key, value in startup_params.items():
+        for key, value in list(startup_params.items()):
             self.assert_get_parameter(key, value)
             if key in parameters and parameters[key] in constraints:
                 _, minimum, maximum = constraints[parameters[key]]

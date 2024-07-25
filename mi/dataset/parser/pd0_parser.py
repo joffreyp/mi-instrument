@@ -153,7 +153,7 @@ class AdcpPd0Record(object):
 
     def _validate_offset_data(self):
         self.offsets = struct.unpack_from('<%dH' % self.header.num_data_types, self.data, 6)
-        valid_block_ids = BlockId.__dict__.values()
+        valid_block_ids = list(BlockId.__dict__.values())
         for offset in self.offsets:
             if offset > len(self.data) - 2:
                 raise BadOffsetException
@@ -213,7 +213,7 @@ class AdcpPd0Record(object):
             elif block_id == BlockId.STATUS_DATA_ID:
                 pass
             else:
-                print >> sys.stderr, block_id
+                print(block_id, file=sys.stderr)
                 raise UnhandledBlockException('Found unhandled data type id: %d' % block_id)
 
     def _parse_fixed(self, offset):

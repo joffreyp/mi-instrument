@@ -645,14 +645,12 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 # Protocol
 ###########################################################################
 # noinspection PyUnusedLocal
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
     __instrument_class__ = FLORT_CLASS
-
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -1267,7 +1265,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         self._verify_not_readonly(*args, **kwargs)
         old_config = self._param_dict.get_config()
 
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             log.debug("KEY = " + str(key) + " VALUE = " + str(val))
             # if setting the clock or date, run clock sync command
             if key in [Parameter.TIME, Parameter.DATE]:

@@ -266,10 +266,10 @@ class TestUnitProtocolCommandDict(TestUnitStringsDict):
         good_cmd = Command(name="some_name")
         
         result = self.cmd_dict.get_command("some_name")
-        self.assert_(not isinstance(result, Command))
+        self.assertTrue(not isinstance(result, Command))
         self.cmd_dict.add_command(good_cmd)
         result = self.cmd_dict.get_command("some_name")
-        self.assert_(isinstance(result, Command))
+        self.assertTrue(isinstance(result, Command))
 
         # exception cases
         bad_cmd = Command(name=1)

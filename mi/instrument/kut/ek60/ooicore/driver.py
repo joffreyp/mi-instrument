@@ -12,7 +12,7 @@ import json
 import multiprocessing
 import tempfile
 import time
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from collections import deque
 from threading import Thread
 
@@ -262,7 +262,7 @@ class ZPLSCStatusParticleKey(BaseEnum):
     ZPLSC_SCHEDULE_FILENAME = "zplsc_schedule_filename"                      # Filename for .yaml schedule file
 
 
-class ZPLSCStatusParticle(DataParticle):
+class ZPLSCStatusParticle(DataParticle, metaclass=get_logging_metaclass(log_level='trace')):
     """
     Routines for parsing raw data into a status particle structure. Override
     the building of values, and the rest should come along for free.
@@ -307,7 +307,6 @@ class ZPLSCStatusParticle(DataParticle):
      'schedule_filename': 'qct_configuration_example_1.yaml'}
 
     """
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     _data_particle_type = DataParticleType.ZPLSC_STATUS
 
@@ -496,13 +495,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 # Protocol
 ###########################################################################
 
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='trace')):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -876,7 +873,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         # verify param is not readonly param
         self._verify_not_readonly(*args, **kwargs)
 
-        for key, val in params.iteritems():
+        for key, val in params.items():
             log.debug("KEY = %s VALUE = %s", key, val)
             self._param_dict.set_value(key, val)
             if key == Parameter.SCHEDULE:
@@ -938,7 +935,7 @@ class Protocol(CommandResponseInstrumentProtocol):
             ftp_session.quit()
             config_file.close()
 
-        except (ftplib.socket.error, ftplib.socket.gaierror), e:
+        except (ftplib.socket.error, ftplib.socket.gaierror) as e:
             log.error("ERROR: cannot reach FTP Host %s: %s ", host, e)
             raise InstrumentException("ERROR: cannot reach FTP Host %s " % host)
 
@@ -956,20 +953,20 @@ class Protocol(CommandResponseInstrumentProtocol):
         try:
             if data is not None:
                 log.debug("Request data: %s", data)
-                req = urllib2.Request(url, data=data, headers={'Content-Type': 'application/json'})
+                req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
             else:
                 log.debug("No request data")
-                req = urllib2.Request(url)
+                req = urllib.request.Request(url)
 
             log.debug("Request url: %s", req.__dict__)
 
-            f = urllib2.urlopen(req, timeout=10)
+            f = urllib.request.urlopen(req, timeout=10)
             res = f.read()
             f.close()
-        except urllib2.HTTPError as e:
+        except urllib.error.HTTPError as e:
             log.error("Failed to open url %s. %s", url, e)
             return result
-        except urllib2.URLError as e:
+        except urllib.error.URLError as e:
             log.error("Failed to open url %s. %s", url, e)
             return result
 

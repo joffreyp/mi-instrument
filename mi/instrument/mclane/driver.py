@@ -488,7 +488,7 @@ class McLaneProtocol(CommandResponseInstrumentProtocol):
         self._verify_not_readonly(*args, **kwargs)
         old_config = self._param_dict.get_config()
 
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             log.debug("KEY = " + str(key) + " VALUE = " + str(val))
             self._param_dict.set_value(key, val)
 

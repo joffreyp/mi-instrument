@@ -144,15 +144,15 @@ class ZplscEchogramUploadDriver(SimpleDatasetDriver):
         # Translate the echogram generator-specific provenance keys extracted by the parser into
         # generic processing information that is understood by the caller and the rest of the system.
 
-        if ZplscProvenanceKey.DATA_FILE_NAME in self._parser.provenance.keys():
+        if ZplscProvenanceKey.DATA_FILE_NAME in list(self._parser.provenance.keys()):
             self._particle_data_handler.setProcessingInfo(ProcessingInfoKey.DATA_FILE,
                         self._parser.provenance[ZplscProvenanceKey.DATA_FILE_NAME])
 
-        if ZplscProvenanceKey.CONVERSION_SOFTWARE_NAME in self._parser.provenance.keys():
+        if ZplscProvenanceKey.CONVERSION_SOFTWARE_NAME in list(self._parser.provenance.keys()):
             self._particle_data_handler.setProcessingInfo(ProcessingInfoKey.PARSER,
                         self._parser.provenance[ZplscProvenanceKey.CONVERSION_SOFTWARE_NAME])
 
-        if ZplscProvenanceKey.CONVERSION_SOFTWARE_VERSION in self._parser.provenance.keys():
+        if ZplscProvenanceKey.CONVERSION_SOFTWARE_VERSION in list(self._parser.provenance.keys()):
             self._particle_data_handler.setProcessingInfo(ProcessingInfoKey.PARSER_VERSION,
                         self._parser.provenance[ZplscProvenanceKey.CONVERSION_SOFTWARE_VERSION])
 

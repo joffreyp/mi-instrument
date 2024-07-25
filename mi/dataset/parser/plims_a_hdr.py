@@ -114,9 +114,8 @@ class PlimsAParticleKey(BaseEnum):
     LASER_MOTOR_LARGE_STEP_MS = 'laser_motor_large_step_ms'
 
 
-class DataParticleType(BaseEnum):
+class DataParticleType(BaseEnum, metaclass=get_logging_metaclass(log_level='trace')):
     PLIMS_A_PARTICLE_TYPE = 'plims_a_hdr_instrument'
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
 
 class PlimsADataParticle(DataParticle):
@@ -131,7 +130,7 @@ class PlimsADataParticle(DataParticle):
         return [{DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: None}
                 if self.raw_data[name] is None else
                 {DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: value}
-                for name, value in self.raw_data.iteritems()]
+                for name, value in self.raw_data.items()]
 
 
 class PlimsAHdrParser(SimpleParser):

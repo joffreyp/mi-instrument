@@ -460,14 +460,12 @@ class SatlanticPARConfigParticle(DataParticle):
 ####################################################################
 # Satlantic PAR Sensor Protocol
 ####################################################################
-class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
+class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """The instrument protocol classes to deal with a Satlantic PAR sensor.
     The protocol is a very simple command/response protocol with a few show
     commands and a few set commands.
     Note protocol state machine must be called "self._protocol_fsm"
     """
-
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, callback=None):
         CommandResponseInstrumentProtocol.__init__(self, Prompt, EOLN, callback)
@@ -686,7 +684,7 @@ class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
         cmd_line = ""
         result = ""
         prompt = ""
-        for retry_num in xrange(retry_count):
+        for retry_num in range(retry_count):
             # Clear line and prompt buffers for result.
             self._linebuf = ''
             self._promptbuf = ''
@@ -823,7 +821,7 @@ class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
                 else:
                     raise InstrumentParameterException("invalid time string parameter for acquire status interval")
 
-        for name, value in params.iteritems():
+        for name, value in params.items():
 
             old_val = self._param_dict.format(name)
             new_val = self._param_dict.format(name, params[name])
@@ -851,7 +849,7 @@ class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
         if new_config != old_config:
             self._driver_event(DriverAsyncEvent.CONFIG_CHANGE)
 
-        for name in params.keys():
+        for name in list(params.keys()):
             if self._param_dict.format(name, params[name]) != self._param_dict.format(name):
                 raise InstrumentParameterException('Failed to update parameter: %r' % name)
 
@@ -959,7 +957,7 @@ class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
         try:
             self._send_break()
             result = ['Autosample break successful, returning to command mode']
-        except InstrumentException, e:
+        except InstrumentException as e:
             log.debug("_handler_autosample_stop_autosample error: %s", e)
             raise InstrumentProtocolException(error_code=InstErrorCode.HARDWARE_ERROR,
                                               msg="Couldn't break from autosample!")
@@ -1163,7 +1161,7 @@ class SatlanticPARInstrumentProtocol(CommandResponseInstrumentProtocol):
                     self._connection.send(Commands.SWITCH_TO_POLL)
                 else:
                     # Send a burst of stop auto poll commands for high maxrates
-                    for _ in xrange(25):    # 25 x 0.15 seconds = 3.75 seconds
+                    for _ in range(25):    # 25 x 0.15 seconds = 3.75 seconds
                         self._connection.send(Commands.SWITCH_TO_POLL)
                         time.sleep(.15)
                 send_flag = False

@@ -42,13 +42,13 @@ class _Recv(Thread):
             return False
 
     def run(self):
-        print "### _Recv running."
+        print("### _Recv running.")
         while True:
             recv = self._conn.recv(4096)
             now = time.time()
             elapsed = now - self.last_time
             self.last_time = now
-            print 'Elapsed [%6.2fs]: %r' % (elapsed, recv)
+            print('Elapsed [%6.2fs]: %r' % (elapsed, recv))
 
 
 class _Direct(object):
@@ -60,7 +60,7 @@ class _Direct(object):
         """
         Establishes the connection and starts the receiving thread.
         """
-        print "### connecting to %s:%s" % (hostname, portnum)
+        print("### connecting to %s:%s" % (hostname, portnum))
         self._sock = socket.socket()
         self._sock.connect((hostname, portnum))
         self._bt = _Recv(self._sock)
@@ -106,7 +106,7 @@ class _Direct(object):
 
             else:
                 cmd += NEWLINE
-                print >> sys.stderr, 'SEND: %r' % cmd
+                print('SEND: %r' % cmd, file=sys.stderr)
                 #self.send_characters(cmd)
                 self.send(cmd)
 
@@ -146,7 +146,7 @@ class _Direct(object):
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print USAGE
+        print(USAGE)
         exit()
 
     if len(sys.argv) == 2:

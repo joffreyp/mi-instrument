@@ -211,31 +211,31 @@ class TestDriverScheduler(MiUnitTest):
         config = {}
 
         # Not a dict
-        with self.assertRaisesRegexp(SchedulerException, 'scheduler config not a dict'):
+        with self.assertRaisesRegex(SchedulerException, 'scheduler config not a dict'):
             self._scheduler.add_config('not_a_dict')
 
         # Empty config
-        with self.assertRaisesRegexp(SchedulerException, 'scheduler config empty'):
+        with self.assertRaisesRegex(SchedulerException, 'scheduler config empty'):
             self._scheduler.add_config(config)
 
         # Not defined schedule config
         config[test_name] = None
-        with self.assertRaisesRegexp(SchedulerException, 'job config empty'):
+        with self.assertRaisesRegex(SchedulerException, 'job config empty'):
             self._scheduler.add_config(config)
 
         # schedule config not a dict
         config[test_name] = 'not_a_dict'
-        with self.assertRaisesRegexp(SchedulerException, 'job config not a dict'):
+        with self.assertRaisesRegex(SchedulerException, 'job config not a dict'):
             self._scheduler.add_config(config)
 
         # empty schedule config
         config[test_name] = {}
-        with self.assertRaisesRegexp(SchedulerException, 'trigger definition missing'):
+        with self.assertRaisesRegex(SchedulerException, 'trigger definition missing'):
             self._scheduler.add_config(config)
 
         # missing trigger
         config[test_name] = { DriverSchedulerConfigKey.CALLBACK: self._callback }
-        with self.assertRaisesRegexp(SchedulerException, 'trigger definition missing'):
+        with self.assertRaisesRegex(SchedulerException, 'trigger definition missing'):
             self._scheduler.add_config(config)
 
         # invalid trigger type
@@ -245,7 +245,7 @@ class TestDriverScheduler(MiUnitTest):
             },
             DriverSchedulerConfigKey.CALLBACK: self._callback
         }
-        with self.assertRaisesRegexp(SchedulerException, "unknown trigger type 'some_type'"):
+        with self.assertRaisesRegex(SchedulerException, "unknown trigger type 'some_type'"):
             self._scheduler.add_config(config)
 
         # missing callback
@@ -254,7 +254,7 @@ class TestDriverScheduler(MiUnitTest):
                 DriverSchedulerConfigKey.TRIGGER_TYPE: TriggerType.ABSOLUTE
             },
         }
-        with self.assertRaisesRegexp(SchedulerException, 'callback definition missing'):
+        with self.assertRaisesRegex(SchedulerException, 'callback definition missing'):
             self._scheduler.add_config(config)
 
         # invalid callback
@@ -264,7 +264,7 @@ class TestDriverScheduler(MiUnitTest):
             },
             DriverSchedulerConfigKey.CALLBACK: 'not_a_method'
         }
-        with self.assertRaisesRegexp(SchedulerException, 'callback incorrect type:'):
+        with self.assertRaisesRegex(SchedulerException, 'callback incorrect type:'):
             self._scheduler.add_config(config)
 
     @unittest.skip('fixme')
@@ -284,12 +284,12 @@ class TestDriverScheduler(MiUnitTest):
         }
 
         # Missing datetime
-        with self.assertRaisesRegexp(SchedulerException, 'trigger missing parameter: date'):
+        with self.assertRaisesRegex(SchedulerException, 'trigger missing parameter: date'):
             self._scheduler.add_config(config)
 
         # Wrong parameter type
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.DATE] = 'not a date object'
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job: Invalid date string'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job: Invalid date string'):
             self._scheduler.add_config(config)
 
     @unittest.skip('fixme')
@@ -309,12 +309,12 @@ class TestDriverScheduler(MiUnitTest):
         }
 
         # Missing all cron settings
-        with self.assertRaisesRegexp(SchedulerException, 'at least one cron parameter required'):
+        with self.assertRaisesRegex(SchedulerException, 'at least one cron parameter required'):
             self._scheduler.add_config(config)
 
         # Wrong parameter type
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.WEEK] = 'n'
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job:'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job:'):
             self._scheduler.add_config(config)
 
     @unittest.skip('fixme')
@@ -334,12 +334,12 @@ class TestDriverScheduler(MiUnitTest):
         }
 
         # Missing all cron settings
-        with self.assertRaisesRegexp(SchedulerException, 'at least interval parameter required'):
+        with self.assertRaisesRegex(SchedulerException, 'at least interval parameter required'):
             self._scheduler.add_config(config)
 
         # Wrong parameter type
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.WEEKS] = 'n'
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job:'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job:'):
             self._scheduler.add_config(config)
 
     @unittest.skip('fixme')
@@ -359,45 +359,45 @@ class TestDriverScheduler(MiUnitTest):
         }
 
         # Missing all cron settings
-        with self.assertRaisesRegexp(SchedulerException, 'minimum_interval missing from trigger configuration'):
+        with self.assertRaisesRegex(SchedulerException, 'minimum_interval missing from trigger configuration'):
             self._scheduler.add_config(config)
 
         # None interval
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MINIMAL_INTERVAL] = None
-        with self.assertRaisesRegexp(SchedulerException, 'minimum_interval missing from trigger configuration'):
+        with self.assertRaisesRegex(SchedulerException, 'minimum_interval missing from trigger configuration'):
             self._scheduler.add_config(config)
 
         # empty interval
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MINIMAL_INTERVAL] = {}
-        with self.assertRaisesRegexp(SchedulerException, 'at least interval parameter required'):
+        with self.assertRaisesRegex(SchedulerException, 'at least interval parameter required'):
             self._scheduler.add_config(config)
 
         # Bad interval parameter
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MINIMAL_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 'n'
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job:'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job:'):
             self._scheduler.add_config(config)
 
         # Bad max_interval parameter
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MAXIMUM_INTERVAL] = {}
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MAXIMUM_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 'n'
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job:'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job:'):
             self._scheduler.add_config(config)
 
         # Schedule a job with a min interval < max interval
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MINIMAL_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 2
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MAXIMUM_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 1
-        with self.assertRaisesRegexp(SchedulerException, 'failed to schedule job: min_interval < max_interval'):
+        with self.assertRaisesRegex(SchedulerException, 'failed to schedule job: min_interval < max_interval'):
             self._scheduler.add_config(config)
 
         # Schedule a job twice
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MINIMAL_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 1
         config[test_name][DriverSchedulerConfigKey.TRIGGER][DriverSchedulerConfigKey.MAXIMUM_INTERVAL][DriverSchedulerConfigKey.WEEKS] = 2
-        with self.assertRaisesRegexp(SchedulerException, "failed to schedule job: Not adding job since a job named 'some_test' already exists"):
+        with self.assertRaisesRegex(SchedulerException, "failed to schedule job: Not adding job since a job named 'some_test' already exists"):
             self._scheduler.add_config(config)
             self._scheduler.add_config(config)
 
         # Run a job that doesn't exist
-        with self.assertRaisesRegexp(LookupError, "no PolledIntervalJob found named"):
+        with self.assertRaisesRegex(LookupError, "no PolledIntervalJob found named"):
             self._scheduler.run_job('who_are_you')
 
 

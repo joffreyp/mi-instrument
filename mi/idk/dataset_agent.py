@@ -76,7 +76,7 @@ class InstrumentAgent(ion.agents.instrument.instrument_agent.InstrumentAgent):
         Data particles are built to spec so we just pass through data particles here.
         '''
         # If the sample event is encoded, load it back to a dict.
-        if isinstance(val, basestring):
+        if isinstance(val, str):
             val = json.loads(val)
         try:
             stream_name = val['stream_name']

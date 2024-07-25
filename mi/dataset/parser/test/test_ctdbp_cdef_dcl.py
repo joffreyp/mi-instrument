@@ -278,9 +278,9 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140918.ctdbp_many_uncorr_t_broken.yml", RESOURCE_PATH)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         # similarly, check error handling on a truncated, corrected Endurance file
         with open(os.path.join(RESOURCE_PATH, '20140930.ctdbp1_corr1stVariant_many_broken.log'), 'rU') as file_handle:
@@ -294,9 +294,9 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140930.ctdbp1_many_corr_broken.yml", RESOURCE_PATH)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         # check error handling on an uncorrected Pioneer data file ( one record truncated )
         with open(os.path.join(RESOURCE_PATH, '20131123.ctdbp1_many_1inval.log'), 'rU') as file_handle:
@@ -310,11 +310,11 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20131123.ctdbp1_many_recovered_1inval.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         # similarly, check error handling on a truncated, corrected Pioneer file
         with open(os.path.join(RESOURCE_PATH, '20131123.ctdbp1_many_corrected_1inval.log'), 'rU') as file_handle:
@@ -328,11 +328,11 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20131123.ctdbp1_many_recovered_1inval.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
         log.debug('===== END TEST INVALID TIDE RECORD =====')
 
     def test_no_particles(self):
@@ -354,8 +354,8 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(particles), num_expected_particles)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, '20131123.ctdbp1_0rec.log'), 'r') as file_handle:
 
@@ -367,7 +367,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
                                         self.exception_callback)
 
             particles = parser.get_records(num_particles_to_request)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
         log.debug('===== END TEST NO PARTICLES =====')
 
@@ -387,7 +387,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             # Make sure we obtained 24 particles
             self.assertTrue(len(particles) == 24)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
         log.debug('===== END TEST bug 11367 =====')
 
     # ticket #9809
@@ -414,8 +414,8 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(particles), num_expected_particles)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         """
         test 1 rec with CTD ID
@@ -433,7 +433,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20150103.ctdbp3_1recCtdID_w_LowBattery.yml", RESOURCE_PATH)
 
         """
@@ -451,7 +451,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20161009.ctdbp3_3rec_noCtdId.yml", RESOURCE_PATH)
 
         """
@@ -471,7 +471,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20141017.ctdbp3_3rec_w_1hash.yml", RESOURCE_PATH)
 
         """
@@ -490,7 +490,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20141002.ctdbp3_3Rec_negPressure.yml", RESOURCE_PATH)
 
         """
@@ -508,7 +508,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20161025.ctdbp3_damagedRec.yml", RESOURCE_PATH)
 
         """
@@ -526,7 +526,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140928.ctdbp3_24rec.yml", RESOURCE_PATH)
 
         """
@@ -545,7 +545,7 @@ class CtdbpCdefDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20141002.ctdbp3_3Rec_negPressure.yml", RESOURCE_PATH)
 
         log.debug('===== END TEST CTDBP WITH FLORT =====')

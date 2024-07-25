@@ -218,8 +218,8 @@ class WfpEngStcImodemParserUnitTestCase(ParserUnitTestCase):
             result = parser.get_records(100)
 
             # make sure we get 100 particles back
-            self.assertEquals(len(result), 100)
+            self.assertEqual(len(result), 100)
 
             # make sure there are no errors
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 

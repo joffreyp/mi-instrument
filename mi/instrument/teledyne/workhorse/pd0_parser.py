@@ -190,7 +190,7 @@ class AdcpPd0Record(object):
             elif block_id == BlockId.STATUS_DATA_ID:
                 pass
             else:
-                print >> sys.stderr, block_id
+                print(block_id, file=sys.stderr)
                 raise UnhandledBlockException('Found unhandled data type id: %d' % block_id)
 
     def _parse_fixed(self, offset):

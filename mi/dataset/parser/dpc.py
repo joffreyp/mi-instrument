@@ -74,7 +74,7 @@ class DeepProfilerParser(SimpleParser):
                 self._exception_callback(e)
 
 
-class DeepProfilerParticle(DataParticle):
+class DeepProfilerParticle(DataParticle, metaclass=METACLASS):
     # map of instrument parameter names to particle parameter names
     parameter_map = {
         'preswat': 'pressure',
@@ -107,8 +107,6 @@ class DeepProfilerParticle(DataParticle):
         'current': DataParticleType.MMP,
         'doconcs': DataParticleType.OPTODE
     }
-
-    __metaclass__ = METACLASS
 
     def __init__(self, *args, **kwargs):
         super(DeepProfilerParticle, self).__init__(*args, **kwargs)
@@ -145,7 +143,7 @@ class DeepProfilerParticle(DataParticle):
             raise SampleException('Invalid sample, does not contain data dictionary')
 
         return self.timelist + [{DataParticleKey.VALUE_ID: DeepProfilerParticle.parameter_map.get(k, k),
-                                 DataParticleKey.VALUE: v} for k, v in data.iteritems()]
+                                 DataParticleKey.VALUE: v} for k, v in data.items()]
 
     def build_acs_parsed_values(self, data):
         if not len(data) == ACS_STRUCT.size:

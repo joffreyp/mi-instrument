@@ -113,7 +113,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
 
     def my_event_callback(self, event):
         event_type = event['type']
-        print "my_event_callback received: " + str(event)
+        print("my_event_callback received: " + str(event))
         if event_type == DriverAsyncEvent.SAMPLE:
             sample_value = event['value']
             """
@@ -154,7 +154,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         test_driver._autoconnect = False
 
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.UNCONFIGURED)
 
         """
@@ -164,7 +164,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         config = {'mock_port_agent' : mock_port_agent}
         test_driver.configure(config = config)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.DISCONNECTED)
 
         """
@@ -174,7 +174,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.connect()
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.UNKNOWN)
 
         """
@@ -183,7 +183,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.test_force_state(state = DriverProtocolState.AUTOSAMPLE)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.AUTOSAMPLE)
 
         """
@@ -342,7 +342,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         test_driver._autoconnect = False
 
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.UNCONFIGURED)
 
         """
@@ -415,7 +415,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         test_driver.set_test_mode(True)
 
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.UNCONFIGURED)
 
         """
@@ -425,7 +425,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         config = {'mock_port_agent' : mock_port_agent}
         test_driver.configure(config = config)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.DISCONNECTED)
 
         """
@@ -435,7 +435,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.connect()
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.UNKNOWN)
 
         """
@@ -444,7 +444,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.test_force_state(state = DriverProtocolState.AUTOSAMPLE)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.AUTOSAMPLE)
 
         """
@@ -524,7 +524,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         test_driver.set_test_mode(True)
 
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.UNCONFIGURED)
 
         """
@@ -534,7 +534,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         config = {'mock_port_agent' : mock_port_agent}
         test_driver.configure(config = config)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverConnectionState.DISCONNECTED)
 
         """
@@ -544,7 +544,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.connect()
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.UNKNOWN)
 
         """
@@ -553,7 +553,7 @@ class ISUS3UnitTestCase(InstrumentDriverUnitTestCase):
         """
         test_driver.test_force_state(state = DriverProtocolState.AUTOSAMPLE)
         current_state = test_driver.get_resource_state()
-        print "DHE: DriverConnectionState: " + str(current_state)
+        print("DHE: DriverConnectionState: " + str(current_state))
         self.assertEqual(current_state, DriverProtocolState.AUTOSAMPLE)
 
         """
@@ -649,13 +649,13 @@ class ISUS3IntTestCase(InstrumentDriverIntegrationTestCase):
         """
         if all_params:
             self.assertEqual(set(pd.keys()), set(PARAMS.keys()))
-            print '-----> DHE: keys: ' +  str(pd.keys())
-            for (key, type_val) in PARAMS.iteritems():
-                print key
+            print('-----> DHE: keys: ' +  str(list(pd.keys())))
+            for (key, type_val) in PARAMS.items():
+                print(key)
                 #self.assertTrue(isinstance(pd[key], type_val))
         else:
-            for (key, val) in pd.iteritems():
-                self.assertTrue(PARAMS.has_key(key))
+            for (key, val) in pd.items():
+                self.assertTrue(key in PARAMS)
                 self.assertTrue(isinstance(val, PARAMS[key]))
 
 
@@ -763,7 +763,7 @@ class ISUS3IntTestCase(InstrumentDriverIntegrationTestCase):
 
         # DHE TEMPTEMP
         # This should get the list of all parameters supported by the driver
-        print "DHE: test_driver: reply to Parameter.ALL is: " + str(reply)
+        print("DHE: test_driver: reply to Parameter.ALL is: " + str(reply))
 
         # Now test getting a specific parameter
         params = [
@@ -815,7 +815,7 @@ class ISUS3IntTestCase(InstrumentDriverIntegrationTestCase):
 
         # DHE TEMPTEMP
         # This should get the list of all parameters supported by the driver
-        print "DHE: test_driver: reply to Parameter.ALL is: " + str(reply)
+        print("DHE: test_driver: reply to Parameter.ALL is: " + str(reply))
 
         # Now test getting a specific parameter
         params = {
@@ -1176,7 +1176,7 @@ class ISUS3QualTestCase(InstrumentDriverQualificationTestCase):
             #print "--->> DHE: " + x['value_id'] + " value: " + str(x['value'])
             if x['value_id'] in ['frame_type', 'serial_num']:
                 #print "--->> DHE: " + x['value_id'] + " is of type: " + str((x['value']).__class__.__name__)
-                self.assertTrue(isinstance(x['value'], basestring))
+                self.assertTrue(isinstance(x['value'], str))
             elif x['value_id'] in [
                     'date',
                     'ch001',

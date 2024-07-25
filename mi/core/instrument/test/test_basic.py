@@ -134,7 +134,7 @@ class MyProtocol(InstrumentProtocol):
 
         updated_params = 0
         result = {}
-        for (param, value) in params.items():
+        for (param, value) in list(params.items()):
             if param in self._values:
                 if isinstance(value, int):
                     self._values[param] = value
@@ -200,7 +200,7 @@ class Some(object):
 
 def _print_dict(title, d):
     mi_logger.debug("%s:" % title)
-    for item in d.items():
+    for item in list(d.items()):
         mi_logger.debug("\t%s" % str(item))
 
 
@@ -371,52 +371,52 @@ class DriverTest(MiUnitTest):
 
         (bad, good) = self.driver._check_channel_args(
                 [Channel.INSTRUMENT])
-        self.assertEquals(bad, {})
-        self.assertEquals(good, [Channel.INSTRUMENT])
+        self.assertEqual(bad, {})
+        self.assertEqual(good, [Channel.INSTRUMENT])
 
         (bad, good) = self.driver._check_channel_args(["BAD_CHANNEL"])
-        self.assertEquals(bad, {"BAD_CHANNEL": InstErrorCode.INVALID_CHANNEL})
-        self.assertEquals(good, [])
+        self.assertEqual(bad, {"BAD_CHANNEL": InstErrorCode.INVALID_CHANNEL})
+        self.assertEqual(good, [])
 
         (bad, good) = self.driver._check_channel_args([Channel.CHAN1])
-        self.assertEquals(bad, {})
-        self.assertEquals(good, [Channel.CHAN1])
+        self.assertEqual(bad, {})
+        self.assertEqual(good, [Channel.CHAN1])
 
         (bad, good) = self.driver._check_channel_args([Channel.CHAN1,
                                                        Channel.CHAN1])
-        self.assertEquals(bad, {})
-        self.assertEquals(good, [Channel.CHAN1])
+        self.assertEqual(bad, {})
+        self.assertEqual(good, [Channel.CHAN1])
 
         # @todo Need a better test...something with more channels
         (bad, good) = self.driver._check_channel_args([Channel.CHAN1,
                                                        Channel.ALL])
-        self.assertEquals(bad, {})
-        self.assertEquals(good, [Channel.CHAN1, Channel.CHAN2])
+        self.assertEqual(bad, {})
+        self.assertEqual(good, [Channel.CHAN1, Channel.CHAN2])
 
         (bad, good) = self.driver._check_channel_args([Channel.CHAN1,
                                                        Channel.INSTRUMENT])
-        self.assertEquals(bad, {})
-        self.assertEquals(good.count(Channel.CHAN1), 1)
-        self.assertEquals(good.count(Channel.INSTRUMENT), 1)
-        self.assertEquals(len(good), 2)
+        self.assertEqual(bad, {})
+        self.assertEqual(good.count(Channel.CHAN1), 1)
+        self.assertEqual(good.count(Channel.INSTRUMENT), 1)
+        self.assertEqual(len(good), 2)
 
         (bad, good) = self.driver._check_channel_args([Channel.CHAN1,
                                                        "BAD_CHANNEL"])
-        self.assertEquals(bad, {"BAD_CHANNEL": InstErrorCode.INVALID_CHANNEL})
-        self.assertEquals(good, [Channel.CHAN1])
+        self.assertEqual(bad, {"BAD_CHANNEL": InstErrorCode.INVALID_CHANNEL})
+        self.assertEqual(good, [Channel.CHAN1])
 
     def test_connect_disconnect(self):
         """Test state change when connecting and disconnecting"""
         result = self.driver.get_resource_state()
         mi_logger.debug("Initial state result: %s", result)
-        self.assertEquals(result[Channel.INSTRUMENT], DriverState.UNCONFIGURED)
+        self.assertEqual(result[Channel.INSTRUMENT], DriverState.UNCONFIGURED)
 
         self.driver.chan_map[Channel.INSTRUMENT].connect = Mock(return_value = 12)
         result = self.driver.connect()
         result = self.driver.get_resource_state()
         # Verify we hit the protocol since we are "connected"
-        self.assertEquals(result[Channel.INSTRUMENT], DriverState.UNCONFIGURED)
+        self.assertEqual(result[Channel.INSTRUMENT], DriverState.UNCONFIGURED)
         result = self.driver.disconnect()
         result = self.driver.get_resource_state()
         # driver FSM should intercept
-        self.assertEquals(result[Channel.INSTRUMENT], DriverConnectionState.DISCONNECTED)
+        self.assertEqual(result[Channel.INSTRUMENT], DriverConnectionState.DISCONNECTED)

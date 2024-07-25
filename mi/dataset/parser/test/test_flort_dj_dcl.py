@@ -255,7 +255,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             log.debug("Num particles: %d", len(particles))
 
             self.assert_particles(particles, "rec_20020215.flort2.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== START TEST MANY WITH YML TELEMETERED =====')
 
@@ -266,7 +266,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             log.debug("Num particles: %d", len(particles))
 
             self.assert_particles(particles, "tel_20020215.flort2.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST MANY WITH YML =====')
 
@@ -284,8 +284,8 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(5)
             log.debug("Num particles: %d", len(particles))
 
-            self.assertEquals(len(particles), 3)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(len(particles), 3)
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST BUG 9692 =====')
 
@@ -310,8 +310,8 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             parser = eval(PARSER_NAME)(self.tel_config, in_file, self.exception_callback)
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(particles), num_expected_particles)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         log.debug('===== END TEST CTDBPwFLORT:control only =====')
 
@@ -329,7 +329,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20150103.ctdbp3_1recCtdID_w_LowBattery_flort.yml", RESOURCE_PATH)
 
         log.debug('===== END TEST CTDBPwFLORT:1 rec Low Battery =====')
@@ -348,7 +348,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20161009.ctdbp3_3rec_noCtdId_flort.yml", RESOURCE_PATH)
         log.debug('===== END TEST CTDBPwFLORT:3 rec no ctd id =====')
 
@@ -367,7 +367,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20141017.ctdbp3_3rec_w_1hash_flort.yml", RESOURCE_PATH)
         log.debug('===== END TEST CTDBPwFLORT:3 recs, 1 with #  =====')
         """
@@ -384,7 +384,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20141002.ctdbp3_3Rec_negPressure_flort.yml", RESOURCE_PATH)
         log.debug('===== END TEST CTDBPwFLORT:3 recs, with neg press  =====')
 
@@ -401,7 +401,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20161025.ctdbp3_damagedRec_flort.yml", RESOURCE_PATH)
         log.debug('===== END TEST CTDBPwFLORT:18 recs, 1 damaged =====')
 
@@ -418,7 +418,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(num_particles_to_request)
 
             # Make sure we obtained expected particle(s)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140928.ctdbp3_24rec_flort.yml", RESOURCE_PATH)
         log.debug('===== END TEST CTDBPwFLORT:24 recs =====')
         log.debug('===== END TESTS ENHANCEMENT 9809  =====')
@@ -436,7 +436,7 @@ class FlortDjDclParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(5)
             log.debug("Num particles: %d", len(particles))
 
-            self.assertEquals(len(particles), 0)
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(particles), 0)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
         log.debug('===== END TEST BUG 13245 =====')

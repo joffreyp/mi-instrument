@@ -18,6 +18,7 @@ from mi.dataset.dataset_parser import SimpleParser
 from mi.dataset.parser.utilities import \
     dcl_time_to_utc, \
     timestamp_yyyymmddhhmmss_to_ntp
+from functools import reduce
 
 log = get_logger()
 
@@ -311,7 +312,7 @@ class WavssADclMeanDirectionalDataParticle(WavssADclCommonDataParticle):
 
         # to match with non-directional data, the mean directional arrays must be padded with NaNs so they are
         # the same size
-        for i in xrange(num_bands, MEAN_DIR_NUMBER_BANDS):
+        for i in range(num_bands, MEAN_DIR_NUMBER_BANDS):
             psd.append(np.nan)
             mean_dir.append(np.nan)
             dir_spread.append(np.nan)

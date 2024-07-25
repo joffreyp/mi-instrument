@@ -117,7 +117,7 @@ class Vel3dCdDclParserUnitTestCase(ParserUnitTestCase):
             # request more particles than are available
             particles = parser.get_records(1700)
             # confirm the correct number is received, expect 181 system records, 1440 velocity records, 1 data header
-            self.assertEquals(len(particles), 1622)
+            self.assertEqual(len(particles), 1622)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -131,7 +131,7 @@ class Vel3dCdDclParserUnitTestCase(ParserUnitTestCase):
             # request more particles than are available
             particles = parser.get_records(1700)
             # confirm the correct number is received, expect 181 system records, 1440 velocity records, 1 data header
-            self.assertEquals(len(particles), 1622)
+            self.assertEqual(len(particles), 1622)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -164,7 +164,7 @@ class Vel3dCdDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(3)
             # we should only get 1 particles back
-            self.assertEquals(len(particles), 1)
+            self.assertEqual(len(particles), 1)
 
             self.assertEqual(len(self.exception_callback_value), 1)
             # first exception due to unexpected data inserted before first system record
@@ -195,7 +195,7 @@ class Vel3dCdDclParserUnitTestCase(ParserUnitTestCase):
             # ask for one more than expected
             particles = parser.get_records(4)
             # should get data header and two system records, but not create partial velocity group
-            self.assertEquals(len(particles), 3)
+            self.assertEqual(len(particles), 3)
 
             self.assertEqual(len(self.exception_callback_value), 1)
             # Exception from not being able to calculate timestamps

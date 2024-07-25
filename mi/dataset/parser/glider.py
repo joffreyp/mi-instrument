@@ -874,8 +874,8 @@ class NutnrMDataParticle(GliderParticle):
         field_value_list = self._parsed_values(NutnrMParticleKey.list())
 
         # Get a list of particles keys that correspond to any renamed labels found in the data file
-        particle_keys_with_renamed_labels = [k for k, v in self._particle_key_to_renamed_label_map.items()
-                                             if v in self.raw_data.keys()]
+        particle_keys_with_renamed_labels = [k for k, v in list(self._particle_key_to_renamed_label_map.items())
+                                             if v in list(self.raw_data.keys())]
 
         # If the file contains the renamed labels, the data values pulled using the original labels will be missing.
         # Get a list of these labels for which we need to pull the data from the raw_data dict using the renamed labels.
@@ -1090,7 +1090,7 @@ class GliderParser(SimpleParser):
                 if particle_class._data_particle_type == 'glider_eng_telemetered':
                     log.info("GliderParser._has_science_data failed: key=[%s] value=[%s]", key, value)
         else:
-            for key, value in data_dict.iteritems():
+            for key, value in data_dict.items():
                 if not (isnan(float(value))) and key in particle_class.science_parameters:
                     return_value = True
                     break

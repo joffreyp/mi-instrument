@@ -78,7 +78,7 @@ def string_to_ntp_date_time(time_format):
     @throws InstrumentParameterException if datestr cannot be formatted to
     a date.
     """
-    if not isinstance(time_format, basestring):
+    if not isinstance(time_format, str):
         raise IOError('Value %s is not a string.' % str(time_format))
 
     if not DATE_MATCHER.match(time_format):

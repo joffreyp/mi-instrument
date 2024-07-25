@@ -360,7 +360,7 @@ class MopakODclParserUnitTestCase(ParserUnitTestCase):
                                   self.particle_e_accel])
 
         self.assertEqual(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_bad_config(self):
         """
@@ -395,5 +395,5 @@ class MopakODclParserUnitTestCase(ParserUnitTestCase):
 
         self.assertEqual(len(result), 5)
         self.assertEqual(len(self.exception_callback_value), 2)
-        self.assert_(isinstance(self.exception_callback_value[0], SampleException))
-        self.assert_(isinstance(self.exception_callback_value[1], SampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[1], SampleException))

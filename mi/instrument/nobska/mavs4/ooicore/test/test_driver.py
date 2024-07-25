@@ -269,7 +269,7 @@ class Mavs4Mixin(DriverTestMixin):
     }
 
     _sample_parameters = {
-        Mavs4SampleDataParticleKey.DATE_TIME_STRING: {TYPE: unicode, VALUE: "12 20 2012 18 50 50.40"},
+        Mavs4SampleDataParticleKey.DATE_TIME_STRING: {TYPE: str, VALUE: "12 20 2012 18 50 50.40"},
         Mavs4SampleDataParticleKey.ACOUSTIC_AXIS_VELOCITY_A: {TYPE: int, VALUE: -571},
         Mavs4SampleDataParticleKey.ACOUSTIC_AXIS_VELOCITY_B: {TYPE: int, VALUE: -144},
         Mavs4SampleDataParticleKey.ACOUSTIC_AXIS_VELOCITY_C: {TYPE: int, VALUE: -229},
@@ -471,7 +471,7 @@ class Testmavs4_UNIT(InstrumentDriverUnitTestCase, Mavs4Mixin):
 
         # load the status parameter values
         pd = driver._protocol._param_dict
-        for name in self._status_instrument_parameters.keys():
+        for name in list(self._status_instrument_parameters.keys()):
             pd.set_value(name, self._status_instrument_parameters[name][VALUE])
 
         # clear out any old events
@@ -512,7 +512,7 @@ class Testmavs4_UNIT(InstrumentDriverUnitTestCase, Mavs4Mixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
     def test_driver_parameters(self):
         """
@@ -726,18 +726,18 @@ class Testmavs4_INT(InstrumentDriverIntegrationTestCase, Mavs4Mixin):
         self.assert_initialize_driver()
 
         json_result = self.driver_client.cmd_dvr("get_config_metadata")
-        self.assert_(json_result is not None)
-        self.assert_(len(json_result) > 100)  # just make sure we have something...
+        self.assertTrue(json_result is not None)
+        self.assertTrue(len(json_result) > 100)  # just make sure we have something...
         result = json.loads(json_result)
-        self.assert_(result is not None)
-        self.assert_(isinstance(result, dict))
+        self.assertTrue(result is not None)
+        self.assertTrue(isinstance(result, dict))
         self.assertFalse(result[ConfigMetadataKey.COMMANDS])
 
         self.assertTrue(result[ConfigMetadataKey.DRIVER])
         self.assertTrue(result[ConfigMetadataKey.DRIVER][DriverDictKey.VENDOR_SW_COMPATIBLE])
 
         self.assertTrue(result[ConfigMetadataKey.PARAMETERS])
-        keys = result[ConfigMetadataKey.PARAMETERS].keys()
+        keys = list(result[ConfigMetadataKey.PARAMETERS].keys())
         keys.append(DriverParameter.ALL)
         keys.sort()
         enum_list = InstrumentParameters.list()
@@ -932,7 +932,7 @@ class Testmavs4_INT(InstrumentDriverIntegrationTestCase, Mavs4Mixin):
         end_time = time.strptime(result[InstrumentParameters.SYS_CLOCK],
                                  "%m/%d/%Y %H:%M:%S")
 
-        self.assert_(end_wall_time > start_wall_time)
+        self.assertTrue(end_wall_time > start_wall_time)
         # this could be better...tricky to measure two varying variables
         self.assertNotEqual(end_time, end_wall_time)  # gonna be off by at least a little
         #self.assertNotEqual(end_time_offset, start_time_offset)
@@ -1022,7 +1022,7 @@ class Testmavs4_QUAL(InstrumentDriverQualificationTestCase, Mavs4Mixin):
                 DriverEvent.START_AUTOSAMPLE,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_enter_command_mode()

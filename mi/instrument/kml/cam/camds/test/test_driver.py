@@ -378,7 +378,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, CAMDSMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
     def test_set(self):
         params = [
@@ -443,7 +443,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, CAMDSMixin):
 
         try:
 
-            if isinstance(val, basestring):
+            if isinstance(val, str):
                 val = ''.join(chr(int(x)) for x in val.split(':'))
 
             else:
@@ -552,16 +552,16 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, CAMDSMixin):
         self.assertTrue(isinstance(drv_pid, int))
 
         self.assertNotEqual(self.port_agents, None)
-        for port_agent in self.port_agents.values():
+        for port_agent in list(self.port_agents.values()):
             pagent_pid = port_agent.get_pid()
             self.assertTrue(isinstance(pagent_pid, int))
 
         # Send a test message to the process interface, confirm result.
         reply = self.driver_client.cmd_dvr('process_echo')
-        self.assert_(reply.startswith('ping from resource ppid:'))
+        self.assertTrue(reply.startswith('ping from resource ppid:'))
 
         reply = self.driver_client.cmd_dvr('driver_ping', 'foo')
-        self.assert_(reply.startswith('driver_ping: foo'))
+        self.assertTrue(reply.startswith('driver_ping: foo'))
 
         # Test the event thread publishes and client side picks up events.
         events = [

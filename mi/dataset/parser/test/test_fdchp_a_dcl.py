@@ -82,7 +82,7 @@ class FdchpADclParserUnitTestCase(ParserUnitTestCase):
             # request a few more particles than are available, should only get the number in the file
             particles = parser.get_records(25)
 
-            self.assertEquals(len(particles), 22)
+            self.assertEqual(len(particles), 22)
             self.assertEqual(self.exception_callback_value, [])
 
     def test_unexpected(self):
@@ -140,7 +140,7 @@ class FdchpADclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(3)
 
-            self.assertEquals(len(particles), 3)
+            self.assertEqual(len(particles), 3)
             self.assertEqual(self.exception_callback_value, [])
 
     def test_bug_10002(self):
@@ -155,5 +155,5 @@ class FdchpADclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(30)
 
-            self.assertEquals(len(particles), 23)
+            self.assertEqual(len(particles), 23)
             self.assertEqual(self.exception_callback_value, [])

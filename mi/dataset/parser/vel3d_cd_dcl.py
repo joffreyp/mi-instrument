@@ -23,7 +23,7 @@ from mi.core.exceptions import UnexpectedDataException, SampleException, DataSou
 from mi.dataset.dataset_parser import SimpleParser
 from mi.core.instrument.dataset_data_particle import DataParticle
 from mi.dataset.parser.common_regexes import DATE_YYYY_MM_DD_REGEX, TIME_HR_MIN_SEC_MSEC_REGEX
-import vel3d_velpt_common
+from . import vel3d_velpt_common
 
 DATE_TIME_REGEX = DATE_YYYY_MM_DD_REGEX + r' ' + TIME_HR_MIN_SEC_MSEC_REGEX + r' '
 DATE_TIME_MATCHER = re.compile(DATE_TIME_REGEX)
@@ -153,7 +153,7 @@ class Vel3dCdDclUserConfigCommonParticle(DataParticle):
         parameters.append(self._encode_value('filter_constants', base64.b64encode(unpacked_data[85]), str))
 
         # unpack dict contains all ints
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             parameters.append(self._encode_value(name, unpacked_data[index], int))
 
         for name, index, bit_index in self.UNPACK_BIT_MAP:
@@ -257,7 +257,7 @@ class Vel3dCdDclHeadConfigCommonParticle(DataParticle):
                                                  (unpacked_data[index] & BIT_MASK_DICT.get(bit_index)) >> bit_index,
                                                  int))
 
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             parameters.append(self._encode_value(name, unpacked_data[index], int))
 
         return parameters
@@ -297,7 +297,7 @@ class Vel3dCdDclDataHeaderCommonParticle(DataParticle):
         date_time_string = vel3d_velpt_common.get_date_time_string(self.raw_data)
         parameters = [self._encode_value('date_time_string', date_time_string, str)]
 
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             parameters.append(self._encode_value(name, unpacked_data[index], int))
 
         return parameters
@@ -338,7 +338,7 @@ class Vel3dCdDclVelocityCommonParticle(DataParticle):
         unpacked_data = struct.unpack('<6B 2H 3h 6B H', self.raw_data)
 
         # unpack the data into parameters and values using the dictionary
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             parameters.append(self._encode_value(name, unpacked_data[index], int))
 
         # some parameters need extra calculations
@@ -458,7 +458,7 @@ class Vel3dCdDclParser(SimpleParser):
             # now that the sync marker has been found, get the record type which follows
             record_type = self._file_handle.read(1)
 
-            if record_type in RECORD_SIZE_DICT.keys():
+            if record_type in list(RECORD_SIZE_DICT.keys()):
                 # this record type does not contain the record size, get it from the dictionary
                 record_size_bytes = RECORD_SIZE_DICT.get(record_type)
                 full_record = vel3d_velpt_common.SYNC_MARKER + record_type

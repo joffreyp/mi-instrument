@@ -195,7 +195,7 @@ class Pco2aADclParserUnitTestCase(ParserUnitTestCase):
         self.assertTrue(self.exception_callback_value is not None)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], UnexpectedDataException))
 
         # bad records
         self.assertEqual(len(self.exception_callback_value), 35)
@@ -220,7 +220,7 @@ class Pco2aADclParserUnitTestCase(ParserUnitTestCase):
         self.assertTrue(self.exception_callback_value is not None)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], UnexpectedDataException))
 
         # bad records
         self.assertEqual(len(self.exception_callback_value), 35)

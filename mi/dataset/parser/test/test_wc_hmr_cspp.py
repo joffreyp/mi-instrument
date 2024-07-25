@@ -138,7 +138,7 @@ class WcHmrCsppParserUnitTestCase(ParserUnitTestCase):
 
         self.assert_particles(particles, 'WC_HMR_bad_data_records.yml', RESOURCE_PATH)
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         stream_handle.close()
 
@@ -169,7 +169,7 @@ class WcHmrCsppParserUnitTestCase(ParserUnitTestCase):
 
         self.assertTrue(self.exception_callback_value is not None)
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         # expect to see a recoverable sample exception in the log
         log.debug('TEST EXTRA DATA exception call back is %s', self.exception_callback_value)

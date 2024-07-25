@@ -67,9 +67,8 @@ class PresfDeDclParticleKey(BaseEnum):
     PERIOD_01 = 'period_01'
 
 
-class DataParticleType(BaseEnum):
+class DataParticleType(BaseEnum, metaclass=get_logging_metaclass(log_level='trace')):
     PRESF_DE_PARTICLE_TYPE = 'presf_de_instrument'
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
 
 class PresfDeDataParticle(DataParticle):
@@ -88,7 +87,7 @@ class PresfDeDataParticle(DataParticle):
         return [{DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: None}
                 if self.raw_data[name] is None else
                 {DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: value}
-                for name, value in self.raw_data.iteritems()]
+                for name, value in self.raw_data.items()]
 
 
 class PresfDeDclParser(SimpleParser):

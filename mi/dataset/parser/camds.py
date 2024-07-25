@@ -210,7 +210,7 @@ class CamdsMetadataParticle(DataParticle):
         ]
 
         for key in required_keys:
-            if key not in data_dict.keys():
+            if key not in list(data_dict.keys()):
                 raise SampleException('Missing required key (%s)' % key)
 
         for key in data_dict:
@@ -296,7 +296,7 @@ class CamdsHtmlParser(SimpleParser):
                     for name, value in zip(names, encoded_values):
                         data_dict[name] = value, encoding_type
 
-                elif key in self.metadata_encoding.keys():
+                elif key in list(self.metadata_encoding.keys()):
                     name, regex, encoder, encoding_type = self.metadata_encoding[key]
                     encoded_value = encoder(regex, value)
                     data_dict[name] = encoded_value, encoding_type

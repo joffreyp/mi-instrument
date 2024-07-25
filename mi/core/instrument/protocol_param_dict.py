@@ -295,7 +295,7 @@ class RegexParameter(Parameter):
         @param input A string possibly containing the parameter value.
         @retval True if an update was successful, False otherwise.
         """
-        if not (isinstance(input, basestring)):
+        if not (isinstance(input, str)):
             match = self.regex.search(str(input))
         else:
             match = self.regex.search(input)
@@ -677,7 +677,7 @@ class ProtocolParameterDict(InstrumentDict):
         """
         hit_count = 0
         multi_mode = False
-        for (name, val) in self._param_dict.iteritems():
+        for (name, val) in self._param_dict.items():
             if multi_mode == True and val.description.multi_match == False:
                 continue
             if val.update(input):
@@ -687,7 +687,7 @@ class ProtocolParameterDict(InstrumentDict):
                 else:
                     multi_mode = True
 
-        if False == multi_mode and input <> "":
+        if False == multi_mode and input != "":
             log.debug("protocol_param_dict.py UNMATCHCHED ***************************** %s", input)
         return hit_count
 
@@ -698,7 +698,7 @@ class ProtocolParameterDict(InstrumentDict):
         @retval A dict with the names and values that were updated
         """
         result = {}
-        for (name, val) in self._param_dict.iteritems():
+        for (name, val) in self._param_dict.items():
             update_result = val.update(input)
             if update_result:
                 result[name] = update_result
@@ -721,12 +721,12 @@ class ProtocolParameterDict(InstrumentDict):
         log.debug("update input: %s", input)
         found = False
 
-        if target_params and isinstance(target_params, basestring):
+        if target_params and isinstance(target_params, str):
             params = [target_params]
         elif target_params and isinstance(target_params, list):
             params = target_params
         elif target_params is None:
-            params = self._param_dict.keys()
+            params = list(self._param_dict.keys())
         else:
             raise InstrumentParameterException("invalid target_params, must be name or list")
 
@@ -744,7 +744,7 @@ class ProtocolParameterDict(InstrumentDict):
         @retval name : value configuration dict.
         """
         config = {}
-        for (key, val) in self._param_dict.iteritems():
+        for (key, val) in self._param_dict.items():
             config[key] = val.get_value(timestamp)
         return config
 
@@ -754,7 +754,7 @@ class ProtocolParameterDict(InstrumentDict):
         @retval name : value configuration dict.
         """
         config = {}
-        for (key, val) in self._param_dict.iteritems():
+        for (key, val) in self._param_dict.items():
             if self.is_settable_param(key):
                config[key] = val.get_value()
         return config
@@ -783,7 +783,7 @@ class ProtocolParameterDict(InstrumentDict):
         """
         Return list of all parameter names in the dictionary.
         """
-        return self._param_dict.keys()
+        return list(self._param_dict.keys())
 
     def get_direct_access_list(self):
         """
@@ -795,7 +795,7 @@ class ProtocolParameterDict(InstrumentDict):
         """
 
         return_val = []
-        for key in self._param_dict.keys():
+        for key in list(self._param_dict.keys()):
 
             if not self._param_dict[key].description:
                 raise InstrumentParameterException("No description present!")
@@ -838,7 +838,7 @@ class ProtocolParameterDict(InstrumentDict):
         @retval A list of parameter names, possibly empty
         """
         return_val = []
-        for key in self._param_dict.keys():
+        for key in list(self._param_dict.keys()):
             if self.is_startup_param(key):
                 return_val.append(key)
 
@@ -854,7 +854,7 @@ class ProtocolParameterDict(InstrumentDict):
         """
         return_val = []
 
-        for key in self._param_dict.keys():
+        for key in list(self._param_dict.keys()):
             if self._param_dict[key].description.visibility == visibility:
                 return_val.append(key)
 
@@ -868,7 +868,7 @@ class ProtocolParameterDict(InstrumentDict):
         """
         return_struct = {}
 
-        for param_key in self._param_dict.keys():
+        for param_key in list(self._param_dict.keys()):
             param_struct = {}
             value_struct = {}
             if self._param_dict[param_key] is not None:
@@ -929,9 +929,9 @@ class ProtocolParameterDict(InstrumentDict):
 
         if metadata:
             log.debug("Found parameter metadata, loading dictionary")
-            for (param_name, param_value) in metadata[ParameterDictKey.PARAMETERS].items():
+            for (param_name, param_value) in list(metadata[ParameterDictKey.PARAMETERS].items()):
                 log.trace("load_strings setting param name/value: %s / %s", param_name, param_value)
-                for (name, value) in param_value.items():
+                for (name, value) in list(param_value.items()):
                     if param_name not in self._param_dict:
                         continue
                     if name == ParameterDictKey.DESCRIPTION:

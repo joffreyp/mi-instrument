@@ -181,7 +181,7 @@ class UtilMixin(DriverTestMixin):
         McLaneSampleDataParticleKey.FLOW_RATE_ACTUAL: {'type': float, 'value': 90.7},
         McLaneSampleDataParticleKey.MIN_FLOW_ACTUAL: {'type': float, 'value': 0.907},
         McLaneSampleDataParticleKey.TIMER: {'type': int, 'value': 1},
-        McLaneSampleDataParticleKey.TIME: {'type': unicode, 'value': '031514 001727'},
+        McLaneSampleDataParticleKey.TIME: {'type': str, 'value': '031514 001727'},
         McLaneSampleDataParticleKey.BATTERY: {'type': float, 'value': 29.9},
         McLaneSampleDataParticleKey.CODE: {'type': int, 'value': 0},
     }
@@ -250,7 +250,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
     def setUp(self):
         InstrumentDriverUnitTestCase.setUp(self)
 
-    print '----- unit test -----'
+    print('----- unit test -----')
 
     #@unittest.skip('not completed yet')
     def test_driver_enums(self):
@@ -331,7 +331,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -588,7 +588,7 @@ class TestQUAL(InstrumentDriverQualificationTestCase, UtilMixin):
                 ProtocolEvent.SET,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

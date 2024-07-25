@@ -1474,7 +1474,7 @@ class CgCpmEngCpmDataParticle(DataParticle):
         # Assigning to a new variable for clarity
         data_dict = self.raw_data
 
-        if CgCpmEngCpmParserDataParticleKey.CG_ENG_PLATFORM_UTIME not in data_dict.keys():
+        if CgCpmEngCpmParserDataParticleKey.CG_ENG_PLATFORM_UTIME not in list(data_dict.keys()):
             raise SampleException("Missing required platform utime parameter.")
 
         # Let's iterate through the sorted list of dict keys

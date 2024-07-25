@@ -9,8 +9,8 @@
 import functools
 from copy import deepcopy
 from socket import error as SocketError
-from xmlrpclib import Fault
-from xmlrpclib import ProtocolError
+from xmlrpc.client import Fault
+from xmlrpc.client import ProtocolError
 
 import mi.core.log
 from mi.core.common import BaseEnum
@@ -100,7 +100,7 @@ class RSNPlatformDriver(PlatformDriver):
         return_dict = {}
         # go through all of the returned values and get the unique timestamps. Each
         # particle will have data for a unique timestamp
-        for attr_id, attr_vals in attr_dict.iteritems():
+        for attr_id, attr_vals in attr_dict.items():
             for value, timestamp in attr_vals:
                 return_dict.setdefault(timestamp, []).append((attr_id, value))
 
@@ -158,7 +158,7 @@ class RSNPlatformDriver(PlatformDriver):
         """
         parameters = deepcopy(self._param_dict)
 
-        for k, v in parameters.iteritems():
+        for k, v in parameters.items():
             read_write = v.get('read_write', None)
             if read_write == 'write':
                 v['visibility'] = 'READ_WRITE'

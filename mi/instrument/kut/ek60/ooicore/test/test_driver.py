@@ -395,29 +395,29 @@ class DriverTestMixinSub(DriverTestMixin):
 
     _sample_parameters = {
         ZPLSCStatusParticleKey.ZPLSC_CONNECTED: {TYPE: bool, VALUE: True, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_120K_MODE: {TYPE: unicode, VALUE: 'active', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_120K_MODE: {TYPE: str, VALUE: 'active', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_120K_POWER: {TYPE: float, VALUE: 100.0, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_120K_PULSE_LENGTH: {TYPE: float, VALUE: 0.000256, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_120K_SAMPLE_INTERVAL: {TYPE: float, VALUE: 6.4e-05, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_200K_MODE: {TYPE: unicode, VALUE: 'active', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_200K_MODE: {TYPE: str, VALUE: 'active', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_200K_POWER: {TYPE: float, VALUE: 120.0, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_200K_PULSE_LENGTH: {TYPE: float, VALUE: 0.000256, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_200K_SAMPLE_INTERVAL: {TYPE: float, VALUE: 6.4e-05, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_38K_MODE: {TYPE: unicode, VALUE: 'active', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_ACTIVE_38K_MODE: {TYPE: str, VALUE: 'active', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_38K_POWER: {TYPE: float, VALUE: 100.0, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_38K_PULSE_LENGTH: {TYPE: float, VALUE: 0.000256, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_ACTIVE_38K_SAMPLE_INTERVAL: {TYPE: float, VALUE: 6.4e-05, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_CURRENT_UTC_TIME: {TYPE: unicode, VALUE: '2014-07-29 15:49:11.789000', REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_EXECUTABLE: {TYPE: unicode, VALUE: 'c:/users/ooi/desktop/er60.lnk', REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_FS_ROOT: {TYPE: unicode, VALUE: 'D:/', REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_NEXT_SCHEDULED_INTERVAL: {TYPE: unicode, VALUE: '2014-07-29 00:00:00.000000', REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_HOST: {TYPE: unicode, VALUE: '157.237.15.100', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_CURRENT_UTC_TIME: {TYPE: str, VALUE: '2014-07-29 15:49:11.789000', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_EXECUTABLE: {TYPE: str, VALUE: 'c:/users/ooi/desktop/er60.lnk', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_FS_ROOT: {TYPE: str, VALUE: 'D:/', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_NEXT_SCHEDULED_INTERVAL: {TYPE: str, VALUE: '2014-07-29 00:00:00.000000', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_HOST: {TYPE: str, VALUE: '157.237.15.100', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_PID: {TYPE: int, VALUE: 0, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_PORT: {TYPE: int, VALUE: 52873, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_CURRENT_RAW_FILENAME: {TYPE: unicode, VALUE: 'DEFAULT-D20140728-T171009.raw', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_CURRENT_RAW_FILENAME: {TYPE: str, VALUE: 'DEFAULT-D20140728-T171009.raw', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_CURRENT_RAW_FILESIZE: {TYPE: int, VALUE: 0, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_FILE_PATH: {TYPE: unicode, VALUE: 'D:\\data\\QCT_1', REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_FILE_PREFIX: {TYPE: unicode, VALUE: 'OOI', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_FILE_PATH: {TYPE: str, VALUE: 'D:\\data\\QCT_1', REQUIRED: True},
+        ZPLSCStatusParticleKey.ZPLSC_FILE_PREFIX: {TYPE: str, VALUE: 'OOI', REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_MAX_FILE_SIZE: {TYPE: int, VALUE: 52428800, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_SAMPLE_RANGE: {TYPE: float, VALUE:  220.0, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_SAVE_BOTTOM: {TYPE: bool, VALUE: True, REQUIRED: True},
@@ -425,7 +425,7 @@ class DriverTestMixinSub(DriverTestMixin):
         ZPLSCStatusParticleKey.ZPLSC_SAVE_RAW: {TYPE: bool, VALUE: True, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_SCHEDULED_INTERVALS_REMAINING: {TYPE: int, VALUE: 144, REQUIRED: True},
         ZPLSCStatusParticleKey.ZPLSC_GPTS_ENABLED: {TYPE: bool, VALUE: False, REQUIRED: True},
-        ZPLSCStatusParticleKey.ZPLSC_SCHEDULE_FILENAME: {TYPE: unicode, VALUE: 'driver_schedule.yaml', REQUIRED: True}
+        ZPLSCStatusParticleKey.ZPLSC_SCHEDULE_FILENAME: {TYPE: str, VALUE: 'driver_schedule.yaml', REQUIRED: True}
     }
 
     base_path = os.path.dirname(os.path.dirname(__file__))
@@ -596,7 +596,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_zplsc_status_sample_format(self):
@@ -751,7 +751,7 @@ class DriverIntegrationTest(InstrumentDriverIntegrationTestCase, DriverTestMixin
             log.debug("ftp session was created")
             return ftp_session
 
-        except (ftplib.socket.error, ftplib.socket.gaierror), e:
+        except (ftplib.socket.error, ftplib.socket.gaierror) as e:
             log.error("ERROR: cannot reach FTP Host %s " % host)
             return
 
@@ -883,7 +883,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
                 ProtocolEvent.ACQUIRE_STATUS,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

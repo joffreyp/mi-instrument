@@ -89,7 +89,7 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, 'recovered_20141207s.pwrsys.yml', RESOURCE_PATH)
 
         # Test the telemetered version
@@ -102,7 +102,7 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, 'telemetered_20141207s.pwrsys.yml', RESOURCE_PATH)
 
         log.debug('===== END TEST SIMPLE =====')
@@ -126,7 +126,7 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
         log.debug('===== END TEST BIGFILE =====')
 
@@ -150,7 +150,7 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
         log.debug('===== END TEST BAD CHECKSUM =====')
 
@@ -190,7 +190,7 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
         log.debug('===== END TEST BADLY FORMED =====')
 
@@ -246,6 +246,6 @@ class FuelCellEngDclParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
         log.debug('===== END TEST BLANK LINE =====')

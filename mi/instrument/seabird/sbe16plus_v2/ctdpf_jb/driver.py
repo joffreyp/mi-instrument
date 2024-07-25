@@ -1107,13 +1107,13 @@ class SBE19Protocol(SBE16Protocol):
 
         # check values that the instrument doesn't validate
         # handle special cases for driver specific parameters
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             if key == Parameter.PUMP_DELAY and (val < MIN_PUMP_DELAY or val > MAX_PUMP_DELAY):
                 raise InstrumentParameterException("pump delay out of range")
             elif key == Parameter.NUM_AVG_SAMPLES and (val < MIN_AVG_SAMPLES or val > MAX_AVG_SAMPLES):
                 raise InstrumentParameterException("num average samples out of range")
 
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
 
             old_val = self._param_dict.format(key)
             new_val = self._param_dict.format(key, val)

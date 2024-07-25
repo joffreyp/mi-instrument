@@ -219,10 +219,10 @@ class DriverScheduler(object):
         if(not isinstance(config, dict)):
             raise SchedulerException("scheduler config not a dict")
 
-        if(len(config.keys()) == 0):
+        if(len(list(config.keys())) == 0):
             raise SchedulerException("scheduler config empty")
 
-        for (name, config) in config.items():
+        for (name, config) in list(config.items()):
             try:
                 self._add_job(name, config)
             except ValueError as e:

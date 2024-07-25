@@ -169,7 +169,7 @@ class CtdmoGhqrImodemInstrumentDataParticle(DataParticle):
         """
         result = []
 
-        for key in self.raw_data.keys():
+        for key in list(self.raw_data.keys()):
             if key == CtdmoGhqrImodemDataParticleKey.CONDUCTIVITY or \
                     key == CtdmoGhqrImodemDataParticleKey.TEMPERATURE:
                 encoded = self._encode_value(key, self.raw_data[key],
@@ -332,7 +332,7 @@ class CtdmoGhqrImodemParser(SimpleParser):
 
         particle_data = dict()
 
-        for key in self._metadata_matches_dict.keys():
+        for key in list(self._metadata_matches_dict.keys()):
 
             self._process_metadata_match_dict(key, particle_data)
 
@@ -442,7 +442,7 @@ class CtdmoGhqrImodemParser(SimpleParser):
 
             self._process_line(line)
 
-            if (None not in self._metadata_matches_dict.values() and
+            if (None not in list(self._metadata_matches_dict.values()) and
                     not self._metadata_sample_generated):
                 # Attempt to generate metadata particles
                 self._generate_metadata_particle()

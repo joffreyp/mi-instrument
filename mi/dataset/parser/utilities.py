@@ -297,7 +297,7 @@ def particle_to_yml(particles, filename, mode='w+'):
             for value in particle_dict.get('values'):
                 values_dict[value.get('value_id')] = value.get('value')
 
-            for key in sorted(values_dict.iterkeys()):
+            for key in sorted(values_dict.keys()):
                 value = values_dict[key]
                 if value is None:
                     fid.write('    %s: %s\n' % (key, 'Null'))

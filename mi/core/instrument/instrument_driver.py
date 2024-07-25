@@ -441,13 +441,12 @@ class InstrumentDriver(object):
 
 
 # noinspection PyMethodMayBeStatic,PyProtectedMember,PyUnusedLocal
-class SingleConnectionInstrumentDriver(InstrumentDriver):
+class SingleConnectionInstrumentDriver(InstrumentDriver, metaclass=META_LOGGER):
     """
     Base class for instrument drivers with a single device connection.
     Provides connection state logic for single connection drivers. This is
     the base class for the majority of driver implementation classes.
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, event_callback, refdes=None):
         """
@@ -1135,7 +1134,7 @@ class SingleConnectionInstrumentDriver(InstrumentDriver):
             port = config['port']
             cmd_port = config.get('cmd_port')
 
-            if isinstance(addr, basestring) and isinstance(port, int) and len(addr) > 0:
+            if isinstance(addr, str) and isinstance(port, int) and len(addr) > 0:
                 return PortAgentClient(addr, port, cmd_port, self._got_data, self._lost_connection_callback)
             else:
                 raise InstrumentParameterException('Invalid comms config dict.')

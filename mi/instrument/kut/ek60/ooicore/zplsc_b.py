@@ -384,7 +384,7 @@ def parse_particles_file(input_file_path, output_file_path=None):
         config_header = read_header(input_file)
         transducer_count = config_header['transducer_count']
 
-        trans_keys = range(1, transducer_count+1)
+        trans_keys = list(range(1, transducer_count+1))
         frequencies = dict.fromkeys(trans_keys)       # transducer frequency
         bin_size = None                               # transducer depth measurement
 
@@ -433,7 +433,7 @@ def parse_particles_file(input_file_path, output_file_path=None):
                         if not power_data_dict:
                             relpath = generate_relative_file_path(image_path)
                             first_ping_metadata = defaultdict(list)
-                            for channel, sample_data in sample_data_temp_dict.iteritems():
+                            for channel, sample_data in sample_data_temp_dict.items():
                                 append_metadata(first_ping_metadata, file_time, relpath, channel, sample_data)
 
                                 frequency = sample_data['frequency'][0]

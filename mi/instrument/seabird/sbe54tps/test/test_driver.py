@@ -124,8 +124,8 @@ class SeaBird54tpsMixin(DriverTestMixin):
 
     _prest_real_time_parameters = {
         SBE54tpsSampleDataParticleKey.SAMPLE_NUMBER: {TYPE: int, VALUE: 5947, REQUIRED: True},
-        SBE54tpsSampleDataParticleKey.SAMPLE_TYPE: {TYPE: unicode, VALUE: 'Pressure', REQUIRED: True},
-        SBE54tpsSampleDataParticleKey.INST_TIME: {TYPE: unicode, VALUE: '2012-11-07T12:21:25', REQUIRED: True},
+        SBE54tpsSampleDataParticleKey.SAMPLE_TYPE: {TYPE: str, VALUE: 'Pressure', REQUIRED: True},
+        SBE54tpsSampleDataParticleKey.INST_TIME: {TYPE: str, VALUE: '2012-11-07T12:21:25', REQUIRED: True},
         SBE54tpsSampleDataParticleKey.PRESSURE: {TYPE: float, VALUE: 13.9669, REQUIRED: True},
         SBE54tpsSampleDataParticleKey.PRESSURE_TEMP: {TYPE: float, VALUE: 18.9047, REQUIRED: True},
     }
@@ -135,8 +135,8 @@ class SeaBird54tpsMixin(DriverTestMixin):
         SBE54tpsSampleRefOscDataParticleKey.SET_TIMEOUT_MAX: {TYPE: int, VALUE: 150000, REQUIRED: True},
         SBE54tpsSampleRefOscDataParticleKey.SET_TIMEOUT_ICD: {TYPE: int, VALUE: 150000, REQUIRED: True},
         SBE54tpsSampleRefOscDataParticleKey.SAMPLE_NUMBER: {TYPE: int, VALUE: 1244, REQUIRED: True},
-        SBE54tpsSampleRefOscDataParticleKey.SAMPLE_TYPE: {TYPE: unicode, VALUE: 'RefOsc', REQUIRED: True},
-        SBE54tpsSampleRefOscDataParticleKey.SAMPLE_TIMESTAMP: {TYPE: unicode, VALUE: u'2013-01-30T15:36:53',
+        SBE54tpsSampleRefOscDataParticleKey.SAMPLE_TYPE: {TYPE: str, VALUE: 'RefOsc', REQUIRED: True},
+        SBE54tpsSampleRefOscDataParticleKey.SAMPLE_TIMESTAMP: {TYPE: str, VALUE: '2013-01-30T15:36:53',
                                                                REQUIRED: True},
         SBE54tpsSampleRefOscDataParticleKey.REF_OSC_FREQ: {TYPE: float, VALUE: 5999995.955, REQUIRED: True},
         SBE54tpsSampleRefOscDataParticleKey.REF_ERROR_PPM: {TYPE: float, VALUE: 0.090, REQUIRED: True},
@@ -144,15 +144,15 @@ class SeaBird54tpsMixin(DriverTestMixin):
     }
 
     _prest_configuration_data_parameters = {
-        SBE54tpsConfigurationDataParticleKey.DEVICE_TYPE: {TYPE: unicode, VALUE: 'SBE54', REQUIRED: True},
+        SBE54tpsConfigurationDataParticleKey.DEVICE_TYPE: {TYPE: str, VALUE: 'SBE54', REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '05400012', REQUIRED: True},
-        SBE54tpsConfigurationDataParticleKey.ACQ_OSC_CAL_DATE: {TYPE: unicode, VALUE: '2012-02-20', REQUIRED: True},
+        SBE54tpsConfigurationDataParticleKey.ACQ_OSC_CAL_DATE: {TYPE: str, VALUE: '2012-02-20', REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.FRA0: {TYPE: float, VALUE: 5.999926E+06, REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.FRA1: {TYPE: float, VALUE: 5.792290E-03, REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.FRA2: {TYPE: float, VALUE: -1.195664E-07, REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.FRA3: {TYPE: float, VALUE: 7.018589E-13, REQUIRED: True},
-        SBE54tpsConfigurationDataParticleKey.PRESSURE_SERIAL_NUM: {TYPE: unicode, VALUE: '121451', REQUIRED: True},
-        SBE54tpsConfigurationDataParticleKey.PRESSURE_CAL_DATE: {TYPE: unicode, VALUE: '2011-06-01', REQUIRED: True},
+        SBE54tpsConfigurationDataParticleKey.PRESSURE_SERIAL_NUM: {TYPE: str, VALUE: '121451', REQUIRED: True},
+        SBE54tpsConfigurationDataParticleKey.PRESSURE_CAL_DATE: {TYPE: str, VALUE: '2011-06-01', REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.PU0: {TYPE: float, VALUE: 5.820407E+00, REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.PY1: {TYPE: float, VALUE: -3.845374E+03, REQUIRED: True},
         SBE54tpsConfigurationDataParticleKey.PY2: {TYPE: float, VALUE: -1.078882E+04, REQUIRED: True},
@@ -176,9 +176,9 @@ class SeaBird54tpsMixin(DriverTestMixin):
     }
 
     _prest_device_status_parameters = {
-        SBE54tpsStatusDataParticleKey.DEVICE_TYPE: {TYPE: unicode, VALUE: 'SBE54', REQUIRED: True},
+        SBE54tpsStatusDataParticleKey.DEVICE_TYPE: {TYPE: str, VALUE: 'SBE54', REQUIRED: True},
         SBE54tpsStatusDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '05400012', REQUIRED: True},
-        SBE54tpsStatusDataParticleKey.TIME: {TYPE: unicode, VALUE: '2012-11-06T10:55:44', REQUIRED: True},
+        SBE54tpsStatusDataParticleKey.TIME: {TYPE: str, VALUE: '2012-11-06T10:55:44', REQUIRED: True},
         SBE54tpsStatusDataParticleKey.EVENT_COUNT: {TYPE: int, VALUE: 573},
         SBE54tpsStatusDataParticleKey.MAIN_SUPPLY_VOLTAGE: {TYPE: float, VALUE: 23.3, REQUIRED: True},
         SBE54tpsStatusDataParticleKey.NUMBER_OF_SAMPLES: {TYPE: int, VALUE: 22618, REQUIRED: True},
@@ -189,7 +189,7 @@ class SeaBird54tpsMixin(DriverTestMixin):
     _prest_event_counter_parameters = {
         SBE54tpsEventCounterDataParticleKey.NUMBER_EVENTS: {TYPE: int, VALUE: 573},
         SBE54tpsEventCounterDataParticleKey.MAX_STACK: {TYPE: int, VALUE: 354},
-        SBE54tpsEventCounterDataParticleKey.DEVICE_TYPE: {TYPE: unicode, VALUE: 'SBE54'},
+        SBE54tpsEventCounterDataParticleKey.DEVICE_TYPE: {TYPE: str, VALUE: 'SBE54'},
         SBE54tpsEventCounterDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '05400012'},
         SBE54tpsEventCounterDataParticleKey.POWER_ON_RESET: {TYPE: int, VALUE: 25},
         SBE54tpsEventCounterDataParticleKey.POWER_FAIL_RESET: {TYPE: int, VALUE: 25},
@@ -203,17 +203,17 @@ class SeaBird54tpsMixin(DriverTestMixin):
     }
 
     _prest_hardware_data_parameters = {
-        SBE54tpsHardwareDataParticleKey.DEVICE_TYPE: {TYPE: unicode, VALUE: 'SBE54', REQUIRED: True},
+        SBE54tpsHardwareDataParticleKey.DEVICE_TYPE: {TYPE: str, VALUE: 'SBE54', REQUIRED: True},
         SBE54tpsHardwareDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '05400012', REQUIRED: True},
-        SBE54tpsHardwareDataParticleKey.MANUFACTURER: {TYPE: unicode, VALUE: 'Sea-Bird Electronics, Inc',
+        SBE54tpsHardwareDataParticleKey.MANUFACTURER: {TYPE: str, VALUE: 'Sea-Bird Electronics, Inc',
                                                        REQUIRED: True},
-        SBE54tpsHardwareDataParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: 'SBE54 V1.3-6MHZ', REQUIRED: True},
-        SBE54tpsHardwareDataParticleKey.FIRMWARE_DATE: {TYPE: unicode, VALUE: 'Mar 22 2007', REQUIRED: True},
+        SBE54tpsHardwareDataParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: 'SBE54 V1.3-6MHZ', REQUIRED: True},
+        SBE54tpsHardwareDataParticleKey.FIRMWARE_DATE: {TYPE: str, VALUE: 'Mar 22 2007', REQUIRED: True},
         SBE54tpsHardwareDataParticleKey.HARDWARE_VERSION: {TYPE: list, VALUE: ['41477A.1', '41478A.1T'],
                                                            REQUIRED: True},
         SBE54tpsHardwareDataParticleKey.PCB_SERIAL_NUMBER: {TYPE: list, VALUE: ['NOT SET', 'NOT SET'], REQUIRED: True},
-        SBE54tpsHardwareDataParticleKey.PCB_TYPE: {TYPE: unicode, VALUE: '1', REQUIRED: True},
-        SBE54tpsHardwareDataParticleKey.MANUFACTURE_DATE: {TYPE: unicode, VALUE: 'Jun 27 2007', REQUIRED: True},
+        SBE54tpsHardwareDataParticleKey.PCB_TYPE: {TYPE: str, VALUE: '1', REQUIRED: True},
+        SBE54tpsHardwareDataParticleKey.MANUFACTURE_DATE: {TYPE: str, VALUE: 'Jun 27 2007', REQUIRED: True},
     }
 
     ###
@@ -389,7 +389,7 @@ class SeaBird54PlusUnitTest(SeaBirdUnitTest, SeaBird54tpsMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
     def test_capabilities(self):
         """
@@ -1052,7 +1052,7 @@ class SeaBird54PlusQualificationTest(SeaBirdQualificationTest, SeaBird54tpsMixin
                 ProtocolEvent.TEST_EEPROM,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

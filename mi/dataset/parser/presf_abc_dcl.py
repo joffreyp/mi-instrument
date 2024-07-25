@@ -269,8 +269,8 @@ class PresfAbcDclParserWaveDataParticle(DataParticle):
         result.append(self._encode_value(PresfAbcDclWaveParticleKey.PTEMP_FREQUENCY,
                                          self.raw_data[PresfAbcDclWaveParticleKey.PTEMP_FREQUENCY], float))
         result.append(self._encode_value(PresfAbcDclWaveParticleKey.ABSOLUTE_PRESSURE_BURST,
-                                         map(float,
-                                             self.raw_data[PresfAbcDclWaveParticleKey.ABSOLUTE_PRESSURE_BURST]),
+                                         list(map(float,
+                                             self.raw_data[PresfAbcDclWaveParticleKey.ABSOLUTE_PRESSURE_BURST])),
                                          list))
 
         return result
@@ -434,7 +434,7 @@ class PresfAbcDclParser(SimpleParser):
                     test_wend.group(WAVE_END_GROUP_DCL_TIMESTAMP)
 
                 # check to make sure we have all the parts of a wave burst
-                wave_data_values = wave_data.values()
+                wave_data_values = list(wave_data.values())
                 if None in wave_data_values or wave_data[PresfAbcDclWaveParticleKey.ABSOLUTE_PRESSURE_BURST] == []:
 
                     log.debug("got wave end burst without complete burst data")

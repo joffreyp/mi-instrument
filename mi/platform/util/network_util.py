@@ -200,7 +200,7 @@ class NetworkUtil(object):
         @return string with the serialization
         """
         ser = "\nplatform_types:\n"
-        for platform_type, description in ndef.platform_types.iteritems():
+        for platform_type, description in ndef.platform_types.items():
             ser += "  - platform_type: %s\n" % platform_type
             ser += "    description: %s\n" % description
         ser += "\n%s" % NetworkUtil.serialize_pnode(ndef.root)
@@ -231,22 +231,22 @@ class NetworkUtil(object):
             # attributes:
             if len(pnode.attrs):
                 lines.append('  attrs:')
-                for attr_id, attr in pnode.attrs.iteritems():
+                for attr_id, attr in pnode.attrs.items():
                     lines.append('  - attr_id: %s' % attr_id)
-                    for k, v in attr.defn.iteritems():
+                    for k, v in attr.defn.items():
                         if k != "attr_id":
                             lines.append('    %s: %s' % (k, v))
 
             # ports
             if len(pnode.ports):
                 lines.append('  ports:')
-                for port_id, port in pnode.ports.iteritems():
+                for port_id, port in pnode.ports.items():
                     lines.append('  - port_id: %s' % port_id)
 
                     # instruments
                     if len(port.instruments):
                         lines.append('    instruments:')
-                        for instrument_id, instrument in port.instruments.iteritems():
+                        for instrument_id, instrument in port.instruments.items():
                             lines.append('    - instrument_id: %s' % instrument_id)
 
             if pnode.subplatforms:
@@ -257,7 +257,7 @@ class NetworkUtil(object):
             next_level = level + 1
 
         if pnode.subplatforms:
-            for sub_platform in pnode.subplatforms.itervalues():
+            for sub_platform in pnode.subplatforms.values():
                 result += NetworkUtil.serialize_pnode(sub_platform, next_level)
 
         return result
@@ -285,7 +285,7 @@ class NetworkUtil(object):
             indent_level += 1
 
         if include_subplatforms:
-            for sub_platform in pnode.subplatforms.itervalues():
+            for sub_platform in pnode.subplatforms.values():
                 s += NetworkUtil._dump_pnode(sub_platform, indent_level, only_topology)
 
         return s
@@ -313,12 +313,12 @@ class NetworkUtil(object):
             parent_str = pnode.platform_id
 
         if parent_str:
-            for sub_platform in pnode.subplatforms.itervalues():
+            for sub_platform in pnode.subplatforms.values():
                 body += '\t"%s" %s "%s"\n' % (parent_str,
                                           arrow,
                                           sub_platform.platform_id)
 
-        for sub_platform in pnode.subplatforms.itervalues():
+        for sub_platform in pnode.subplatforms.values():
             body += NetworkUtil._gen_diagram(sub_platform, style=style, root=False)
 
         result = body
@@ -352,18 +352,18 @@ class NetworkUtil(object):
             yml_name = '%s.yml' % base_name
             dot_name = '%s.dot' % base_name
             png_name = '%s.png' % base_name
-            print 'generating yml %r' % yml_name
+            print('generating yml %r' % yml_name)
             file(yml_name, 'w').write(NetworkUtil.serialize_pnode(pnode))
-            print 'generating diagram %r' % dot_name
+            print('generating diagram %r' % dot_name)
             file(dot_name, 'w').write(NetworkUtil._gen_diagram(pnode, style="dot"))
             dot_cmd = 'dot -Tpng %s -o %s' % (dot_name, png_name)
-            print 'running: %s' % dot_cmd
+            print('running: %s' % dot_cmd)
             subprocess.call(dot_cmd.split())
-            print 'opening %r' % png_name
+            print('opening %r' % png_name)
             open_cmd = 'open %s' % png_name
             subprocess.call(open_cmd.split())
-        except Exception, e:
-            print "error generating or opening diagram: %s" % str(e)
+        except Exception as e:
+            print("error generating or opening diagram: %s" % str(e))
 
     @staticmethod
     def _gen_yaml(pnode, level=0):  # pragma: no cover
@@ -420,7 +420,7 @@ class NetworkUtil(object):
             next_level = level + 1
 
         if pnode.subplatforms:
-            for sub_platform in pnode.subplatforms.itervalues():
+            for sub_platform in pnode.subplatforms.values():
                 result += NetworkUtil._gen_yaml(sub_platform, next_level)
 
         return result
@@ -508,17 +508,17 @@ class NetworkUtil(object):
             parent_node.add_subplatform(pn)
 
             # attributes:
-            _add_attrs_to_platform_node(attributes.itervalues(), pn)
+            _add_attrs_to_platform_node(iter(attributes.values()), pn)
 
             # ports:
             # TODO(OOIION-1495) the following was commented out,
             # but we need to capture the ports, at least under the current logic.
             # remove until network checkpoint needs are defined.
             # port info can be retrieve from active deployment
-            _add_ports_to_platform_node(ports.itervalues(), pn)
+            _add_ports_to_platform_node(iter(ports.values()), pn)
 
             # children:
-            for child_CFG in CFG.get("children", {}).itervalues():
+            for child_CFG in CFG.get("children", {}).values():
                 device_type = child_CFG.get("device_type", None)
                 if device_type == 'PlatformDevice':
                     build_platform_node(child_CFG, pn)

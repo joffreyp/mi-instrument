@@ -8,7 +8,7 @@
 """
 import os
 import struct
-from StringIO import StringIO
+from io import StringIO
 
 import ntplib
 from nose.plugins.attrib import attr
@@ -192,7 +192,7 @@ class DofstKWfpParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(self.parser._state[StateKey.RECORDS_READ], rec_read)
         self.assertEqual(self.state_callback_value[StateKey.RECORDS_READ], rec_read)
 
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], particle)
 
     def test_simple(self):
@@ -226,7 +226,7 @@ class DofstKWfpParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(recovered_result, [])
         self.assertEqual(recovered_parser._state[StateKey.POSITION], 33)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 33)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.recov_particle_c)
 
         #**********************************************
@@ -253,7 +253,7 @@ class DofstKWfpParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(telemetered_result, [])
         self.assertEqual(telemetered_parser._state[StateKey.POSITION], 33)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 33)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.telem_particle_c)
 
     def test_simple_pad(self):
@@ -288,7 +288,7 @@ class DofstKWfpParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(recovered_result, [])
         self.assertEqual(recovered_parser._state[StateKey.POSITION], 33)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 33)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.recov_particle_c)
 
         #**********************************************
@@ -315,7 +315,7 @@ class DofstKWfpParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(telemetered_result, [])
         self.assertEqual(telemetered_parser._state[StateKey.POSITION], 33)
         self.assertEqual(self.state_callback_value[StateKey.POSITION], 33)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], self.telem_particle_c)
 
     def test_get_many(self):

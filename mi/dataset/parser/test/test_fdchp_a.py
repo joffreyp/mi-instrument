@@ -55,7 +55,7 @@ class FdchpAParserUnitTestCase(ParserUnitTestCase):
 
             # request a few extra particles, there are 12011 in the file
             particles = parser.get_records(12020)
-            self.assertEquals(len(particles), 12011)
+            self.assertEqual(len(particles), 12011)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -65,7 +65,7 @@ class FdchpAParserUnitTestCase(ParserUnitTestCase):
 
             # there are 12011 in the file
             particles = parser.get_records(12011)
-            self.assertEquals(len(particles), 12011)
+            self.assertEqual(len(particles), 12011)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -80,7 +80,7 @@ class FdchpAParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(10)
             # confirm no particles have been returned
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -94,6 +94,6 @@ class FdchpAParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(10)
             # confirm no particles have been returned
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)
 
             self.assertEqual(self.exception_callback_value, [])

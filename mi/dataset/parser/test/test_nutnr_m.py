@@ -60,9 +60,9 @@ class NutnrMParserUnitTestCase(ParserUnitTestCase):
             particles = parser.get_records(50)
 
             # confirm we get the expected 29 particles, the last particles's header was corrupted
-            self.assertEquals(len(particles), 29)
+            self.assertEqual(len(particles), 29)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
             self.assertIsInstance(self.exception_callback_value[0], SampleException)
 
@@ -74,7 +74,7 @@ class NutnrMParserUnitTestCase(ParserUnitTestCase):
 
             # request more particles than are available
             particles = parser.get_records(100)
-            self.assertEquals(len(particles), 88)
+            self.assertEqual(len(particles), 88)
 
             self.assertEqual(self.exception_callback_value, [])
 
@@ -87,10 +87,10 @@ class NutnrMParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(3)
             # first one has the checksum error
-            self.assertEquals(len(particles), 2)
+            self.assertEqual(len(particles), 2)
 
             # make sure we get the rest of the particles as expected
             self.assert_particles(particles, "nl_bad_checksum.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], SampleException)

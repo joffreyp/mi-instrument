@@ -102,9 +102,8 @@ class PrtszAParticleKey(BaseEnum):
     PARTICLE_LOWER_SIZE_BINS = 'particle_lower_size_bins'
 
 
-class DataParticleType(BaseEnum):
+class DataParticleType(BaseEnum, metaclass=get_logging_metaclass(log_level='trace')):
     PRTSZ_A_PARTICLE_TYPE = 'prtsz_a_instrument'
-    __metaclass__ = get_logging_metaclass(log_level='trace')
 
 
 class PrtszADataParticle(DataParticle):
@@ -123,7 +122,7 @@ class PrtszADataParticle(DataParticle):
         return [{DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: None}
                 if self.raw_data[name] is None else
                 {DataParticleKey.VALUE_ID: name, DataParticleKey.VALUE: value}
-                for name, value in self.raw_data.iteritems()]
+                for name, value in self.raw_data.items()]
 
 
 class PrtszADclParser(SimpleParser):

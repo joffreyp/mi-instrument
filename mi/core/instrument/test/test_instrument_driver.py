@@ -40,7 +40,7 @@ class TestUnitInstrumentDriver(MiUnitTestCase):
         def mock_set(values, startup=True):
             assert isinstance(values, dict)
             return_string = ""
-            for key in values.keys():
+            for key in list(values.keys()):
                 return_string += "%s=%s" % (key, values[key])  # inefficient, I know
             return return_string
 
@@ -156,8 +156,8 @@ class TestUnitInstrumentDriver(MiUnitTestCase):
         thats what it is headed...
         """
         running_config = self.driver.get_cached_config()
-        self.assertEquals(running_config["foo"], 10)
-        self.assertEquals(running_config["bar"], 15)
+        self.assertEqual(running_config["foo"], 10)
+        self.assertEqual(running_config["bar"], 15)
 
     def test_apply_startup_params(self):
         """
@@ -173,29 +173,29 @@ class TestUnitInstrumentDriver(MiUnitTestCase):
         Test the metadata structure fetch
         """
         result = self.driver.get_config_metadata()
-        self.assert_(isinstance(result, dict))
+        self.assertTrue(isinstance(result, dict))
 
-        self.assert_(isinstance(result[ConfigMetadataKey.DRIVER], dict))
-        self.assert_(isinstance(result[ConfigMetadataKey.COMMANDS], dict))
-        self.assert_(isinstance(result[ConfigMetadataKey.PARAMETERS], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.DRIVER], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.COMMANDS], dict))
+        self.assertTrue(isinstance(result[ConfigMetadataKey.PARAMETERS], dict))
 
-        self.assertEquals(len(result[ConfigMetadataKey.DRIVER]), 1)
-        self.assertEquals(result[ConfigMetadataKey.DRIVER],
+        self.assertEqual(len(result[ConfigMetadataKey.DRIVER]), 1)
+        self.assertEqual(result[ConfigMetadataKey.DRIVER],
                           {DriverDictKey.VENDOR_SW_COMPATIBLE: True})
 
         # Check a few in the cmd list...the leaves in the structure are
         # tested in the cmd dict test cases
-        self.assertEquals(len(result[ConfigMetadataKey.COMMANDS]), 2)
-        self.assert_("cmd1" in result[ConfigMetadataKey.COMMANDS].keys())
-        self.assert_("cmd2" in result[ConfigMetadataKey.COMMANDS].keys())
+        self.assertEqual(len(result[ConfigMetadataKey.COMMANDS]), 2)
+        self.assertTrue("cmd1" in list(result[ConfigMetadataKey.COMMANDS].keys()))
+        self.assertTrue("cmd2" in list(result[ConfigMetadataKey.COMMANDS].keys()))
 
         # Check a few in the param list...the leaves in the structure are
         # tested in the param dict test cases
-        self.assertEquals(len(result[ConfigMetadataKey.PARAMETERS]), 4)
-        self.assert_("foo" in result[ConfigMetadataKey.PARAMETERS].keys())
-        self.assert_("bar" in result[ConfigMetadataKey.PARAMETERS].keys())
-        self.assert_("baz" in result[ConfigMetadataKey.PARAMETERS].keys())
-        self.assert_("bat" in result[ConfigMetadataKey.PARAMETERS].keys())
+        self.assertEqual(len(result[ConfigMetadataKey.PARAMETERS]), 4)
+        self.assertTrue("foo" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
+        self.assertTrue("bar" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
+        self.assertTrue("baz" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
+        self.assertTrue("bat" in list(result[ConfigMetadataKey.PARAMETERS].keys()))
 
     def test_startup_params(self):
         """

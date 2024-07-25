@@ -508,12 +508,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 # Protocol
 ################################################################################
 
-class Protocol(MenuInstrumentProtocol):
+class Protocol(MenuInstrumentProtocol, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Instrument protocol class
     Subclasses MenuInstrumentProtocol
     """
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def __init__(self, menu, prompts, newline, driver_event):
         """
@@ -736,7 +735,7 @@ class Protocol(MenuInstrumentProtocol):
         """
 
         self._go_to_root_menu()
-        for (key, val) in params.iteritems():
+        for (key, val) in params.items():
             if not Parameter.has(key):
                 raise InstrumentParameterException()
 

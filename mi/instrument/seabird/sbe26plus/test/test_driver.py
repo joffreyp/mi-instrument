@@ -155,14 +155,14 @@ class SeaBird26PlusMixin(DriverTestMixin):
     }
 
     _tide_sample_parameters = {
-        SBE26plusWaveBurstDataParticleKey.TIMESTAMP: {TYPE: unicode, VALUE: u'05 Oct 2012 01:10:54', REQUIRED: False },
+        SBE26plusWaveBurstDataParticleKey.TIMESTAMP: {TYPE: str, VALUE: '05 Oct 2012 01:10:54', REQUIRED: False },
         SBE26plusTideSampleDataParticleKey.PRESSURE: {TYPE: float, VALUE: -159.7139 },
         SBE26plusTideSampleDataParticleKey.PRESSURE_TEMP: {TYPE: float, VALUE: -8382.61 },
         SBE26plusTideSampleDataParticleKey.TEMPERATURE: {TYPE: float, VALUE: 34.6843 },
     }
 
     _wave_sample_parameters = {
-        SBE26plusWaveBurstDataParticleKey.TIMESTAMP: {TYPE: unicode, VALUE: u'05 Oct 2012 01:10:54' },
+        SBE26plusWaveBurstDataParticleKey.TIMESTAMP: {TYPE: str, VALUE: '05 Oct 2012 01:10:54' },
         SBE26plusWaveBurstDataParticleKey.PTFREQ: {TYPE: float, VALUE: 171791.359 },
         SBE26plusWaveBurstDataParticleKey.PTRAW: {TYPE: list }
     }
@@ -191,7 +191,7 @@ class SeaBird26PlusMixin(DriverTestMixin):
     }
 
     _calibration_sample_parameters = {
-        SBE26plusDeviceCalibrationDataParticleKey.PCALDATE: {TYPE: unicode, VALUE: u'02-apr-13' },
+        SBE26plusDeviceCalibrationDataParticleKey.PCALDATE: {TYPE: str, VALUE: '02-apr-13' },
         SBE26plusDeviceCalibrationDataParticleKey.PU0: {TYPE: float, VALUE: 5.100000e+00 },
         SBE26plusDeviceCalibrationDataParticleKey.PY1: {TYPE: float, VALUE: -3.910859e+03 },
         SBE26plusDeviceCalibrationDataParticleKey.PY2: {TYPE: float, VALUE: -1.070825e+04 },
@@ -208,12 +208,12 @@ class SeaBird26PlusMixin(DriverTestMixin):
         SBE26plusDeviceCalibrationDataParticleKey.FACTORY_M: {TYPE: float, VALUE: 41943.0 },
         SBE26plusDeviceCalibrationDataParticleKey.FACTORY_B: {TYPE: float, VALUE: 2796.2 },
         SBE26plusDeviceCalibrationDataParticleKey.POFFSET: {TYPE: float, VALUE: -1.374000e-01 },
-        SBE26plusDeviceCalibrationDataParticleKey.TCALDATE: {TYPE: unicode, VALUE: u'02-apr-13'},
+        SBE26plusDeviceCalibrationDataParticleKey.TCALDATE: {TYPE: str, VALUE: '02-apr-13'},
         SBE26plusDeviceCalibrationDataParticleKey.TA0: {TYPE: float, VALUE: 1.200000e-04 },
         SBE26plusDeviceCalibrationDataParticleKey.TA1: {TYPE: float, VALUE: 2.558000e-04 },
         SBE26plusDeviceCalibrationDataParticleKey.TA2: {TYPE: float, VALUE: -2.073449e-06 },
         SBE26plusDeviceCalibrationDataParticleKey.TA3: {TYPE: float, VALUE: 1.640089e-07 },
-        SBE26plusDeviceCalibrationDataParticleKey.CCALDATE: {TYPE: unicode, VALUE: u'02-apr-13', REQUIRED: False },
+        SBE26plusDeviceCalibrationDataParticleKey.CCALDATE: {TYPE: str, VALUE: '02-apr-13', REQUIRED: False },
         SBE26plusDeviceCalibrationDataParticleKey.CG: {TYPE: float, VALUE: -1.025348e+01, REQUIRED: False },
         SBE26plusDeviceCalibrationDataParticleKey.CH: {TYPE: float, VALUE: 1.557569e+00, REQUIRED: False },
         SBE26plusDeviceCalibrationDataParticleKey.CI: {TYPE: float, VALUE: -1.737200e-03, REQUIRED: False },
@@ -224,10 +224,10 @@ class SeaBird26PlusMixin(DriverTestMixin):
     }
 
     _status_sample_parameters = {
-        SBE26plusDeviceStatusDataParticleKey.DEVICE_VERSION: {TYPE: unicode, VALUE: u'6.1e' },
-        SBE26plusDeviceStatusDataParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: u'1329' },
-        SBE26plusDeviceStatusDataParticleKey.DS_DEVICE_DATE_TIME: {TYPE: unicode, VALUE: u'05 Oct 2012  17:19:27' },
-        SBE26plusDeviceStatusDataParticleKey.USER_INFO: {TYPE: unicode, VALUE: u'ooi' },
+        SBE26plusDeviceStatusDataParticleKey.DEVICE_VERSION: {TYPE: str, VALUE: '6.1e' },
+        SBE26plusDeviceStatusDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '1329' },
+        SBE26plusDeviceStatusDataParticleKey.DS_DEVICE_DATE_TIME: {TYPE: str, VALUE: '05 Oct 2012  17:19:27' },
+        SBE26plusDeviceStatusDataParticleKey.USER_INFO: {TYPE: str, VALUE: 'ooi' },
         SBE26plusDeviceStatusDataParticleKey.QUARTZ_PRESSURE_SENSOR_SERIAL_NUMBER: {TYPE: str, VALUE: '122094' },
         SBE26plusDeviceStatusDataParticleKey.QUARTZ_PRESSURE_SENSOR_RANGE: {TYPE: float, VALUE: 300 },
         SBE26plusDeviceStatusDataParticleKey.EXTERNAL_TEMPERATURE_SENSOR: {TYPE: bool, VALUE: False },
@@ -266,7 +266,7 @@ class SeaBird26PlusMixin(DriverTestMixin):
         SBE26plusDeviceStatusDataParticleKey.MAX_PERIOD_IN_AUTO_SPECTRUM: {TYPE: float, VALUE: 1.0e+06, REQUIRED: False },
         SBE26plusDeviceStatusDataParticleKey.HANNING_WINDOW_CUTOFF: {TYPE: float, VALUE: 0.10, REQUIRED: False },
         SBE26plusDeviceStatusDataParticleKey.SHOW_PROGRESS_MESSAGES: {TYPE: bool, VALUE: True, REQUIRED: False },
-        SBE26plusDeviceStatusDataParticleKey.STATUS: {TYPE: unicode, VALUE: u'stopped by user' },
+        SBE26plusDeviceStatusDataParticleKey.STATUS: {TYPE: str, VALUE: 'stopped by user' },
         SBE26plusDeviceStatusDataParticleKey.LOGGING: {TYPE: bool, VALUE: False },
     }
 
@@ -458,7 +458,7 @@ class SeaBird26PlusUnitTest(SeaBirdUnitTest, SeaBird26PlusMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
 
     def test_driver_parameters(self):
@@ -1438,7 +1438,7 @@ class SeaBird26PlusQualificationTest(SeaBirdQualificationTest, SeaBird26PlusMixi
                 ProtocolEvent.QUIT_SESSION
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
             }
 
         self.assert_capabilities(capabilities)

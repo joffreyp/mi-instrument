@@ -105,7 +105,7 @@ class AquadoppDriverTestMixinSub(DriverTestMixinSub):
 
     #this particle can be used for both the velocity particle and the diagnostic particle
     _sample_velocity_diagnostic = {
-        AquadoppVelocityDataParticleKey.TIMESTAMP: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        AquadoppVelocityDataParticleKey.TIMESTAMP: {TYPE: str, VALUE: '', REQUIRED: True},
         AquadoppVelocityDataParticleKey.ERROR: {TYPE: int, VALUE: 0, REQUIRED: True},
         AquadoppVelocityDataParticleKey.ANALOG1: {TYPE: int, VALUE: 0, REQUIRED: True},
         AquadoppVelocityDataParticleKey.BATTERY_VOLTAGE: {TYPE: int, VALUE: 0, REQUIRED: True},

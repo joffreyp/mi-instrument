@@ -125,24 +125,24 @@ class SeaBird16plusMixin(DriverTestMixin):
     }
 
     _status_parameters = {
-        SBE16StatusParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: '2.5.2', REQUIRED: True},
-        SBE16StatusParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01906914', REQUIRED: True},
-        SBE16StatusParticleKey.DATE_TIME: {TYPE: unicode, VALUE: '2014-03-20T09:09:06', REQUIRED: True},
+        SBE16StatusParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: '2.5.2', REQUIRED: True},
+        SBE16StatusParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01906914', REQUIRED: True},
+        SBE16StatusParticleKey.DATE_TIME: {TYPE: str, VALUE: '2014-03-20T09:09:06', REQUIRED: True},
         SBE16StatusParticleKey.VBATT: {TYPE: float, VALUE: 13.0, REQUIRED: True},
         SBE16StatusParticleKey.VLITH: {TYPE: float, VALUE: 8.6, REQUIRED: True},
         SBE16StatusParticleKey.IOPER: {TYPE: float, VALUE: 51.1, REQUIRED: True},
         SBE16StatusParticleKey.IPUMP: {TYPE: float, VALUE: 145.6, REQUIRED: True},
-        SBE16StatusParticleKey.LOGGING_STATUS: {TYPE: unicode, VALUE: 'not logging', REQUIRED: True},
+        SBE16StatusParticleKey.LOGGING_STATUS: {TYPE: str, VALUE: 'not logging', REQUIRED: True},
         SBE16StatusParticleKey.SAMPLES: {TYPE: int, VALUE: 15, REQUIRED: True},
         SBE16StatusParticleKey.MEM_FREE: {TYPE: int, VALUE: 2990809, REQUIRED: True},
         SBE16StatusParticleKey.SAMPLE_INTERVAL: {TYPE: int, VALUE: 10, REQUIRED: False},
         SBE16StatusParticleKey.MEASUREMENTS_PER_SAMPLE: {TYPE: int, VALUE: 4, REQUIRED: False},
-        SBE16StatusParticleKey.PUMP_MODE: {TYPE: unicode, VALUE: 'no', REQUIRED: True},
+        SBE16StatusParticleKey.PUMP_MODE: {TYPE: str, VALUE: 'no', REQUIRED: True},
         SBE16StatusParticleKey.DELAY_BEFORE_SAMPLING: {TYPE: float, VALUE: 15.0, REQUIRED: True},
         SBE16StatusParticleKey.DELAY_AFTER_SAMPLING: {TYPE: float, VALUE: 15.0, REQUIRED: True},
         SBE16StatusParticleKey.TX_REAL_TIME: {TYPE: int, VALUE: 1, REQUIRED: False},
         SBE16StatusParticleKey.BATTERY_CUTOFF: {TYPE: float, VALUE: 7.5, REQUIRED: True},
-        SBE16StatusParticleKey.PRESSURE_SENSOR: {TYPE: unicode, VALUE: 'strain-0', REQUIRED: True},
+        SBE16StatusParticleKey.PRESSURE_SENSOR: {TYPE: str, VALUE: 'strain-0', REQUIRED: True},
         SBE16StatusParticleKey.RANGE: {TYPE: float, VALUE: 160, REQUIRED: False},
         SBE16StatusParticleKey.SBE38: {TYPE: int, VALUE: 0, REQUIRED: True},
         SBE16StatusParticleKey.SBE50: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -156,16 +156,16 @@ class SeaBird16plusMixin(DriverTestMixin):
         SBE16StatusParticleKey.EXT_VOLT_4: {TYPE: int, VALUE: 0, REQUIRED: True},
         SBE16StatusParticleKey.EXT_VOLT_5: {TYPE: int, VALUE: 0, REQUIRED: True},
         SBE16StatusParticleKey.ECHO_CHARACTERS: {TYPE: int, VALUE: 1, REQUIRED: True},
-        SBE16StatusParticleKey.OUTPUT_FORMAT: {TYPE: unicode, VALUE: 'raw HEX', REQUIRED: True},
+        SBE16StatusParticleKey.OUTPUT_FORMAT: {TYPE: str, VALUE: 'raw HEX', REQUIRED: True},
         SBE16StatusParticleKey.OUTPUT_SALINITY: {TYPE: int, VALUE: 0, REQUIRED: False},
         SBE16StatusParticleKey.OUTPUT_SOUND_VELOCITY: {TYPE: int, VALUE: 0, REQUIRED: False},
         SBE16StatusParticleKey.SERIAL_SYNC_MODE: {TYPE: int, VALUE: 0, REQUIRED: False},
     }
 
     _calibration_parameters_strain = {
-        SBE16CalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: unicode, VALUE: '3313899', REQUIRED: True},
+        SBE16CalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: str, VALUE: '3313899', REQUIRED: True},
         SBE16CalibrationParticleKey.PRES_RANGE: {TYPE: int, VALUE: 508, REQUIRED: True},
-        SBE16CalibrationParticleKey.PRES_CAL_DATE: {TYPE: unicode, VALUE: '06-Oct-11', REQUIRED: True},
+        SBE16CalibrationParticleKey.PRES_CAL_DATE: {TYPE: str, VALUE: '06-Oct-11', REQUIRED: True},
         SBE16CalibrationParticleKey.PA0: {TYPE: float, VALUE: -3.689246e-02, REQUIRED: True},
         SBE16CalibrationParticleKey.PA1: {TYPE: float, VALUE: 1.545570e-03, REQUIRED: True},
         SBE16CalibrationParticleKey.PA2: {TYPE: float, VALUE: 6.733197e-12, REQUIRED: True},
@@ -179,16 +179,16 @@ class SeaBird16plusMixin(DriverTestMixin):
         SBE16CalibrationParticleKey.PTEMPA1: {TYPE: float, VALUE: 5.424624e+01, REQUIRED: True},
         SBE16CalibrationParticleKey.PTEMPA2: {TYPE: float, VALUE: -2.278113e-01, REQUIRED: True},
         SBE16CalibrationParticleKey.POFFSET: {TYPE: float, VALUE: 0.000000e+00, REQUIRED: True},
-        SBE16CalibrationParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: "SBE19plus", REQUIRED: True},
-        SBE16CalibrationParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01906914', REQUIRED: True},
-        SBE16CalibrationParticleKey.DATE_TIME: {TYPE: unicode, VALUE: "09-Oct-11", REQUIRED: True},
-        SBE16CalibrationParticleKey.TEMP_CAL_DATE: {TYPE: unicode, VALUE: "09-Oct-11", REQUIRED: True},
+        SBE16CalibrationParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: "SBE19plus", REQUIRED: True},
+        SBE16CalibrationParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01906914', REQUIRED: True},
+        SBE16CalibrationParticleKey.DATE_TIME: {TYPE: str, VALUE: "09-Oct-11", REQUIRED: True},
+        SBE16CalibrationParticleKey.TEMP_CAL_DATE: {TYPE: str, VALUE: "09-Oct-11", REQUIRED: True},
         SBE16CalibrationParticleKey.TA0: {TYPE: float, VALUE: 1.254755e-03, REQUIRED: True},
         SBE16CalibrationParticleKey.TA1: {TYPE: float, VALUE: 2.758871e-04, REQUIRED: True},
         SBE16CalibrationParticleKey.TA2: {TYPE: float, VALUE: -1.368268e-06, REQUIRED: True},
         SBE16CalibrationParticleKey.TA3: {TYPE: float, VALUE: 1.910795e-07, REQUIRED: True},
         SBE16CalibrationParticleKey.TOFFSET: {TYPE: float, VALUE: 0.000000e+00, REQUIRED: True},
-        SBE16CalibrationParticleKey.COND_CAL_DATE: {TYPE: unicode, VALUE: '09-Oct-11', REQUIRED: True},
+        SBE16CalibrationParticleKey.COND_CAL_DATE: {TYPE: str, VALUE: '09-Oct-11', REQUIRED: True},
         SBE16CalibrationParticleKey.CONDG: {TYPE: float, VALUE: -9.761799e-01, REQUIRED: True},
         SBE16CalibrationParticleKey.CONDH: {TYPE: float, VALUE: 1.369994e-01, REQUIRED: True},
         SBE16CalibrationParticleKey.CONDI: {TYPE: float, VALUE: -3.523860e-04, REQUIRED: True},
@@ -223,9 +223,9 @@ class SeaBird16plusMixin(DriverTestMixin):
     }
 
     _calibration_parameters_quartz = {
-        SBE16CalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: unicode, VALUE: '3313899', REQUIRED: True},
+        SBE16CalibrationParticleKey.PRES_SERIAL_NUMBER: {TYPE: str, VALUE: '3313899', REQUIRED: True},
 
-        SBE16CalibrationParticleKey.PRES_CAL_DATE: {TYPE: unicode, VALUE: '06-Oct-11', REQUIRED: True},
+        SBE16CalibrationParticleKey.PRES_CAL_DATE: {TYPE: str, VALUE: '06-Oct-11', REQUIRED: True},
         SBE16CalibrationParticleKey.PC1: {TYPE: float, VALUE: -4.642673e+03, REQUIRED: True},
         SBE16CalibrationParticleKey.PC2: {TYPE: float, VALUE: -4.611640e-03, REQUIRED: True},
         SBE16CalibrationParticleKey.PC3: {TYPE: float, VALUE: 8.921190e-04, REQUIRED: True},
@@ -237,16 +237,16 @@ class SeaBird16plusMixin(DriverTestMixin):
         SBE16CalibrationParticleKey.PT4: {TYPE: float, VALUE: 1.705490e-09, REQUIRED: True},
         SBE16CalibrationParticleKey.PSLOPE: {TYPE: float, VALUE: -1.000000e+00, REQUIRED: True},
         SBE16CalibrationParticleKey.POFFSET: {TYPE: float, VALUE: 0.000000e+00, REQUIRED: True},
-        SBE16CalibrationParticleKey.FIRMWARE_VERSION: {TYPE: unicode, VALUE: "SBE19plus", REQUIRED: True},
-        SBE16CalibrationParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: '01906914', REQUIRED: True},
-        SBE16CalibrationParticleKey.DATE_TIME: {TYPE: unicode, VALUE: "09-Oct-11", REQUIRED: True},
-        SBE16CalibrationParticleKey.TEMP_CAL_DATE: {TYPE: unicode, VALUE: "09-Oct-11", REQUIRED: True},
+        SBE16CalibrationParticleKey.FIRMWARE_VERSION: {TYPE: str, VALUE: "SBE19plus", REQUIRED: True},
+        SBE16CalibrationParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: '01906914', REQUIRED: True},
+        SBE16CalibrationParticleKey.DATE_TIME: {TYPE: str, VALUE: "09-Oct-11", REQUIRED: True},
+        SBE16CalibrationParticleKey.TEMP_CAL_DATE: {TYPE: str, VALUE: "09-Oct-11", REQUIRED: True},
         SBE16CalibrationParticleKey.TA0: {TYPE: float, VALUE: 1.254755e-03, REQUIRED: True},
         SBE16CalibrationParticleKey.TA1: {TYPE: float, VALUE: 2.758871e-04, REQUIRED: True},
         SBE16CalibrationParticleKey.TA2: {TYPE: float, VALUE: -1.368268e-06, REQUIRED: True},
         SBE16CalibrationParticleKey.TA3: {TYPE: float, VALUE: 1.910795e-07, REQUIRED: True},
         SBE16CalibrationParticleKey.TOFFSET: {TYPE: float, VALUE: 0.000000e+00, REQUIRED: True},
-        SBE16CalibrationParticleKey.COND_CAL_DATE: {TYPE: unicode, VALUE: '09-Oct-11', REQUIRED: True},
+        SBE16CalibrationParticleKey.COND_CAL_DATE: {TYPE: str, VALUE: '09-Oct-11', REQUIRED: True},
         SBE16CalibrationParticleKey.CONDG: {TYPE: float, VALUE: -9.761799e-01, REQUIRED: True},
         SBE16CalibrationParticleKey.CONDH: {TYPE: float, VALUE: 1.369994e-01, REQUIRED: True},
         SBE16CalibrationParticleKey.CONDI: {TYPE: float, VALUE: -3.523860e-04, REQUIRED: True},
@@ -531,7 +531,7 @@ class Sbe16plusUnitTestCase(InstrumentDriverUnitTestCase, SeaBird16plusMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
 
 ###############################################################################
@@ -883,7 +883,7 @@ class Sbe16plusIntegrationTestCase(InstrumentDriverIntegrationTestCase, SeaBird1
         self.assert_initialize_driver()
         metadata = self.driver_client.cmd_dvr('get_config_metadata')
         log.debug("Metadata: %s", metadata)
-        self.assertTrue(isinstance(metadata, basestring))
+        self.assertTrue(isinstance(metadata, str))
 
 
 ###############################################################################
@@ -1021,7 +1021,7 @@ class Sbe16plusQualTestCase(InstrumentDriverQualificationTestCase, SeaBird16plus
                 ProtocolEvent.START_AUTOSAMPLE,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

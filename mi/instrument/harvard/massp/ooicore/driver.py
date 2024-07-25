@@ -158,13 +158,12 @@ class ScheduledJob(BaseEnum):
 ###############################################################################
 
 # noinspection PyProtectedMember,PyMethodMayBeStatic
-class InstrumentDriver(SingleConnectionInstrumentDriver):
+class InstrumentDriver(SingleConnectionInstrumentDriver, metaclass=META_LOGGER):
     """
     InstrumentDriver subclass
     Subclasses SingleConnectionInstrumentDriver with connection state
     machine.
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, evt_callback, refdes=None):
         """
@@ -218,7 +217,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
     def _handler_inst_disconnected_connect(self, *args, **kwargs):
         self._build_protocol()
         self.set_init_params({})
-        for name, connection in self._connection.items():
+        for name, connection in list(self._connection.items()):
             self._slave_protocols[name]._connection = connection
 
         return DriverConnectionState.CONNECTED, None
@@ -234,7 +233,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
         @return (next_state, result) tuple, (DriverConnectionState.CONNECTED, None) if successful.
         """
         try:
-            for connection in self._connection.values():
+            for connection in list(self._connection.values()):
                 connection.init_comms()
             next_state = DriverConnectionState.INST_DISCONNECTED
         except InstrumentConnectionException as e:
@@ -258,7 +257,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
         Disconnect to the device via port agent / logger and destroy the protocol FSM.
         @returns: (next_state, result) tuple, (DriverConnectionState.DISCONNECTED, None) if successful.
         """
-        for connection in self._connection.values():
+        for connection in list(self._connection.values()):
             connection.stop_comms()
 
         self._destroy_protocol()
@@ -270,7 +269,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
         The device connection was lost. Stop comms, destroy protocol FSM and revert to disconnected state.
         @returns: (next_state, result) tuple, (DriverConnectionState.DISCONNECTED, None).
         """
-        for connection in self._connection.values():
+        for connection in list(self._connection.values()):
             connection.stop_comms()
 
         self._destroy_protocol()
@@ -315,7 +314,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 
         connections = {}
 
-        for name, config in all_configs.items():
+        for name, config in list(all_configs.items()):
             if not isinstance(config, dict):
                 continue
             if 'mock_port_agent' in config:
@@ -329,7 +328,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
                     port = config['port']
                     cmd_port = config.get('cmd_port')
 
-                    if isinstance(addr, basestring) and isinstance(port, int) and len(addr) > 0:
+                    if isinstance(addr, str) and isinstance(port, int) and len(addr) > 0:
                         connections[name] = PortAgentClient(addr, port, cmd_port,
                                                             self._massp_got_data(name), self._lost_connection_callback)
                     else:
@@ -376,12 +375,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal,PyProtectedMember
-class Protocol(InstrumentProtocol):
+class Protocol(InstrumentProtocol, metaclass=META_LOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, driver_event):
         """
@@ -668,7 +666,7 @@ class Protocol(InstrumentProtocol):
         Send the same event to all slave protocols.
         @return: List of (name, result) for a slave protocols
         """
-        return [(name, slave._protocol_fsm.on_event(event)) for name, slave in self._slave_protocols.items()]
+        return [(name, slave._protocol_fsm.on_event(event)) for name, slave in list(self._slave_protocols.items())]
 
     def _send_event_to_slave(self, name, event):
         """
@@ -692,7 +690,7 @@ class Protocol(InstrumentProtocol):
         @param command: Direct access command received
         """
         err_string = 'Invalid command.  Command must be in the following format: "target:command' + NEWLINE + \
-                     'Valid targets are: %r' % self._slave_protocols.keys()
+                     'Valid targets are: %r' % list(self._slave_protocols.keys())
         try:
             target, command = command.split(DA_COMMAND_DELIMITER, 1)
             target = target.lower()
@@ -784,7 +782,7 @@ class Protocol(InstrumentProtocol):
                        ConfigMetadataKey.COMMANDS: self._cmd_dict.generate_dict(),
                        ConfigMetadataKey.PARAMETERS: self._param_dict.generate_dict()}
 
-        for protocol in self._slave_protocols.values():
+        for protocol in list(self._slave_protocols.values()):
             return_dict[ConfigMetadataKey.PARAMETERS].update(protocol._param_dict.generate_dict())
             return_dict[ConfigMetadataKey.COMMANDS].update(protocol._cmd_dict.generate_dict())
 
@@ -800,7 +798,7 @@ class Protocol(InstrumentProtocol):
         res_cmds = self._filter_capabilities(res_cmds)
         res_params = self._param_dict.get_keys()
 
-        for protocol in self._slave_protocols.values():
+        for protocol in list(self._slave_protocols.values()):
             res_params.extend(protocol._param_dict.get_keys())
 
         return res_cmds, res_params
@@ -882,7 +880,7 @@ class Protocol(InstrumentProtocol):
         target_state = (ProtocolState.COMMAND, ProtocolState.COMMAND, ProtocolState.COMMAND)
         success = False
         # wait for the slave protocols to discover
-        for attempt in xrange(5):
+        for attempt in range(5):
             slave_states = self._get_slave_states()
             if slave_states == target_state:
                 success = True
@@ -915,7 +913,7 @@ class Protocol(InstrumentProtocol):
             params = [Parameter.ALL]
             _, result = self._handler_get(params, **kwargs)
             result_dict.update(result)
-            for protocol in self._slave_protocols.values():
+            for protocol in list(self._slave_protocols.values()):
                 _, result = protocol._handler_get(params, **kwargs)
                 result_dict.update(result)
 

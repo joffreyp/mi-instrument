@@ -252,7 +252,7 @@ class DostaAbcdjmDclParserUnitTestCase(ParserUnitTestCase):
         result = parser.get_records(1)
 
         self.assertEqual(result, [])
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         in_file.close()
 
         log.debug('===== START TEST NO SENSOR DATA TELEMETERED =====')
@@ -263,7 +263,7 @@ class DostaAbcdjmDclParserUnitTestCase(ParserUnitTestCase):
         result = parser.get_records(1)
 
         self.assertEqual(result, [])
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         in_file.close()
 
         log.debug('===== END TEST SENSOR DATA =====')
@@ -285,7 +285,7 @@ class DostaAbcdjmDclParserUnitTestCase(ParserUnitTestCase):
         log.debug("Num particles: %d", len(particles))
 
         self.assert_particles(particles, "rec_20010121.dosta1.yml", RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         in_file.close()
         log.debug('===== START TEST MANY WITH YML TELEMETERED =====')
@@ -297,7 +297,7 @@ class DostaAbcdjmDclParserUnitTestCase(ParserUnitTestCase):
         log.debug("Num particles: %d", len(particles))
 
         self.assert_particles(particles, "tel_20010121.dosta1.yml", RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         in_file.close()
         log.debug('===== END TEST MANY WITH YML =====')

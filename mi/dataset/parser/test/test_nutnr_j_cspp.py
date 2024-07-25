@@ -185,7 +185,7 @@ class NutnrJCsppParserUnitTestCase(ParserUnitTestCase):
         self.assertEqual(len(self.exception_callback_value), 5)
 
         for exception in self.exception_callback_value:
-            self.assert_(isinstance(exception, RecoverableSampleException))
+            self.assertTrue(isinstance(exception, RecoverableSampleException))
 
     def test_missing_source_file(self):
         """
@@ -205,7 +205,7 @@ class NutnrJCsppParserUnitTestCase(ParserUnitTestCase):
 
         # confirm an exception occurred
         self.assertEqual(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         stream_handle.close()
 
@@ -227,7 +227,7 @@ class NutnrJCsppParserUnitTestCase(ParserUnitTestCase):
 
         # confirm an exception occurred
         self.assertEqual(len(self.exception_callback_value), 1)
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         stream_handle.close()
 
@@ -296,7 +296,7 @@ class NutnrJCsppParserUnitTestCase(ParserUnitTestCase):
 
         # check all the values against expected results.
         self.assert_particles(particles, '11079364_SNA_SNA_recov.yml', RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
         stream_handle.close()
 
         # Telemetered

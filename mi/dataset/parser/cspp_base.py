@@ -325,7 +325,7 @@ class CsppParser(SimpleParser):
         header_part_value = header_part_match.group(
             HeaderPartMatchesGroupNumber.HEADER_PART_MATCH_GROUP_VALUE)
 
-        if header_part_key in self._header_state.keys():
+        if header_part_key in list(self._header_state.keys()):
             self._header_state[header_part_key] = string.rstrip(header_part_value)
 
     def _process_line_not_containing_data_record_or_header_part(self, line):

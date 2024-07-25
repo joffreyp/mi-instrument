@@ -149,6 +149,6 @@ class DbgPdbgCsppParserUnitTestCase(ParserUnitTestCase):
 
         stream_handle.close()
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
 

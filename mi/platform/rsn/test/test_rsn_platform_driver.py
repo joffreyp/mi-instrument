@@ -90,7 +90,7 @@ class TestRsnPlatformDriver(MiUnitTestCase, HelperTestMixin):
 
     def _ping(self):
         result = self._plat_driver.ping()
-        self.assertEquals("PONG", result)
+        self.assertEqual("PONG", result)
 
     def _get_attribute_values(self):
         attrNames = self.ATTR_NAMES
@@ -107,7 +107,7 @@ class TestRsnPlatformDriver(MiUnitTestCase, HelperTestMixin):
 
     def test_ping(self):
         response = self._plat_driver.ping()
-        self.assertEquals(response, 'PONG')
+        self.assertEqual(response, 'PONG')
 
 
     def test_getting_attribute_values(self):
@@ -117,28 +117,28 @@ class TestRsnPlatformDriver(MiUnitTestCase, HelperTestMixin):
         port_id = 'J08-IP4'
         response = self._plat_driver.turn_on_port(port_id, 'Testing')
         self.assertTrue(type({}) == type(response))
-        self.assertEquals(response.keys(), [port_id])
-        self.assertEquals(response[port_id], NormalResponse.PORT_TURNED_ON)
+        self.assertEqual(list(response.keys()), [port_id])
+        self.assertEqual(response[port_id], NormalResponse.PORT_TURNED_ON)
 
 
     def test_turn_off_port(self):
         port_id = 'J08-IP4'
         response = self._plat_driver.turn_off_port(port_id, 'Testing')
         self.assertTrue(type({}) == type(response))
-        self.assertEquals(response.keys(), [port_id])
-        self.assertEquals(response[port_id], NormalResponse.PORT_TURNED_OFF)
+        self.assertEqual(list(response.keys()), [port_id])
+        self.assertEqual(response[port_id], NormalResponse.PORT_TURNED_OFF)
 
         response = self._plat_driver.turn_off_port(port_id, 'Testing')
         self.assertTrue(type({}) == type(response))
-        self.assertEquals(response.keys(), [port_id])
-        self.assertEquals(response[port_id], NormalResponse.PORT_ALREADY_OFF)
+        self.assertEqual(list(response.keys()), [port_id])
+        self.assertEqual(response[port_id], NormalResponse.PORT_ALREADY_OFF)
 
     def test_set_overcurrent_limit(self):
         port_id = 'J08-IP4'
         response = self._plat_driver.set_overcurrent_limit(port_id, 40000, 2000, 'Testing')
         self.assertTrue(type({}) == type(response))
-        self.assertEquals(response.keys(), [port_id])
-        self.assertEquals(response[port_id], NormalResponse.OVER_CURRENT_SET)
+        self.assertEqual(list(response.keys()), [port_id])
+        self.assertEqual(response[port_id], NormalResponse.OVER_CURRENT_SET)
 
     def test_get_available_missions(self):
         response = self._plat_driver.get_available_missions()
@@ -146,7 +146,7 @@ class TestRsnPlatformDriver(MiUnitTestCase, HelperTestMixin):
 
     def test_get_mission_status(self):
         response = self._plat_driver.get_mission_status()
-        self.assertIsInstance(response, basestring)
+        self.assertIsInstance(response, str)
 
     def test_start_profiler_mission(self):
         missions = self._plat_driver.get_available_missions()
@@ -154,15 +154,15 @@ class TestRsnPlatformDriver(MiUnitTestCase, HelperTestMixin):
         self.assertTrue(len(missions) > 0)
 
         response = self._plat_driver.start_profiler_mission(missions[0], 'Testing')
-        self.assertEquals(response, NormalResponse.MISSION_STARTED)
+        self.assertEqual(response, NormalResponse.MISSION_STARTED)
 
     def test_stop_mission(self):
         error_response = self._plat_driver.stop_profiler_mission('stop', 'Testing')
-        self.assertEquals(error_response, InvalidResponse.FLAG)
+        self.assertEqual(error_response, InvalidResponse.FLAG)
 
         response = self._plat_driver.stop_profiler_mission('pause', 'Testing')
-        self.assertEquals(response, NormalResponse.MISSION_STOPPED)
+        self.assertEqual(response, NormalResponse.MISSION_STOPPED)
         response = self._plat_driver.stop_profiler_mission('returntohome', 'Testing')
-        self.assertEquals(response, NormalResponse.MISSION_STOPPED)
+        self.assertEqual(response, NormalResponse.MISSION_STOPPED)
         response = self._plat_driver.stop_profiler_mission('returntodock', 'Testing')
-        self.assertEquals(response, NormalResponse.MISSION_STOPPED)
+        self.assertEqual(response, NormalResponse.MISSION_STOPPED)

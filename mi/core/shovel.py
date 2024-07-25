@@ -17,9 +17,9 @@ from threading import Thread
 
 import qpid.messaging as qm
 from docopt import docopt
-from kombu import Connection, Queue, Exchange
+from kombu import Connection, Exchange, Queue
+from kombu.exceptions import ChannelError
 from kombu.mixins import ConsumerMixin
-from librabbitmq import ChannelError
 from mi.core.log import LoggerManager
 from mi.logging import log
 

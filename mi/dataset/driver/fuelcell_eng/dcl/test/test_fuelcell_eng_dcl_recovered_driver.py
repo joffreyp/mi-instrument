@@ -33,7 +33,7 @@ class SampleTest(unittest.TestCase):
         log.debug("SAMPLES: %s", particle_data_handler._samples)
         log.debug("FAILURE: %s", particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, False)
+        self.assertEqual(particle_data_handler._failure, False)
 
 
 if __name__ == '__main__':

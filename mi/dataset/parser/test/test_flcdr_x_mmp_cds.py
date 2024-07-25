@@ -130,7 +130,7 @@ class FlcdrXMmpCdsParserUnitTestCase(ParserUnitTestCase):
             parser.get_records(1)
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_bad_data_two(self):
         """
@@ -144,6 +144,6 @@ class FlcdrXMmpCdsParserUnitTestCase(ParserUnitTestCase):
             parser.get_records(1)
 
             self.assertTrue(len(self.exception_callback_value) >= 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
 

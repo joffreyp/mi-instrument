@@ -21,13 +21,13 @@ def text(label, default=None):
     if( default ):
         display += " (default: " + str(default) + ")"
 
-    input = raw_input( display + ": " )
+    input = input( display + ": " )
 
     if input == '' and default:
         input = default
 
     if input == '':
-        print "%s is a required field" % label
+        print("%s is a required field" % label)
         return text(label, default)
 
     return input
@@ -40,15 +40,15 @@ def multiline(label, default):
     @retval multiline string input from user
     """
     if( default ):
-        print label + " is currently:\n" + default
+        print(label + " is currently:\n" + default)
 
     user_input = []
-    entry = raw_input( label + " (type 'done' on its own line end input. enter to keep current): \n" )
+    entry = input( label + " (type 'done' on its own line end input. enter to keep current): \n" )
 
     if entry:
         while entry != 'done':
             user_input.append(entry)
-            entry = raw_input("")
+            entry = input("")
 
     user_input = "\n" . join(user_input)
 
@@ -56,7 +56,7 @@ def multiline(label, default):
         user_input = default
 
     if user_input == '':
-        print "%s is required" % label
+        print("%s is required" % label)
         return multiline(label, default)
 
     return user_input
@@ -67,7 +67,7 @@ def yes_no(prompt):
     @brief prompt and read a yes or no answer from the user
     @retval True if yes False if no
     """
-    answer = raw_input( prompt + ": " )
+    answer = input( prompt + ": " )
     answer = answer.lower();
 
     if( answer == 'y' or answer == 'yes' ):

@@ -162,15 +162,15 @@ class Metadata(mi.idk.metadata.Metadata):
         """
         @brief Pretty print the current metadata object to STDOUT
         """
-        print( "Driver Path: " + self.driver_path )
-        print( "Driver Name: " + self.driver_name )
-        print( "Author: " + self.author )
-        print( "Email: " + self.email )
-        print( "Release Notes: \n" + self.notes )
-        print( "Driver Version: \n" + self.version )
-        print( "Driver Constructor: \n" + self.constructor )
-        print( "Driver Entry Point Group: \n" + self.entry_point_group )
-        print( "Driver Versioned Constructor: \n" + self.versioned_constructor )
+        print(( "Driver Path: " + self.driver_path ))
+        print(( "Driver Name: " + self.driver_name ))
+        print(( "Author: " + self.author ))
+        print(( "Email: " + self.email ))
+        print(( "Release Notes: \n" + self.notes ))
+        print(( "Driver Version: \n" + self.version ))
+        print(( "Driver Constructor: \n" + self.constructor ))
+        print(( "Driver Entry Point Group: \n" + self.entry_point_group ))
+        print(( "Driver Versioned Constructor: \n" + self.versioned_constructor ))
 
     def serialize(self):
         """

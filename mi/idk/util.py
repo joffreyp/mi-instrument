@@ -56,7 +56,7 @@ def get_dict_value(dictobj, keys, default=None):
         keys = [keys]
 
     for k in keys:
-        if dictobj.has_key(k):
+        if k in dictobj:
             return dictobj[k]
 
     return default

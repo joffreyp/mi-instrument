@@ -185,14 +185,14 @@ class TestUnitDataParticle(MiUnitTestCase):
 
         test_particle.set_internal_timestamp(self.sample_internal_timestamp)
         fetched_time = test_particle.get_value(DataParticleKey.INTERNAL_TIMESTAMP)
-        self.assertEquals(self.sample_internal_timestamp, fetched_time)
+        self.assertEqual(self.sample_internal_timestamp, fetched_time)
 
         now = time.time()
         ntptime = ntplib.system_to_ntp_time(now)
 
         test_particle.set_internal_timestamp(unix_time=now)
         fetched_time = test_particle.get_value(DataParticleKey.INTERNAL_TIMESTAMP)
-        self.assertEquals(ntptime, fetched_time)
+        self.assertEqual(ntptime, fetched_time)
 
         self.assertRaises(InstrumentParameterException, test_particle.set_internal_timestamp)
 
@@ -209,7 +209,7 @@ class TestUnitDataParticle(MiUnitTestCase):
         test_particle.set_value(DataParticleKey.INTERNAL_TIMESTAMP,
                                 new_time)
         fetched_time = test_particle.get_value(DataParticleKey.INTERNAL_TIMESTAMP)
-        self.assertEquals(new_time, fetched_time)
+        self.assertEqual(new_time, fetched_time)
 
         self.assertRaises(ReadOnlyException, test_particle.set_value,
                           DataParticleKey.PKT_VERSION, 2)

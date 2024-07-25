@@ -500,7 +500,7 @@ class SBE26plusStatisticsDataParticle(DataParticle):
                 salinity = float(match.group(3))
                 density = float(match.group(4))
 
-            for (key, matcher) in single_var_matchers.items():
+            for (key, matcher) in list(single_var_matchers.items()):
                 match = single_var_matchers[key].match(line)
                 if match:
                     if key in ["nAvgBand", "wave integration time", "number of waves"]:
@@ -732,16 +732,16 @@ class SBE26plusDeviceCalibrationDataParticle(DataParticle):
         result = []  # Final storage for particle
         vals = {}  # intermediate storage for particle values so they can be set to null first.
 
-        for (key, (matcher, l_func)) in single_var_matchers.iteritems():
+        for (key, (matcher, l_func)) in single_var_matchers.items():
             vals[key] = None
 
         for line in self.raw_data.split(NEWLINE):
-            for (key, (matcher, l_func)) in single_var_matchers.iteritems():
+            for (key, (matcher, l_func)) in single_var_matchers.items():
                 match = matcher.match(line)
                 if match:
                     vals[key] = l_func(match)
 
-        for (key, val) in vals.iteritems():
+        for (key, val) in vals.items():
             result.append({DataParticleKey.VALUE_ID: key, DataParticleKey.VALUE: val})
 
         return result
@@ -1011,15 +1011,15 @@ class SBE26plusDeviceStatusDataParticle(DataParticle):
         result = []  # Final storage for particle
         vals = {}  # intermediate storage for particle values so they can be set to null first.
 
-        for (key, (matcher, l_func)) in single_var_matchers.iteritems():
+        for (key, (matcher, l_func)) in single_var_matchers.items():
             vals[key] = None
         for line in self.raw_data.split(NEWLINE):
-            for (key, (matcher, l_func)) in single_var_matchers.iteritems():
+            for (key, (matcher, l_func)) in single_var_matchers.items():
                 match = matcher.match(line)
                 if match:
                     vals[key] = l_func(match)
 
-        for (key, val) in vals.iteritems():
+        for (key, val) in vals.items():
             result.append({DataParticleKey.VALUE_ID: key, DataParticleKey.VALUE: val})
 
         return result
@@ -1373,7 +1373,7 @@ class Protocol(SeaBirdProtocol):
         log.debug("General Set Params: %s" % set_params)
 
         if set_params != {}:
-            for (key, val) in set_params.iteritems():
+            for (key, val) in set_params.items():
                 log.debug("KEY = " + str(key) + " VALUE = " + str(val))
                 result = self._do_cmd_resp(InstrumentCmds.SET, key, val, **kwargs)
 
@@ -1449,7 +1449,7 @@ class Protocol(SeaBirdProtocol):
         log.debug("_build_setsampling_command setting _sampling_args")
         self._sampling_args = args[0]
 
-        for (arg, val) in self._sampling_args.items():
+        for (arg, val) in list(self._sampling_args.items()):
             # assert int
             if arg in [Parameter.WAVE_SAMPLES_PER_BURST,
                        Parameter.TIDE_INTERVAL,
@@ -1674,7 +1674,7 @@ class Protocol(SeaBirdProtocol):
         # Verify that paramaters set via set are matching in the latest parameter scan.
 
         device_parameters = self._param_dict.get_config()
-        for k in self._sampling_args.keys():
+        for k in list(self._sampling_args.keys()):
             try:
                 log.debug("self._sampling_args " + k + " = " + str(self._sampling_args[k]))
             except:
@@ -1714,7 +1714,7 @@ class Protocol(SeaBirdProtocol):
                    Parameter.MAX_PERIOD_IN_AUTO_SPECTRUM,
                    Parameter.HANNING_WINDOW_CUTOFF]
 
-        for (key, value) in params.iteritems():
+        for (key, value) in params.items():
             if key in ss_keys:
                 ss_params[key] = value
             else:

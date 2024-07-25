@@ -127,11 +127,11 @@ class PlatformDriver(PlatformDriver):
 
         self._instr_port_map = {}
         ports = driver_config['ports']
-        for port_id, port_attrs in ports.iteritems():
+        for port_id, port_attrs in ports.items():
             if 'instruments' not in port_attrs:
                 continue
             instruments = port_attrs['instruments']
-            for instr_id, instr_attrs in instruments.iteritems():
+            for instr_id, instr_attrs in instruments.items():
                 if instr_id in self._instr_port_map:
                     msg = "%r: instrument=%r already associated with port=%r" % (
                         self._platform_id, instr_id, port_id)
@@ -180,7 +180,7 @@ class PlatformDriver(PlatformDriver):
         # port info can be retrieve from active deployment
         #for k,v in ports_dict.iteritems():
         #    ports.append(v['port_id'])
-        for k,v in parameters.iteritems():
+        for k,v in parameters.items():
             read_write = v.get('read_write', None)
             if read_write == 'write':
                 v['visibility'] = 'READ_WRITE'
@@ -342,7 +342,7 @@ class PlatformDriver(PlatformDriver):
         """
         Gets the IDs of my sub-platforms.
         """
-        return self._pnode.subplatforms.keys()
+        return list(self._pnode.subplatforms.keys())
 
     def get_attributes(self):
         attrs = self._driver_config.get('attributes', {})

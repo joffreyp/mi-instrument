@@ -159,10 +159,10 @@ class AdcptAcfgmPd8ParserUnitTestCase(ParserUnitTestCase):
         parser.get_records(66)
 
         for i in range(len(self.exception_callback_value)):
-            self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
             log.debug('Exception: %s', self.exception_callback_value[i])
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         fid.close()
 

@@ -1,5 +1,5 @@
 import ntplib
-import cPickle as pickle
+import pickle as pickle
 from threading import Lock
 
 from mi.core.driver_scheduler import DriverSchedulerConfigKey, TriggerType
@@ -116,9 +116,7 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
-class Protocol(InstrumentProtocol):
-    __metaclass__ = META_LOGGER
-
+class Protocol(InstrumentProtocol, metaclass=META_LOGGER):
     def __init__(self, driver_event):
         super(Protocol, self).__init__(driver_event)
         self._protocol_fsm = ThreadSafeFSM(ProtocolState, ProtocolEvent,
@@ -272,7 +270,7 @@ class Protocol(InstrumentProtocol):
         old_config = self._param_dict.get_config()
 
         # all constraints met or no constraints exist, set the values
-        for key, value in params.iteritems():
+        for key, value in params.items():
             self._param_dict.set_value(key, value)
 
         new_config = self._param_dict.get_config()
@@ -287,7 +285,7 @@ class Protocol(InstrumentProtocol):
     def _flush(self):
         particles = []
         with self._lock:
-            for _log in self._logs.itervalues():
+            for _log in self._logs.values():
                 try:
                     _log.flush()
                 except InstrumentProtocolException as ex:

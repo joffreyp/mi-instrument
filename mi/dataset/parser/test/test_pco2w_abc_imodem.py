@@ -96,11 +96,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1624.telem.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, 'pco2wXYZ_11212014_1624.DAT'), 'r') as file_handle:
 
@@ -110,11 +110,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1624.recov.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         log.debug('===== END TEST HAPPY PATH =====')
 
@@ -137,11 +137,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1625.telem.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 2)
+            self.assertEqual(len(self.exception_callback_value), 2)
 
             for exception in self.exception_callback_value:
                 self.assertIsInstance(exception, RecoverableSampleException)
@@ -167,11 +167,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1625.recov.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 2)
+            self.assertEqual(len(self.exception_callback_value), 2)
 
             for exception in self.exception_callback_value:
                 self.assertIsInstance(exception, RecoverableSampleException)
@@ -199,11 +199,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1626.telem.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, 'pco2wXYZ_11212014_1626.DAT'), 'r') as file_handle:
 
@@ -213,11 +213,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1626.recov.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         log.debug('===== END TEST INCOMPLETE METADATA ONE =====')
 
@@ -242,11 +242,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1627.telem.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         with open(os.path.join(RESOURCE_PATH, 'pco2wXYZ_11212014_1627.DAT'), 'r') as file_handle:
 
@@ -256,11 +256,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1627.recov.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)
 
         log.debug('===== END TEST INCOMPLETE METADATA TWO =====')
 
@@ -282,11 +282,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1628.telem.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
             for exception in self.exception_callback_value:
                 self.assertIsInstance(exception, RecoverableSampleException)
@@ -311,11 +311,11 @@ class Pco2wAbcParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "pco2wXYZ_11212014_1628.recov.yml", RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
 
             for exception in self.exception_callback_value:
                 self.assertIsInstance(exception, RecoverableSampleException)

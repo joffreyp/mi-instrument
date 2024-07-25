@@ -693,10 +693,10 @@ class PAClientIntTestCase(InstrumentDriverTestCase):
         self.assertTrue(self.rawCallbackCalled)
         self.assertTrue(self.dataCallbackCalled)
 
-        self.assertEquals(self.pa_packet.get_data_length(), len(data))
-        self.assertEquals(len(self.pa_packet.get_data()), len(data))
+        self.assertEqual(self.pa_packet.get_data_length(), len(data))
+        self.assertEqual(len(self.pa_packet.get_data()), len(data))
         # don't use assertEquals b/c it will print 64kb
-        self.assert_(self.pa_packet.get_data() == data)
+        self.assertTrue(self.pa_packet.get_data() == data)
 
     def test_start_pa_client_lost_port_agent_tx_rx(self):
         """

@@ -1158,7 +1158,7 @@ class WorkhorseProtocol(CommandResponseInstrumentProtocol):
         old_config = self._param_dict.get_config()
 
         commands = []
-        for key, val in params.iteritems():
+        for key, val in params.items():
             if WorkhorseEngineeringParameter.has(key):
                 continue
             if val != old_config.get(key):

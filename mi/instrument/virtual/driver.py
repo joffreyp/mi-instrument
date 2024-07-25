@@ -56,7 +56,7 @@ def load_paramdefs(conn):
     log.debug('Loading Parameter Definitions')
     c = conn.cursor()
     c.execute(PARAMDEF_SELECT)
-    params = map(ParameterDef._make, c.fetchall())
+    params = list(map(ParameterDef._make, c.fetchall()))
     return {x.id: x for x in params}
 
 
@@ -64,7 +64,7 @@ def load_paramdicts(conn):
     log.debug('Loading Streams')
     c = conn.cursor()
     c.execute(STREAM_SELECT)
-    stream_params = map(StreamParam._make, c.fetchall())
+    stream_params = list(map(StreamParam._make, c.fetchall()))
     paramdict = {}
     for each in stream_params:
         paramdict.setdefault(each.name, []).append(each.parameter_id)
@@ -115,8 +115,7 @@ class Prompt(BaseEnum):
     """
 
 
-class VirtualParticle(DataParticle):
-    __metaclass__ = META_LOGGER
+class VirtualParticle(DataParticle, metaclass=META_LOGGER):
     _parameters = None
     _streams = None
     _ignore = 'PD7,PD10,PD11,PD12,PD16,PD863'.split(',')
@@ -180,7 +179,7 @@ class VirtualParticle(DataParticle):
                      random.randint(0, UINT64_MAX),
                      UINT64_MAX]
 
-    FLOAT_RANDOM = [random.random() for _ in xrange(5)]
+    FLOAT_RANDOM = [random.random() for _ in range(5)]
 
     def _load_streams(self):
         conn = sqlite3.connect('preload.db')
@@ -256,12 +255,11 @@ class PortAgentClientStub(object):
 ###############################################################################
 
 # noinspection PyMethodMayBeStatic
-class InstrumentDriver(SingleConnectionInstrumentDriver):
+class InstrumentDriver(SingleConnectionInstrumentDriver, metaclass=META_LOGGER):
     """
     InstrumentDriver subclass
     Subclasses SingleConnectionInstrumentDriver with connection state machine.
     """
-    __metaclass__ = META_LOGGER
 
     ########################################################################
     # Superclass overrides for resource query.
@@ -331,12 +329,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyUnusedLocal,PyMethodMayBeStatic
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=META_LOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -491,7 +488,7 @@ class Protocol(CommandResponseInstrumentProtocol):
 
         param_config = config.get(DriverConfigKey.PARAMETERS)
         if param_config:
-            for name in param_config.keys():
+            for name in list(param_config.keys()):
                 self._param_dict.add(name, '', None, None)
                 log.debug("Setting init value for %s to %s", name, param_config[name])
                 self._param_dict.set_init_value(name, param_config[name])

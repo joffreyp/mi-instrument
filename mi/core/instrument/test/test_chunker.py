@@ -65,11 +65,11 @@ class UnitTestStringChunker(MiUnitTestCase):
         """
         Do a quick test of the sieve to make sure it does what we want.
         """
-        self.assertEquals([(0,31)],
+        self.assertEqual([(0,31)],
                           UnitTestStringChunker.sieve_function(self.SAMPLE_1))
-        self.assertEquals([],
+        self.assertEqual([],
                           UnitTestStringChunker.sieve_function(self.FRAGMENT_1))
-        self.assertEquals([(0,31), (33, 64)],
+        self.assertEqual([(0,31), (33, 64)],
                           UnitTestStringChunker.sieve_function(self.MULTI_SAMPLE_1))
 
     def test_regex_sieve(self):
@@ -81,11 +81,11 @@ class UnitTestStringChunker(MiUnitTestCase):
 
         self._chunker = StringChunker(partial(self._chunker.regex_sieve_function, regex_list=[regex]))
 
-        self.assertEquals([(0,31)],
+        self.assertEqual([(0,31)],
                           self._chunker.regex_sieve_function(self.SAMPLE_1, [regex]))
-        self.assertEquals([],
+        self.assertEqual([],
                           self._chunker.regex_sieve_function(self.FRAGMENT_1, [regex]))
-        self.assertEquals([(0,31), (33, 64)],
+        self.assertEqual([(0,31), (33, 64)],
                           self._chunker.regex_sieve_function(self.MULTI_SAMPLE_1, [regex]))
 
     def test_make_chunks(self):
@@ -105,13 +105,13 @@ class UnitTestStringChunker(MiUnitTestCase):
         """
         self._chunker.add_chunk(self.SAMPLE_1, self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, self.TIMESTAMP_1)
-        self.assertEquals(result, self.SAMPLE_1)
+        self.assertEqual(time, self.TIMESTAMP_1)
+        self.assertEqual(result, self.SAMPLE_1)
 
         # It got cleared at the last fetch...
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, None)
-        self.assertEquals(result, None)
+        self.assertEqual(time, None)
+        self.assertEqual(result, None)
 
         self.assertEqual(self._chunker.buffer, '')
 
@@ -138,17 +138,17 @@ class UnitTestStringChunker(MiUnitTestCase):
         self._chunker.add_chunk(self.SAMPLE_2, self.TIMESTAMP_2)
         self._chunker.add_chunk(self.SAMPLE_3, self.TIMESTAMP_3)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, self.TIMESTAMP_1)
-        self.assertEquals(result, self.SAMPLE_1)
+        self.assertEqual(time, self.TIMESTAMP_1)
+        self.assertEqual(result, self.SAMPLE_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, self.TIMESTAMP_2)
-        self.assertEquals(result, self.SAMPLE_2)
+        self.assertEqual(time, self.TIMESTAMP_2)
+        self.assertEqual(result, self.SAMPLE_2)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, self.TIMESTAMP_3)
-        self.assertEquals(result, self.SAMPLE_3)
+        self.assertEqual(time, self.TIMESTAMP_3)
+        self.assertEqual(result, self.SAMPLE_3)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, None)
-        self.assertEquals(time, None)
+        self.assertEqual(result, None)
+        self.assertEqual(time, None)
 
     def test_add_get_fragment(self):
         """
@@ -157,14 +157,14 @@ class UnitTestStringChunker(MiUnitTestCase):
         # Add a part of a sample
         self._chunker.add_chunk(self.FRAGMENT_1, self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, None)
-        self.assertEquals(result, None)
+        self.assertEqual(time, None)
+        self.assertEqual(result, None)
 
         # add the rest of the sample
         self._chunker.add_chunk(self.FRAGMENT_2, self.TIMESTAMP_2)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, self.FRAGMENT_SAMPLE)
-        self.assertEquals(time, self.TIMESTAMP_1)
+        self.assertEqual(result, self.FRAGMENT_SAMPLE)
+        self.assertEqual(time, self.TIMESTAMP_1)
 
     def test_add_multiple_in_one(self):
         """
@@ -173,14 +173,14 @@ class UnitTestStringChunker(MiUnitTestCase):
         """
         self._chunker.add_chunk(self.MULTI_SAMPLE_1, self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, self.SAMPLE_1)
-        self.assertEquals(time, self.TIMESTAMP_1)
+        self.assertEqual(result, self.SAMPLE_1)
+        self.assertEqual(time, self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(time, self.TIMESTAMP_1)
-        self.assertEquals(result, self.SAMPLE_2)
+        self.assertEqual(time, self.TIMESTAMP_1)
+        self.assertEqual(result, self.SAMPLE_2)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, None)
-        self.assertEquals(time, None)
+        self.assertEqual(result, None)
+        self.assertEqual(time, None)
 
     def test_funky_chunks(self):
         def funky_sieve(_):
@@ -189,11 +189,11 @@ class UnitTestStringChunker(MiUnitTestCase):
         self._chunker = StringChunker(funky_sieve)
         self._chunker.add_chunk("BarFoo", self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, "Bar")
-        self.assertEquals(time, self.TIMESTAMP_1)
+        self.assertEqual(result, "Bar")
+        self.assertEqual(time, self.TIMESTAMP_1)
         (time, result) = self._chunker.get_next_data()
-        self.assertEquals(result, "Foo")
-        self.assertEquals(time, self.TIMESTAMP_1)
+        self.assertEqual(result, "Foo")
+        self.assertEqual(time, self.TIMESTAMP_1)
 
     def test_overlap(self):
         self.assertEqual([(0, 5)], StringChunker._prune_overlaps([(0, 5)]))

@@ -180,7 +180,7 @@ class Command(object):
             retval_dict[CommandDictKey.DESCRIPTION] = self.return_description
 
         # fill in the arguments
-        for arg in self.arguments.values():
+        for arg in list(self.arguments.values()):
             args_dict[arg.name] = arg.generate_dict()
 
         return_dict[CommandDictKey.ARGUMENTS] = args_dict
@@ -242,7 +242,7 @@ class ProtocolCommandDict(InstrumentDict):
         if not isinstance(command, Command):
             raise InstrumentParameterException("Invalid command structure!")
 
-        if not isinstance(command.name, basestring):
+        if not isinstance(command.name, str):
             raise InstrumentParameterException("Invalid command structure!")
 
         self._cmd_dict[command.name] = command
@@ -257,7 +257,7 @@ class ProtocolCommandDict(InstrumentDict):
         if name == None:
             return None
 
-        if name not in self._cmd_dict.keys():
+        if name not in list(self._cmd_dict.keys()):
             return None
 
         return self._cmd_dict[name]
@@ -271,7 +271,7 @@ class ProtocolCommandDict(InstrumentDict):
         """
         return_struct = {}
 
-        for cmd in self._cmd_dict.keys():
+        for cmd in list(self._cmd_dict.keys()):
             return_struct[cmd] = self._cmd_dict[cmd].generate_dict()
 
         return return_struct
@@ -300,7 +300,7 @@ class ProtocolCommandDict(InstrumentDict):
         if metadata:
             log.debug("Found command metadata, loading dictionary")
 
-            for (cmd_name, cmd_value) in metadata[CommandDictKey.COMMANDS].items():
+            for (cmd_name, cmd_value) in list(metadata[CommandDictKey.COMMANDS].items()):
                 # base info
                 if not isinstance(cmd_value, dict):
                     log.trace("Skipping value %s while loading YAML strings", cmd_value)
@@ -327,7 +327,7 @@ class ProtocolCommandDict(InstrumentDict):
                             cmd_value[CommandDictKey.RETURN][CommandDictKey.DESCRIPTION]
 
                 if CommandDictKey.ARGUMENTS in cmd_value:
-                    for (arg_name, arg_value) in cmd_value[CommandDictKey.ARGUMENTS].items():
+                    for (arg_name, arg_value) in list(cmd_value[CommandDictKey.ARGUMENTS].items()):
                         if not isinstance(arg_value, dict):
                             continue
                         if arg_name not in self._cmd_dict[cmd_name].arguments:

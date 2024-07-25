@@ -90,7 +90,7 @@ class PhsenAbcdefSioParserUnitTestCase(ParserUnitTestCase):
 
             # assert there was 1 exception, one sample was corrupted
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], SampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], SampleException))
 
     def test_control(self):
         """
@@ -122,8 +122,8 @@ class PhsenAbcdefSioParserUnitTestCase(ParserUnitTestCase):
             self.assert_particles(result, 'node59p1_control.yml', RESOURCE_PATH)
 
             self.assertEqual(len(self.exception_callback_value), 2)
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
-            self.assert_(isinstance(self.exception_callback_value[1], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[1], UnexpectedDataException))
 
     def test_replaced_ref(self):
         """

@@ -189,6 +189,6 @@ class WcWmCsppParserUnitTestCase(ParserUnitTestCase):
 
         # log.info('##Exception value %s', self.exception_callback_value)
 
-        self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
         stream_handle.close()

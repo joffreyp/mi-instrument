@@ -4,7 +4,7 @@ import functools
 import socket
 import time
 from threading import Lock
-from xmlrpclib import ServerProxy
+from xmlrpc.client import ServerProxy
 from pkg_resources import resource_string
 
 import ntplib
@@ -60,7 +60,7 @@ class stopwatch(object):
         def decorated(*args, **kwargs):
             self.start_time = datetime.datetime.now()
             if self.label is None:
-                self.label = 'function: %s' % f.func_name
+                self.label = 'function: %s' % f.__name__
             with self:
                 return f(*args, **kwargs)
         return decorated
@@ -120,7 +120,7 @@ class OmsExtractor(object):
         return_dict = {}
         # go through all of the returned values and get the unique timestamps. Each
         # particle will have data for a unique timestamp
-        for attr_id, attr_vals in attr_dict.iteritems():
+        for attr_id, attr_vals in attr_dict.items():
             for value, timestamp in attr_vals:
                 return_dict.setdefault(timestamp, []).append((attr_id, value))
 
@@ -148,7 +148,7 @@ class OmsExtractor(object):
 
         return_dict = {}
         count = 0
-        for key, value_list in response.iteritems():
+        for key, value_list in response.items():
             if value_list == 'INVALID_ATTRIBUTE_ID':
                 continue
             if not isinstance(value_list, list):
@@ -174,8 +174,8 @@ class OmsExtractor(object):
         attrs = [(k, last_time) for k in node_config.attributes]
         fetched = OmsExtractor._fetch_attrs(proxy, node_config.platform_id, attrs)
         self._set_last_times(node_config.platform_id, fetched)
-        for stream_name, stream_instances in node_config.node_streams.iteritems():
-            for key, parameters in stream_instances.iteritems():
+        for stream_name, stream_instances in node_config.node_streams.items():
+            for key, parameters in stream_instances.items():
                 particles = OmsExtractor._build_particles(stream_name, parameters, fetched)
                 for particle in particles:
                     self.publisher.enqueue(self._asevent(particle, base_refdes, key))
@@ -183,7 +183,7 @@ class OmsExtractor(object):
     def _set_last_times(self, platform_id, fetched):
         with self.times_lock:
             try:
-                new_max = max(pluck(1, concat(fetched.itervalues())))
+                new_max = max(pluck(1, concat(iter(fetched.values()))))
                 if new_max > self._last_times.get(platform_id, 0):
                     self._last_times[platform_id] = new_max
             except ValueError:
@@ -203,7 +203,7 @@ class OmsExtractor(object):
         subset = keyfilter(lambda k: k in parameters, data)
         grouped = OmsExtractor._group_by_timestamp(subset)
         particles = []
-        for timestamp, attrs in grouped.iteritems():
+        for timestamp, attrs in grouped.items():
             attrs = OmsExtractor._convert_attrs_to_ion(parameters, attrs)
             particles.append(OmsExtractor._build_particle(stream_name, timestamp, attrs))
         return particles

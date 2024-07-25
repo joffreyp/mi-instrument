@@ -75,15 +75,15 @@ def _decode(data):
     if isinstance(data, (list, tuple)):
         return [_decode(x) for x in data]
     if isinstance(data, dict):
-        return {_decode(k): _decode(v) for k, v in data.iteritems()}
-    if isinstance(data, basestring):
+        return {_decode(k): _decode(v) for k, v in data.items()}
+    if isinstance(data, str):
         return data.decode('utf-8', 'ignore')
     return data
 
 
 def _transform(value):
     flag = '_base64:'
-    if isinstance(value, basestring):
+    if isinstance(value, str):
         if value.startswith(flag):
             data = value.split(flag, 1)[1]
             return base64.b64decode(data)
@@ -168,7 +168,7 @@ class CommandHandler(threading.Thread):
         if isinstance(level_name, int):
             if level_name in _levelNames:
                 level = level_name
-        elif isinstance(level_name, basestring):
+        elif isinstance(level_name, str):
             level_name = level_name.upper()
             level = _levelNames.get(level_name)
 
@@ -325,7 +325,7 @@ class LoadBalancer(object):
                 break
 
     def _start_workers(self):
-        for _ in xrange(self.num_workers):
+        for _ in range(self.num_workers):
             t = CommandHandler(self.wrapper, self.worker_url)
             t.setDaemon(True)
             t.start()
@@ -334,13 +334,12 @@ class LoadBalancer(object):
         self.running = False
 
 
-class DriverWrapper(object):
+class DriverWrapper(object, metaclass=META_LOGGER):
     """
     Base class for messaging enabled OS-level driver processes. Provides
     run loop, dynamic driver import and construction and interface
     for messaging implementation subclasses.
     """
-    __metaclass__ = META_LOGGER
     worker_url = "inproc://workers"
     num_workers = 5
 

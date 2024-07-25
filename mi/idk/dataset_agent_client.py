@@ -285,7 +285,7 @@ class DataSetAgentClient(object):
             infile = open(pidfile, "r")
             pid = infile.read()
             infile.close()
-        except IOError, e:
+        except IOError as e:
             return None
 
         if pid:
@@ -392,7 +392,7 @@ class InstrumentAgentDataSubscribers(object):
 
             name = None
 
-            for (stream_name, stream_config) in self.stream_config.iteritems():
+            for (stream_name, stream_config) in self.stream_config.items():
                 if stream_route.routing_key == stream_config['routing_key']:
                     log.debug("NAME: %s %s == %s" % (stream_name, stream_route.routing_key, stream_config['routing_key']))
                     name = stream_name
@@ -401,7 +401,7 @@ class InstrumentAgentDataSubscribers(object):
                     self.samples_received[stream_name].append(message)
                     log.debug("Add message to stream '%s' value: %s" % (stream_name, message))
 
-        for (stream_name, stream_config) in self.stream_config.iteritems():
+        for (stream_name, stream_config) in self.stream_config.items():
             stream_id = stream_config['stream_id']
 
             # Create subscriptions for each stream.
@@ -432,7 +432,7 @@ class InstrumentAgentDataSubscribers(object):
 
         log.debug("Fetch %d sample(s) from stream '%s'" % (sample_count, stream_name))
         while(len(result) < sample_count):
-            if(self.samples_received.has_key(stream_name) and
+            if(stream_name in self.samples_received and
                len(self.samples_received.get(stream_name))):
                 log.trace("get_samples() received sample!")
                 result.append(self.samples_received[stream_name].pop())
@@ -441,7 +441,7 @@ class InstrumentAgentDataSubscribers(object):
             if(start_time + timeout < time.time()):
                 raise SampleTimeout()
 
-            if(not self.samples_received.has_key(stream_name) or
+            if(stream_name not in self.samples_received or
                len(self.samples_received.get(stream_name)) == 0):
                 log.debug("No samples in the queue, sleep for a bit to let the queue fill up")
                 gevent.sleep(1)
@@ -460,7 +460,7 @@ class InstrumentAgentDataSubscribers(object):
         xn.purge()
 
     def stop_data_subscribers(self):
-        for subscriber in self.data_subscribers.values():
+        for subscriber in list(self.data_subscribers.values()):
             pubsub_client = PubsubManagementServiceClient()
             if hasattr(subscriber,'subscription_id'):
                 try:

@@ -804,7 +804,7 @@ class CgDclEngDclDataParticle(DataParticle):
         """
         result = []
 
-        for key in self.raw_data.keys():
+        for key in list(self.raw_data.keys()):
 
             if key == ParticleKey.HEADER_TIMESTAMP:
                 # DCL controller timestamp  is the port_timestamp
@@ -951,7 +951,7 @@ class CgDclEngDclDlogStatusDataParticle(CgDclEngDclDataParticle):
 
         log.trace("dlog status raw_data: %s", self.raw_data)
 
-        for key in self.raw_data.keys():
+        for key in list(self.raw_data.keys()):
 
             if key == ParticleKey.HEADER_TIMESTAMP:
                 # DCL controller timestamp  is the port_timestamp
@@ -997,7 +997,7 @@ class CgDclEngDclStatusDataParticle(CgDclEngDclDataParticle):
 
         log.trace("status raw_data: %s", self.raw_data)
 
-        for key in self.raw_data.keys():
+        for key in list(self.raw_data.keys()):
 
             if key == ParticleKey.HEADER_TIMESTAMP:
                 # DCL controller timestamp  is the port_timestamp

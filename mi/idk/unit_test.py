@@ -192,7 +192,7 @@ class InstrumentDriverTestConfig(Singleton):
             params = param_config.list()
 
         elif isinstance(param_config, dict):
-            params = [value for (key, value) in param_config.items()]
+            params = [value for (key, value) in list(param_config.items())]
 
         else:
             log.error("Unknown param_config type")
@@ -214,7 +214,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
     Base class for data particle mixin.  Used for data particle validation.
     """
     _raw_sample_parameters = {
-        RawDataParticleKey.PAYLOAD: {'type': unicode, 'value': u'SWFtIEFwdWJsaXNoZWQgTWVzc2FnZQ=='},
+        RawDataParticleKey.PAYLOAD: {'type': str, 'value': 'SWFtIEFwdWJsaXNoZWQgTWVzc2FnZQ=='},
         RawDataParticleKey.LENGTH: {'type': int, 'value': 22},
         RawDataParticleKey.TYPE: {'type': int, 'value': 2},
         RawDataParticleKey.CHECKSUM: {'type': int, 'value': 2757}
@@ -271,7 +271,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
 
         pd = driver._protocol._param_dict
 
-        for (name, config) in param_dict.items():
+        for (name, config) in list(param_dict.items()):
             log.debug("Verify parameter: %s", name)
             self.assertIsInstance(config, dict)
 
@@ -380,7 +380,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
 
         @param param_dict: dictionary containing data particle parameter validation values
         """
-        for key, param_def in param_dict.items():
+        for key, param_def in list(param_dict.items()):
             if isinstance(param_def, dict):
                 name = param_def.get(ParameterTestConfigKey.NAME)
                 if name is not None:
@@ -442,7 +442,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
         @param sample_values: parsed data particle to inspect
         @param param_dict: dictionary containing parameter validation information
         """
-        for (param_name, param_value) in sample_values.items():
+        for (param_name, param_value) in list(sample_values.items()):
             # get the parameter type
             param_def = param_dict.get(param_name)
             log.debug("Particle Def (%s) ", param_def)
@@ -471,7 +471,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
         @param sample_values: parsed data particle to inspect
         @param param_dict: dictionary containing parameter validation information
         """
-        for (param_name, param_value) in sample_values.items():
+        for (param_name, param_value) in list(sample_values.items()):
             log.debug("Data Particle Parameter (%s): %s", param_name, type(param_value))
 
             # get the parameter type
@@ -496,10 +496,10 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
                 # It looks like one of the interfaces between services converts unicode to string
                 # and vice versa.  So if the type is string it can be promoted to unicode so it
                 # is still valid.
-                if param_type == long and isinstance(param_value, int):
+                if param_type == int and isinstance(param_value, int):
                     # we want type Long, but it is a int instance.  All good
                     pass
-                elif param_type == unicode and isinstance(param_value, str):
+                elif param_type == str and isinstance(param_value, str):
                     # we want type unicode, but it is a string instance.  All good
                     pass
                 else:
@@ -664,7 +664,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
 
         self.assertEqual(sorted(capability_dict.keys()), sorted(capabilities.keys()))
 
-        for key in capability_dict.keys():
+        for key in list(capability_dict.keys()):
             log.debug("verify driver capability %s", key)
             capability = capability_dict.get(key)
             self.assertIsInstance(capability, dict)
@@ -708,9 +708,9 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
         metadata being generated. Could be from an enum class's list() method
         """
         metadata = self.driver_client.cmd_dvr("get_config_metadata")
-        self.assert_(metadata is not None)
+        self.assertTrue(metadata is not None)
         log.debug("Metadata response: %s", metadata)
-        self.assert_(isinstance(metadata, dict))
+        self.assertTrue(isinstance(metadata, dict))
 
         # simple driver metadata check
         self.assertTrue(metadata[ConfigMetadataKey.DRIVER])
@@ -718,7 +718,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
 
         # param metadata check
         self.assertTrue(metadata[ConfigMetadataKey.PARAMETERS])
-        keys = metadata[ConfigMetadataKey.PARAMETERS].keys()
+        keys = list(metadata[ConfigMetadataKey.PARAMETERS].keys())
         keys.append(DriverParameter.ALL)  # toss that in there to match up
         keys.sort()
         enum_list = instrument_params
@@ -727,7 +727,7 @@ class DriverTestMixin(MiUnitTest, ParticleTestMixin):
 
         # command metadata check
         self.assertTrue(metadata[ConfigMetadataKey.COMMANDS])
-        keys = metadata[ConfigMetadataKey.COMMANDS].keys()
+        keys = list(metadata[ConfigMetadataKey.COMMANDS].keys())
         keys.sort()
         enum_list = commands
         enum_list.sort()
@@ -889,7 +889,7 @@ class InstrumentDriverTestCase(MiIntTestCase):
 
     def create_multi_comm_config(self, comm_config):
         result = {}
-        for name, config in comm_config.configs.items():
+        for name, config in list(comm_config.configs.items()):
             if config.method() == ConfigTypes.TCP:
                 result[name] = self.create_ethernet_comm_config(config)
             elif config.method() == ConfigTypes.SERIAL:
@@ -1030,7 +1030,7 @@ class InstrumentDriverTestCase(MiIntTestCase):
             retval = driver_client.cmd_dvr('set_init_params', startup_config)
 
             self.driver_client = driver_client
-        except Exception, e:
+        except Exception as e:
             self.driver_process.stop()
             log.error('Error starting driver client. %s', e)
             raise InstrumentException('Error starting driver client.')
@@ -1084,7 +1084,7 @@ class InstrumentDriverTestCase(MiIntTestCase):
     def assert_enum_has_no_duplicates(self, obj):
         dic = convert_enum_to_dict(obj)
         occurrences = {}
-        for k, v in dic.items():
+        for k, v in list(dic.items()):
             occurrences[v] = occurrences.get(v, 0) + 1
 
         for k in occurrences:
@@ -1457,7 +1457,7 @@ class InstrumentDriverUnitTestCase(InstrumentDriverTestCase):
         all_capabilities = sorted(driver._protocol._protocol_fsm.get_events(current_state=False))
         expected_capabilities = []
 
-        for (state, capability_list) in capabilities.items():
+        for (state, capability_list) in list(capabilities.items()):
             for s in capability_list:
                 if s not in expected_capabilities:
                     expected_capabilities.append(s)
@@ -1480,7 +1480,7 @@ class InstrumentDriverUnitTestCase(InstrumentDriverTestCase):
         driver.set_test_mode(True)
 
         # Verify state specific capabilities
-        for (state, capability_list) in capabilities.items():
+        for (state, capability_list) in list(capabilities.items()):
             self.assert_force_state(driver, state)
             reported_capabilities = sorted(driver._protocol._protocol_fsm.get_events(current_state=True))
             expected_capabilities = sorted(capability_list)
@@ -1602,7 +1602,7 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
             parameter_assert(reply, True)
 
         if get_values is not None:
-            for (key, val) in get_values.iteritems():
+            for (key, val) in get_values.items():
                 self.assert_get(key, val)
 
         if new_values:
@@ -1620,7 +1620,7 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
         parameter_assert(reply, True)
 
         if get_values is not None:
-            for (key, val) in get_values.iteritems():
+            for (key, val) in get_values.items():
                 self.assert_get(key, val)
 
     def assert_get(self, param, value=None, pattern=None):
@@ -1639,7 +1639,7 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
         if value is not None:
             self.assertEqual(return_value, value, msg="%s no value match (%s != %s)" % (param, return_value, value))
         elif pattern is not None:
-            self.assertRegexpMatches(str(return_value), pattern,
+            self.assertRegex(str(return_value), pattern,
                                      msg="%s no value match (%s != %s)" % (param, return_value, value))
 
         return return_value
@@ -1698,7 +1698,7 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
         reply = self.driver_client.cmd_dvr('set_resource', param_dict)
         self.assertIsNone(reply, None)
 
-        for (key, value) in param_dict.items():
+        for (key, value) in list(param_dict.items()):
             self.assert_get(key, value)
 
     def assert_set_bulk_exception(self, param_dict, error_regex=None, exception_class=InstrumentParameterException):
@@ -1862,7 +1862,7 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
             log.debug("command reply: %s", value)
             self.assertIsNotNone(value)
             compiled = re.compile(regex, regex_options)
-            self.assertRegexpMatches(value, compiled)
+            self.assertRegex(value, compiled)
 
         if state is not None:
             self.assert_current_state(state)
@@ -2015,10 +2015,10 @@ class InstrumentDriverIntegrationTestCase(InstrumentDriverTestCase):  # Must inh
         log.debug("before 'process_echo'")
         reply = self.driver_client.cmd_dvr('process_echo')
         log.debug("after 'process_echo'")
-        self.assert_(reply.startswith('ping from resource ppid:'))
+        self.assertTrue(reply.startswith('ping from resource ppid:'))
 
         reply = self.driver_client.cmd_dvr('driver_ping', 'foo')
-        self.assert_(reply.startswith('driver_ping: foo'))
+        self.assertTrue(reply.startswith('driver_ping: foo'))
 
         # Test the event thread publishes and client side picks up events.
         events = [

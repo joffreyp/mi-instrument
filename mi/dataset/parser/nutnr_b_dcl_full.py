@@ -182,7 +182,7 @@ class NutnrBDclFullParser(NutnrBDclParser):
              inst_match.group(InstrumentDataMatchGroups.INST_GROUP_SPEC_CHANNEL_AVERAGE),
              float),
             (spectral_key,
-             map(int, inst_match.group(InstrumentDataMatchGroups.INST_GROUP_SPECTRAL_CHANNELS).split(',')),
+             list(map(int, inst_match.group(InstrumentDataMatchGroups.INST_GROUP_SPECTRAL_CHANNELS).split(','))),
              list),
         ]
 

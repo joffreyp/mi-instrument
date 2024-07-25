@@ -76,7 +76,7 @@ class SwitchDriver(mi.idk.switch_driver.SwitchDriver):
 
         for driver in sorted(drivers.keys()):
             for version in sorted(drivers[driver]):
-                print "%s %s" % (driver, version)
+                print("%s %s" % (driver, version))
 
     @staticmethod
     def get_drivers():

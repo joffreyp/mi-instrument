@@ -102,11 +102,11 @@ class CtdmoGhqrSioParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(10)
             particles2 = parser.get_records(10)
-            self.assertEquals(len(particles2), 10)
+            self.assertEqual(len(particles2), 10)
             particles.extend(particles2)
             particles3 = parser.get_records(10)
             # 24 records total, should only have 4 remaining at this point
-            self.assertEquals(len(particles3), 4)
+            self.assertEqual(len(particles3), 4)
             particles.extend(particles3)
 
             self.assert_particles(particles, 'node59p1_1.ctdmo.yml', RESOURCE_PATH)
@@ -153,7 +153,7 @@ class CtdmoGhqrSioParserUnitTestCase(ParserUnitTestCase):
             self.assert_particles(particles, 'node59p1_1.ctdmo.yml', RESOURCE_PATH)
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def test_unexpected_data(self):
         """
@@ -168,7 +168,7 @@ class CtdmoGhqrSioParserUnitTestCase(ParserUnitTestCase):
             self.assert_particles(particles, 'node59p1_1.ctdmo.yml', RESOURCE_PATH)
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
     def test_rec_co_and_ct_big_giant_input(self):
         """

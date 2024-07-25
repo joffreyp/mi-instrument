@@ -8,7 +8,7 @@ independantly.
 """
 
 import os
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import logging
 import subprocess
 
@@ -35,10 +35,10 @@ class IDKDependancy():
     
     def install(self):
         if(not self.is_installed()):
-            print "- Installing " + self.package()
+            print("- Installing " + self.package())
             self._install()
         else:
-            print "- %s already installed." % self.package()
+            print("- %s already installed." % self.package())
             
     def _install(self):
         raise Exception("Must be overloaded")
@@ -57,11 +57,11 @@ class IDKDependancy():
              log.debug(" -- file already downloaded")
              return '/tmp/' + file_name
             
-        u = urllib2.urlopen(url)
+        u = urllib.request.urlopen(url)
         f = open('/tmp/' + file_name, 'wb')
         meta = u.info()
         file_size = int(meta.getheaders("Content-Length")[0])
-        print "Downloading: %s Bytes: %s" % (file_name, file_size)
+        print("Downloading: %s Bytes: %s" % (file_name, file_size))
 
         file_size_dl = 0
         block_sz = 8192
@@ -74,7 +74,7 @@ class IDKDependancy():
             f.write(buffer)
             status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
             status = status + chr(8)*(len(status)+1)
-            print status,
+            print(status, end=' ')
 
         f.close()
         return '/tmp/' + file_name
@@ -299,7 +299,7 @@ class IDKSetup():
     """
 
     def run(self):
-        print "*** IDK Installation ***"
+        print("*** IDK Installation ***")
         IDKPython().install()
         IDKSetupTools().install()
         IDKProfile().install()

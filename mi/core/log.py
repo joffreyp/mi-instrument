@@ -66,13 +66,13 @@ def configure_logging(logging_conf_paths, logging_config_override=None):
     for path in logging_conf_paths:
         try:
             config.add_configuration(path)
-        except Exception, e:
-            print 'WARNING: could not load logging configuration file %s: %s' % (path, e)
+        except Exception as e:
+            print('WARNING: could not load logging configuration file %s: %s' % (path, e))
     if logging_config_override:
         try:
             config.add_configuration(logging_config_override)
-        except Exception,e:
-            print 'WARNING: failed to apply logging override %r: %e' % (logging_config_override,e)
+        except Exception as e:
+            print('WARNING: failed to apply logging override %r: %e' % (logging_config_override,e))
 
     # direct warnings mechanism to loggers
     logging.captureWarnings(True)
@@ -94,30 +94,30 @@ class LoggerManager(Singleton):
         path = os.environ[LOGGING_CONFIG_ENVIRONMENT_VARIABLE] if LOGGING_CONFIG_ENVIRONMENT_VARIABLE in os.environ else None
         haveenv = path and os.path.isfile(path)
         if path and not haveenv:
-            print >> os.stderr, 'WARNING: %s was set but %s was not found (using default configuration files instead)' % (LOGGING_CONFIG_ENVIRONMENT_VARIABLE, path)
+            print('WARNING: %s was set but %s was not found (using default configuration files instead)' % (LOGGING_CONFIG_ENVIRONMENT_VARIABLE, path), file=os.stderr)
         if path and haveenv:
             config.replace_configuration(path)
             if debug:
-                print >> sys.stderr, str(os.getpid()) + ' configured logging from ' + path
+                print(str(os.getpid()) + ' configured logging from ' + path, file=sys.stderr)
         elif os.path.isfile(LOGGING_PRIMARY_FROM_FILE):
             config.replace_configuration(LOGGING_PRIMARY_FROM_FILE)
             if debug:
-                print >> sys.stderr, str(os.getpid()) + ' configured logging from ' + LOGGING_PRIMARY_FROM_FILE
+                print(str(os.getpid()) + ' configured logging from ' + LOGGING_PRIMARY_FROM_FILE, file=sys.stderr)
         else:
             logconfig = pkg_resources.resource_string('mi', LOGGING_PRIMARY_FROM_EGG)
             parsed = yaml.load(logconfig)
             config.replace_configuration(parsed)
             if debug:
-                print >> sys.stderr, str(os.getpid()) + ' configured logging from config/' + LOGGING_PRIMARY_FROM_FILE
+                print(str(os.getpid()) + ' configured logging from config/' + LOGGING_PRIMARY_FROM_FILE, file=sys.stderr)
 
         if os.path.isfile(LOGGING_MI_OVERRIDE):
             config.add_configuration(LOGGING_MI_OVERRIDE)
             if debug:
-                print >> sys.stderr, str(os.getpid()) + ' supplemented logging from ' + LOGGING_MI_OVERRIDE
+                print(str(os.getpid()) + ' supplemented logging from ' + LOGGING_MI_OVERRIDE, file=sys.stderr)
         elif os.path.isfile(LOGGING_CONTAINER_OVERRIDE):
             config.add_configuration(LOGGING_CONTAINER_OVERRIDE)
             if debug:
-                print >> sys.stderr, str(os.getpid()) + ' supplemented logging from ' + LOGGING_CONTAINER_OVERRIDE
+                print(str(os.getpid()) + ' supplemented logging from ' + LOGGING_CONTAINER_OVERRIDE, file=sys.stderr)
 
 
 class LoggingMetaClass(type):
@@ -131,7 +131,7 @@ class LoggingMetaClass(type):
         wrapped = class_dict.get(wrapped_set_name, set())
 
         # wrap all methods, unless they have been previously wrapped
-        for attributeName, attribute in class_dict.items():
+        for attributeName, attribute in list(class_dict.items()):
             if attributeName not in wrapped and type(attribute) == FunctionType:
                 attribute = wrapper(attribute)
                 wrapped.add(attributeName)

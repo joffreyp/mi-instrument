@@ -95,7 +95,7 @@ class StringChunker(object):
 
         remove_indices = []
 
-        for index in xrange(len(results)-1):
+        for index in range(len(results)-1):
             s1, e1 = results[index]
             s2, e2 = results[index+1]
             if s2 < e1:

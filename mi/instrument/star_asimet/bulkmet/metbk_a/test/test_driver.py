@@ -182,22 +182,22 @@ class UtilMixin(DriverTestMixin):
         }   
                         
     _status_parameters = {
-        METBK_StatusDataParticleKey.INSTRUMENT_MODEL : {'type': unicode, 'value': 'NEWLGR53'},
-        METBK_StatusDataParticleKey.SERIAL_NUMBER : {'type': unicode, 'value': '17DEC12'},
-        METBK_StatusDataParticleKey.CALIBRATION_DATE : {'type': unicode, 'value': '17DEC12'},
-        METBK_StatusDataParticleKey.FIRMWARE_VERSION : {'type': unicode, 'value': 'LOGR53 v4.11cf'},
-        METBK_StatusDataParticleKey.DATE_TIME_STRING : {'type': unicode, 'value': '2013/05/21  13:55:51'},
+        METBK_StatusDataParticleKey.INSTRUMENT_MODEL : {'type': str, 'value': 'NEWLGR53'},
+        METBK_StatusDataParticleKey.SERIAL_NUMBER : {'type': str, 'value': '17DEC12'},
+        METBK_StatusDataParticleKey.CALIBRATION_DATE : {'type': str, 'value': '17DEC12'},
+        METBK_StatusDataParticleKey.FIRMWARE_VERSION : {'type': str, 'value': 'LOGR53 v4.11cf'},
+        METBK_StatusDataParticleKey.DATE_TIME_STRING : {'type': str, 'value': '2013/05/21  13:55:51'},
         METBK_StatusDataParticleKey.LOGGING_INTERVAL : {'type': int, 'value': 60},
         METBK_StatusDataParticleKey.CURRENT_TICK : {'type': int, 'value': 6},
         METBK_StatusDataParticleKey.RECENT_RECORD_INTERVAL : {'type': int, 'value': 1},
-        METBK_StatusDataParticleKey.FLASH_CARD_PRESENCE : {'type': unicode, 'value': 'Compact Flash Card present - Compact Flash OK!'},
+        METBK_StatusDataParticleKey.FLASH_CARD_PRESENCE : {'type': str, 'value': 'Compact Flash Card present - Compact Flash OK!'},
         METBK_StatusDataParticleKey.BATTERY_VOLTAGE_MAIN : {'type': float, 'value': 12.50},
         METBK_StatusDataParticleKey.FAILURE_MESSAGES : {'type': list, 'value': ["Failed last attempt to update PTT module",
                                                                                 "TMP failed"]},
-        METBK_StatusDataParticleKey.PTT_ID1 : {'type': unicode, 'value': '46B1BAD3E8E9FF7F9681300017D1F446ADBED76909FE7F9601200017D1F4706A'},
-        METBK_StatusDataParticleKey.PTT_ID2 : {'type': unicode, 'value': '46A9BED82911FE7F9601400017D1F446A5C2D668F1FE7F9581400017D1F4FFA6'},
-        METBK_StatusDataParticleKey.PTT_ID3 : {'type': unicode, 'value': '46A1BED628D9FE7F9581400017D1F4469DC2D7E8C1FE7F9501500017D1F40B4F'},
-        METBK_StatusDataParticleKey.SAMPLING_STATE : {'type': unicode, 'value': 'GO'},
+        METBK_StatusDataParticleKey.PTT_ID1 : {'type': str, 'value': '46B1BAD3E8E9FF7F9681300017D1F446ADBED76909FE7F9601200017D1F4706A'},
+        METBK_StatusDataParticleKey.PTT_ID2 : {'type': str, 'value': '46A9BED82911FE7F9601400017D1F446A5C2D668F1FE7F9581400017D1F4FFA6'},
+        METBK_StatusDataParticleKey.PTT_ID3 : {'type': str, 'value': '46A1BED628D9FE7F9581400017D1F4469DC2D7E8C1FE7F9501500017D1F40B4F'},
+        METBK_StatusDataParticleKey.SAMPLING_STATE : {'type': str, 'value': 'GO'},
         }
 
 # Driver Parameter Methods
@@ -355,7 +355,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -610,7 +610,7 @@ class TestQUAL(InstrumentDriverQualificationTestCase, UtilMixin):
                 ProtocolEvent.ACQUIRE_STATUS,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
             }
 
         log.debug("test_get_capabilities: enter command")

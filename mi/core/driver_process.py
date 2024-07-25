@@ -12,8 +12,8 @@ import os
 import uuid
 import time
 import subprocess
-
-from urllib2 import urlopen, URLError, HTTPError
+from urllib.request import urlopen
+from urllib.error import URLError, HTTPError
 from mi.core.log import log
 from mi.core.common import BaseEnum
 
@@ -236,7 +236,7 @@ class DriverProcess(object):
         max_wait = 10  # try for up to 10sec
         wait_interval = 0.5  # repeating every 1/2 sec
         log.debug("about to read port from file %s", filename)
-        for n in xrange(int(max_wait / wait_interval)):
+        for n in range(int(max_wait / wait_interval)):
             try:
                 with open(filename, 'r') as f:
                     port = int(f.read().strip())
@@ -286,7 +286,7 @@ class DriverProcess(object):
             try:
                 driver_client = ZmqDriverClient('localhost', self._command_port, self._event_port)
                 self._driver_client = driver_client
-            except Exception, e:
+            except Exception as e:
                 self.stop()
                 log.error('Error starting driver client: %s', e)
                 raise DriverLaunchException('Error starting driver client.')
@@ -415,9 +415,9 @@ class ZMQEggDriverProcess(DriverProcess):
                 response = urlopen(self._egg_remotepath(egg_name))
             egg_yolk = response.read()
             log.debug("_fetch_egg GOT YOLK")
-        except HTTPError, e:
+        except HTTPError as e:
             raise DriverLaunchException('failed to download egg: ' + str(e))
-        except URLError, e:
+        except URLError as e:
             raise DriverLaunchException('bad egg URL ' + egg_name + ': ' + e.reason)
 
         filename = get_filename_from_uri(egg_name)

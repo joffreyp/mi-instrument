@@ -68,7 +68,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, '11194982_PPD_OPT.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_simple_recov(self):
         """
@@ -88,7 +88,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, '11079894_PPB_OPT.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_get_many(self):
         """
@@ -112,7 +112,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, '11079419_PPB_OPT.yml', RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_long_stream(self):
         """
@@ -128,7 +128,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
             # Should end up with 272 particles
             self.assertTrue(len(particles) == 272)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
     def test_bad_data_record(self):
         """
@@ -143,7 +143,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
 
             self.assert_particles(particles, 'BadDataRecord_PPB_OPT.yml', RESOURCE_PATH)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], RecoverableSampleException)
 
     def test_bad_header_source_file_name(self):
@@ -157,7 +157,7 @@ class DostaAbcdjmCsppParserUnitTestCase(ParserUnitTestCase):
 
             parser.get_records(1)
 
-            self.assertEquals(len(self.exception_callback_value), 1)
+            self.assertEqual(len(self.exception_callback_value), 1)
             self.assertIsInstance(self.exception_callback_value[0], SampleEncodingException)
 
     def test_bad_header_start_date(self):

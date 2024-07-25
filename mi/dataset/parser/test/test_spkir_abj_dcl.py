@@ -292,7 +292,7 @@ class SpkirAbjDclParserUnitTestCase(ParserUnitTestCase):
         log.debug("Num particles: %d", len(particles))
 
         self.assert_particles(particles, "rec_20020113.spkir2.yml", RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         in_file.close()
         log.debug('===== START TEST MANY WITH YML TELEMETERED =====')
@@ -304,7 +304,7 @@ class SpkirAbjDclParserUnitTestCase(ParserUnitTestCase):
         log.debug("Num particles: %d", len(particles))
 
         self.assert_particles(particles, "tel_20020113.spkir2.yml", RESOURCE_PATH)
-        self.assertEquals(self.exception_callback_value, [])
+        self.assertEqual(self.exception_callback_value, [])
 
         in_file.close()
         log.debug('===== END TEST MANY WITH YML =====')

@@ -8,7 +8,7 @@
 """
 import os
 import struct
-from StringIO import StringIO
+from io import StringIO
 
 import ntplib
 from nose.plugins.attrib import attr
@@ -185,7 +185,7 @@ class CtdpfCklWfpSioMuleParserUnitTestCase(ParserUnitTestCase):
     def assert_result(self, result, particle, ingested):
         self.assertEqual(result, [particle])
         self.assertEqual(self.file_ingested_value, ingested)
-        self.assert_(isinstance(self.publish_callback_value, list))
+        self.assertTrue(isinstance(self.publish_callback_value, list))
         self.assertEqual(self.publish_callback_value[0], particle)
 
     def test_simple_with_decimation_factor(self):

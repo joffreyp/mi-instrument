@@ -286,7 +286,7 @@ class WfpSioCFileDriver(SimpleDatasetDriver):
                         self._particle_data_handler.addParticleSample(record.data_particle_type(), record.generate())
 
             self._c_file_profiles = self.get_c_file_profiles(self._data_particle_record_buffer)
-            self._missing_e_profile_indexes = range(len(self._c_file_profiles))
+            self._missing_e_profile_indexes = list(range(len(self._c_file_profiles)))
 
         except Exception as e:
             log.error(e)
@@ -413,7 +413,7 @@ class WfpSioCFileDriver(SimpleDatasetDriver):
 
         # Adjust c sample times that came before the time range of the interpolation model
         backfill_c_sample_time = c_time_within_model_begin
-        for i in reversed(range(c_index_within_model_begin)):
+        for i in reversed(list(range(c_index_within_model_begin))):
             backfill_c_sample_time -= avg_c_sample_time_interval
             c_profile[i].set_value(DataParticleKey.INTERNAL_TIMESTAMP, backfill_c_sample_time)
 

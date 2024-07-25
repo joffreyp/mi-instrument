@@ -18,22 +18,22 @@ basePath = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe(
 #print 'basePath is ' + basePath
 
 if not os.path.exists(basePath):
-    print 'error: driver directory not found'
+    print('error: driver directory not found')
     sys.exit(0)
 
 
 #
-print "create_driver:  This script will ask for driver identification items,"
-print "                 and then build a template driver file, creating the"
-print "                 target directories if necessary"
+print("create_driver:  This script will ask for driver identification items,")
+print("                 and then build a template driver file, creating the")
+print("                 target directories if necessary")
 
 
-inst_name = raw_input('Enter Instrument Name ( ex: flntu_x ): ')
-plat_name = raw_input('Enter Instrument Name ( ex: mmp_cds ): ')
-driver_file_name = raw_input('Enter Driver File Name ( ex: flntu_x_mmp_cds_recovered_driver.py ): ')
+inst_name = input('Enter Instrument Name ( ex: flntu_x ): ')
+plat_name = input('Enter Instrument Name ( ex: mmp_cds ): ')
+driver_file_name = input('Enter Driver File Name ( ex: flntu_x_mmp_cds_recovered_driver.py ): ')
 # the driver name is the same as the filename, without the '.py'
 driver_name = driver_file_name[0:-3]
-auth_name = raw_input('Enter Author Name: ')
+auth_name = input('Enter Author Name: ')
 
 
 # gather the platform and instrument into an underbar delimited string
@@ -51,7 +51,7 @@ camel_case_driver_name = ubar_to_camel(driver_name)
 # check/create the top level instrument directory
 tld_dir = basePath + '/' + inst_name
 if not os.path.exists(tld_dir):
-    print "No instrument directory found, creating " + tld_dir
+    print("No instrument directory found, creating " + tld_dir)
     os.makedirs(tld_dir)
 
 # check to see if a platform has been provided.  If so, check/create.  Else set target to instrument level.
@@ -60,13 +60,13 @@ if not plat_name:
 else:
     tgt_dir = tld_dir + '/' + plat_name
     if not os.path.exists(tgt_dir):
-        print "No platform directory found, creating " + tgt_dir
+        print("No platform directory found, creating " + tgt_dir)
         os.makedirs(tgt_dir)
 
 # now open the target driver file.  Don't clobber.
 tgt_filename = tgt_dir + '/' +  driver_file_name
 if os.path.exists(tgt_filename):
-    print 'error: driver file ' + tgt_filename + ' already exists'
+    print('error: driver file ' + tgt_filename + ' already exists')
     sys.exit(0)
 
 
@@ -129,7 +129,7 @@ f.write('    def _build_parser(self, stream_handle):' + '\n')
 f.write('' + '\n')
 f.write('        raise NotImplementedException(\"_build_parser() not overridden!\")')
 
-print 'create_driver: done'
+print('create_driver: done')
 
 
 

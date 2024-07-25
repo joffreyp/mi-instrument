@@ -339,7 +339,7 @@ class DriverTestMixinSub(DriverTestMixin):
     }
 
     _id_parameter = {
-        particles.NortekEngIdDataParticleKey.ID: {TYPE: unicode, VALUE: '', REQUIRED: True}
+        particles.NortekEngIdDataParticleKey.ID: {TYPE: str, VALUE: '', REQUIRED: True}
     }
 
     _driver_parameters = {
@@ -412,7 +412,7 @@ class DriverTestMixinSub(DriverTestMixin):
         UserConfigKey.NUM_CELLS: {TYPE: int, VALUE: 1, REQUIRED: True},
         UserConfigKey.CELL_SIZE: {TYPE: int, VALUE: 7, REQUIRED: True},
         UserConfigKey.MEASUREMENT_INTERVAL: {TYPE: int, VALUE: 500, REQUIRED: True},
-        UserConfigKey.DEPLOYMENT_NAME: {TYPE: unicode, VALUE: "", REQUIRED: True},
+        UserConfigKey.DEPLOYMENT_NAME: {TYPE: str, VALUE: "", REQUIRED: True},
         UserConfigKey.WRAP_MODE: {TYPE: int, VALUE: 0, REQUIRED: True},
         UserConfigCompositeKey.DEPLOY_START_TIME: {TYPE: list, VALUE: [39, 28, 17, 14, 12, 12], REQUIRED: True},
         UserConfigCompositeKey.DIAG_INTERVAL: {TYPE: int, VALUE: 10800, REQUIRED: True},
@@ -434,8 +434,8 @@ class DriverTestMixinSub(DriverTestMixin):
         UserConfigKey.FILTER_DATA_OUTPUT: {TYPE: int, VALUE: 0, REQUIRED: True},
         UserConfigKey.ANALOG_INPUT_ADDR: {TYPE: int, VALUE: 0, REQUIRED: True},
         UserConfigKey.SW_VER: {TYPE: int, VALUE: 0, REQUIRED: True},
-        UserConfigCompositeKey.VELOCITY_ADJ_FACTOR: {TYPE: unicode, VALUE: '', REQUIRED: True},
-        UserConfigKey.FILE_COMMENTS: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        UserConfigCompositeKey.VELOCITY_ADJ_FACTOR: {TYPE: str, VALUE: '', REQUIRED: True},
+        UserConfigKey.FILE_COMMENTS: {TYPE: str, VALUE: '', REQUIRED: True},
         UserConfigCompositeKey.WAVE_MODE: {TYPE: int, VALUE: 4615, REQUIRED: False},
         UserConfigKey.WAVE_DATA_RATE: {TYPE: int, VALUE: 1, REQUIRED: True},
         UserConfigKey.WAVE_CELL_POS: {TYPE: int, VALUE: 1, REQUIRED: True},
@@ -449,7 +449,7 @@ class DriverTestMixinSub(DriverTestMixin):
         UserConfigKey.ANALOG_SCALE_FACTOR: {TYPE: int, VALUE: 11185, REQUIRED: True},
         UserConfigKey.CORRELATION_THRS: {TYPE: int, VALUE: 0, REQUIRED: True},
         UserConfigKey.TX_PULSE_LEN_2ND: {TYPE: int, VALUE: 2, REQUIRED: True},
-        UserConfigCompositeKey.FILTER_CONSTANTS: {TYPE: unicode, VALUE: 'Cv/N/4sA5QDuAAsAhP89/w==', REQUIRED: True},
+        UserConfigCompositeKey.FILTER_CONSTANTS: {TYPE: str, VALUE: 'Cv/N/4sA5QDuAAsAhP89/w==', REQUIRED: True},
         UserConfigKey.CHECKSUM: {TYPE: int, VALUE: 0, REQUIRED: False}
     }
 
@@ -460,15 +460,15 @@ class DriverTestMixinSub(DriverTestMixin):
         particles.NortekHeadConfigDataParticleKey.TILT_SENSOR_MOUNT: {TYPE: int, VALUE: 0, REQUIRED: True},
         particles.NortekHeadConfigDataParticleKey.HEAD_FREQ: {TYPE: int, VALUE: 0, REQUIRED: True},
         particles.NortekHeadConfigDataParticleKey.HEAD_TYPE: {TYPE: int, VALUE: 0, REQUIRED: True},
-        particles.NortekHeadConfigDataParticleKey.HEAD_SERIAL: {TYPE: unicode, VALUE: '', REQUIRED: True},
-        particles.NortekHeadConfigDataParticleKey.SYSTEM_DATA: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        particles.NortekHeadConfigDataParticleKey.HEAD_SERIAL: {TYPE: str, VALUE: '', REQUIRED: True},
+        particles.NortekHeadConfigDataParticleKey.SYSTEM_DATA: {TYPE: str, VALUE: '', REQUIRED: True},
         particles.NortekHeadConfigDataParticleKey.NUM_BEAMS: {TYPE: int, VALUE: 3, REQUIRED: True},
         particles.NortekHeadConfigDataParticleKey.CONFIG: {TYPE: int, VALUE: 0, REQUIRED: False},
         UserConfigKey.CHECKSUM: {TYPE: int, VALUE: 0, REQUIRED: False}
     }
 
     _hardware_config_parameter = {
-        particles.NortekHardwareConfigDataParticleKey.SERIAL_NUM: {TYPE: unicode, VALUE: 0, REQUIRED: True},
+        particles.NortekHardwareConfigDataParticleKey.SERIAL_NUM: {TYPE: str, VALUE: 0, REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.RECORDER_INSTALLED: {TYPE: bool, VALUE: False, REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.COMPASS_INSTALLED: {TYPE: bool, VALUE: True, REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.BOARD_FREQUENCY: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -476,9 +476,9 @@ class DriverTestMixinSub(DriverTestMixin):
         particles.NortekHardwareConfigDataParticleKey.HW_REVISION: {TYPE: int, VALUE: 0, REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.RECORDER_SIZE: {TYPE: int, VALUE: 0, REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.VELOCITY_RANGE: {TYPE: int, VALUE: 0, REQUIRED: True},
-        particles.NortekHardwareConfigDataParticleKey.FW_VERSION: {TYPE: unicode, VALUE: '', REQUIRED: True},
+        particles.NortekHardwareConfigDataParticleKey.FW_VERSION: {TYPE: str, VALUE: '', REQUIRED: True},
         particles.NortekHardwareConfigDataParticleKey.STATUS: {TYPE: int, VALUE: 0, REQUIRED: False},
-        particles.NortekHardwareConfigDataParticleKey.CONFIG: {TYPE: unicode, VALUE: 0, REQUIRED: False},
+        particles.NortekHardwareConfigDataParticleKey.CONFIG: {TYPE: str, VALUE: 0, REQUIRED: False},
         particles.NortekHardwareConfigDataParticleKey.CHECKSUM: {TYPE: int, VALUE: 0, REQUIRED: False}
     }
 
@@ -613,7 +613,7 @@ class NortekUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_core_chunker(self):
@@ -878,71 +878,71 @@ class NortekIntTest(InstrumentDriverIntegrationTestCase, DriverTestMixinSub):
         values_after = self.driver_client.cmd_dvr("get_resource", Parameter.ALL)
         log.debug("VALUES_AFTER = %s", values_after)
 
-        self.assertEquals(values_after[Parameter.TRANSMIT_PULSE_LENGTH],
+        self.assertEqual(values_after[Parameter.TRANSMIT_PULSE_LENGTH],
                           self._user_config_parameters.get(UserConfigKey.TX_LENGTH)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.BLANKING_DISTANCE],
+        self.assertEqual(values_after[Parameter.BLANKING_DISTANCE],
                           self._user_config_parameters.get(UserConfigKey.BLANK_DIST)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.RECEIVE_LENGTH],
+        self.assertEqual(values_after[Parameter.RECEIVE_LENGTH],
                           self._user_config_parameters.get(UserConfigKey.RX_LENGTH)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.TIME_BETWEEN_PINGS],
+        self.assertEqual(values_after[Parameter.TIME_BETWEEN_PINGS],
                           self._user_config_parameters.get(UserConfigKey.TIME_BETWEEN_PINGS)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.TIME_BETWEEN_BURST_SEQUENCES],
+        self.assertEqual(values_after[Parameter.TIME_BETWEEN_BURST_SEQUENCES],
                           self._user_config_parameters.get(UserConfigKey.TIME_BETWEEN_BURSTS)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.AVG_INTERVAL],
+        self.assertEqual(values_after[Parameter.AVG_INTERVAL],
                           self._user_config_parameters.get(UserConfigKey.AVG_INTERVAL)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.USER_NUMBER_BEAMS],
+        self.assertEqual(values_after[Parameter.USER_NUMBER_BEAMS],
                           self._user_config_parameters.get(UserConfigKey.NUM_BEAMS)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.TIMING_CONTROL_REGISTER],
+        self.assertEqual(values_after[Parameter.TIMING_CONTROL_REGISTER],
                           self._user_config_parameters.get(UserConfigCompositeKey.TCR)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.POWER_CONTROL_REGISTER],
+        self.assertEqual(values_after[Parameter.POWER_CONTROL_REGISTER],
                           self._user_config_parameters.get(UserConfigCompositeKey.PCR)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.COMPASS_UPDATE_RATE],
+        self.assertEqual(values_after[Parameter.COMPASS_UPDATE_RATE],
                           self._user_config_parameters.get(UserConfigKey.COMPASS_UPDATE_RATE)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.COORDINATE_SYSTEM],
+        self.assertEqual(values_after[Parameter.COORDINATE_SYSTEM],
                           self._user_config_parameters.get(UserConfigKey.COORDINATE_SYSTEM)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.NUMBER_BINS],
+        self.assertEqual(values_after[Parameter.NUMBER_BINS],
                           self._user_config_parameters.get(UserConfigKey.NUM_CELLS)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.BIN_LENGTH],
+        self.assertEqual(values_after[Parameter.BIN_LENGTH],
                           self._user_config_parameters.get(UserConfigKey.CELL_SIZE)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.MEASUREMENT_INTERVAL],
+        self.assertEqual(values_after[Parameter.MEASUREMENT_INTERVAL],
                           self._user_config_parameters.get(UserConfigKey.MEASUREMENT_INTERVAL)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.DEPLOYMENT_NAME],
+        self.assertEqual(values_after[Parameter.DEPLOYMENT_NAME],
                           self._user_config_parameters.get(UserConfigKey.DEPLOYMENT_NAME)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.WRAP_MODE],
+        self.assertEqual(values_after[Parameter.WRAP_MODE],
                           self._user_config_parameters.get(UserConfigKey.WRAP_MODE)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.CLOCK_DEPLOY],
+        self.assertEqual(values_after[Parameter.CLOCK_DEPLOY],
                           self._user_config_parameters.get(UserConfigCompositeKey.DEPLOY_START_TIME)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.DIAGNOSTIC_INTERVAL],
+        self.assertEqual(values_after[Parameter.DIAGNOSTIC_INTERVAL],
                           self._user_config_parameters.get(UserConfigCompositeKey.DIAG_INTERVAL)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.MODE],
+        self.assertEqual(values_after[Parameter.MODE],
                           self._user_config_parameters.get(UserConfigCompositeKey.MODE)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.ADJUSTMENT_SOUND_SPEED],
+        self.assertEqual(values_after[Parameter.ADJUSTMENT_SOUND_SPEED],
                           self._user_config_parameters.get(UserConfigKey.SOUND_SPEED_ADJUST)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.NUMBER_SAMPLES_DIAGNOSTIC],
+        self.assertEqual(values_after[Parameter.NUMBER_SAMPLES_DIAGNOSTIC],
                           self._user_config_parameters.get(UserConfigKey.NUM_DIAG_SAMPLES)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.NUMBER_BEAMS_CELL_DIAGNOSTIC],
+        self.assertEqual(values_after[Parameter.NUMBER_BEAMS_CELL_DIAGNOSTIC],
                           self._user_config_parameters.get(UserConfigKey.NUM_BEAMS_PER_CELL)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.NUMBER_PINGS_DIAGNOSTIC],
+        self.assertEqual(values_after[Parameter.NUMBER_PINGS_DIAGNOSTIC],
                           self._user_config_parameters.get(UserConfigKey.NUM_PINGS_DIAG)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.MODE_TEST],
+        self.assertEqual(values_after[Parameter.MODE_TEST],
                           self._user_config_parameters.get(UserConfigCompositeKey.MODE_TEST)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.ANALOG_INPUT_ADDR],
+        self.assertEqual(values_after[Parameter.ANALOG_INPUT_ADDR],
                           self._user_config_parameters.get(UserConfigKey.ANALOG_INPUT_ADDR)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.SW_VERSION],
+        self.assertEqual(values_after[Parameter.SW_VERSION],
                           self._user_config_parameters.get(UserConfigKey.SW_VER)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.COMMENTS],
+        self.assertEqual(values_after[Parameter.COMMENTS],
                           self._user_config_parameters.get(UserConfigKey.FILE_COMMENTS)[ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.WAVE_MEASUREMENT_MODE],
+        self.assertEqual(values_after[Parameter.WAVE_MEASUREMENT_MODE],
                           self._user_config_parameters.get(UserConfigCompositeKey.WAVE_MODE)[ParameterTestConfigKey.VALUE])
         # self.assertEquals(values_after[Parameter.DYN_PERCENTAGE_POSITION],
         #                   self._user_config_parameters.get(UserConfigKey.PERCENT_WAVE_CELL_POS)[
@@ -957,16 +957,16 @@ class NortekIntTest(InstrumentDriverIntegrationTestCase, DriverTestMixinSub):
         # self.assertEquals(values_after[Parameter.NUMBER_DIAG_SAMPLES],
         #                   self._user_config_parameters.get(UserConfigKey.NUM_DIAG_PER_WAVE)[
         #                       ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.NUMBER_SAMPLES_PER_BURST],
+        self.assertEqual(values_after[Parameter.NUMBER_SAMPLES_PER_BURST],
                           self._user_config_parameters.get(UserConfigKey.NUM_SAMPLE_PER_BURST)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.ANALOG_OUTPUT_SCALE],
+        self.assertEqual(values_after[Parameter.ANALOG_OUTPUT_SCALE],
                           self._user_config_parameters.get(UserConfigKey.ANALOG_SCALE_FACTOR)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.CORRELATION_THRESHOLD],
+        self.assertEqual(values_after[Parameter.CORRELATION_THRESHOLD],
                           self._user_config_parameters.get(UserConfigKey.CORRELATION_THRS)[
                               ParameterTestConfigKey.VALUE])
-        self.assertEquals(values_after[Parameter.TRANSMIT_PULSE_LENGTH_SECOND_LAG],
+        self.assertEqual(values_after[Parameter.TRANSMIT_PULSE_LENGTH_SECOND_LAG],
                           self._user_config_parameters.get(UserConfigKey.TX_PULSE_LEN_2ND)[
                               ParameterTestConfigKey.VALUE])
         # self.assertEquals(values_after[Parameter.QUAL_CONSTANTS],

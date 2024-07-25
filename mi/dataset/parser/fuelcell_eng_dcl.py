@@ -131,7 +131,7 @@ class FuelCellEngDclDataCommonParticle(DataParticle):
 
         particle_parameters = []
         # Loop through the unpack dictionary and encode integers
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             particle_parameters.append(self._encode_value(name, self.raw_data[index], int))
 
         return particle_parameters

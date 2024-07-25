@@ -360,7 +360,7 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         encoding_errors = params.get_encoding_errors()
         self._encoding_errors = encoding_errors
         all_params = params.get_all()
-        for (key, value) in all_params.iteritems():
+        for (key, value) in all_params.items():
             result.append({DataParticleKey.VALUE_ID: key, DataParticleKey.VALUE: value})
         log.debug("CgStcEngStcParserDataParticle %s", result)
         return result
@@ -1007,19 +1007,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_STATE,
               dlogp1_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_TX,
-              dlogp1_regex,lambda match: long(match.group(3)),long)
+              dlogp1_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_RX,
-              dlogp1_regex,lambda match: long(match.group(4)),long)
+              dlogp1_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_LOG,
-              dlogp1_regex,lambda match: long(match.group(5)),long)
+              dlogp1_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_GOOD,
-              dlogp1_regex,lambda match: long(match.group(6)),long)
+              dlogp1_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_BAD,
-              dlogp1_regex,lambda match: long(match.group(7)),long)
+              dlogp1_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_BB,
-              dlogp1_regex,lambda match: long(match.group(8)),long)
+              dlogp1_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_LD,
-              dlogp1_regex,lambda match: long(match.group(9)),long)
+              dlogp1_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_LC,
               r'DLOGP1='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG1_LU,
@@ -1031,19 +1031,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_STATE,
               dlogp2_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_TX,
-              dlogp2_regex,lambda match: long(match.group(3)),long)
+              dlogp2_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_RX,
-              dlogp2_regex,lambda match: long(match.group(4)),long)
+              dlogp2_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_LOG,
-              dlogp2_regex,lambda match: long(match.group(5)),long)
+              dlogp2_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_GOOD,
-              dlogp2_regex,lambda match: long(match.group(6)),long)
+              dlogp2_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_BAD,
-              dlogp2_regex,lambda match: long(match.group(7)),long)
+              dlogp2_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_BB,
-              dlogp2_regex,lambda match: long(match.group(8)),long)
+              dlogp2_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_LD,
-              dlogp2_regex,lambda match: long(match.group(9)),long)
+              dlogp2_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_LC,
               r'DLOGP2='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG2_LU,
@@ -1055,19 +1055,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_STATE,
               dlogp3_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_TX,
-              dlogp3_regex,lambda match: long(match.group(3)),long)
+              dlogp3_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_RX,
-              dlogp3_regex,lambda match: long(match.group(4)),long)
+              dlogp3_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_LOG,
-              dlogp3_regex,lambda match: long(match.group(5)),long)
+              dlogp3_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_GOOD,
-              dlogp3_regex,lambda match: long(match.group(6)),long)
+              dlogp3_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_BAD,
-              dlogp3_regex,lambda match: long(match.group(7)),long)
+              dlogp3_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_BB,
-              dlogp3_regex,lambda match: long(match.group(8)),long)
+              dlogp3_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_LD,
-              dlogp3_regex,lambda match: long(match.group(9)),long)
+              dlogp3_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_LC,
               r'DLOGP3='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG3_LU,
@@ -1079,19 +1079,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_STATE,
               dlogp4_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_TX,
-              dlogp4_regex,lambda match: long(match.group(3)),long)
+              dlogp4_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_RX,
-              dlogp4_regex,lambda match: long(match.group(4)),long)
+              dlogp4_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_LOG,
-              dlogp4_regex,lambda match: long(match.group(5)),long)
+              dlogp4_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_GOOD,
-              dlogp4_regex,lambda match: long(match.group(6)),long)
+              dlogp4_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_BAD,
-              dlogp4_regex,lambda match: long(match.group(7)),long)
+              dlogp4_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_BB,
-              dlogp4_regex,lambda match: long(match.group(8)),long)
+              dlogp4_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_LD,
-              dlogp4_regex,lambda match: long(match.group(9)),long)
+              dlogp4_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_LC,
               r'DLOGP4='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG4_LU,
@@ -1103,19 +1103,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_STATE,
               dlogp5_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_TX,
-              dlogp5_regex,lambda match: long(match.group(3)),long)
+              dlogp5_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_RX,
-              dlogp5_regex,lambda match: long(match.group(4)),long)
+              dlogp5_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_LOG,
-              dlogp5_regex,lambda match: long(match.group(5)),long)
+              dlogp5_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_GOOD,
-              dlogp5_regex,lambda match: long(match.group(6)),long)
+              dlogp5_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_BAD,
-              dlogp5_regex,lambda match: long(match.group(7)),long)
+              dlogp5_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_BB,
-              dlogp5_regex,lambda match: long(match.group(8)),long)
+              dlogp5_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_LD,
-              dlogp5_regex,lambda match: long(match.group(9)),long)
+              dlogp5_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_LC,
               r'DLOGP5='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG5_LU,
@@ -1127,19 +1127,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_STATE,
               dlogp6_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_TX,
-              dlogp6_regex,lambda match: long(match.group(3)),long)
+              dlogp6_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_RX,
-              dlogp6_regex,lambda match: long(match.group(4)),long)
+              dlogp6_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_LOG,
-              dlogp6_regex,lambda match: long(match.group(5)),long)
+              dlogp6_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_GOOD,
-              dlogp6_regex,lambda match: long(match.group(6)),long)
+              dlogp6_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_BAD,
-              dlogp6_regex,lambda match: long(match.group(7)),long)
+              dlogp6_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_BB,
-              dlogp6_regex,lambda match: long(match.group(8)),long)
+              dlogp6_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_LD,
-              dlogp6_regex,lambda match: long(match.group(9)),long)
+              dlogp6_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_LC,
               r'DLOGP6='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG6_LU,
@@ -1151,19 +1151,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_STATE,
               dlogp7_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_TX,
-              dlogp7_regex,lambda match: long(match.group(3)),long)
+              dlogp7_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_RX,
-              dlogp7_regex,lambda match: long(match.group(4)),long)
+              dlogp7_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_LOG,
-              dlogp7_regex,lambda match: long(match.group(5)),long)
+              dlogp7_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_GOOD,
-              dlogp7_regex,lambda match: long(match.group(6)),long)
+              dlogp7_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_BAD,
-              dlogp7_regex,lambda match: long(match.group(7)),long)
+              dlogp7_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_BB,
-              dlogp7_regex,lambda match: long(match.group(8)),long)
+              dlogp7_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_LD,
-              dlogp7_regex,lambda match: long(match.group(9)),long)
+              dlogp7_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_LC,
               r'DLOGP7='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG7_LU,
@@ -1175,19 +1175,19 @@ class CgStcEngStcParserDataAbstractParticle(DataParticle):
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_STATE,
               dlogp8_regex,lambda match: match.group(2),str)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_TX,
-              dlogp8_regex,lambda match: long(match.group(3)),long)
+              dlogp8_regex,lambda match: int(match.group(3)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_RX,
-              dlogp8_regex,lambda match: long(match.group(4)),long)
+              dlogp8_regex,lambda match: int(match.group(4)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_LOG,
-              dlogp8_regex,lambda match: long(match.group(5)),long)
+              dlogp8_regex,lambda match: int(match.group(5)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_GOOD,
-              dlogp8_regex,lambda match: long(match.group(6)),long)
+              dlogp8_regex,lambda match: int(match.group(6)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_BAD,
-              dlogp8_regex,lambda match: long(match.group(7)),long)
+              dlogp8_regex,lambda match: int(match.group(7)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_BB,
-              dlogp8_regex,lambda match: long(match.group(8)),long)
+              dlogp8_regex,lambda match: int(match.group(8)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_LD,
-              dlogp8_regex,lambda match: long(match.group(9)),long)
+              dlogp8_regex,lambda match: int(match.group(9)),int)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_LC,
               r'DLOGP8='+DLOG_LC_REGEX,lambda match: float(match.group(11)),float)
         p.add(CgStcEngStcParserDataParticleKey.CG_ENG_PORT_DLOG8_LU,

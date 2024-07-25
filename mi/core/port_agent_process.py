@@ -156,7 +156,7 @@ class PortAgentProcess(object):
 
         try:
             os.kill(self._pid, 0)
-        except OSError, e:
+        except OSError as e:
             log.warn("Could not send a signal to the driver, pid: %s" % self._pid)
             return False
 

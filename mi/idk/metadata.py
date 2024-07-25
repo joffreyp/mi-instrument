@@ -141,13 +141,13 @@ class Metadata():
         """
         @brief Pretty print the current metadata object to STDOUT
         """
-        print( "Driver Make: " + self.driver_make )
-        print( "Driver Model: " + self.driver_model )
-        print( "Driver Name: " + self.driver_name )
-        print( "Author: " + self.author )
-        print( "Email: " + self.email )
-        print( "Release Notes: \n" + self.notes )
-        print( "Driver Version: \n" + self.version )
+        print(( "Driver Make: " + self.driver_make ))
+        print(( "Driver Model: " + self.driver_model ))
+        print(( "Driver Name: " + self.driver_name ))
+        print(( "Author: " + self.author ))
+        print(( "Email: " + self.email ))
+        print(( "Release Notes: \n" + self.notes ))
+        print(( "Driver Version: \n" + self.version ))
 
 
     def confirm_metadata(self):
@@ -205,7 +205,7 @@ class Metadata():
     def link_current_metadata(self):
         try:
             os.remove(self.current_metadata_path())
-        except OSError, e:
+        except OSError as e:
             if e.errno != errno.ENOENT:
                 raise
 

@@ -251,7 +251,7 @@ class Pco2wSamiSampleDataParticle(DataParticle):
                 # parse group 5 into 14, 2 byte (4 character) values stored in
                 # an array.
                 light = matched.group(grp_index)
-                light = [int(light[i:i + 4], 16) for i in xrange(0, len(light), 4)]
+                light = [int(light[i:i + 4], 16) for i in range(0, len(light), 4)]
                 result.append({DataParticleKey.VALUE_ID: key,
                                DataParticleKey.VALUE: light})
             else:

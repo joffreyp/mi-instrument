@@ -23,7 +23,7 @@ class WhichDriver():
         """
         self.fetch_metadata()
         if self.metadata.driver_path:
-            print "%s" % (self.metadata.driver_path)
+            print("%s" % (self.metadata.driver_path))
 
 
 

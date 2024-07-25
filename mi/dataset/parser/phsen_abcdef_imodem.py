@@ -409,7 +409,7 @@ class PhsenAbcdefImodemParser(SimpleParser):
         else:
             particle_data = dict()
 
-            for key in self._metadata_matches_dict.keys():
+            for key in list(self._metadata_matches_dict.keys()):
                 log.trace('key: %s, particle_data: %s', key, particle_data)
 
                 if self._metadata_matches_dict[key]:
@@ -808,7 +808,7 @@ class PhsenAbcdefImodemParser(SimpleParser):
                     self._handle_non_match(line)
 
             # See if we have all the metadata parameters
-            if (None not in self._metadata_matches_dict.values() and
+            if (None not in list(self._metadata_matches_dict.values()) and
                     not self._metadata_sample_generated):
                 # Attempt to generate metadata particle
                 self._generate_metadata_particle()

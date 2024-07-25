@@ -29,8 +29,8 @@ class DriverTest(unittest.TestCase):
         log.debug("SAMPLES: %s", particle_data_handler._samples)
         log.debug("FAILURE: %s", particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, False)
-        self.assertEquals(len(particle_data_handler._samples), 1)
+        self.assertEqual(particle_data_handler._failure, False)
+        self.assertEqual(len(particle_data_handler._samples), 1)
 
 
 if __name__ == '__main__':

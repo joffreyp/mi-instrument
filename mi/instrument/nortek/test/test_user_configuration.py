@@ -68,7 +68,7 @@ class UserConfigurationTest(TestCase):
 
     def test_set_velocity_adjustment_factor(self):
         uc = UserConfiguration(user_config_sample())
-        new_velocity_adjustment_factor_bytes = bytearray(range(180))
+        new_velocity_adjustment_factor_bytes = bytearray(list(range(180)))
         new_velocity_adjustment_factor = base64.b64encode(new_velocity_adjustment_factor_bytes)
         uc.velocity_adjustment_factor = new_velocity_adjustment_factor
         self.assertEqual(new_velocity_adjustment_factor, uc.velocity_adjustment_factor)
@@ -76,7 +76,7 @@ class UserConfigurationTest(TestCase):
 
     def test_set_velocity_adjustment_factor_invalid(self):
         uc = UserConfiguration(user_config_sample())
-        new_velocity_adjustment_factor_bytes = bytearray(range(179))
+        new_velocity_adjustment_factor_bytes = bytearray(list(range(179)))
         new_velocity_adjustment_factor = base64.b64encode(new_velocity_adjustment_factor_bytes)
         with self.assertRaises(TypeError):
             uc.velocity_adjustment_factor = new_velocity_adjustment_factor
@@ -113,12 +113,12 @@ class UserConfigurationTest(TestCase):
             uc.diagnostics_interval = 2**32
 
         uc.diagnostics_interval = 10800
-        print uc.diag_interval_low
-        print uc.diag_interval_high
+        print(uc.diag_interval_low)
+        print(uc.diag_interval_high)
 
     def test_set_filter_constants(self):
         uc = UserConfiguration(user_config_sample())
-        new_bytes = bytearray(range(16))
+        new_bytes = bytearray(list(range(16)))
         new_value = base64.b64encode(new_bytes)
         uc.filter_constants = new_value
         self.assertEqual(new_value, uc.filter_constants)
@@ -126,7 +126,7 @@ class UserConfigurationTest(TestCase):
 
     def test_set_filter_constants_invalid(self):
         uc = UserConfiguration(user_config_sample())
-        new_bytes = bytearray(range(17))
+        new_bytes = bytearray(list(range(17)))
         new_value = base64.b64encode(new_bytes)
         with self.assertRaises(TypeError):
             uc.filter_constants = new_value

@@ -187,7 +187,7 @@ class TRHPHMixinSub(DriverTestMixin):
     }
 
     _status_parameters = {
-        BarsStatusParticleKey.SYSTEM_INFO: {TYPE: unicode, VALUE:
+        BarsStatusParticleKey.SYSTEM_INFO: {TYPE: str, VALUE:
                                             "System Name:  Temperature Resistivity Probe - TRHPH" + NEWLINE +
                                             "System Owner: Consortium for Ocean Leadership" + NEWLINE +
                                             "            University of Washington, OOI-RCN" + NEWLINE +
@@ -391,7 +391,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, TRHPHMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -422,22 +422,22 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, TRHPHMixinSub):
         """
         Test to second conversion.
         """
-        self.assertEquals(240, Protocol._to_seconds(4, 1))
-        self.assertEquals(59, Protocol._to_seconds(59, 0))
-        self.assertEquals(60, Protocol._to_seconds(60, 0))
-        self.assertEquals(3600, Protocol._to_seconds(60, 1))
-        self.assertEquals(3660, Protocol._to_seconds(61, 1))
+        self.assertEqual(240, Protocol._to_seconds(4, 1))
+        self.assertEqual(59, Protocol._to_seconds(59, 0))
+        self.assertEqual(60, Protocol._to_seconds(60, 0))
+        self.assertEqual(3600, Protocol._to_seconds(60, 1))
+        self.assertEqual(3660, Protocol._to_seconds(61, 1))
         self.assertRaises(InstrumentProtocolException,
                           Protocol._to_seconds, 1, 2)
         self.assertRaises(InstrumentProtocolException,
                           Protocol._to_seconds, 1, "foo")
 
     def test_from_seconds(self):
-        self.assertEquals((1, 23), Protocol._from_seconds(23))
-        self.assertEquals((1, 59), Protocol._from_seconds(59))
-        self.assertEquals((2, 1), Protocol._from_seconds(60))
-        self.assertEquals((2, 2), Protocol._from_seconds(120))
-        self.assertEquals((2, 1), Protocol._from_seconds(119))
+        self.assertEqual((1, 23), Protocol._from_seconds(23))
+        self.assertEqual((1, 59), Protocol._from_seconds(59))
+        self.assertEqual((2, 1), Protocol._from_seconds(60))
+        self.assertEqual((2, 2), Protocol._from_seconds(120))
+        self.assertEqual((2, 1), Protocol._from_seconds(119))
         self.assertRaises(InstrumentParameterException,
                           Protocol._from_seconds, 3601)
         self.assertRaises(InstrumentParameterException,
@@ -724,7 +724,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, TRHPHMixinS
                 ProtocolEvent.START_AUTOSAMPLE,
                 ProtocolEvent.ACQUIRE_STATUS],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()}
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())}
 
         self.assert_enter_command_mode()
         self.assert_capabilities(capabilities)

@@ -29,7 +29,7 @@ import logging
 
 from mi.platform.rsn.simulator.oms_simulator import CIOMSSimulator
 from mi.platform.util.network_util import NetworkUtil
-from SimpleXMLRPCServer import SimpleXMLRPCServer
+from xmlrpc.server import SimpleXMLRPCServer
 from threading import Thread
 import time
 

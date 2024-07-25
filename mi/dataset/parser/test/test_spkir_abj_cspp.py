@@ -185,10 +185,10 @@ class SpkirAbjCsppParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(2)
 
-            self.assertEquals(len(self.exception_callback_value), 2)
+            self.assertEqual(len(self.exception_callback_value), 2)
 
             for exception in self.exception_callback_value:
-                self.assert_(isinstance(exception, RecoverableSampleException))
+                self.assertTrue(isinstance(exception, RecoverableSampleException))
 
             # expect to see a recoverable sample exception in the log
             log.debug('TEST EXTRA DATA exception call back is %s', self.exception_callback_value)
@@ -207,10 +207,10 @@ class SpkirAbjCsppParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(2)
 
-            self.assertEquals(len(self.exception_callback_value), 2)
+            self.assertEqual(len(self.exception_callback_value), 2)
 
             for exception in self.exception_callback_value:
-                self.assert_(isinstance(exception, RecoverableSampleException))
+                self.assertTrue(isinstance(exception, RecoverableSampleException))
 
             # expect to see a recoverable sample exception in the log
             log.debug('TEST EXTRA DATA exception call back is %s', self.exception_callback_value)

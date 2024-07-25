@@ -230,11 +230,11 @@ class UtilMixin(DriverTestMixin):
                                                                                 12217]}}
 
     _status_parameters = {
-        OptaaStatusDataParticleKey.FIRMWARE_VERSION: {'type': unicode, 'value': '1.10'},
-        OptaaStatusDataParticleKey.FIRMWARE_DATE: {'type': unicode, 'value': 'May 16 2005 09:40:13'},
-        OptaaStatusDataParticleKey.PERSISTOR_CF_SERIAL_NUMBER: {'type': unicode, 'value': '12154'},
-        OptaaStatusDataParticleKey.PERSISTOR_CF_BIOS_VERSION: {'type': unicode, 'value': '2.28'},
-        OptaaStatusDataParticleKey.PERSISTOR_CF_PICODOS_VERSION: {'type': unicode, 'value': '2.28'}}
+        OptaaStatusDataParticleKey.FIRMWARE_VERSION: {'type': str, 'value': '1.10'},
+        OptaaStatusDataParticleKey.FIRMWARE_DATE: {'type': str, 'value': 'May 16 2005 09:40:13'},
+        OptaaStatusDataParticleKey.PERSISTOR_CF_SERIAL_NUMBER: {'type': str, 'value': '12154'},
+        OptaaStatusDataParticleKey.PERSISTOR_CF_BIOS_VERSION: {'type': str, 'value': '2.28'},
+        OptaaStatusDataParticleKey.PERSISTOR_CF_PICODOS_VERSION: {'type': str, 'value': '2.28'}}
 
     def assert_data_particle_sample(self, data_particle, verify_values=False):
         """
@@ -383,7 +383,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):
@@ -489,7 +489,7 @@ class TestQUAL(InstrumentDriverQualificationTestCase, UtilMixin):
             AgentCapabilityType.AGENT_PARAMETER: self._common_agent_parameters(),
             AgentCapabilityType.RESOURCE_COMMAND: [DriverEvent.START_AUTOSAMPLE],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()}
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())}
 
         self.assert_capabilities(capabilities)
 

@@ -76,7 +76,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -109,7 +109,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'jumbled_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -133,7 +133,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'too_few_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -157,7 +157,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'too_many_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -180,7 +180,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -203,7 +203,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'bad_id_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -227,7 +227,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'truncated_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -251,7 +251,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'bad_velocity_checksum_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -274,7 +274,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'too_few_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -298,7 +298,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_hardware_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -322,7 +322,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_head_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -346,7 +346,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_user_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -370,7 +370,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_config_recs_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -395,7 +395,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_head_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -420,7 +420,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_hardware_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -445,7 +445,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_user_config_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -470,7 +470,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_diag_header_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -495,7 +495,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_diag_header_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -520,7 +520,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'random_diag_record_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -544,7 +544,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'no_diag_recs_VELPT_SN_11402_2014-07-02.yml', RESOURCE_PATH)
 
@@ -599,7 +599,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'bad_diag_hdr_checksum_19_diag_VELPT_SN_11402_2014-07-02.yml',
                                   RESOURCE_PATH)
@@ -625,7 +625,7 @@ class VelptAbParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, 'bad_diag_hdr_checksum_21_diag_VELPT_SN_11402_2014-07-02.yml',
                                   RESOURCE_PATH)

@@ -44,7 +44,7 @@ def _create_simple_generator(gen_period):
             from_time = _START_TIME
 
         # t: initial abscissa coordinate within the time window
-        l_from_time = long(from_time - 2*gen_period)
+        l_from_time = int(from_time - 2*gen_period)
         t = float((l_from_time / gen_period) * gen_period)
         while t < from_time:
             t += gen_period
@@ -87,7 +87,7 @@ def _create_sine_generator(sine_period, gen_period, min_val, max_val):
             from_time = _START_TIME
 
         # t: initial abscissa coordinate within the time window
-        l_from_time = long(from_time - 2*gen_period)
+        l_from_time = int(from_time - 2*gen_period)
         t = float((l_from_time / gen_period) * gen_period)
         while t < from_time:
             t += gen_period
@@ -212,10 +212,10 @@ if __name__ == "__main__":  # pragma: no cover
     to_time     = cur_time + delta_to
 
     values = generate_values(platform_id, attr_id, from_time, to_time)
-    print("Generated %d values in time window [%s, %s]:" % (
-        len(values), from_time, to_time))
+    print(("Generated %d values in time window [%s, %s]:" % (
+        len(values), from_time, to_time)))
     for n, (val, t) in enumerate(values):
-        print("\t%2d: %5.2f -> %+4.3f" % (n, t, val))
+        print(("\t%2d: %5.2f -> %+4.3f" % (n, t, val)))
 
 """
 $ bin/python  ion/agents/platform/rsn/simulator/oms_values.py Node1A other_attr -35 0

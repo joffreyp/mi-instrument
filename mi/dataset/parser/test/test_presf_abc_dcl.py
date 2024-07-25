@@ -129,11 +129,11 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
             parser = PresfAbcDclParser(file_handle, self.exception_callback, True, True)
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140105_invts.presf_telem.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
  
         with open(os.path.join(RESOURCE_PATH, '20140105_invts.presf.log'), 'r') as file_handle:
 
@@ -143,11 +143,11 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
             parser = PresfAbcDclParser(file_handle, self.exception_callback, False, True)
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140105_invts.presf_recov.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         log.debug('===== END TEST INVALID TIDE RECORD =====')
 
@@ -166,11 +166,11 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
             parser = PresfAbcDclParser(file_handle, self.exception_callback, True, True)
             particles = parser.get_records(num_particles_to_request)
             
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140105_invwv.presf_telem.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
  
         with open(os.path.join(RESOURCE_PATH, '20140105_invwv.presf.log'), 'r') as file_handle:
 
@@ -180,11 +180,11 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
             parser = PresfAbcDclParser(file_handle, self.exception_callback, False, True)
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140105_invwv.presf_recov.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
  
         log.debug('===== END TEST INVALID TIDE RECORD =====')
 
@@ -205,7 +205,7 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
 
             # Make sure there were no errors
             self.assertTrue(len(self.exception_callback_value) == 0)
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assertEqual(len(self.exception_callback_value), 0)
 
         log.debug('===== END TEST NO PARTICLES =====')
@@ -226,4 +226,4 @@ class PresfAbcDclParserUnitTestCase(ParserUnitTestCase):
             # Make sure there was one error due to the "time out"
             self.assertTrue(len(self.exception_callback_value) == 1)
             # Make sure we obtained 0 particles
-            self.assertEquals(len(particles), 0)
+            self.assertEqual(len(particles), 0)

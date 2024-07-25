@@ -36,7 +36,7 @@ from mi.core.instrument.publisher import Publisher
 from mi.logging import log
 from ooi_port_agent.common import PacketType
 from ooi_port_agent.packet import Packet, PacketHeader
-from wrapper import EventKeys, encode_exception, DriverWrapper
+from .wrapper import EventKeys, encode_exception, DriverWrapper
 
 __author__ = 'Ronald Ronquillo'
 __license__ = 'Apache 2.0'
@@ -56,7 +56,7 @@ def string_to_ntp_date_time(datestr):
     @throws InstrumentParameterException if datestr cannot be formatted to
     a date.
     """
-    if not isinstance(datestr, basestring):
+    if not isinstance(datestr, str):
         raise IOError('Value %s is not a string.' % str(datestr))
 
     if not DATE_MATCHER.match(datestr):
@@ -363,7 +363,7 @@ def main():
 
     # when running with the profiler, files will be a string
     # coerce to list
-    if isinstance(files, basestring):
+    if isinstance(files, str):
         files = [files]
         
     zplsc_reader = False

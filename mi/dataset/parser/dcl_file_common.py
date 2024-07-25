@@ -108,8 +108,8 @@ class DclFileCommonParser(SimpleParser):
             self.particle_classes = None    # will be set from self._particle_class once instantiated
         elif DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT in config and \
                 all(hasattr(particle_class, "data_matcher")
-                    for particle_class in config[DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT].values()):
-            self.particle_classes = config[DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT].values()
+                    for particle_class in list(config[DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT].values())):
+            self.particle_classes = list(config[DataSetDriverConfigKeys.PARTICLE_CLASSES_DICT].values())
         else:
             raise InstrumentParameterException("data matcher required")
         self.metadata_matcher = metadata_matcher

@@ -180,9 +180,9 @@ class DependencyList:
         log.debug("Found roots:")
 
         found_roots = set()
-        for key, files in allfiles.iteritems():
+        for key, files in allfiles.items():
             found_roots.add(key[0])
-            found_roots.update(map(itemgetter(0),files))
+            found_roots.update(list(map(itemgetter(0),files)))
         if None in found_roots:
             found_roots.remove(None)
         for root in sorted(found_roots):
@@ -264,7 +264,7 @@ class DependencyList:
         root as the target file.  External is the opposite.
         """
         result = []
-        for key, files in filelist.iteritems():
+        for key, files in filelist.items():
             inroot = key[0] in self.file_roots
             if(not(internal or external) or (internal and inroot) or (external and not inroot)):
                 if not isdir(key[1]):
@@ -284,7 +284,7 @@ class DependencyList:
         root as the target file.  External is the opposite.
         """
         result = []
-        for key, files in filelist.iteritems():
+        for key, files in filelist.items():
             inroot = key[0] in self.file_roots
             if(not(internal or external) or (internal and inroot) or (external and not inroot)):
                 if not key[0] in result:
@@ -302,7 +302,7 @@ class DependencyList:
         """
         #log.debug("Build __init__.py list")
         result = []
-        for key, files in filelist.iteritems():
+        for key, files in filelist.items():
             if key[0] == root:
                 for initfile in self._get_init_files(key[1], root):
                     if not initfile in result:
@@ -714,7 +714,7 @@ class EggGenerator:
             log.info("CMD: %s" % cmd)
             os.system(cmd)
 
-        except ValidationFailure, e:
+        except ValidationFailure as e:
             log.error("Failed egg verification: %s" % e )
             return None
 

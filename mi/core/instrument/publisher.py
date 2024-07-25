@@ -11,8 +11,8 @@ import copy
 import datetime
 import json
 import time
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 from collections import deque
 from threading import Thread
 
@@ -21,7 +21,7 @@ from mi.logging import log
 
 
 def extract_param(param, query):
-    params = urlparse.parse_qsl(query, keep_blank_values=True)
+    params = urllib.parse.parse_qsl(query, keep_blank_values=True)
     return_value = None
     new_params = []
 
@@ -31,7 +31,7 @@ def extract_param(param, query):
         else:
             new_params.append((name, value))
 
-    return return_value, urllib.urlencode(new_params)
+    return return_value, urllib.parse.urlencode(new_params)
 
 
 class Publisher(object):
@@ -98,7 +98,7 @@ class Publisher(object):
 
     def publish(self):
         events = []
-        for _ in xrange(self._max_events):
+        for _ in range(self._max_events):
             try:
                 events.append(self._deque.popleft())
             except IndexError:
@@ -144,7 +144,7 @@ class Publisher(object):
         if headers is None:
             headers = {}
 
-        result = urlparse.urlsplit(url)
+        result = urllib.parse.urlsplit(url)
         queue, query = extract_param('queue', result.query)
         url = result.scheme + '://' + result.netloc + result.path
 
@@ -159,11 +159,11 @@ class Publisher(object):
 
         publisher = None
         if result.scheme == 'qpid':
-            from qpid_publisher import QpidPublisher
+            from .qpid_publisher import QpidPublisher
             publisher = QpidPublisher
 
         elif result.scheme == 'amqp' or result.scheme == 'pyamqp':
-            from kombu_publisher import KombuPublisher
+            from .kombu_publisher import KombuPublisher
             publisher = KombuPublisher
 
         elif result.scheme == 'log':
@@ -173,15 +173,15 @@ class Publisher(object):
             return CountPublisher(allowed, **kwargs)
 
         elif result.scheme == 'csv':
-            from file_publisher import CsvPublisher
+            from .file_publisher import CsvPublisher
             return CsvPublisher(allowed, **kwargs)
 
         elif result.scheme == 'pandas':
-            from file_publisher import PandasPublisher
+            from .file_publisher import PandasPublisher
             return PandasPublisher(allowed, **kwargs)
 
         elif result.scheme == 'xarray':
-            from file_publisher import XarrayPublisher
+            from .file_publisher import XarrayPublisher
             return XarrayPublisher(allowed, **kwargs)
         
         elif result.scheme == 'ingest':

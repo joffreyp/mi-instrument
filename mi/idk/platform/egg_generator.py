@@ -240,7 +240,7 @@ class EggGenerator(mi.idk.egg_generator.EggGenerator):
             log.info("CMD: %s" % cmd)
             os.system(cmd)
 
-        except ValidationFailure, e:
+        except ValidationFailure as e:
             log.error("Failed egg verification: %s" % e )
             return None
 

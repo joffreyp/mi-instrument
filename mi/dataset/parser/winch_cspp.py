@@ -141,12 +141,10 @@ class WinchCsppDataParticle(DataParticle):
                 % (ex, self.raw_data))
 
 
-class WinchCsppParser(SimpleParser):
+class WinchCsppParser(SimpleParser, metaclass=get_logging_metaclass(log_level='debug')):
     """
     Parser for Winch CSPP data.
     """
-
-    __metaclass__ = get_logging_metaclass(log_level='debug')
 
     def parse_file(self):
         """

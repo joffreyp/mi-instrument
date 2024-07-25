@@ -52,7 +52,7 @@ class Replayer(object):
         for filename in name_list:
             with open(filename, 'r') as f:
                 contents = f.read()
-            exec contents ## DANGER, DANGER!
+            exec(contents) ## DANGER, DANGER!
             if self._delete_file:
                 os.remove(filename)
 
@@ -64,7 +64,7 @@ class Replayer(object):
 if __name__ == '__main__':
     """ when run as application, replay raw logs to a GELF server """
     if len(sys.argv)<3:
-        print 'USAGE: python ' + __file__ + " server logfile..."
+        print('USAGE: python ' + __file__ + " server logfile...")
         exit(1)
     server = sys.argv[1]
     filenames = sys.argv[2:]

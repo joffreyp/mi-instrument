@@ -124,7 +124,7 @@ class Parameter(DriverParameter):
 
     @classmethod
     def reverse_dict(cls):
-        return dict((v, k) for k, v in cls.dict().iteritems())
+        return dict((v, k) for k, v in cls.dict().items())
 
 
 class ParameterConstraint(BaseEnum):
@@ -263,7 +263,7 @@ class McuStatusParticleKey(BaseEnum):
     ION_CHAMBER_HEATER2_STATUS = 'massp_ion_chamber_heater2_status'
 
 
-class McuDataParticle(DataParticle):
+class McuDataParticle(DataParticle, metaclass=METALOGGER):
     """
     DATA,POW:Pow0:Pow1:Pow2:Pow3:Pow4:Pow5:Pow6:Pow7:Pow8:Pow9:Pow10,
     PRE:p1:p2:p3:p4,
@@ -280,7 +280,6 @@ class McuDataParticle(DataParticle):
     INT:50:35:17:20:20:21:20:20:20:20:20,EXT:2.00:0.00:-1.00,EXTST:1:0:0,POWST:0:0:0:0:1:0:0:0:0:0:0:0:0,
     SOLST:0:0:0:1:0:0,CAL:0:0:0:0:0:10:10:1:0,HEAT:0:0:0:20:0:-1:-1:-1:-1:-1,ENDDATA
     """
-    __metaclass__ = METALOGGER
     _data_particle_type = DataParticleType.MCU_STATUS
     _compiled = None
 
@@ -394,9 +393,9 @@ class McuDataParticle(DataParticle):
                 self._encode_value(McuStatusParticleKey.ION_CHAMBER_HEATER1_STATUS, heater_statuses[7], int),
                 self._encode_value(McuStatusParticleKey.ION_CHAMBER_HEATER2_STATUS, heater_statuses[8], int)
             ]
-        except IndexError, e:
+        except IndexError as e:
             raise SampleException('Incomplete or corrupt data telegram received (%s)', e)
-        except ValueError, e:
+        except ValueError as e:
             raise SampleException('Incomplete or corrupt data telegram received (%s)', e)
         if self.get_encoding_errors():
             raise SampleException('Incomplete or corrupt data telegram received (%s)', self.get_encoding_errors())
@@ -407,13 +406,12 @@ class McuDataParticle(DataParticle):
 # Driver
 ###############################################################################
 
-class InstrumentDriver(SingleConnectionInstrumentDriver):
+class InstrumentDriver(SingleConnectionInstrumentDriver, metaclass=METALOGGER):
     """
     InstrumentDriver subclass
     Subclasses SingleConnectionInstrumentDriver with connection state
     machine.
     """
-    __metaclass__ = METALOGGER
 
     ########################################################################
     # Protocol builder.
@@ -431,12 +429,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=METALOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = METALOGGER
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -791,7 +788,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         parameters = Parameter.reverse_dict()
 
         # step through the list of parameters
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             # if constraint exists, verify we have not violated it
             constraint_key = parameters.get(key)
             if constraint_key in constraints:
@@ -807,7 +804,7 @@ class Protocol(CommandResponseInstrumentProtocol):
                         (key, val, minimum, maximum))
 
         # all constraints met or no constraints exist, set the values
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             if key in old_config:
                 self._param_dict.set_value(key, val)
             else:

@@ -48,6 +48,6 @@ class TestMetadata(MiUnitTest):
         failure_metadata = None;
         try:
             failure_metadata = Metadata('seabird');
-        except InvalidParameters, e:
+        except InvalidParameters as e:
             self.assertTrue(e)
         self.assertFalse(failure_metadata)

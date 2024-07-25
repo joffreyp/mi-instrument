@@ -46,14 +46,14 @@ class TestUnitProtocolCommandDict(MiUnitTestCase):
         self.assertEqual(result, {})
         
     def test_add_get(self):
-        self.assertEquals(self.driver_dict.get_value("vendor_sw_compatible"),
+        self.assertEqual(self.driver_dict.get_value("vendor_sw_compatible"),
                           True)
         self.driver_dict.add("good_val", 12)
-        self.assertEquals(self.driver_dict.get_value("good_val"), 12)
+        self.assertEqual(self.driver_dict.get_value("good_val"), 12)
         self.driver_dict.add("good_val", 21)
-        self.assertEquals(self.driver_dict.get_value("good_val"), 21)
+        self.assertEqual(self.driver_dict.get_value("good_val"), 21)
         self.driver_dict.add("good_val")
-        self.assertEquals(self.driver_dict.get_value("good_val"), None)
+        self.assertEqual(self.driver_dict.get_value("good_val"), None)
 
         self.assertRaises(KeyError,
                           self.driver_dict.get_value, "missing_val")

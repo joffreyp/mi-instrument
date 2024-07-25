@@ -159,7 +159,7 @@ class DatasetParameterDict(ProtocolParameterDict):
         @raise InstrumentParameterException on invalid target prams
         @raise KeyError on invalid parameter name
         """
-        params = self._param_dict.keys()
+        params = list(self._param_dict.keys())
 
         for name in params:
             log.trace("update param dict name: %s", name)

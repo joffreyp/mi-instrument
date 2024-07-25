@@ -99,10 +99,9 @@ class BotptStatusParticleKey(BaseEnum):
     SYST = 'botpt_syst_status'
 
 
-class BotptDataParticle(DataParticle):
+class BotptDataParticle(DataParticle, metaclass=METALOGGER):
     _compiled_regex = None
     _compile_flags = None
-    __metaclass__ = METALOGGER
 
     def __init__(self, *args, **kwargs):
         """

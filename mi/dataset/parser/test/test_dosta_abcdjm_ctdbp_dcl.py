@@ -136,11 +136,11 @@ class DostaDCtdbpDclCeParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
             self.assert_particles(particles, "20140930.dosta1_many_corr_broken.yml", RESOURCE_PATH)
 
             for i in range(len(self.exception_callback_value)):
-                self.assert_(isinstance(self.exception_callback_value[i], RecoverableSampleException))
+                self.assertTrue(isinstance(self.exception_callback_value[i], RecoverableSampleException))
 
         log.debug('===== END TEST INVALID TIDE RECORD =====')
 
@@ -159,4 +159,4 @@ class DostaDCtdbpDclCeParserUnitTestCase(ParserUnitTestCase):
 
             # Make sure we obtained 1 particle
             self.assertTrue(len(particles) == 24)
-            self.assertEquals(len(self.exception_callback_value), 0)
+            self.assertEqual(len(self.exception_callback_value), 0)

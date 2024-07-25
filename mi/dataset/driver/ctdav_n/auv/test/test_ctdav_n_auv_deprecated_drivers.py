@@ -23,7 +23,7 @@ class DriverTest(unittest.TestCase):
         log.info("SAMPLES: %s", particle_data_handler._samples)
         log.info("FAILURE: %s", particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, False)
+        self.assertEqual(particle_data_handler._failure, False)
 
     def test_recovered_deprecation(self):
 
@@ -32,7 +32,7 @@ class DriverTest(unittest.TestCase):
         log.info("SAMPLES: %s", particle_data_handler._samples)
         log.info("FAILURE: %s", particle_data_handler._failure)
 
-        self.assertEquals(particle_data_handler._failure, False)
+        self.assertEqual(particle_data_handler._failure, False)
 
 
 if __name__ == '__main__':

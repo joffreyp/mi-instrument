@@ -49,6 +49,7 @@ from mi.core.instrument.dataset_data_particle import \
     DataParticle, \
     DataParticleKey, \
     DataParticleValue
+from functools import reduce
 
 log = get_logger()
 
@@ -281,7 +282,7 @@ class SpkirAbjDclParser(SimpleParser):
 
             buffer_checksum = groups[SENSOR_GROUP_CHECKSUM_SECTION]
             checksum = reduce(lambda x, y: x + y,
-                              map(ord, buffer_checksum)) % 256
+                              list(map(ord, buffer_checksum))) % 256
 
             if checksum == 0:
                 checksum_status = CHECKSUM_PASSED

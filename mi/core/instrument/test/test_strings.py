@@ -65,7 +65,7 @@ class TestUnitStringsDict(MiUnitTestCase):
         wfile = open("/tmp/test.yml", "w+")
         if wfile:
             log.debug("Printing dumping YAML string to file: %s", wfile)
-            print  >>wfile, self.test_yaml
+            print(self.test_yaml, file=wfile)
             wfile.close()
 
         # test good filename

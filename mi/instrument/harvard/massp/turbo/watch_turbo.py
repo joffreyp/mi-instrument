@@ -2,7 +2,7 @@
 
 import sys
 import time
-import Queue
+import queue
 import socket
 from threading import Thread
 import argparse
@@ -53,9 +53,9 @@ class Receiver(Thread):
                     value = int(data[-9:-4])
                     key = int(data[5:8])
                     if key in names:
-                        print '%-15s : %d' % (names[key], value)
+                        print('%-15s : %d' % (names[key], value))
                     else:
-                        print 'Received: %r' % data
+                        print('Received: %r' % data)
                 except ValueError:
                     pass
 
@@ -71,7 +71,7 @@ class Sender(Thread):
         while True:
             to_send = self.q.get()
             self._conn.send(to_send)
-            print 'Wrote: %r' % to_send
+            print('Wrote: %r' % to_send)
             time.sleep(.1)
 
 
@@ -100,9 +100,9 @@ class _Direct(object):
         """
         Establishes the connection and starts the receiving thread.
         """
-        print "### connecting to %s:%s" % (hostname, portnum)
+        print("### connecting to %s:%s" % (hostname, portnum))
         self._sock = socket.socket()
-        self._send_q = Queue.Queue()
+        self._send_q = queue.Queue()
         self._sock.connect((hostname, portnum))
         self._receiver = Receiver(self._sock)
         self._poller = Poller(self._sock, self._send_q)
@@ -113,15 +113,15 @@ class _Direct(object):
 
     def run(self):
         while True:
-            data = raw_input().strip().lower()
+            data = input().strip().lower()
             start_items = [set_station_on, set_pump_on]
             stop_items = [set_station_off, set_pump_off]
             if data == 'start':
-                print 'starting turbo'
+                print('starting turbo')
                 for x in start_items:
                     self._send_q.put(x)
             elif data == 'stop':
-                print 'stopping turbo'
+                print('stopping turbo')
                 for x in stop_items:
                     self._send_q.put(x)
 
@@ -141,9 +141,9 @@ if __name__ == '__main__':
     host = args.host
     port = int(args.port)
 
-    print "### connecting to %s:%s" % (host, port)
+    print("### connecting to %s:%s" % (host, port))
     sock = socket.socket()
-    send_q = Queue.Queue()
+    send_q = queue.Queue()
     sock.connect((host, port))
     receiver = Receiver(sock)
     sender = Sender(sock, send_q)
@@ -154,15 +154,15 @@ if __name__ == '__main__':
         poller.start()
 
     while True:
-        input_data = raw_input().strip().lower()
+        input_data = input().strip().lower()
         start = [set_station_on, set_pump_on]
         stop = [set_station_off, set_pump_off]
         if input_data == 'start':
-            print 'starting turbo'
+            print('starting turbo')
             for each in start:
                 send_q.put(each)
         elif input_data == 'stop':
-            print 'stopping turbo'
+            print('stopping turbo')
             for each in stop:
                 send_q.put(each)
 

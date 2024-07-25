@@ -141,7 +141,7 @@ class Parameter(DriverParameter):
 
     @classmethod
     def reverse_dict(cls):
-        return dict((v, k) for k, v in cls.dict().iteritems())
+        return dict((v, k) for k, v in cls.dict().items())
 
 
 class ParameterConstraints(BaseEnum):
@@ -206,7 +206,7 @@ class TurboStatusParticleKey(BaseEnum):
 
 
 # noinspection PyMethodMayBeStatic,PyProtectedMember
-class TurboStatusParticle(DataParticle):
+class TurboStatusParticle(DataParticle, metaclass=META_LOGGER):
     """
     Example data:
     0011031006000000012
@@ -217,7 +217,6 @@ class TurboStatusParticle(DataParticle):
 
     These are the responses from 5 commands sent to the turbopump during acquire_status.
     """
-    __metaclass__ = META_LOGGER
     _data_particle_type = DataParticleType.TURBO_STATUS
 
     @staticmethod
@@ -263,7 +262,7 @@ class TurboStatusParticle(DataParticle):
                 self._encode_value(tspk.TEMP_MOTOR, self._extract(match.group('TEMP_MOTOR')), int),
                 self._encode_value(tspk.ROTATION_SPEED, self._extract(match.group('ROTATION_SPEED_ACTUAL')), int),
             ]
-        except ValueError, e:
+        except ValueError as e:
             raise exceptions.SampleException('Corrupt turbo status received (%s)', e)
         return result
 
@@ -272,13 +271,12 @@ class TurboStatusParticle(DataParticle):
 # Driver
 ###############################################################################
 
-class InstrumentDriver(SingleConnectionInstrumentDriver):
+class InstrumentDriver(SingleConnectionInstrumentDriver, metaclass=META_LOGGER):
     """
     InstrumentDriver subclass
     Subclasses SingleConnectionInstrumentDriver with connection state
     machine.
     """
-    __metaclass__ = META_LOGGER
 
     ########################################################################
     # Protocol builder.
@@ -296,12 +294,11 @@ class InstrumentDriver(SingleConnectionInstrumentDriver):
 ###########################################################################
 
 # noinspection PyMethodMayBeStatic,PyUnusedLocal
-class Protocol(CommandResponseInstrumentProtocol):
+class Protocol(CommandResponseInstrumentProtocol, metaclass=META_LOGGER):
     """
     Instrument protocol class
     Subclasses CommandResponseInstrumentProtocol
     """
-    __metaclass__ = META_LOGGER
 
     def __init__(self, prompts, newline, driver_event):
         """
@@ -602,7 +599,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         parameters = Parameter.reverse_dict()
 
         # step through the list of parameters
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             # if constraint exists, verify we have not violated it
             constraint_key = parameters.get(key)
             if constraint_key in constraints:
@@ -618,7 +615,7 @@ class Protocol(CommandResponseInstrumentProtocol):
                         (key, val, minimum, maximum))
 
         # all constraints met or no constraints exist, set the values
-        for key, val in params_to_set.iteritems():
+        for key, val in params_to_set.items():
             if key in old_config:
                 self._param_dict.set_value(key, val)
             else:
@@ -636,7 +633,7 @@ class Protocol(CommandResponseInstrumentProtocol):
         receive a response after max_retries attempts.
         @throws InstrumentTimeoutException
         """
-        for attempt in xrange(1, max_retries + 1):
+        for attempt in range(1, max_retries + 1):
             try:
                 if value is None:
                     result = self._do_cmd_resp(command, response_regex=TURBO_RESPONSE, timeout=TIMEOUT)

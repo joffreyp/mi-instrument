@@ -136,6 +136,6 @@ class AdcpsMGliderParserUnitTestCase(ParserUnitTestCase):
             log.debug('Exceptions : %s', self.exception_callback_value[0])
 
             self.assertEqual(len(self.exception_callback_value), 1)
-            self.assert_(isinstance(self.exception_callback_value[0], RecoverableSampleException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], RecoverableSampleException))
 
 

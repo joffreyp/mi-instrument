@@ -180,7 +180,7 @@ class DriverTestMixinSub(DriverTestMixin):
             self._send_port_agent_packet(driver, sample_data)
             # uh oh, we shouldn't have reached this point
             self.fail('Failed to generate an exception when given bad data!')
-        except SampleException, e:
+        except SampleException as e:
             log.debug('Caught sample exception: %r', e)
 
     def _send_port_agent_packet(self, driver, data):
@@ -508,7 +508,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, DriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_driver_schema(self):
@@ -705,7 +705,7 @@ class DriverQualificationTest(InstrumentDriverQualificationTestCase, DriverTestM
                 ProtocolEvent.POWEROFF,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_capabilities(capabilities)

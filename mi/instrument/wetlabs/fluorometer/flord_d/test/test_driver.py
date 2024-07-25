@@ -118,8 +118,8 @@ class FlordDriverTestMixinSub(DriverTestMixinSub):
     _Driver = InstrumentDriver
 
     _flordD_mnu_parameters = {
-        FlordMenuParticleKey.SERIAL_NUM: {TYPE: unicode, VALUE: 'BBFL2W-993', REQUIRED: True},
-        FlordMenuParticleKey.FIRMWARE_VER: {TYPE: unicode, VALUE: 'Triplet5.20', REQUIRED: True},
+        FlordMenuParticleKey.SERIAL_NUM: {TYPE: str, VALUE: 'BBFL2W-993', REQUIRED: True},
+        FlordMenuParticleKey.FIRMWARE_VER: {TYPE: str, VALUE: 'Triplet5.20', REQUIRED: True},
         FlordMenuParticleKey.AVE: {TYPE: int, VALUE: 1, REQUIRED: True},
         FlordMenuParticleKey.PKT: {TYPE: int, VALUE: 0, REQUIRED: True},
         FlordMenuParticleKey.M1D: {TYPE: int, VALUE: 0, REQUIRED: True},
@@ -131,10 +131,10 @@ class FlordDriverTestMixinSub(DriverTestMixinSub):
         FlordMenuParticleKey.SET: {TYPE: int, VALUE: 0, REQUIRED: True},
         FlordMenuParticleKey.REC: {TYPE: int, VALUE: 1, REQUIRED: True},
         FlordMenuParticleKey.MAN: {TYPE: int, VALUE: 0, REQUIRED: True},
-        FlordMenuParticleKey.INT: {TYPE: unicode, VALUE: '00:00:10', REQUIRED: True},
-        FlordMenuParticleKey.DAT: {TYPE: unicode, VALUE: '07/11/13', REQUIRED: True},
-        FlordMenuParticleKey.CLK: {TYPE: unicode, VALUE: '12:48:34', REQUIRED: True},
-        FlordMenuParticleKey.MST: {TYPE: unicode, VALUE: '12:48:31', REQUIRED: True},
+        FlordMenuParticleKey.INT: {TYPE: str, VALUE: '00:00:10', REQUIRED: True},
+        FlordMenuParticleKey.DAT: {TYPE: str, VALUE: '07/11/13', REQUIRED: True},
+        FlordMenuParticleKey.CLK: {TYPE: str, VALUE: '12:48:34', REQUIRED: True},
+        FlordMenuParticleKey.MST: {TYPE: str, VALUE: '12:48:31', REQUIRED: True},
         FlordMenuParticleKey.MEM: {TYPE: int, VALUE: 4095, REQUIRED: True}
     }
 
@@ -273,7 +273,7 @@ class DriverUnitTest(InstrumentDriverUnitTestCase, FlordDriverTestMixinSub):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(sorted(driver_capabilities),
+        self.assertEqual(sorted(driver_capabilities),
                           sorted(protocol._filter_capabilities(test_capabilities)))
 
     def test_capabilities(self):

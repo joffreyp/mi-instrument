@@ -108,7 +108,7 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
             log.debug("Num particles: %d", len(particles))
 
             self.assert_particles(particles, "example1_rec.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         # Telemetered
         with open(os.path.join(RESOURCE_PATH, 'example1.DAT'), O_MODE) as file_handle:
@@ -122,7 +122,7 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
             log.debug("Num particles: %d", len(particles))
 
             self.assert_particles(particles, "example1_tel.yml", RESOURCE_PATH)
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST HAPPY PATH SINGLE =====')
 
@@ -146,13 +146,13 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "invalid_header_timestamp_rec.yml", RESOURCE_PATH)
 
             log.debug('Exceptions : %s', self.exception_callback_value)
 
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST INVALID METADATA TIMESTAMP =====')
 
@@ -176,13 +176,13 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "invalid_record_type_rec.yml", RESOURCE_PATH)
 
             log.debug('Exceptions : %s', self.exception_callback_value)
 
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST INVALID RECORD TYPE =====')
 
@@ -206,13 +206,13 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "ph_record_missing_timestamp_rec.yml", RESOURCE_PATH)
 
             log.debug('Exceptions : %s', self.exception_callback_value)
 
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST PH RECORD MISSING TIMESTAMP =====')
 
@@ -236,11 +236,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "header_and_footer_only_rec.yml", RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST NO SCIENCE PARTICLES =====')
 
@@ -267,13 +267,13 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "incorrect_data_length_rec.yml", RESOURCE_PATH)
 
         log.debug('Exceptions : %s', self.exception_callback_value)
 
-        self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST INCORRECT LENGTH =====')
 
@@ -295,12 +295,12 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "invalid_checksum_rec.yml", RESOURCE_PATH)
 
             # No exception should be thrown
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST INVALID CHECKSUM =====')
 
@@ -323,11 +323,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             particles = parser.get_records(num_particles_to_request)
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "invalid_header_fields_rec.yml", RESOURCE_PATH)
 
-            self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+            self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST INVALID HEADER FIELDS =====')
 
@@ -353,11 +353,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             log.info(len(particles))
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "phsen1_20140730_190554_rec.yml", RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         with open(os.path.join(RESOURCE_PATH, 'phsen1_20140730_190554.DAT'), O_MODE) as file_handle:
 
@@ -369,11 +369,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             log.info(len(particles))
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "phsen1_20140730_190554_tel.yml", RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST REAL FILE =====')
 
@@ -399,11 +399,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             log.info(len(particles))
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "phsen1_20140725_192532_rec.yml", RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         with open(os.path.join(RESOURCE_PATH, 'phsen1_20140725_192532.DAT'), O_MODE) as file_handle:
 
@@ -415,11 +415,11 @@ class PhsenAbcdefImodemParserUnitTestCase(ParserUnitTestCase):
 
             log.info(len(particles))
 
-            self.assertEquals(len(particles), num_expected_particles)
+            self.assertEqual(len(particles), num_expected_particles)
 
             self.assert_particles(particles, "phsen1_20140725_192532_tel.yml", RESOURCE_PATH)
 
-            self.assertEquals(self.exception_callback_value, [])
+            self.assertEqual(self.exception_callback_value, [])
 
         log.debug('===== END TEST REAL 2 FILE =====')
 

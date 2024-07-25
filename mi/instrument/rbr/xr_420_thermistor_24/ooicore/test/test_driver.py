@@ -293,7 +293,7 @@ class UtilMixin(DriverTestMixin):
         XR_420SampleDataParticleKey.TEMPERATURE23: {TYPE: float, VALUE: 21.0411},
         XR_420SampleDataParticleKey.TEMPERATURE24: {TYPE: float, VALUE: 21.4361},
         XR_420SampleDataParticleKey.BATTERY_VOLTAGE: {TYPE: float, VALUE: 11.5916},
-        XR_420SampleDataParticleKey.SERIAL_NUMBER: {TYPE: unicode, VALUE: u"021964"},
+        XR_420SampleDataParticleKey.SERIAL_NUMBER: {TYPE: str, VALUE: "021964"},
     }
 
     SAMPLE = \
@@ -448,7 +448,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
 
         # load the engineering parameter values
         pd = driver._protocol._param_dict
-        for name in self._raw_coefficients.keys():
+        for name in list(self._raw_coefficients.keys()):
             pd.update(self._raw_coefficients[name], target_params=name)
 
         # clear out any old events
@@ -488,7 +488,7 @@ class TestUNIT(InstrumentDriverUnitTestCase, UtilMixin):
         test_capabilities.append("BOGUS_CAPABILITY")
 
         # Verify "BOGUS_CAPABILITY was filtered out
-        self.assertEquals(driver_capabilities, protocol._filter_capabilities(test_capabilities))
+        self.assertEqual(driver_capabilities, protocol._filter_capabilities(test_capabilities))
 
     def test_driver_parameters(self):
         """
@@ -646,7 +646,7 @@ class TestINT(InstrumentDriverIntegrationTestCase, UtilMixin):
         the startup has been applied.
         """
         reply = self._assert_parameters_on_initialization()
-        for (name, value) in reply.iteritems():
+        for (name, value) in reply.items():
             log.debug("test_get_parameters: name=%s, value=%s", name, str(value))
 
     def test_set_clock(self):
@@ -1055,7 +1055,7 @@ class TestQUAL(InstrumentDriverQualificationTestCase, UtilMixin):
                 DriverEvent.START_AUTOSAMPLE,
             ],
             AgentCapabilityType.RESOURCE_INTERFACE: None,
-            AgentCapabilityType.RESOURCE_PARAMETER: self._driver_parameters.keys()
+            AgentCapabilityType.RESOURCE_PARAMETER: list(self._driver_parameters.keys())
         }
 
         self.assert_enter_command_mode()

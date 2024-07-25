@@ -14,7 +14,7 @@ import numpy as np
 from mi.core.log import get_logger, LoggerManager
 
 try:
-    import cPickle as pickle
+    import pickle as pickle
 except ImportError:
     import pickle
 

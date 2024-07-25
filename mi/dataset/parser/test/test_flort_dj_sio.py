@@ -246,7 +246,7 @@ class FlortDjSioParserUnitTestCase(ParserUnitTestCase):
 
         particles = self.parser.get_records(num_particles_to_request)
 
-        self.assertEquals(len(particles), num_expected_particles)
+        self.assertEqual(len(particles), num_expected_particles)
 
         particle_to_yml(particles, os.path.join(RESOURCE_PATH, 'flo_bad_header.yml'))
 
@@ -254,6 +254,6 @@ class FlortDjSioParserUnitTestCase(ParserUnitTestCase):
 
         log.debug('Exceptions : %s', self.exception_callback_value)
 
-        self.assert_(isinstance(self.exception_callback_value[0], UnexpectedDataException))
+        self.assertTrue(isinstance(self.exception_callback_value[0], UnexpectedDataException))
 
         log.debug('===== END TEST BAD HEADER =====')

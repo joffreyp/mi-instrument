@@ -111,13 +111,13 @@ def read_buildbot_config():
     result = []
 
     # verify we have everything we need in the config
-    for (key, config) in drivers.items():
+    for (key, config) in list(drivers.items()):
         if(not config.get(BuildBotConfig.MAKE)
            or not config.get(BuildBotConfig.MODEL)
            or not config.get(BuildBotConfig.FLAVOR)):
             raise IDKConfigMissing("%s missing configuration" % key)
 
-    return drivers.items()
+    return list(drivers.items())
 
 if __name__ == '__main__':
     run()

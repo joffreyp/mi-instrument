@@ -131,7 +131,7 @@ class FdchpADclCommonParticle(DataParticle):
 
         # loop through unpack dictionary and encode floats
         parameters = list()
-        for name, index in self.UNPACK_DICT.iteritems():
+        for name, index in self.UNPACK_DICT.items():
             parameters.append(self._encode_value(name, self.raw_data[index], float))
 
         return parameters
