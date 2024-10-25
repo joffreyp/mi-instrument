@@ -56,8 +56,8 @@ EVOLUTION / CREATION:
 """
 
 
-import logging
 import inspect
+import logging
 import threading
 
 # invent a new log level called "trace".  hope that people will use it.
@@ -127,12 +127,14 @@ class _ScopedLogger(object):
             true_caller_tuple = (name, frame[2], frame[3])
         logger = logging.getLogger(name)
 
+        # Py3 fix: the below "fix" seems to break the logger in Python 3.11, where
+        # the findCaller method expects at least stack_info and stacklevel inputs
         # fix bug -- first message logged was reporting line number from this file
-        def first_time_find_caller():
-            logger.findCaller = logger._original_find_caller
-            return true_caller_tuple
-        logger._original_find_caller = logger.findCaller
-        logger.findCaller = first_time_find_caller
+        # def first_time_find_caller():
+        #     logger.findCaller = logger._original_find_caller
+        #     return true_caller_tuple
+        # logger._original_find_caller = logger.findCaller
+        # logger.findCaller = first_time_find_caller
 
         for filter in self._filters:
             logger.addFilter(filter)
