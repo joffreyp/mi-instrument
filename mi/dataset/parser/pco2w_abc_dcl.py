@@ -12,18 +12,17 @@ __author__ = 'Joe Padula'
 __license__ = 'Apache 2.0'
 
 import re
-from mi.dataset.parser.utilities import \
-    dcl_time_to_ntp
 
 from mi.core.exceptions import RecoverableSampleException
 from mi.core.log import get_logger
 from mi.dataset.parser.pco2w_abc import Pco2wAbcParser
+from mi.dataset.parser.utilities import dcl_time_to_ntp
 
 log = get_logger()
-from mi.dataset.parser.pco2w_abc_particles import Pco2wAbcDataParticleKey
-from mi.dataset.parser.common_regexes import ONE_OR_MORE_WHITESPACE_REGEX, ASCII_HEX_CHAR_REGEX
-
 from mi.core.instrument.data_particle import DataParticleKey
+from mi.dataset.parser.common_regexes import (ASCII_HEX_CHAR_REGEX,
+                                              ONE_OR_MORE_WHITESPACE_REGEX)
+from mi.dataset.parser.pco2w_abc_particles import Pco2wAbcDataParticleKey
 
 # A regex to match a date in format YYYY/MM/DD, example 2014/05/07
 DATE_REGEX = r'\d{4}/\d{2}/\d{2}'
@@ -39,7 +38,7 @@ ID_REGEX = LEN_REGEX = CHECKSUM_REGEX = r'(' + ASCII_HEX_CHAR_REGEX + '{2}' + ')
 
 # Common regex for beginning of instrument data record
 INSTRUMENT_DATA_RECORD_REGEX = DCL_CONTROLLER_TIMESTAMP_REGEX + ONE_OR_MORE_WHITESPACE_REGEX \
-    + '\*{1}' + ID_REGEX + LEN_REGEX
+    + '?(?:\*|:1)' + ID_REGEX + LEN_REGEX
 
 # Format of DCL Controller Timestamp in records
 # Example: 2014/08/17 00:57:10.648
