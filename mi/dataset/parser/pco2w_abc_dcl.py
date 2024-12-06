@@ -38,7 +38,7 @@ ID_REGEX = LEN_REGEX = CHECKSUM_REGEX = r'(' + ASCII_HEX_CHAR_REGEX + '{2}' + ')
 
 # Common regex for beginning of instrument data record
 INSTRUMENT_DATA_RECORD_REGEX = DCL_CONTROLLER_TIMESTAMP_REGEX + ONE_OR_MORE_WHITESPACE_REGEX \
-    + '?(?:\*|:1)' + ID_REGEX + LEN_REGEX
+    + '?(?:\*|\:1)' + ID_REGEX + LEN_REGEX
 
 # Format of DCL Controller Timestamp in records
 # Example: 2014/08/17 00:57:10.648
