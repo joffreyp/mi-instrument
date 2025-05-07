@@ -28,7 +28,7 @@ class DriverTest(unittest.TestCase):
         particles = data_handler._samples
         if os.path.isfile(yaml_file):
             with open(yaml_file, 'r') as stream:
-                prev_particles = yaml.load(stream)
+                prev_particles = yaml.safe_load(stream)
                 # particle key names should match
                 self.assertListEqual(sorted(prev_particles.keys()), sorted(particles.keys()))
                 # compare number of samples across one of the particle keys

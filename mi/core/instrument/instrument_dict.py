@@ -53,7 +53,7 @@ class InstrumentDict(object):
             yml = pkg_resources.resource_string(resource_base, resource_name)
             log.debug("Found resource in the %s, %s base",
                       resource_base, resource_name)
-            return yaml.load(yml)
+            return yaml.safe_load(yml)
         else:
             return False
     

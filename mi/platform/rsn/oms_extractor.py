@@ -111,7 +111,7 @@ class OmsExtractor(object):
     # INTERNAL METHODS
     def _get_nodes(self, config, stream_definition_filename=DEFAULT_STREAM_DEF_FILENAME):
         stream_config_string = resource_string(mi.platform.rsn.__name__, stream_definition_filename)
-        stream_definitions = yaml.load(stream_config_string)
+        stream_definitions = yaml.safe_load(stream_config_string)
         for node_config_file in config.get('node_config_files', []):
             self.node_configs.append(NodeConfiguration(node_config_file, stream_definitions))
 
@@ -212,7 +212,7 @@ class OmsExtractor(object):
 def main():
     import sys
     config_file = sys.argv[1]
-    extractor = OmsExtractor(yaml.load(open(config_file)))
+    extractor = OmsExtractor(yaml.safe_load(open(config_file)))
     while True:
         extractor.fetch_all()
 

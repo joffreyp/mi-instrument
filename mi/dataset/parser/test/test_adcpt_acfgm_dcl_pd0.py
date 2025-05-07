@@ -370,7 +370,7 @@ def convert_yml(input_file):
         return True
 
     out_records = []
-    records = yaml.load(open(input_file))
+    records = yaml.safe_load(open(input_file))
     index = 1
     base_internal_ts = 3607286478.639999866
     increment = 600

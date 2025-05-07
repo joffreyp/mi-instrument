@@ -215,7 +215,7 @@ if __name__ == "__main__":  # pragma: no cover
             # parse with either json or yaml ("every JSON file is also a valid
             # YAML file" -- http://yaml.org/spec/1.2/spec.html#id2759572):
             #
-            event_instance = yaml.load(body)
+            event_instance = yaml.safe_load(body)
             print(('event_instance=%s' % str(event_instance)))
 
             # respond OK:

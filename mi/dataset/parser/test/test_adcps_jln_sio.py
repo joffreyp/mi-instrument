@@ -126,7 +126,7 @@ def swap_list(values):
 
 
 def convert_yml(input_file):
-    records = yaml.load(open(input_file))
+    records = yaml.safe_load(open(input_file))
     fields = [
         'error_velocity',
         'water_velocity_up',

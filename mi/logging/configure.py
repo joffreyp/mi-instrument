@@ -74,7 +74,7 @@ class _LoggingConfiguration(object):
             contents = self._read_file(configuration) or self._read_resource(configuration)
             if not contents:
                 raise IOError('failed to locate logging configuration: ' + configuration)
-            parsed = yaml.load(contents)
+            parsed = yaml.safe_load(contents)
             self.add_configuration(parsed, initial)
         elif isinstance(configuration, list) or isinstance(configuration, tuple):
             for item in configuration:

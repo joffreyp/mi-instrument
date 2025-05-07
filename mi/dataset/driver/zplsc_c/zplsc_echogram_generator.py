@@ -218,7 +218,7 @@ class ZPLSCEchogramGenerator(object):
         try:
             with open(zplsc_config_file, 'r') as config_file:
                 try:
-                    zplsc_config = yaml.load(config_file)
+                    zplsc_config = yaml.safe_load(config_file)
                 except yaml.YAMLError as ex:
                     log.error('Error loading the configuration file: %s: %s', zplsc_config_file, ex.message)
                     valid_input = False

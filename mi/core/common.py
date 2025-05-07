@@ -61,7 +61,7 @@ class Config(object):
         result = []
         for content in content_list:
             if content:
-                input_config = yaml.load(content)
+                input_config = yaml.safe_load(content)
                 if result:
                     self._merge(result, input_config, True)
                 else:

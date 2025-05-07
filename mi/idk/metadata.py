@@ -228,7 +228,7 @@ class Metadata():
         except IOError:
             return True
 
-        input = yaml.load( fd )
+        input = yaml.safe_load( fd )
 
         if( input ):
             self._init_from_yaml( input )

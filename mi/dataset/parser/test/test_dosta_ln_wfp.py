@@ -376,7 +376,7 @@ class DostaLnWfpParserUnitTestCase(ParserUnitTestCase):
         """
 
         fid = open(os.path.join(RESOURCE_PATH, filename), 'r')
-        result = yaml.load(fid)
+        result = yaml.safe_load(fid)
         fid.close()
 
         return result

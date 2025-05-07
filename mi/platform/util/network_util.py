@@ -185,7 +185,7 @@ class NetworkUtil(object):
             for platObj in pyobj["network"]:
                 build_node(platObj, ndef._dummy_root)
 
-        pyobj = yaml.load(ser)
+        pyobj = yaml.safe_load(ser)
         _get_platform_types(pyobj)
         _build_network(pyobj)
 

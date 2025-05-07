@@ -167,7 +167,7 @@ class CommConfig(object):
         if self.config_file_path and os.path.exists(self.config_file_path):
             try:
                 infile = open(filename, "r")
-                input = yaml.load(infile)
+                input = yaml.safe_load(infile)
 
                 if input:
                     self._init_from_yaml(input)

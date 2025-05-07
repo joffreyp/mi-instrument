@@ -94,7 +94,7 @@ def main():
     options = docopt(__doc__)
     server_config_file = options['<server_config>']
     try:
-        config = yaml.load(open(server_config_file))
+        config = yaml.safe_load(open(server_config_file))
     except IOError:
         log.error('Cannot find configuration file: %r', server_config_file)
         return

@@ -108,7 +108,7 @@ class ResultSet(object):
         stream = file(result_file_path, 'r')
 
         if result_file_path.endswith('.yml') or result_file_path.endswith('.yaml'):
-            result_set = yaml.load(stream)
+            result_set = yaml.safe_load(stream)
         elif result_file_path.endswith('json'):
             result_set = json.load(stream)
         else:

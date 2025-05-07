@@ -105,7 +105,7 @@ class LoggerManager(Singleton):
                 print(str(os.getpid()) + ' configured logging from ' + LOGGING_PRIMARY_FROM_FILE, file=sys.stderr)
         else:
             logconfig = pkg_resources.resource_string('mi', LOGGING_PRIMARY_FROM_EGG)
-            parsed = yaml.load(logconfig)
+            parsed = yaml.safe_load(logconfig)
             config.replace_configuration(parsed)
             if debug:
                 print(str(os.getpid()) + ' configured logging from config/' + LOGGING_PRIMARY_FROM_FILE, file=sys.stderr)

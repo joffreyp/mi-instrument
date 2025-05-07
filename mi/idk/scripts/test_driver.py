@@ -103,7 +103,7 @@ def read_buildbot_config():
     @raise IDKConfigMissing if a driver config is missing a parameter
     """
     config_file = os.path.join(Config().base_dir(), BUILDBOT_DRIVER_FILE)
-    drivers = yaml.load(file(config_file))
+    drivers = yaml.safe_load(file(config_file))
 
     log.error("Read drivers from %s" % config_file)
     log.error("Yaml load result: %s" % drivers)

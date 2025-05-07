@@ -375,7 +375,7 @@ class DriverWrapper(object, metaclass=META_LOGGER):
         dirname = os.path.dirname(module.__file__)
         metadata_file = os.path.join(dirname, 'metadata.yml')
         if os.path.exists(metadata_file):
-            metadata = yaml.load(open(metadata_file))
+            metadata = yaml.safe_load(open(metadata_file))
             return metadata.get('driver_metadata', {}).get('version')
         return 'UNVERSIONED'
 
@@ -472,7 +472,7 @@ def main():
     config_file = options['<config_file>']
 
     if config_file is not None:
-        init_params = yaml.load(open(config_file))
+        init_params = yaml.safe_load(open(config_file))
     else:
         init_params = {}
 

@@ -26,7 +26,7 @@ class NodeConfiguration(object):
         self._attributes = None
         try:
             node_config_string = resource_string(mi.platform.rsn.__name__, node_config_filename)
-            node_config = yaml.load(node_config_string)
+            node_config = yaml.safe_load(node_config_string)
             self._node_yaml = NodeYAML.factory(node_config, stream_definitions)
             self._node_yaml.validate()
 
